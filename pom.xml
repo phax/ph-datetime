@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2006-2014 phloc systems (www.phloc.com)
     Copyright (C) 2014 Philip Helger (www.helger.com)
     philip[at]helger[dot]com
 
@@ -31,6 +30,7 @@
   <name>ph-datetime</name>
   <description>Java date time library based on joda time</description>
   <url>https://github.com/phax/ph-datetime</url>
+  <inceptionYear>2014</inceptionYear>
 
   <licenses>
     <license>
@@ -58,13 +58,6 @@
       <name>Philip Helger</name>
       <email>ph(at)helger.com</email>
       <url>http://www.helger.com</url>
-    </developer>
-    <developer>
-      <id>boris</id>
-      <name>Boris Gregorcic</name>
-      <email>bg(at)phloc.com</email>
-      <url>http://www.phloc.com</url>
-      <organization>phloc systems</organization>
     </developer>
   </developers>
 
