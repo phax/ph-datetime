@@ -17,7 +17,7 @@
     limitations under the License.
 
 -->
-<translationitems count="26">
+<translationitems count="26" hashcode="0116aee2">
   <item id="com.helger.datetime.format.PeriodFormatMultilingual$EText.LONG_DAY_PLURAL">
     <de> Tage</de>
     <en> days</en>
