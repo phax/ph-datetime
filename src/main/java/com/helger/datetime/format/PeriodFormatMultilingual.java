@@ -27,7 +27,6 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import com.helger.commons.annotations.PresentForCodeCoverage;
 import com.helger.commons.annotations.Translatable;
 import com.helger.commons.name.IHasDisplayText;
-import com.helger.commons.text.ISimpleMultiLingualText;
 import com.helger.commons.text.impl.TextProvider;
 import com.helger.commons.text.resolve.DefaultTextResolver;
 
@@ -38,7 +37,7 @@ import com.helger.commons.text.resolve.DefaultTextResolver;
  * <p>
  * PeriodFormat is thread-safe and immutable, and the formatters it returns are
  * as well.
- * 
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
@@ -74,7 +73,7 @@ public final class PeriodFormatMultilingual
     SHORT_SECOND (" Sek", " sec"),
     SHORT_MILLISECOND (" Millisek", " millisec");
 
-    private ISimpleMultiLingualText m_aTP;
+    private final TextProvider m_aTP;
 
     private EText (@Nonnull final String sDE, @Nonnull final String sEN)
     {
@@ -150,7 +149,7 @@ public final class PeriodFormatMultilingual
 
   /**
    * Gets the short {@link PeriodFormatter}.
-   * 
+   *
    * @param aContentLocale
    *        The content locale for which the formatter is requested. May not be
    *        <code>null</code>.
@@ -190,7 +189,7 @@ public final class PeriodFormatMultilingual
 
   /**
    * Gets the very short {@link PeriodFormatter}.
-   * 
+   *
    * @param aContentLocale
    *        The content locale for which the formatter is requested. May not be
    *        <code>null</code>.
