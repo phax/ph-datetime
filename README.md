@@ -1,8 +1,6 @@
-ph-datetime
-===========
+#ph-datetime
 
 Java date time library based on joda time
-
 
 #Maven usage
 Add the following to your pom.xml to use this artifact:
@@ -13,3 +11,7 @@ Add the following to your pom.xml to use this artifact:
   <version>3.2.0</version>
 </dependency>
 ```
+
+---
+
+On Twitter: <a href="https://twitter.com/philiphelger">Follow @philiphelger</a>
