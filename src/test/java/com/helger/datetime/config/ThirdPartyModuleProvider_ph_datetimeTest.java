@@ -28,7 +28,7 @@ import com.helger.commons.thirdparty.ThirdPartyModuleRegistry;
 
 /**
  * Test class for class {@link ThirdPartyModuleProvider_ph_datetime}.
- * 
+ *
  * @author Philip Helger
  */
 public final class ThirdPartyModuleProvider_ph_datetimeTest
@@ -36,7 +36,7 @@ public final class ThirdPartyModuleProvider_ph_datetimeTest
   @Test
   public void testAll ()
   {
-    final Set <IThirdPartyModule> aSet = ThirdPartyModuleRegistry.getAllRegisteredThirdPartyModules ();
+    final Set <IThirdPartyModule> aSet = ThirdPartyModuleRegistry.getInstance ().getAllRegisteredThirdPartyModules ();
     final IThirdPartyModule [] aExpected = new ThirdPartyModuleProvider_ph_datetime ().getAllThirdPartyModules ();
     assertTrue (aSet.containsAll (ContainerHelper.newList (aExpected)));
   }
