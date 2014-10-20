@@ -30,7 +30,7 @@ import com.helger.commons.annotations.PresentForCodeCoverage;
 
 /**
  * Some date/time related constants.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -41,14 +41,20 @@ public final class CPDT
   /** Default end of week: Sunday */
   public static final int END_OF_WEEK_DAY = DateTimeConstants.SUNDAY;
 
+  public static final int MIN_YEAR_INT32 = 1970;
+
   /** Default null local date: 1.1.1970 */
-  public static final LocalDate NULL_LOCAL_DATE = PDTFactory.createLocalDate (1970, DateTimeConstants.JANUARY, 1);
+  public static final LocalDate NULL_LOCAL_DATE = PDTFactory.createLocalDate (MIN_YEAR_INT32,
+                                                                              DateTimeConstants.JANUARY,
+                                                                              1);
   /** Default null local time: 00:00:00.000 */
   public static final LocalTime NULL_LOCAL_TIME = PDTFactory.createLocalTime (0, 0, 0);
   /** Default null local date time : 1.1.1970 00:00:00.000 */
   public static final LocalDateTime NULL_LOCAL_DATETIME = NULL_LOCAL_DATE.toLocalDateTime (NULL_LOCAL_TIME);
-  /** Default null date time : 1.1.1970 00:00:00.000 */
+  /** Default null date time : 1.1.1970 00:00:00.000 with the default timezone! */
   public static final DateTime NULL_DATETIME = PDTFactory.createDateTimeFromMillis (0);
+  /** Default null date time : 1.1.1970 00:00:00.000 with the UTC timezone! */
+  public static final DateTime NULL_DATETIME_UTC = PDTFactory.createDateTimeFromMillisUTC (0);
   /** Default empty period */
   public static final Period NULL_PERIOD = new Period ();
   /** Default empty duration */

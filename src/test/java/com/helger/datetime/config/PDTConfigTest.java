@@ -44,8 +44,8 @@ public final class PDTConfigTest
     assertNotNull (PDTConfig.getDefaultChronologyUTC ());
     assertEquals (PDTConfig.getDateTimeZoneUTC (), PDTConfig.getDefaultChronologyUTC ().getZone ());
 
-    assertNotNull (PDTConfig.getDefaultChronologyWithoutDateTimeZone ());
-    assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithoutDateTimeZone ().getZone ());
+    assertNotNull (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ());
+    assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ());
 
     try
     {
@@ -61,12 +61,12 @@ public final class PDTConfigTest
       assertEquals ("UTC", PDTConfig.getDefaultDateTimeZone ().getID ());
 
       // The default date time zone was not modified
-      assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithoutDateTimeZone ().getZone ());
+      assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ());
 
       if (!DateTimeZone.getDefault ().getID ().equals ("UTC"))
       {
         // And therefore this must not be equal
-        assertTrue (!PDTConfig.getDefaultDateTimeZone ().equals (PDTConfig.getDefaultChronologyWithoutDateTimeZone ()
+        assertTrue (!PDTConfig.getDefaultDateTimeZone ().equals (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ()
                                                                           .getZone ()));
       }
     }

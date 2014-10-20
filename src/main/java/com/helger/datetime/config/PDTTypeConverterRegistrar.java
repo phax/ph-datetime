@@ -32,6 +32,7 @@ import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.MutablePeriod;
 import org.joda.time.Period;
 import org.joda.time.convert.ConverterManager;
 
@@ -45,7 +46,7 @@ import com.helger.datetime.PDTFactory;
 /**
  * Register all {@link ITypeConverter} objects to the central
  * {@link TypeConverterRegistry}.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -66,21 +67,23 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     // Register Joda native converters
     _registerJodaConverter ();
 
+    final Class <?> [] aSourceClasses = new Class <?> [] { String.class,
+                                                          Calendar.class,
+                                                          GregorianCalendar.class,
+                                                          Date.class,
+                                                          AtomicInteger.class,
+                                                          AtomicLong.class,
+                                                          BigDecimal.class,
+                                                          BigInteger.class,
+                                                          Byte.class,
+                                                          Double.class,
+                                                          Float.class,
+                                                          Integer.class,
+                                                          Long.class,
+                                                          Short.class };
+
     // DateTime
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       Calendar.class,
-                                                       GregorianCalendar.class,
-                                                       Date.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, DateTime.class, new ITypeConverter ()
+    aRegistry.registerTypeConverter (aSourceClasses, DateTime.class, new ITypeConverter ()
     {
       @Nonnull
       public DateTime convert (@Nonnull final Object aSource)
@@ -114,20 +117,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     });
 
     // LocalDateTime
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       Calendar.class,
-                                                       GregorianCalendar.class,
-                                                       Date.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, LocalDateTime.class, new ITypeConverter ()
+    aRegistry.registerTypeConverter (aSourceClasses, LocalDateTime.class, new ITypeConverter ()
     {
       @Nonnull
       public LocalDateTime convert (@Nonnull final Object aSource)
@@ -161,20 +151,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     });
 
     // LocalDate
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       Calendar.class,
-                                                       GregorianCalendar.class,
-                                                       Date.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, LocalDate.class, new ITypeConverter ()
+    aRegistry.registerTypeConverter (aSourceClasses, LocalDate.class, new ITypeConverter ()
     {
       @Nonnull
       public LocalDate convert (@Nonnull final Object aSource)
@@ -200,20 +177,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     });
 
     // LocalTime
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       Calendar.class,
-                                                       GregorianCalendar.class,
-                                                       Date.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, LocalTime.class, new ITypeConverter ()
+    aRegistry.registerTypeConverter (aSourceClasses, LocalTime.class, new ITypeConverter ()
     {
       @Nonnull
       public LocalTime convert (@Nonnull final Object aSource)
@@ -258,7 +222,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
       }
     });
 
-    // Duration
+    // Period
     aRegistry.registerTypeConverter (new Class <?> [] { String.class,
                                                        AtomicInteger.class,
                                                        AtomicLong.class,
@@ -275,6 +239,26 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
       public Period convert (@Nonnull final Object aSource)
       {
         return new Period (aSource);
+      }
+    });
+
+    // MutablePeriod
+    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
+                                                       AtomicInteger.class,
+                                                       AtomicLong.class,
+                                                       BigDecimal.class,
+                                                       BigInteger.class,
+                                                       Byte.class,
+                                                       Double.class,
+                                                       Float.class,
+                                                       Integer.class,
+                                                       Long.class,
+                                                       Short.class }, MutablePeriod.class, new ITypeConverter ()
+    {
+      @Nonnull
+      public MutablePeriod convert (@Nonnull final Object aSource)
+      {
+        return new MutablePeriod (aSource);
       }
     });
   }

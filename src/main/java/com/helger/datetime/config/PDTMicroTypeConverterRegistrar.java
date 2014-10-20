@@ -30,6 +30,8 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.MutableDateTime;
+import org.joda.time.MutableInterval;
+import org.joda.time.MutablePeriod;
 import org.joda.time.Period;
 
 import com.helger.commons.annotations.IsSPIImplementation;
@@ -39,7 +41,7 @@ import com.helger.commons.microdom.convert.impl.StringBasedMicroTypeConverter;
 
 /**
  * Implementation of {@link IMicroTypeConverterRegistrarSPI} for date time stuff
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -60,6 +62,10 @@ public final class PDTMicroTypeConverterRegistrar implements IMicroTypeConverter
     aRegistry.registerMicroElementTypeConverter (LocalTime.class, new StringBasedMicroTypeConverter (LocalTime.class));
     aRegistry.registerMicroElementTypeConverter (MutableDateTime.class,
                                                  new StringBasedMicroTypeConverter (MutableDateTime.class));
+    aRegistry.registerMicroElementTypeConverter (MutableInterval.class,
+                                                 new StringBasedMicroTypeConverter (MutableInterval.class));
+    aRegistry.registerMicroElementTypeConverter (MutablePeriod.class,
+                                                 new StringBasedMicroTypeConverter (MutablePeriod.class));
     aRegistry.registerMicroElementTypeConverter (Period.class, new StringBasedMicroTypeConverter (Period.class));
 
     // J2SE stuff

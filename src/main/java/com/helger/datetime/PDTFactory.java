@@ -70,9 +70,21 @@ public final class PDTFactory
   }
 
   @Nonnull
+  public static MutableDateTime getCurrentMutableDateTimeUTC ()
+  {
+    return new MutableDateTime (PDTConfig.getDefaultChronologyUTC ());
+  }
+
+  @Nonnull
   public static DateTime createDateTimeFromMillis (final long nMillis)
   {
     return new DateTime (nMillis, PDTConfig.getDefaultChronology ());
+  }
+
+  @Nonnull
+  public static DateTime createDateTimeFromMillisUTC (final long nMillis)
+  {
+    return new DateTime (nMillis, PDTConfig.getDefaultChronologyUTC ());
   }
 
   @Nonnull
@@ -130,13 +142,19 @@ public final class PDTFactory
   @Nonnull
   public static DateTime createDateTime (@Nonnull final Date aDate)
   {
-    return createDateTime (aDate, TimeZone.getDefault ());
+    return createDateTime (aDate, PDTConfig.getDefaultDateTimeZone ());
   }
 
   @Nonnull
   public static DateTime createDateTime (@Nonnull final Date aDate, @Nonnull final TimeZone aTimeZone)
   {
-    return new DateTime (aDate, PDTConfig.getDefaultChronology ().withZone (DateTimeZone.forTimeZone (aTimeZone)));
+    return createDateTime (aDate, DateTimeZone.forTimeZone (aTimeZone));
+  }
+
+  @Nonnull
+  public static DateTime createDateTime (@Nonnull final Date aDate, @Nonnull final DateTimeZone aDateTimeZone)
+  {
+    return new DateTime (aDate, PDTConfig.getDefaultChronology ().withZone (aDateTimeZone));
   }
 
   @Nonnull
@@ -234,13 +252,19 @@ public final class PDTFactory
   @Nonnull
   public static LocalDate createLocalDate (@Nonnull final Date aDate)
   {
-    return createLocalDate (aDate, TimeZone.getDefault ());
+    return createLocalDate (aDate, PDTConfig.getDefaultDateTimeZone ());
   }
 
   @Nonnull
   public static LocalDate createLocalDate (@Nonnull final Date aDate, final TimeZone aTimeZone)
   {
-    return new LocalDate (aDate, getLocalChronology ().withZone (DateTimeZone.forTimeZone (aTimeZone)));
+    return createLocalDate (aDate, DateTimeZone.forTimeZone (aTimeZone));
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final Date aDate, final DateTimeZone aDateTimeZone)
+  {
+    return new LocalDate (aDate, getLocalChronology ().withZone (aDateTimeZone));
   }
 
   @Nonnull
@@ -305,13 +329,19 @@ public final class PDTFactory
   @Nonnull
   public static LocalTime createLocalTime (@Nonnull final Date aDate)
   {
-    return createLocalTime (aDate, TimeZone.getDefault ());
+    return createLocalTime (aDate, PDTConfig.getDefaultDateTimeZone ());
   }
 
   @Nonnull
   public static LocalTime createLocalTime (@Nonnull final Date aDate, @Nonnull final TimeZone aTimeZone)
   {
-    return new LocalTime (aDate, getLocalChronology ().withZone (DateTimeZone.forTimeZone (aTimeZone)));
+    return new LocalTime (aDate, DateTimeZone.forTimeZone (aTimeZone));
+  }
+
+  @Nonnull
+  public static LocalTime createLocalTime (@Nonnull final Date aDate, @Nonnull final DateTimeZone aDateTimeZone)
+  {
+    return new LocalTime (aDate, getLocalChronology ().withZone (aDateTimeZone));
   }
 
   @Nonnull
@@ -350,6 +380,31 @@ public final class PDTFactory
   public static LocalDateTime createLocalDateTime (@Nonnull final String sDateTime)
   {
     return new LocalDateTime (sDateTime, getLocalChronology ());
+  }
+
+  @Nonnull
+  public static LocalDateTime createLocalDateTime (@Nonnull final Date aDate)
+  {
+    return createLocalDateTime (aDate, PDTConfig.getDefaultDateTimeZone ());
+  }
+
+  @Nonnull
+  public static LocalDateTime createLocalDateTime (@Nonnull final Date aDate, @Nonnull final TimeZone aTimeZone)
+  {
+    return createLocalDateTime (aDate, DateTimeZone.forTimeZone (aTimeZone));
+  }
+
+  @Nonnull
+  public static LocalDateTime createLocalDateTime (@Nonnull final Date aDate, @Nonnull final DateTimeZone aDateTimeZone)
+  {
+    return new LocalDateTime (aDate, getLocalChronology ().withZone (aDateTimeZone));
+  }
+
+  @Nonnull
+  public static LocalDateTime createLocalDateTime (@Nonnull final Calendar aCalendar)
+  {
+    return new LocalDateTime (aCalendar,
+                              getLocalChronology ().withZone (DateTimeZone.forTimeZone (aCalendar.getTimeZone ())));
   }
 
   @Nonnull
@@ -457,13 +512,6 @@ public final class PDTFactory
   {
     // Always using UTC internally!
     return new LocalDateTime (nYears, nMonths, nDays, nHours, nMinutes, nSeconds, nMilliSeconds, getLocalChronology ());
-  }
-
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Calendar aCalendar)
-  {
-    return new LocalDateTime (aCalendar,
-                              getLocalChronology ().withZone (DateTimeZone.forTimeZone (aCalendar.getTimeZone ())));
   }
 
   @Nonnegative

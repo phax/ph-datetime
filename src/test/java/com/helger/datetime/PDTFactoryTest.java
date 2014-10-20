@@ -144,15 +144,15 @@ public final class PDTFactoryTest
   @Test
   public void testConvert ()
   {
-    final LocalDate aLD1 = PDTFactory.getCurrentLocalDate ();
+    LocalDate aLD1 = PDTFactory.getCurrentLocalDate ();
     DateTime aDT = PDTFactory.createDateTime (aLD1);
     assertEquals (aLD1, aDT.toLocalDate ());
 
-    final LocalTime aLT1 = PDTFactory.getCurrentLocalTime ();
+    LocalTime aLT1 = PDTFactory.getCurrentLocalTime ();
     aDT = PDTFactory.createDateTime (aLT1);
     assertEquals (aLT1, aDT.toLocalTime ());
 
-    final LocalDateTime aLDT1 = PDTFactory.getCurrentLocalDateTime ();
+    LocalDateTime aLDT1 = PDTFactory.getCurrentLocalDateTime ();
     aDT = PDTFactory.createDateTime (aLDT1);
     assertEquals (aLDT1, aDT.toLocalDateTime ());
 
@@ -161,8 +161,25 @@ public final class PDTFactoryTest
     final DateTime aDT2 = PDTFactory.createDateTime (aLDT);
     assertEquals (aDT, aDT2);
 
-    aDT = PDTFactory.createDateTimeFromMillis (1328008438966L);
+    final long nMillis = 1328008438966L;
+    aDT = PDTFactory.createDateTimeFromMillis (nMillis);
     assertNotNull (aDT);
     assertEquals (aDT, PDTFactory.createDateTime (2012, DateTimeConstants.JANUARY, 31, 12, 13, 58, 966));
+    assertEquals (aDT, PDTFactory.createDateTime (new Date (nMillis)));
+
+    aLD1 = PDTFactory.createLocalDateFromMillis (nMillis);
+    assertNotNull (aLD1);
+    assertEquals (aLD1, PDTFactory.createLocalDate (2012, DateTimeConstants.JANUARY, 31));
+    assertEquals (aLD1, PDTFactory.createLocalDate (new Date (nMillis)));
+
+    aLT1 = PDTFactory.createLocalTimeFromMillis (nMillis);
+    assertNotNull (aLT1);
+    assertEquals (aLT1, PDTFactory.createLocalTime (12, 13, 58, 966));
+    assertEquals (aLT1, PDTFactory.createLocalTime (new Date (nMillis)));
+
+    aLDT1 = PDTFactory.createLocalDateTimeFromMillis (nMillis);
+    assertNotNull (aLDT1);
+    assertEquals (aLDT1, PDTFactory.createLocalDateTime (2012, DateTimeConstants.JANUARY, 31, 12, 13, 58, 966));
+    assertEquals (aLDT1, PDTFactory.createLocalDateTime (new Date (nMillis)));
   }
 }

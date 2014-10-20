@@ -16,6 +16,7 @@
  */
 package com.helger.datetime.config;
 
+import java.util.TimeZone;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -30,8 +31,11 @@ import org.joda.time.chrono.ISOChronology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.helger.commons.ValueEnforcer;
+import com.helger.commons.annotations.Nonempty;
 import com.helger.commons.annotations.PresentForCodeCoverage;
 import com.helger.commons.state.ESuccess;
+import com.helger.datetime.PDTFactory;
 
 /**
  * This class provides the most basic settings for date time operating: the
@@ -51,8 +55,15 @@ public final class PDTConfig
   private static final Logger s_aLogger = LoggerFactory.getLogger (PDTConfig.class);
   private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
   @GuardedBy ("s_aRWLock")
-  private static DateTimeZone s_aDateTimeZone = DateTimeZone.forID (DEFAULT_DATETIMEZONEID);
+  private static DateTimeZone s_aDefaultDateTimeZone;
+  @GuardedBy ("s_aRWLock")
   private static volatile boolean s_bUseISOChronology = DEFAULT_USE_ISO_CHRONOLOGY;
+
+  static
+  {
+    // Ensure the JDK timezone is aligned to our default
+    setDefaultDateTimeZoneID (DEFAULT_DATETIMEZONEID);
+  }
 
   @PresentForCodeCoverage
   @SuppressWarnings ("unused")
@@ -62,20 +73,26 @@ public final class PDTConfig
   {}
 
   /**
-   * Set the default date time zone to use.
+   * Set the default date time zone to use. This effects all objects created via
+   * {@link PDTFactory} as well as the default JDK TimeZone.
    *
    * @param sDateTimeZoneID
-   *        Must be a valid, non-null time zone.
+   *        Must be a valid, non-<code>null</code> time zone.
    * @return {@link ESuccess}
    */
   @Nonnull
-  public static ESuccess setDefaultDateTimeZoneID (final String sDateTimeZoneID)
+  public static ESuccess setDefaultDateTimeZoneID (@Nonnull @Nonempty final String sDateTimeZoneID)
   {
+    ValueEnforcer.notEmpty (sDateTimeZoneID, "DateTimeZoneID");
+
     s_aRWLock.writeLock ().lock ();
     try
     {
       // Try to resolve ID -> throws IAE if unknown
-      s_aDateTimeZone = DateTimeZone.forID (sDateTimeZoneID);
+      s_aDefaultDateTimeZone = DateTimeZone.forID (sDateTimeZoneID);
+      // getTimeZone falls back to GMT if unknown
+      final TimeZone aDefaultTimeZone = TimeZone.getTimeZone (sDateTimeZoneID);
+      TimeZone.setDefault (aDefaultTimeZone);
       return ESuccess.SUCCESS;
     }
     catch (final IllegalArgumentException ex)
@@ -92,7 +109,7 @@ public final class PDTConfig
 
   /**
    * @return The default date time zone to use. Never <code>null</code>. The
-   *         default default is {@link #DEFAULT_DATETIMEZONEID}.
+   *         default is {@link #DEFAULT_DATETIMEZONEID}.
    */
   @Nonnull
   public static DateTimeZone getDefaultDateTimeZone ()
@@ -100,7 +117,7 @@ public final class PDTConfig
     s_aRWLock.readLock ().lock ();
     try
     {
-      return s_aDateTimeZone;
+      return s_aDefaultDateTimeZone;
     }
     finally
     {
@@ -109,7 +126,7 @@ public final class PDTConfig
   }
 
   /**
-   * @return The default UTC time zone.
+   * @return The default UTC date time zone. Never <code>null</code>.
    */
   @Nonnull
   public static DateTimeZone getDateTimeZoneUTC ()
@@ -117,47 +134,84 @@ public final class PDTConfig
     return DateTimeZone.UTC;
   }
 
+  /**
+   * @return <code>true</code> if {@link ISOChronology} should be used by
+   *         default. Defaults to {@value #DEFAULT_USE_ISO_CHRONOLOGY}.
+   */
   public static boolean isUseISOChronology ()
   {
-    return s_bUseISOChronology;
-  }
-
-  public static void setUseISOChronology (final boolean bUse)
-  {
-    s_bUseISOChronology = bUse;
+    s_aRWLock.readLock ().lock ();
+    try
+    {
+      return s_bUseISOChronology;
+    }
+    finally
+    {
+      s_aRWLock.readLock ().unlock ();
+    }
   }
 
   /**
-   * @return The default GJ chronology using the result of
+   * Change whether ISO chronology should be used by default or
+   * {@link GJChronology}.
+   *
+   * @param bUse
+   *        <code>true</code> to use {@link ISOChronology}, <code>false</code>
+   *        to use {@link GJChronology}.
+   */
+  public static void setUseISOChronology (final boolean bUse)
+  {
+    s_aRWLock.writeLock ().lock ();
+    try
+    {
+      s_bUseISOChronology = bUse;
+    }
+    finally
+    {
+      s_aRWLock.writeLock ().unlock ();
+    }
+  }
+
+  /**
+   * @return The default chronology ({@link ISOChronology} or
+   *         {@link GJChronology}) using the result of
    *         {@link #getDefaultDateTimeZone()}
+   * @see #isUseISOChronology()
+   * @see #getDefaultDateTimeZone()
    */
   @Nonnull
   public static Chronology getDefaultChronology ()
   {
-    if (s_bUseISOChronology)
+    if (isUseISOChronology ())
       return ISOChronology.getInstance (getDefaultDateTimeZone ());
     return GJChronology.getInstance (getDefaultDateTimeZone ());
   }
 
   /**
-   * @return The default chronology with the system date time zone
-   */
-  @Nonnull
-  public static Chronology getDefaultChronologyWithoutDateTimeZone ()
-  {
-    if (s_bUseISOChronology)
-      return ISOChronology.getInstance ();
-    return GJChronology.getInstance ();
-  }
-
-  /**
-   * @return The default chronology with UTC date time zone
+   * @return The default chronology ({@link ISOChronology} or
+   *         {@link GJChronology}) with UTC date time zone. Never
+   *         <code>null</code>.
+   * @see #isUseISOChronology()
    */
   @Nonnull
   public static Chronology getDefaultChronologyUTC ()
   {
-    if (s_bUseISOChronology)
+    if (isUseISOChronology ())
       return ISOChronology.getInstanceUTC ();
     return GJChronology.getInstanceUTC ();
+  }
+
+  /**
+   * @return The default chronology ({@link ISOChronology} or
+   *         {@link GJChronology}) with the system date time zone. Never
+   *         <code>null</code>.
+   * @see #isUseISOChronology()
+   */
+  @Nonnull
+  public static Chronology getDefaultChronologyWithDefaultDateTimeZone ()
+  {
+    if (isUseISOChronology ())
+      return ISOChronology.getInstance ();
+    return GJChronology.getInstance ();
   }
 }
