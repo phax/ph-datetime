@@ -87,7 +87,6 @@ public final class PeriodFormatMultilingual
   }
 
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PeriodFormatMultilingual s_aInstance = new PeriodFormatMultilingual ();
 
   /**

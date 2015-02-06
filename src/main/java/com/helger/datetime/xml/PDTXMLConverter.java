@@ -66,7 +66,6 @@ public final class PDTXMLConverter
   }
 
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTXMLConverter s_aInstance = new PDTXMLConverter ();
 
   private PDTXMLConverter ()

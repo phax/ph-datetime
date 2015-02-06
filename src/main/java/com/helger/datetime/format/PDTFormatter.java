@@ -31,14 +31,13 @@ import com.helger.datetime.config.PDTConfig;
 /**
  * Create common {@link DateTimeFormatter} objects used for printing and parsing
  * date and time objects.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
 public final class PDTFormatter
 {
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTFormatter s_aInstance = new PDTFormatter ();
 
   private PDTFormatter ()
@@ -47,7 +46,7 @@ public final class PDTFormatter
   /**
    * Assign the passed display locale and the default chronology to the passed
    * date time formatter.
-   * 
+   *
    * @param aFormatter
    *        The formatter to be modified. May not be <code>null</code>.
    * @param aDisplayLocale
@@ -64,7 +63,7 @@ public final class PDTFormatter
   /**
    * Get the default date formatter for the passed locale. This used medium
    * style.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -77,7 +76,7 @@ public final class PDTFormatter
 
   /**
    * Get the short date formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -90,7 +89,7 @@ public final class PDTFormatter
 
   /**
    * Get the medium date formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -103,7 +102,7 @@ public final class PDTFormatter
 
   /**
    * Get the long date formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -116,7 +115,7 @@ public final class PDTFormatter
 
   /**
    * Get the full date formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -130,7 +129,7 @@ public final class PDTFormatter
   /**
    * Get the default time formatter for the passed locale. This used medium
    * style.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -143,7 +142,7 @@ public final class PDTFormatter
 
   /**
    * Get the short time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -156,7 +155,7 @@ public final class PDTFormatter
 
   /**
    * Get the medium time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -169,7 +168,7 @@ public final class PDTFormatter
 
   /**
    * Get the long time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -182,7 +181,7 @@ public final class PDTFormatter
 
   /**
    * Get the full time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -196,7 +195,7 @@ public final class PDTFormatter
   /**
    * Get the default date time formatter for the passed locale. The default
    * style is medium.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -209,7 +208,7 @@ public final class PDTFormatter
 
   /**
    * Get the short date time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -222,7 +221,7 @@ public final class PDTFormatter
 
   /**
    * Get the medium date time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -235,7 +234,7 @@ public final class PDTFormatter
 
   /**
    * Get the long date time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -248,7 +247,7 @@ public final class PDTFormatter
 
   /**
    * Get the full date time formatter for the passed locale.
-   * 
+   *
    * @param aDisplayLocale
    *        The display locale to be used. May be <code>null</code>.
    * @return The created date time formatter. Never <code>null</code>.
@@ -262,7 +261,7 @@ public final class PDTFormatter
   /**
    * Get the {@link DateTimeFormatter} for the given pattern, using our default
    * chronology.
-   * 
+   *
    * @param sPattern
    *        The pattern to be parsed
    * @return The formatter object.
@@ -278,7 +277,7 @@ public final class PDTFormatter
   /**
    * Get the {@link DateTimeFormatter} for the given pattern and locale, using
    * our default chronology.
-   * 
+   *
    * @param sPattern
    *        The pattern to be parsed
    * @param aDisplayLocale

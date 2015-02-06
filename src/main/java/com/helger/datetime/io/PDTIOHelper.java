@@ -30,7 +30,7 @@ import com.helger.datetime.format.PDTToString;
 
 /**
  * Some date time specific routines especially helpful for IO.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -44,7 +44,6 @@ public final class PDTIOHelper
   public static final String PATTERN_DATETIME = PATTERN_DATE + '_' + PATTERN_TIME;
 
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTIOHelper s_aInstance = new PDTIOHelper ();
 
   private PDTIOHelper ()
@@ -61,7 +60,7 @@ public final class PDTIOHelper
 
   /**
    * Get the passed date time formatted suitable for a file name.
-   * 
+   *
    * @param aDT
    *        The date time to be formatted. May not be <code>null</code>.
    * @return The formatted string.
@@ -83,7 +82,7 @@ public final class PDTIOHelper
 
   /**
    * Get the passed local date time formatted suitable for a file name.
-   * 
+   *
    * @param aDT
    *        The local date time to be formatted. May not be <code>null</code>.
    * @return The formatted string.
@@ -104,7 +103,7 @@ public final class PDTIOHelper
 
   /**
    * Get the passed date formatted suitable for a file name.
-   * 
+   *
    * @param aLocalDate
    *        The date to be formatted. May not be <code>null</code>.
    * @return The formatted string.
@@ -124,7 +123,7 @@ public final class PDTIOHelper
 
   /**
    * Get the passed time formatted suitable for a file name.
-   * 
+   *
    * @param aLocalTime
    *        The time to be formatted. May not be <code>null</code>.
    * @return The formatted string.

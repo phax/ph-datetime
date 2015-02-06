@@ -47,7 +47,6 @@ import com.helger.commons.collections.pair.ReadonlyPair;
 public final class PDTUtils
 {
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTUtils s_aInstance = new PDTUtils ();
 
   private PDTUtils ()

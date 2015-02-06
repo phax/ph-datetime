@@ -66,7 +66,6 @@ public final class PDTConfig
   }
 
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTConfig s_aInstance = new PDTConfig ();
 
   private PDTConfig ()

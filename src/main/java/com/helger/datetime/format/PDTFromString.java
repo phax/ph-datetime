@@ -36,7 +36,7 @@ import com.helger.commons.string.StringHelper;
 /**
  * Handles the conversion to date, time or date time objects from a
  * {@link String}.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
@@ -45,7 +45,6 @@ public final class PDTFromString
   private static final Logger s_aLogger = LoggerFactory.getLogger (PDTFromString.class);
 
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTFromString s_aInstance = new PDTFromString ();
 
   private PDTFromString ()

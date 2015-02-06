@@ -33,14 +33,13 @@ import com.helger.commons.annotations.PresentForCodeCoverage;
 
 /**
  * Standard API to convert a date, time or date time to a {@link String}.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
 public final class PDTToString
 {
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTToString s_aInstance = new PDTToString ();
 
   private PDTToString ()

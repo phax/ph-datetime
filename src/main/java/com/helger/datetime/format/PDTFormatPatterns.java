@@ -28,14 +28,13 @@ import com.helger.commons.annotations.PresentForCodeCoverage;
 /**
  * Create common {@link DateFormat} patterns to format date, time and datetime
  * objects.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
 public final class PDTFormatPatterns
 {
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTFormatPatterns s_aInstance = new PDTFormatPatterns ();
 
   private PDTFormatPatterns ()

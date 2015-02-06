@@ -45,7 +45,6 @@ import com.helger.datetime.config.PDTConfig;
 public final class PDTFactory
 {
   @PresentForCodeCoverage
-  @SuppressWarnings ("unused")
   private static final PDTFactory s_aInstance = new PDTFactory ();
 
   private PDTFactory ()
