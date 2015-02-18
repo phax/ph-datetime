@@ -110,30 +110,31 @@ public final class PDTFactoryTest
   {
     final Calendar aCal = new GregorianCalendar (2011, Calendar.JULY, 31);
     final Date aDate = aCal.getTime ();
+
     LocalDate aLD = PDTFactory.createLocalDate (aDate);
     assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-    assertEquals (aCal, aLD.toDateTimeAtStartOfDay ().toCalendar (null));
+    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
     assertEquals (PDTConfig.getDefaultChronologyUTC (), aLD.getChronology ());
     DateTime aDT = PDTFactory.createDateTime (aLD);
     assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
 
     aLD = PDTFactory.createLocalDate (aCal);
     assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-    assertEquals (aCal, aLD.toDateTimeAtStartOfDay ().toCalendar (null));
+    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
 
     PDTConfig.setUseISOChronology (!PDTConfig.DEFAULT_USE_ISO_CHRONOLOGY);
     try
     {
       aLD = PDTFactory.createLocalDate (aDate);
       assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-      assertEquals (aCal, aLD.toDateTimeAtStartOfDay ().toCalendar (null));
+      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
       assertEquals (PDTConfig.getDefaultChronologyUTC (), aLD.getChronology ());
       aDT = PDTFactory.createDateTime (aLD);
       assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
 
       aLD = PDTFactory.createLocalDate (aCal);
       assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-      assertEquals (aCal, aLD.toDateTimeAtStartOfDay ().toCalendar (null));
+      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
     }
     finally
     {
