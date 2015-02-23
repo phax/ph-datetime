@@ -1,6 +1,6 @@
 #ph-datetime
 
-Java date time library based on joda time
+Java date time library based on [Joda-Time](http://www.joda.org/joda-time/).
 
 #Maven usage
 Add the following to your pom.xml to use this artifact:
@@ -8,7 +8,7 @@ Add the following to your pom.xml to use this artifact:
 <dependency>
   <groupId>com.helger</groupId>
   <artifactId>ph-datetime</artifactId>
-  <version>3.2.2</version>
+  <version>3.3.0</version>
 </dependency>
 ```
 
