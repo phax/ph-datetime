@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -575,5 +576,13 @@ public final class PDTUtils
   public static boolean isLessOrEqual (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
   {
     return aDateTime1.compareTo (aDateTime2) <= 0;
+  }
+
+  @Nonnull
+  public static Duration createDuration (@Nonnull final LocalDateTime aDateTime1,
+                                         @Nonnull final LocalDateTime aDateTime2)
+  {
+    // Must be converted to DateTime to work
+    return new Duration (aDateTime1.toDateTime (DateTimeZone.UTC), aDateTime2.toDateTime (DateTimeZone.UTC));
   }
 }
