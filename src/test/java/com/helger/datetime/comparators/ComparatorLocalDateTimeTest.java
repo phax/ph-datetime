@@ -23,13 +23,13 @@ import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.compare.ESortOrder;
 import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link ComparatorLocalDateTime}.
- * 
+ *
  * @author Philip Helger
  */
 public final class ComparatorLocalDateTimeTest
@@ -39,11 +39,11 @@ public final class ComparatorLocalDateTimeTest
   {
     final LocalDateTime aObj1 = PDTFactory.createLocalDateTime (2000, 5, 5);
     final LocalDateTime aObj2 = PDTFactory.createLocalDateTime (1000, 5, 5);
-    final List <LocalDateTime> aList = ContainerHelper.newList (aObj1, aObj2);
-    List <LocalDateTime> aSorted = ContainerHelper.getSorted (aList, new ComparatorLocalDateTime ());
+    final List <LocalDateTime> aList = CollectionHelper.newList (aObj1, aObj2);
+    List <LocalDateTime> aSorted = CollectionHelper.getSorted (aList, new ComparatorLocalDateTime ());
     assertEquals (aObj2, aSorted.get (0));
     assertEquals (aObj1, aSorted.get (1));
-    aSorted = ContainerHelper.getSorted (aList, new ComparatorLocalDateTime (ESortOrder.DESCENDING));
+    aSorted = CollectionHelper.getSorted (aList, new ComparatorLocalDateTime (ESortOrder.DESCENDING));
     assertEquals (aObj1, aSorted.get (0));
     assertEquals (aObj2, aSorted.get (1));
   }

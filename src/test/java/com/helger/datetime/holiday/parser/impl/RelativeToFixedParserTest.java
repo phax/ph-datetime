@@ -19,7 +19,7 @@ package com.helger.datetime.holiday.parser.impl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.Fixed;
@@ -74,7 +74,7 @@ public final class RelativeToFixedParserTest
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          PDTFactory.createLocalDate (2011, 8, 11),
-                         ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -94,6 +94,6 @@ public final class RelativeToFixedParserTest
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          PDTFactory.createLocalDate (2011, 8, 2),
-                         ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }

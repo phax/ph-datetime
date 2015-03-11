@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.helger.commons.annotations.ReturnsImmutableObject;
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.hash.HashCodeGenerator;
 import com.helger.commons.id.IHasID;
 import com.helger.commons.locale.country.ECountry;
@@ -32,7 +32,7 @@ import com.helger.commons.string.ToStringGenerator;
 
 /**
  * Bean class for describing the configuration hierarchy.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
@@ -45,7 +45,7 @@ public final class CalendarHierarchy implements IHasID <String>
   /**
    * Constructor which takes a eventually existing parent hierarchy node and the
    * ID of this hierarchy.
-   * 
+   *
    * @param aParent
    *        parent entry
    * @param sID
@@ -71,7 +71,7 @@ public final class CalendarHierarchy implements IHasID <String>
 
   /**
    * Returns the hierarchies description text from the resource bundle.
-   * 
+   *
    * @param aContentLocale
    *        Locale to return the description text for.
    * @return Description text
@@ -92,7 +92,7 @@ public final class CalendarHierarchy implements IHasID <String>
   @ReturnsImmutableObject
   public Map <String, CalendarHierarchy> getChildren ()
   {
-    return ContainerHelper.makeUnmodifiable (m_aChildren);
+    return CollectionHelper.makeUnmodifiable (m_aChildren);
   }
 
   @Override

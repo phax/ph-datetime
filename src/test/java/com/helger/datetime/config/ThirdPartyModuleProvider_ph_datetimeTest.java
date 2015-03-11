@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.thirdparty.IThirdPartyModule;
 import com.helger.commons.thirdparty.ThirdPartyModuleRegistry;
 
@@ -38,6 +38,6 @@ public final class ThirdPartyModuleProvider_ph_datetimeTest
   {
     final Set <IThirdPartyModule> aSet = ThirdPartyModuleRegistry.getInstance ().getAllRegisteredThirdPartyModules ();
     final IThirdPartyModule [] aExpected = new ThirdPartyModuleProvider_ph_datetime ().getAllThirdPartyModules ();
-    assertTrue (aSet.containsAll (ContainerHelper.newList (aExpected)));
+    assertTrue (aSet.containsAll (CollectionHelper.newList (aExpected)));
   }
 }

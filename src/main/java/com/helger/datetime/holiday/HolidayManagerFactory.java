@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 
 import com.helger.commons.annotations.Nonempty;
 import com.helger.commons.annotations.ReturnsImmutableObject;
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.lang.ClassHelper;
 import com.helger.commons.lang.GenericReflection;
 import com.helger.commons.locale.country.ECountry;
@@ -38,7 +38,7 @@ import com.helger.datetime.holiday.mgr.XMLHolidayManagerJapan;
 
 /**
  * The main class for creating holiday managers.
- * 
+ *
  * @author Philip Helger
  */
 public final class HolidayManagerFactory
@@ -143,13 +143,13 @@ public final class HolidayManagerFactory
 
   /**
    * Returns a set of all currently supported country codes.
-   * 
+   *
    * @return Set of supported country codes.
    */
   @Nonnull
   @ReturnsImmutableObject
   public static Set <String> getSupportedCountryCodes ()
   {
-    return ContainerHelper.makeUnmodifiable (s_aSupportedCountries);
+    return CollectionHelper.makeUnmodifiable (s_aSupportedCountries);
   }
 }

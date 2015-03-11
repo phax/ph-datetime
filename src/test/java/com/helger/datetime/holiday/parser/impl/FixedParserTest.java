@@ -23,7 +23,7 @@ import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.Fixed;
@@ -92,8 +92,8 @@ public final class FixedParserTest
   private void _containsAll (final HolidayMap list, final LocalDate... dates)
   {
     Assert.assertEquals ("Number of holidays.", dates.length, list.size ());
-    final List <LocalDate> aSortedList = ContainerHelper.getSorted (list.getAllDates ());
-    final List <LocalDate> expected = ContainerHelper.getSorted (dates);
+    final List <LocalDate> aSortedList = CollectionHelper.getSorted (list.getAllDates ());
+    final List <LocalDate> expected = CollectionHelper.getSorted (dates);
     for (int i = 0; i < expected.size (); i++)
     {
       Assert.assertEquals ("Missing date.", expected.get (i), aSortedList.get (i));

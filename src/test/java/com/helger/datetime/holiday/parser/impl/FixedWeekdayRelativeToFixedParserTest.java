@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.Fixed;
@@ -85,7 +85,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
     assertEquals ("Wrong date.",
                   PDTFactory.createLocalDate (2011, 1, 24),
-                  ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -106,7 +106,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
     assertEquals ("Wrong date.",
                   PDTFactory.createLocalDate (2011, 1, 17),
-                  ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -127,7 +127,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
     assertEquals ("Wrong date.",
                   PDTFactory.createLocalDate (2011, 2, 14),
-                  ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -148,6 +148,6 @@ public final class FixedWeekdayRelativeToFixedParserTest
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
     assertEquals ("Wrong date.",
                   PDTFactory.createLocalDate (2011, 4, 12),
-                  ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }

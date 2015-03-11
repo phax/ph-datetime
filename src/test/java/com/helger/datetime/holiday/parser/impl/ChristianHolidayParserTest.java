@@ -24,7 +24,7 @@ import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.ChristianHoliday;
@@ -57,7 +57,7 @@ public final class ChristianHolidayParserTest
     final Holidays aConfig = _createConfig (ChristianHolidayType.EASTER);
     s_aParser.parse (2011, aHolidays, aConfig);
     Assert.assertEquals ("Wrong number of aHolidays.", 1, aHolidays.size ());
-    final LocalDate aEasterDate = ContainerHelper.getFirstElement (aHolidays.getAllDates ());
+    final LocalDate aEasterDate = CollectionHelper.getFirstElement (aHolidays.getAllDates ());
     final LocalDate aEndDate = PDTFactory.createLocalDate (2011, 4, 24);
     Assert.assertEquals ("Wrong easter date.", aEndDate, aEasterDate);
   }
@@ -84,7 +84,7 @@ public final class ChristianHolidayParserTest
     Assert.assertEquals ("Wrong number of aHolidays.", aExpected.size (), aHolidays.size ());
     Assert.assertEquals ("Wrong holiday.",
                          aExpected.get (0),
-                         ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -112,7 +112,7 @@ public final class ChristianHolidayParserTest
 
     Collections.sort (expected);
 
-    final List <LocalDate> found = ContainerHelper.getSorted (aHolidays.getAllDates ());
+    final List <LocalDate> found = CollectionHelper.getSorted (aHolidays.getAllDates ());
 
     for (int i = 0; i < expected.size (); i++)
     {

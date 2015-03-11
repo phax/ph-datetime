@@ -23,13 +23,13 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.compare.ESortOrder;
 import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link ComparatorDateTime}.
- * 
+ *
  * @author Philip Helger
  */
 public final class ComparatorDateTimeTest
@@ -39,11 +39,11 @@ public final class ComparatorDateTimeTest
   {
     final DateTime aObj1 = PDTFactory.createDateTimeFromMillis (2000);
     final DateTime aObj2 = PDTFactory.createDateTimeFromMillis (1000);
-    final List <DateTime> aList = ContainerHelper.newList (aObj1, aObj2);
-    List <DateTime> aSorted = ContainerHelper.getSorted (aList, new ComparatorDateTime ());
+    final List <DateTime> aList = CollectionHelper.newList (aObj1, aObj2);
+    List <DateTime> aSorted = CollectionHelper.getSorted (aList, new ComparatorDateTime ());
     assertEquals (aObj2, aSorted.get (0));
     assertEquals (aObj1, aSorted.get (1));
-    aSorted = ContainerHelper.getSorted (aList, new ComparatorDateTime (ESortOrder.DESCENDING));
+    aSorted = CollectionHelper.getSorted (aList, new ComparatorDateTime (ESortOrder.DESCENDING));
     assertEquals (aObj1, aSorted.get (0));
     assertEquals (aObj2, aSorted.get (1));
   }

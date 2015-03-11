@@ -19,7 +19,7 @@ package com.helger.datetime.holiday.parser.impl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collections.ContainerHelper;
+import com.helger.commons.collections.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.FixedWeekdayBetweenFixed;
@@ -69,6 +69,6 @@ public final class FixedWeekdayBetweenFixedParserTest
     Assert.assertEquals ("Wrong number of results.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          PDTFactory.createLocalDate (2011, 1, 19),
-                         ContainerHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }
