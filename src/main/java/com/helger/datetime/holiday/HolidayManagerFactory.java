@@ -26,8 +26,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.annotation.Nonnull;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotations.Nonempty;
-import com.helger.commons.annotations.ReturnsImmutableObject;
+import com.helger.commons.annotations.ReturnsMutableCopy;
 import com.helger.commons.collections.CollectionHelper;
 import com.helger.commons.lang.ClassHelper;
 import com.helger.commons.lang.GenericReflection;
@@ -66,10 +67,8 @@ public final class HolidayManagerFactory
   public static void registerHolidayManagerClass (@Nonnull @Nonempty final String sCountryID,
                                                   @Nonnull final Class <? extends IHolidayManager> aClass)
   {
-    if (StringHelper.hasNoText (sCountryID))
-      throw new IllegalArgumentException ("countryID is empty");
-    if (aClass == null)
-      throw new NullPointerException ("class");
+    ValueEnforcer.notEmpty (sCountryID, "CountryID");
+    ValueEnforcer.notNull (aClass, "Class");
     if (!ClassHelper.isInstancableClass (aClass))
       throw new IllegalArgumentException ("The passed class must be public, not abstract and needs a no-argument ctor!");
 
@@ -95,8 +94,7 @@ public final class HolidayManagerFactory
   @Nonnull
   public static IHolidayManager getHolidayManager (@Nonnull final ECountry eCountry)
   {
-    if (eCountry == null)
-      throw new NullPointerException ("country");
+    ValueEnforcer.notNull (eCountry, "Country");
 
     return getHolidayManager (eCountry.getID ());
   }
@@ -104,6 +102,8 @@ public final class HolidayManagerFactory
   @Nonnull
   public static IHolidayManager getHolidayManager (@Nonnull @Nonempty final String sCountryID)
   {
+    ValueEnforcer.notEmpty (sCountryID, "CountryID");
+
     // is the instance already cached?
     IHolidayManager aMgr;
     s_aRWLock.readLock ().lock ();
@@ -147,9 +147,9 @@ public final class HolidayManagerFactory
    * @return Set of supported country codes.
    */
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public static Set <String> getSupportedCountryCodes ()
   {
-    return CollectionHelper.makeUnmodifiable (s_aSupportedCountries);
+    return CollectionHelper.newSet (s_aSupportedCountries);
   }
 }

@@ -18,15 +18,13 @@ package com.helger.datetime.holiday;
 
 import org.junit.Test;
 
-import com.helger.datetime.holiday.mgr.AbstractCountryTestBase;
-
-public class HolidayFRTest extends AbstractCountryTestBase
+public class HolidayBGFuncTest extends AbstractCountryTestBase
 {
-  private static final String ISO_CODE = "fr";
+  private static final String ISO_CODE = "bg";
   private static final int YEAR = 2010;
 
   @Test
-  public void testManagerFRStructure () throws Exception
+  public void testManagerBGStructure () throws Exception
   {
     validateCalendarData (ISO_CODE, YEAR);
   }

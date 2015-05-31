@@ -230,7 +230,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * getHolidays()/isHoliday().
    */
   @Override
-  protected CalendarHierarchy getHierarchy ()
+  @Nonnull
+  public CalendarHierarchy getHierarchy ()
   {
     return _createConfigurationHierarchy (m_aConfiguration, null);
   }
@@ -241,8 +242,9 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aConfig
    * @return configuration hierarchy
    */
-  private static CalendarHierarchy _createConfigurationHierarchy (final Configuration aConfig,
-                                                                  final CalendarHierarchy aParent)
+  @Nonnull
+  private static CalendarHierarchy _createConfigurationHierarchy (@Nonnull final Configuration aConfig,
+                                                                  @Nullable final CalendarHierarchy aParent)
   {
     final ECountry eCountry = ECountry.getFromIDOrNull (aConfig.getHierarchy ());
     final CalendarHierarchy aHierarchy = new CalendarHierarchy (aParent, aConfig.getHierarchy (), eCountry);

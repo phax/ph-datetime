@@ -124,5 +124,6 @@ public abstract class AbstractHolidayManager implements IHolidayManager
    *
    * @return The hierarchy
    */
-  protected abstract CalendarHierarchy getHierarchy ();
+  @Nonnull
+  public abstract CalendarHierarchy getHierarchy ();
 }

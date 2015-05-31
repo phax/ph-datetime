@@ -31,7 +31,7 @@ import com.helger.commons.locale.country.ECountry;
  * 
  * @author svdi1de
  */
-public final class ISOCodesTest
+public final class ISOCodesFuncTest
 {
   private static final int NUMBER_OF_ISOCOUNTRIES = 244;
 

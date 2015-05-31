@@ -23,9 +23,8 @@ import org.junit.Test;
 
 import com.helger.commons.locale.country.ECountry;
 import com.helger.datetime.PDTFactory;
-import com.helger.datetime.holiday.mgr.AbstractCountryTestBase;
 
-public class HolidayUKTest extends AbstractCountryTestBase
+public class HolidayUKFuncTest extends AbstractCountryTestBase
 {
 
   private static final int YEAR = 2010;

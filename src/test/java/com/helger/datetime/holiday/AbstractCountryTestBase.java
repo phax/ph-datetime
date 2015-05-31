@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.mgr;
+package com.helger.datetime.holiday;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,6 +33,8 @@ import com.helger.datetime.holiday.HolidayManagerFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayManager;
 import com.helger.datetime.holiday.ISingleHoliday;
+import com.helger.datetime.holiday.mgr.AbstractHolidayManager;
+import com.helger.datetime.holiday.mgr.CalendarHierarchy;
 
 /**
  * @author svdi1de
@@ -41,7 +43,7 @@ public abstract class AbstractCountryTestBase
 {
   /**
    * Compares two hierarchy structure by traversing down.
-   * 
+   *
    * @param expected
    *        This is the test structure which is how it should be.
    * @param found
@@ -62,15 +64,15 @@ public abstract class AbstractCountryTestBase
   protected void compareData (final AbstractHolidayManager expected, final IHolidayManager found, final int year)
   {
     final CalendarHierarchy expectedHierarchy = expected.getHierarchy ();
-    final ArrayList <String> args = new ArrayList <String> ();
+    final List <String> args = new ArrayList <String> ();
     _compareDates (expected, found, expectedHierarchy, args, year);
   }
 
   private void _compareDates (final IHolidayManager aExpected,
-                             final IHolidayManager aFound,
-                             final CalendarHierarchy aHierarchy,
-                             final List <String> args,
-                             final int nYear)
+                              final IHolidayManager aFound,
+                              final CalendarHierarchy aHierarchy,
+                              final List <String> args,
+                              final int nYear)
   {
     final HolidayMap aExpectedHolidays = aExpected.getHolidays (nYear, ArrayHelper.newArray (args, String.class));
     final HolidayMap aFoundHolidays = aFound.getHolidays (nYear, ArrayHelper.newArray (args, String.class));
