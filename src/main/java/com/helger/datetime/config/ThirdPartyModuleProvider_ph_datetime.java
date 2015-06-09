@@ -37,7 +37,7 @@ public final class ThirdPartyModuleProvider_ph_datetime implements IThirdPartyMo
   public static final IThirdPartyModule JODATIME = new ThirdPartyModule ("Joda-Time",
                                                                          "Stephen Colebourne",
                                                                          ELicense.APACHE2,
-                                                                         new Version (2, 7),
+                                                                         new Version (2, 8),
                                                                          "http://www.joda.org/joda-time/");
 
   @Nonnull
