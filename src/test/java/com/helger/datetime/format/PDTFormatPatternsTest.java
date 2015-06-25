@@ -30,7 +30,7 @@ import com.helger.commons.locale.LocaleCache;
 
 /**
  * Test class for class {@link PDTFormatPatterns}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTFormatPatternsTest
@@ -69,7 +69,7 @@ public final class PDTFormatPatternsTest
   public void testGetPattern ()
   {
     String sDefault, sShort, sMedium, sLong, sFull;
-    for (final Locale aLocale : LocaleCache.getAllLocales ())
+    for (final Locale aLocale : LocaleCache.getInstance ().getAllLocales ())
     {
       // get pattern
       sDefault = PDTFormatPatterns.getDefaultPatternDate (aLocale);

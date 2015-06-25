@@ -27,7 +27,7 @@ import com.helger.commons.locale.LocaleCache;
 
 /**
  * Test class for class {@link PDTFormatter}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTFormatterTest
@@ -35,7 +35,7 @@ public final class PDTFormatterTest
   @Test
   public void testGetDefaultFormatter ()
   {
-    for (final Locale aLocale : LocaleCache.getAllLocales ())
+    for (final Locale aLocale : LocaleCache.getInstance ().getAllLocales ())
     {
       // get formatter
       assertNotNull (PDTFormatter.getDefaultFormatterDate (aLocale));
@@ -50,7 +50,7 @@ public final class PDTFormatterTest
   @Test
   public void testGetForPattern ()
   {
-    for (final Locale aLocale : LocaleCache.getAllLocales ())
+    for (final Locale aLocale : LocaleCache.getInstance ().getAllLocales ())
       assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd", aLocale));
     assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd"));
     assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd", null));

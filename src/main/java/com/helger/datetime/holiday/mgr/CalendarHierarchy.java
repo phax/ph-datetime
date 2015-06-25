@@ -23,9 +23,9 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.helger.commons.annotations.ReturnsImmutableObject;
-import com.helger.commons.collections.CollectionHelper;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.annotation.ReturnsImmutableObject;
+import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.id.IHasID;
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.string.ToStringGenerator;

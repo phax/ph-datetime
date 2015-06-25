@@ -29,7 +29,7 @@ import org.joda.time.LocalTime;
 import org.joda.time.ReadableInstant;
 import org.joda.time.ReadablePartial;
 
-import com.helger.commons.annotations.PresentForCodeCoverage;
+import com.helger.commons.annotation.PresentForCodeCoverage;
 
 /**
  * Standard API to convert a date, time or date time to a {@link String}.

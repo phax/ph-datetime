@@ -20,13 +20,13 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
  * Default implementation of {@link IReadonlyExpirable}
- * 
+ *
  * @author Philip Helger
  */
 public final class ReadonlyExpirable implements IReadonlyExpirable
@@ -62,7 +62,7 @@ public final class ReadonlyExpirable implements IReadonlyExpirable
     if (!(o instanceof ReadonlyExpirable))
       return false;
     final ReadonlyExpirable rhs = (ReadonlyExpirable) o;
-    return EqualsUtils.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);
+    return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);
   }
 
   @Override

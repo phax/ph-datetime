@@ -27,9 +27,9 @@ import javax.annotation.Nullable;
 
 import org.joda.time.LocalDate;
 
-import com.helger.commons.annotations.ReturnsImmutableObject;
-import com.helger.commons.collections.CollectionHelper;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.annotation.ReturnsImmutableObject;
+import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 

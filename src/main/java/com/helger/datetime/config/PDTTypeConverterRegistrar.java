@@ -36,7 +36,7 @@ import org.joda.time.MutablePeriod;
 import org.joda.time.Period;
 import org.joda.time.convert.ConverterManager;
 
-import com.helger.commons.annotations.IsSPIImplementation;
+import com.helger.commons.annotation.IsSPIImplementation;
 import com.helger.commons.typeconvert.ITypeConverter;
 import com.helger.commons.typeconvert.ITypeConverterRegistrarSPI;
 import com.helger.commons.typeconvert.ITypeConverterRegistry;

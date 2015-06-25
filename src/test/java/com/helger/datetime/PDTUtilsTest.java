@@ -29,11 +29,9 @@ import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.junit.Test;
 
-import com.helger.commons.collections.pair.IReadonlyPair;
-
 /**
  * Test class for class {@link PDTUtils}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTUtilsTest
@@ -47,27 +45,22 @@ public final class PDTUtilsTest
   public void testGetWeeksOfMonth ()
   {
     // Default cases:
-    IReadonlyPair <Integer, Integer> p = PDTUtils.getWeeksOfMonth (_getDT (2008, DateTimeConstants.JANUARY));
-    assertEquals (1, p.getFirst ().intValue ());
-    assertEquals (5, p.getSecond ().intValue ());
+    assertEquals (1, PDTUtils.getStartWeekOfMonth (_getDT (2008, DateTimeConstants.JANUARY)));
+    assertEquals (5, PDTUtils.getEndWeekOfMonth (_getDT (2008, DateTimeConstants.JANUARY)));
 
-    p = PDTUtils.getWeeksOfMonth (_getDT (2008, DateTimeConstants.FEBRUARY));
-    assertEquals (5, p.getFirst ().intValue ());
-    assertEquals (9, p.getSecond ().intValue ());
+    assertEquals (5, PDTUtils.getStartWeekOfMonth (_getDT (2008, DateTimeConstants.FEBRUARY)));
+    assertEquals (9, PDTUtils.getEndWeekOfMonth (_getDT (2008, DateTimeConstants.FEBRUARY)));
 
-    p = PDTUtils.getWeeksOfMonth (_getDT (2008, DateTimeConstants.MARCH));
-    assertEquals (9, p.getFirst ().intValue ());
-    assertEquals (14, p.getSecond ().intValue ());
+    assertEquals (9, PDTUtils.getStartWeekOfMonth (_getDT (2008, DateTimeConstants.MARCH)));
+    assertEquals (14, PDTUtils.getEndWeekOfMonth (_getDT (2008, DateTimeConstants.MARCH)));
 
     // Special case: August ends with a sunday and therefore the last week is
     // different from the beginning of the following week
-    p = PDTUtils.getWeeksOfMonth (_getDT (2008, DateTimeConstants.AUGUST));
-    assertEquals (31, p.getFirst ().intValue ());
-    assertEquals (35, p.getSecond ().intValue ());
+    assertEquals (31, PDTUtils.getStartWeekOfMonth (_getDT (2008, DateTimeConstants.AUGUST)));
+    assertEquals (35, PDTUtils.getEndWeekOfMonth (_getDT (2008, DateTimeConstants.AUGUST)));
 
-    p = PDTUtils.getWeeksOfMonth (_getDT (2008, DateTimeConstants.SEPTEMBER));
-    assertEquals (36, p.getFirst ().intValue ());
-    assertEquals (40, p.getSecond ().intValue ());
+    assertEquals (36, PDTUtils.getStartWeekOfMonth (_getDT (2008, DateTimeConstants.SEPTEMBER)));
+    assertEquals (40, PDTUtils.getEndWeekOfMonth (_getDT (2008, DateTimeConstants.SEPTEMBER)));
   }
 
   @Test

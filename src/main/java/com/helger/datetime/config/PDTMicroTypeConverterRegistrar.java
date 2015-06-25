@@ -34,10 +34,10 @@ import org.joda.time.MutableInterval;
 import org.joda.time.MutablePeriod;
 import org.joda.time.Period;
 
-import com.helger.commons.annotations.IsSPIImplementation;
+import com.helger.commons.annotation.IsSPIImplementation;
 import com.helger.commons.microdom.convert.IMicroTypeConverterRegistrarSPI;
 import com.helger.commons.microdom.convert.IMicroTypeConverterRegistry;
-import com.helger.commons.microdom.convert.impl.StringBasedMicroTypeConverter;
+import com.helger.commons.microdom.convert.StringBasedMicroTypeConverter;
 
 /**
  * Implementation of {@link IMicroTypeConverterRegistrarSPI} for date time stuff

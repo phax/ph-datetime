@@ -21,14 +21,14 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
  * Default implementation of {@link IExpirable}
- * 
+ *
  * @author Philip Helger
  */
 public final class Expirable implements IExpirable
@@ -62,7 +62,7 @@ public final class Expirable implements IExpirable
   @Nonnull
   public EChange setExpirationDateTime (@Nullable final DateTime aExpirationDateTime)
   {
-    if (EqualsUtils.equals (aExpirationDateTime, m_aExpirationDateTime))
+    if (EqualsHelper.equals (aExpirationDateTime, m_aExpirationDateTime))
       return EChange.UNCHANGED;
     m_aExpirationDateTime = aExpirationDateTime;
     return EChange.CHANGED;
@@ -81,7 +81,7 @@ public final class Expirable implements IExpirable
     if (!(o instanceof Expirable))
       return false;
     final Expirable rhs = (Expirable) o;
-    return EqualsUtils.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);
+    return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);
   }
 
   @Override

@@ -24,12 +24,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
-import com.helger.commons.lang.ClassHelper;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
+import com.helger.commons.lang.ClassLoaderHelper;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
-import com.helger.commons.text.resource.ResourceBundleKey;
+import com.helger.commons.text.resourcebundle.ResourceBundleKey;
 
 /**
  * Represents the holiday and contains the actual date and an localized
@@ -52,7 +52,7 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   /**
    * Constructs a holiday for a date using the provided properties key to
    * retrieve the description with.
-   * 
+   *
    * @param aType
    *        type
    * @param sPropertiesKey
@@ -87,7 +87,7 @@ public final class ResourceBundleHoliday implements ISingleHoliday
       {
         final ResourceBundle aBundle = ResourceBundle.getBundle (m_aRBKey.getBundleName (),
                                                                  aLocale,
-                                                                 ClassHelper.getDefaultClassLoader ());
+                                                                 ClassLoaderHelper.getDefaultClassLoader ());
         ret = aBundle.getString (m_aRBKey.getKey ());
       }
       catch (final MissingResourceException ex)
@@ -106,7 +106,7 @@ public final class ResourceBundleHoliday implements ISingleHoliday
     if (!(o instanceof ResourceBundleHoliday))
       return false;
     final ResourceBundleHoliday rhs = (ResourceBundleHoliday) o;
-    return m_bIsOfficial == rhs.m_bIsOfficial && EqualsUtils.equals (m_aRBKey, rhs.m_aRBKey);
+    return m_bIsOfficial == rhs.m_bIsOfficial && EqualsHelper.equals (m_aRBKey, rhs.m_aRBKey);
   }
 
   @Override

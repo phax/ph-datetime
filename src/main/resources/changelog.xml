@@ -17,8 +17,12 @@
     limitations under the License.
 
 -->
-<changelog xmlns="http://www.phloc.com/ns/changelog/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.phloc.com/ns/changelog/1.0 schemas/changelog-1.0.xsd" version="1.0" component="ph-datetime">
+<changelog xmlns="http://www.helger.com/xsd/changelog/1.0" version="1.0" component="ph-datetime">
+  <entry date="2015-06-25" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to Joda-Time 2.8.1</text>
+    </change>
+  </entry>
   <entry date="2015-06-09" category="tech" action="update">
     <change>
       <text locale="en">Updated to Joda-Time 2.8</text>

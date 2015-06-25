@@ -23,7 +23,7 @@ import java.util.List;
 import org.joda.time.LocalTime;
 import org.junit.Test;
 
-import com.helger.commons.collections.CollectionHelper;
+import com.helger.commons.collection.CollectionHelper;
 import com.helger.commons.compare.ESortOrder;
 import com.helger.datetime.PDTFactory;
 
@@ -43,7 +43,7 @@ public final class ComparatorLocalTimeTest
     List <LocalTime> aSorted = CollectionHelper.getSorted (aList, new ComparatorLocalTime ());
     assertEquals (aObj2, aSorted.get (0));
     assertEquals (aObj1, aSorted.get (1));
-    aSorted = CollectionHelper.getSorted (aList, new ComparatorLocalTime (ESortOrder.DESCENDING));
+    aSorted = CollectionHelper.getSorted (aList, new ComparatorLocalTime ().setSortOrder (ESortOrder.DESCENDING));
     assertEquals (aObj1, aSorted.get (0));
     assertEquals (aObj2, aSorted.get (1));
   }

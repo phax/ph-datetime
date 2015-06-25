@@ -18,7 +18,7 @@ package com.helger.datetime.config;
 
 import javax.annotation.Nonnull;
 
-import com.helger.commons.annotations.IsSPIImplementation;
+import com.helger.commons.annotation.IsSPIImplementation;
 import com.helger.commons.thirdparty.ELicense;
 import com.helger.commons.thirdparty.IThirdPartyModule;
 import com.helger.commons.thirdparty.IThirdPartyModuleProviderSPI;
@@ -37,7 +37,7 @@ public final class ThirdPartyModuleProvider_ph_datetime implements IThirdPartyMo
   public static final IThirdPartyModule JODATIME = new ThirdPartyModule ("Joda-Time",
                                                                          "Stephen Colebourne",
                                                                          ELicense.APACHE2,
-                                                                         new Version (2, 8),
+                                                                         new Version (2, 8, 1),
                                                                          "http://www.joda.org/joda-time/");
 
   @Nonnull

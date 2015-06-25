@@ -25,7 +25,7 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import com.helger.commons.mock.PHTestUtils;
+import com.helger.commons.mock.CommonsTestHelper;
 import com.helger.datetime.format.SerializableDateTimeFormatter.EFormatStyle;
 
 /**
@@ -44,7 +44,7 @@ public final class SerializableDateTimeFormatterTest
     assertSame (EFormatStyle.DEFAULT, s.getTimeStyle ());
     assertNull (s.getPattern ());
     assertNull (s.getLocale ());
-    PHTestUtils.testDefaultSerialization (s);
+    CommonsTestHelper.testDefaultSerialization (s);
 
     s = SerializableDateTimeFormatter.create (EFormatStyle.DEFAULT, EFormatStyle.DEFAULT, Locale.US);
     assertNotNull (s.getFormatter ());
@@ -52,7 +52,7 @@ public final class SerializableDateTimeFormatterTest
     assertSame (EFormatStyle.DEFAULT, s.getTimeStyle ());
     assertNull (s.getPattern ());
     assertSame (Locale.US, s.getLocale ());
-    PHTestUtils.testDefaultSerialization (s);
+    CommonsTestHelper.testDefaultSerialization (s);
 
     s = SerializableDateTimeFormatter.create ("mmYY", Locale.US);
     assertNotNull (s.getFormatter ());
@@ -60,6 +60,6 @@ public final class SerializableDateTimeFormatterTest
     assertNull (s.getTimeStyle ());
     assertEquals ("mmYY", s.getPattern ());
     assertSame (Locale.US, s.getLocale ());
-    PHTestUtils.testDefaultSerialization (s);
+    CommonsTestHelper.testDefaultSerialization (s);
   }
 }

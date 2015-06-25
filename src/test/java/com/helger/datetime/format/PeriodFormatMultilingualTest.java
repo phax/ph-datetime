@@ -27,7 +27,7 @@ import com.helger.commons.locale.LocaleCache;
 
 /**
  * Test class for class {@link PeriodFormatMultilingual}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PeriodFormatMultilingualTest
@@ -35,7 +35,7 @@ public final class PeriodFormatMultilingualTest
   @Test
   public void testSimple ()
   {
-    final Locale DE = LocaleCache.getLocale ("de", "AT");
+    final Locale DE = LocaleCache.getInstance ().getLocale ("de", "AT");
     final Period aPeriod = new Period (123456);
     assertNotNull (PeriodFormatMultilingual.getFormatterLong (DE).print (aPeriod));
     assertNotNull (PeriodFormatMultilingual.getFormatterShort (DE).print (aPeriod));

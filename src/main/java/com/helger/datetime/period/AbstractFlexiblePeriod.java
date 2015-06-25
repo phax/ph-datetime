@@ -20,14 +20,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
  * Abstract base implementation for {@link IFlexiblePeriod}.
- * 
+ *
  * @author Philip Helger
  * @param <DATATYPE>
  *        Date and time type
@@ -53,7 +53,7 @@ public abstract class AbstractFlexiblePeriod <DATATYPE> implements IFlexiblePeri
   @Nonnull
   public final EChange setStart (@Nullable final DATATYPE aStart)
   {
-    if (EqualsUtils.equals (m_aStart, aStart))
+    if (EqualsHelper.equals (m_aStart, aStart))
       return EChange.UNCHANGED;
     m_aStart = aStart;
     return EChange.CHANGED;
@@ -68,7 +68,7 @@ public abstract class AbstractFlexiblePeriod <DATATYPE> implements IFlexiblePeri
   @Nonnull
   public final EChange setEnd (@Nullable final DATATYPE aEnd)
   {
-    if (EqualsUtils.equals (m_aEnd, aEnd))
+    if (EqualsHelper.equals (m_aEnd, aEnd))
       return EChange.UNCHANGED;
     m_aEnd = aEnd;
     return EChange.CHANGED;
@@ -82,7 +82,7 @@ public abstract class AbstractFlexiblePeriod <DATATYPE> implements IFlexiblePeri
     if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final AbstractFlexiblePeriod <?> rhs = (AbstractFlexiblePeriod <?>) o;
-    return EqualsUtils.equals (m_aStart, rhs.m_aStart) && EqualsUtils.equals (m_aEnd, rhs.m_aEnd);
+    return EqualsHelper.equals (m_aStart, rhs.m_aStart) && EqualsHelper.equals (m_aEnd, rhs.m_aEnd);
   }
 
   @Override

@@ -27,7 +27,7 @@ import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.junit.Test;
 
-import com.helger.commons.mock.PHTestUtils;
+import com.helger.commons.mock.CommonsTestHelper;
 import com.helger.datetime.PDTFactory;
 
 /**
@@ -83,37 +83,37 @@ public final class LocalTimePeriodTest
     assertNotNull (p.getEnd ());
     assertEquals (per, p.getAsPeriod ());
 
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (p,
-                                                                 new LocalTimePeriod (PDTFactory.createLocalTime (17,
-                                                                                                                  15,
-                                                                                                                  30),
-                                                                                      PDTFactory.createLocalTime (17,
-                                                                                                                  16,
-                                                                                                                  30)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new LocalTimePeriod (PDTFactory.createLocalTime (17,
-                                                                                                                      15,
-                                                                                                                      30),
-                                                                                          PDTFactory.createLocalTime (17,
-                                                                                                                      15,
-                                                                                                                      30)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new LocalTimePeriod (PDTFactory.createLocalTime (17,
-                                                                                                                      15,
-                                                                                                                      30),
-                                                                                          PDTFactory.createLocalTime (17,
-                                                                                                                      17,
-                                                                                                                      30)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new LocalTimePeriod (null,
-                                                                                          PDTFactory.createLocalTime (17,
-                                                                                                                      16,
-                                                                                                                      30)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new LocalTimePeriod (PDTFactory.createLocalTime (17,
-                                                                                                                      15,
-                                                                                                                      30),
-                                                                                          null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (p,
+                                                                       new LocalTimePeriod (PDTFactory.createLocalTime (17,
+                                                                                                                        15,
+                                                                                                                        30),
+                                                                                            PDTFactory.createLocalTime (17,
+                                                                                                                        16,
+                                                                                                                        30)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new LocalTimePeriod (PDTFactory.createLocalTime (17,
+                                                                                                                            15,
+                                                                                                                            30),
+                                                                                                PDTFactory.createLocalTime (17,
+                                                                                                                            15,
+                                                                                                                            30)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new LocalTimePeriod (PDTFactory.createLocalTime (17,
+                                                                                                                            15,
+                                                                                                                            30),
+                                                                                                PDTFactory.createLocalTime (17,
+                                                                                                                            17,
+                                                                                                                            30)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new LocalTimePeriod (null,
+                                                                                                PDTFactory.createLocalTime (17,
+                                                                                                                            16,
+                                                                                                                            30)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new LocalTimePeriod (PDTFactory.createLocalTime (17,
+                                                                                                                            15,
+                                                                                                                            30),
+                                                                                                null));
   }
 
   @Test
@@ -125,7 +125,7 @@ public final class LocalTimePeriodTest
     assertTrue (vr.isValidForNow ());
     assertTrue (vr.isValidFor (PDTFactory.createLocalTime (0, 0, 0)));
     assertTrue (vr.isValidFor (PDTFactory.createLocalTime (23, 59, 59)));
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (null, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (null, null));
 
     try
     {
@@ -144,7 +144,7 @@ public final class LocalTimePeriodTest
     assertFalse (vr.isValidFor (PDTFactory.createLocalTime (12, 34)));
     assertTrue (vr.isValidFor (PDTFactory.createLocalTime (12, 35)));
     assertTrue (vr.isValidFor (PDTFactory.createLocalTime (23, 59)));
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (aStart, null));
 
     final LocalTime aEnd = PDTFactory.createLocalTime (15, 12);
     vr = new LocalTimePeriod (aStart, aEnd);
@@ -161,12 +161,14 @@ public final class LocalTimePeriodTest
     assertFalse (vr.isValidFor (PDTFactory.createLocalTime (16, 0)));
     assertFalse (vr.isValidFor (PDTFactory.createLocalTime (23, 59)));
 
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (aStart, aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new LocalTimePeriod (aStart.plusMinutes (1),
-                                                                                              aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr,
-                                                                     new LocalTimePeriod (aStart, aEnd.plusMinutes (1)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new LocalTimePeriod (null, aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new LocalTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalTimePeriod (aStart, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
+                                                                           new LocalTimePeriod (aStart.plusMinutes (1),
+                                                                                                aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
+                                                                           new LocalTimePeriod (aStart,
+                                                                                                aEnd.plusMinutes (1)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalTimePeriod (null, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalTimePeriod (aStart, null));
   }
 }

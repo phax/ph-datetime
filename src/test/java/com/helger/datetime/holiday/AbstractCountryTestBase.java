@@ -28,11 +28,7 @@ import java.util.Map;
 
 import org.joda.time.LocalDate;
 
-import com.helger.commons.collections.ArrayHelper;
-import com.helger.datetime.holiday.HolidayManagerFactory;
-import com.helger.datetime.holiday.HolidayMap;
-import com.helger.datetime.holiday.IHolidayManager;
-import com.helger.datetime.holiday.ISingleHoliday;
+import com.helger.commons.collection.ArrayHelper;
 import com.helger.datetime.holiday.mgr.AbstractHolidayManager;
 import com.helger.datetime.holiday.mgr.CalendarHierarchy;
 

@@ -37,9 +37,6 @@ import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.timing.StopWatch;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
-import com.helger.datetime.holiday.HolidayManagerFactory;
-import com.helger.datetime.holiday.HolidayMap;
-import com.helger.datetime.holiday.IHolidayManager;
 import com.helger.datetime.holiday.mgr.AbstractHolidayManager;
 import com.helger.datetime.holiday.mgr.CalendarHierarchy;
 
@@ -124,7 +121,7 @@ public final class HolidayManagerFactoryTest
     long sumDuration = 0;
     while (date.getYear () < 2011)
     {
-      final StopWatch aSW = new StopWatch (true);
+      final StopWatch aSW = StopWatch.createdStarted ();
       final IHolidayManager m = HolidayManagerFactory.getHolidayManager ("test");
       m.isHoliday (date);
       long duration = aSW.stopAndGetMillis ();

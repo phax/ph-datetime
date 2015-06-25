@@ -26,8 +26,8 @@ import javax.annotation.Nullable;
 import org.joda.time.LocalDate;
 import org.joda.time.ReadableInterval;
 
-import com.helger.commons.annotations.ReturnsMutableCopy;
-import com.helger.commons.collections.ArrayHelper;
+import com.helger.commons.annotation.ReturnsMutableCopy;
+import com.helger.commons.collection.ArrayHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayManager;

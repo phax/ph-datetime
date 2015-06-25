@@ -35,9 +35,7 @@ import org.joda.time.base.AbstractInstant;
 import org.joda.time.base.AbstractPartial;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.commons.annotations.PresentForCodeCoverage;
-import com.helger.commons.collections.pair.IReadonlyPair;
-import com.helger.commons.collections.pair.ReadonlyPair;
+import com.helger.commons.annotation.PresentForCodeCoverage;
 
 /**
  * Some date/time utility methods.
@@ -183,19 +181,29 @@ public final class PDTUtils
   }
 
   /**
-   * Get the start- and end-week numbers for the passed year and month.
+   * Get the start--week number for the passed year and month.
    *
    * @param aDT
    *        The object to use year and month from.
-   * @return A non-<code>null</code> pair where the first item is the initial
-   *         week number, and the second item is the month's last week number.
+   * @return the start week number.
    */
   @Nonnull
-  public static IReadonlyPair <Integer, Integer> getWeeksOfMonth (@Nonnull final DateTime aDT)
+  public static int getStartWeekOfMonth (@Nonnull final DateTime aDT)
   {
-    final int nStart = aDT.withDayOfMonth (1).getWeekOfWeekyear ();
-    final int nEnd = aDT.withDayOfMonth (aDT.dayOfMonth ().getMaximumValue ()).getWeekOfWeekyear ();
-    return ReadonlyPair.create (Integer.valueOf (nStart), Integer.valueOf (nEnd));
+    return aDT.withDayOfMonth (1).getWeekOfWeekyear ();
+  }
+
+  /**
+   * Get the end-week number for the passed year and month.
+   *
+   * @param aDT
+   *        The object to use year and month from.
+   * @return The end week number.
+   */
+  @Nonnull
+  public static int getEndWeekOfMonth (@Nonnull final DateTime aDT)
+  {
+    return aDT.withDayOfMonth (aDT.dayOfMonth ().getMaximumValue ()).getWeekOfWeekyear ();
   }
 
   @Nonnull

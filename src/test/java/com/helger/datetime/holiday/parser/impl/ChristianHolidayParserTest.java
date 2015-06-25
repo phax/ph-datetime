@@ -24,7 +24,7 @@ import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collections.CollectionHelper;
+import com.helger.commons.collection.CollectionHelper;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.ChristianHoliday;

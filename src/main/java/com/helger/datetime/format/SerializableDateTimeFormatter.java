@@ -29,9 +29,9 @@ import javax.annotation.Nullable;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.helger.commons.annotations.Nonempty;
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.annotation.Nonempty;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
@@ -40,7 +40,7 @@ import com.helger.commons.string.ToStringGenerator;
  * serializable, this is a bloody workaround, handling either the style creation
  * parameters (short/medium/long/full/none) or the pattern string plus the
  * respective optional locale that was used on creation.
- * 
+ *
  * @author Philip Helger
  */
 public final class SerializableDateTimeFormatter implements Serializable
@@ -182,10 +182,10 @@ public final class SerializableDateTimeFormatter implements Serializable
     if (!(o instanceof SerializableDateTimeFormatter))
       return false;
     final SerializableDateTimeFormatter rhs = (SerializableDateTimeFormatter) o;
-    return EqualsUtils.equals (m_eDateStyle, rhs.m_eDateStyle) &&
-           EqualsUtils.equals (m_eTimeStyle, rhs.m_eTimeStyle) &&
-           EqualsUtils.equals (m_sPattern, rhs.m_sPattern) &&
-           EqualsUtils.equals (m_aLocale, rhs.m_aLocale);
+    return EqualsHelper.equals (m_eDateStyle, rhs.m_eDateStyle) &&
+           EqualsHelper.equals (m_eTimeStyle, rhs.m_eTimeStyle) &&
+           EqualsHelper.equals (m_sPattern, rhs.m_sPattern) &&
+           EqualsHelper.equals (m_aLocale, rhs.m_aLocale);
   }
 
   @Override

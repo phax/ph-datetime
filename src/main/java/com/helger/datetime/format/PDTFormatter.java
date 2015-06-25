@@ -25,7 +25,7 @@ import javax.annotation.concurrent.Immutable;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.helger.commons.annotations.PresentForCodeCoverage;
+import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.datetime.config.PDTConfig;
 
 /**

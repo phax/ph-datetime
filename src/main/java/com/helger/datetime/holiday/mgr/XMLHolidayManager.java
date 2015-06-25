@@ -33,11 +33,12 @@ import javax.xml.bind.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.commons.annotations.Nonempty;
-import com.helger.commons.annotations.ReturnsMutableCopy;
-import com.helger.commons.collections.ArrayHelper;
+import com.helger.commons.ValueEnforcer;
+import com.helger.commons.annotation.Nonempty;
+import com.helger.commons.annotation.ReturnsMutableCopy;
+import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.io.resource.ClassPathResource;
-import com.helger.commons.io.streams.StreamUtils;
+import com.helger.commons.io.stream.StreamHelper;
 import com.helger.commons.jaxb.JAXBContextCache;
 import com.helger.commons.lang.GenericReflection;
 import com.helger.commons.locale.country.ECountry;
@@ -76,10 +77,10 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aIS
    * @return The unmarshalled configuration.
    */
+  @Nonnull
   private static Configuration _unmarshallConfiguration (@WillClose @Nonnull final InputStream aIS)
   {
-    if (aIS == null)
-      throw new IllegalArgumentException ("Stream is NULL. Cannot read XML.");
+    ValueEnforcer.notNull (aIS, "InputStream");
 
     try
     {
@@ -95,7 +96,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
     }
     finally
     {
-      StreamUtils.close (aIS);
+      StreamHelper.close (aIS);
     }
   }
 
@@ -110,7 +111,10 @@ public class XMLHolidayManager extends AbstractHolidayManager
       throw new IllegalArgumentException ("countryCode is empty");
 
     final String sFileName = "holidays/Holidays_" + sCountryCode.toLowerCase () + ".xml";
-    m_aConfiguration = _unmarshallConfiguration (ClassPathResource.getInputStream (sFileName));
+    final InputStream aIS = ClassPathResource.getInputStream (sFileName);
+    if (aIS == null)
+      throw new IllegalArgumentException ("No holidays are defined for country code '" + sCountryCode + "'");
+    m_aConfiguration = _unmarshallConfiguration (aIS);
     _validateConfigurationHierarchy (m_aConfiguration);
   }
 

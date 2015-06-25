@@ -29,7 +29,7 @@ import org.joda.time.Interval;
 import org.joda.time.Period;
 import org.junit.Test;
 
-import com.helger.commons.mock.PHTestUtils;
+import com.helger.commons.mock.CommonsTestHelper;
 import com.helger.datetime.PDTFactory;
 
 /**
@@ -105,37 +105,37 @@ public final class DateTimePeriodTest
     assertNotNull (p.getEnd ());
     assertEquals (per, p.getAsPeriod ());
 
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (p,
-                                                                 new DateTimePeriod (PDTFactory.createDateTime (2010,
-                                                                                                                DateTimeConstants.FEBRUARY,
-                                                                                                                10),
-                                                                                     PDTFactory.createDateTime (2010,
-                                                                                                                DateTimeConstants.FEBRUARY,
-                                                                                                                11)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new DateTimePeriod (PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    11),
-                                                                                         PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    11)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new DateTimePeriod (PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    10),
-                                                                                         PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    12)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new DateTimePeriod (null,
-                                                                                         PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    11)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (p,
-                                                                     new DateTimePeriod (PDTFactory.createDateTime (2010,
-                                                                                                                    DateTimeConstants.FEBRUARY,
-                                                                                                                    10),
-                                                                                         null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (p,
+                                                                       new DateTimePeriod (PDTFactory.createDateTime (2010,
+                                                                                                                      DateTimeConstants.FEBRUARY,
+                                                                                                                      10),
+                                                                                           PDTFactory.createDateTime (2010,
+                                                                                                                      DateTimeConstants.FEBRUARY,
+                                                                                                                      11)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new DateTimePeriod (PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          11),
+                                                                                               PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          11)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new DateTimePeriod (PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          10),
+                                                                                               PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          12)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new DateTimePeriod (null,
+                                                                                               PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          11)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
+                                                                           new DateTimePeriod (PDTFactory.createDateTime (2010,
+                                                                                                                          DateTimeConstants.FEBRUARY,
+                                                                                                                          10),
+                                                                                               null));
   }
 
   @Test
@@ -147,7 +147,7 @@ public final class DateTimePeriodTest
     assertTrue (vr.isValidForNow ());
     assertTrue (vr.isValidFor (PDTFactory.createDateTime (2000, DateTimeConstants.JANUARY, 1)));
     assertTrue (vr.isValidFor (PDTFactory.createDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (null, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (null, null));
 
     try
     {
@@ -170,7 +170,7 @@ public final class DateTimePeriodTest
     assertTrue (vr.isValidFor (PDTFactory.createDateTime (2011, DateTimeConstants.JULY, 19)));
     // End date
     assertTrue (vr.isValidFor (PDTFactory.createDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (aStart, null));
 
     final DateTime aEnd = PDTFactory.createDateTime (2011, DateTimeConstants.NOVEMBER, 18, 15, 12);
     vr = new DateTimePeriod (aStart, aEnd);
@@ -189,10 +189,13 @@ public final class DateTimePeriodTest
     assertFalse (vr.isValidFor (PDTFactory.createDateTime (2011, DateTimeConstants.NOVEMBER, 18, 15, 13)));
     assertFalse (vr.isValidFor (PDTFactory.createDateTime (2011, DateTimeConstants.NOVEMBER, 19)));
     assertFalse (vr.isValidFor (PDTFactory.createDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    PHTestUtils.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (aStart, aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart.plusDays (1), aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart, aEnd.plusDays (1)));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (null, aEnd));
-    PHTestUtils.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (aStart, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart.plusDays (1),
+                                                                                                   aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
+                                                                           new DateTimePeriod (aStart,
+                                                                                               aEnd.plusDays (1)));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (null, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart, null));
   }
 }

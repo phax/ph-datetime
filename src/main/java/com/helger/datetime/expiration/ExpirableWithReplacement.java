@@ -21,14 +21,14 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 
-import com.helger.commons.equals.EqualsUtils;
-import com.helger.commons.hash.HashCodeGenerator;
+import com.helger.commons.equals.EqualsHelper;
+import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
  * Default implementation of {@link IExpirableWithReplacement}
- * 
+ *
  * @author Philip Helger
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
@@ -66,7 +66,7 @@ public final class ExpirableWithReplacement <DATATYPE> implements IExpirableWith
   @Nonnull
   public EChange setExpirationDateTime (@Nullable final DateTime aExpirationDateTime)
   {
-    if (EqualsUtils.equals (aExpirationDateTime, m_aExpirationDateTime))
+    if (EqualsHelper.equals (aExpirationDateTime, m_aExpirationDateTime))
       return EChange.UNCHANGED;
     m_aExpirationDateTime = aExpirationDateTime;
     return EChange.CHANGED;
@@ -81,7 +81,7 @@ public final class ExpirableWithReplacement <DATATYPE> implements IExpirableWith
   @Nonnull
   public EChange setReplacement (@Nullable final DATATYPE aReplacement)
   {
-    if (EqualsUtils.equals (aReplacement, m_aReplacement))
+    if (EqualsHelper.equals (aReplacement, m_aReplacement))
       return EChange.UNCHANGED;
     m_aReplacement = aReplacement;
     return EChange.CHANGED;
@@ -100,8 +100,8 @@ public final class ExpirableWithReplacement <DATATYPE> implements IExpirableWith
     if (!(o instanceof ExpirableWithReplacement <?>))
       return false;
     final ExpirableWithReplacement <?> rhs = (ExpirableWithReplacement <?>) o;
-    return EqualsUtils.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime) &&
-           EqualsUtils.equals (m_aReplacement, rhs.m_aReplacement);
+    return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime) &&
+           EqualsHelper.equals (m_aReplacement, rhs.m_aReplacement);
   }
 
   @Override

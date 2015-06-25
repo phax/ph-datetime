@@ -16,6 +16,7 @@
  */
 package com.helger.datetime;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -24,9 +25,8 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTimeConstants;
 
-import com.helger.commons.collections.ArrayHelper;
-import com.helger.commons.id.IHasSimpleIntID;
-import com.helger.commons.lang.DateFormatSymbolsFactory;
+import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.id.IHasIntID;
 import com.helger.commons.lang.EnumHelper;
 
 /**
@@ -34,7 +34,7 @@ import com.helger.commons.lang.EnumHelper;
  *
  * @author Philip Helger
  */
-public enum EDayOfWeek implements IHasSimpleIntID
+public enum EDayOfWeek implements IHasIntID
 {
   MONDAY (DateTimeConstants.MONDAY, Calendar.MONDAY),
   TUESDAY (DateTimeConstants.TUESDAY, Calendar.TUESDAY),
@@ -77,13 +77,13 @@ public enum EDayOfWeek implements IHasSimpleIntID
   @Nullable
   public String getWeekdayName (@Nonnull final Locale aLocale)
   {
-    return ArrayHelper.getSafeElement (DateFormatSymbolsFactory.getInstance (aLocale).getWeekdays (), m_nCalID);
+    return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getWeekdays (), m_nCalID);
   }
 
   @Nullable
   public String getWeekdayShortName (@Nonnull final Locale aLocale)
   {
-    return ArrayHelper.getSafeElement (DateFormatSymbolsFactory.getInstance (aLocale).getShortWeekdays (), m_nCalID);
+    return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getShortWeekdays (), m_nCalID);
   }
 
   @Nullable

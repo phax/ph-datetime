@@ -16,6 +16,7 @@
  */
 package com.helger.datetime;
 
+import java.text.DateFormatSymbols;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
@@ -23,9 +24,8 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTimeConstants;
 
-import com.helger.commons.collections.ArrayHelper;
-import com.helger.commons.id.IHasSimpleIntID;
-import com.helger.commons.lang.DateFormatSymbolsFactory;
+import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.id.IHasIntID;
 import com.helger.commons.lang.EnumHelper;
 
 /**
@@ -33,7 +33,7 @@ import com.helger.commons.lang.EnumHelper;
  *
  * @author Philip Helger
  */
-public enum EAmPm implements IHasSimpleIntID
+public enum EAmPm implements IHasIntID
 {
   AM (DateTimeConstants.AM),
   PM (DateTimeConstants.PM);
@@ -53,7 +53,7 @@ public enum EAmPm implements IHasSimpleIntID
   @Nullable
   public String getDisplayName (@Nonnull final Locale aLocale)
   {
-    return ArrayHelper.getSafeElement (DateFormatSymbolsFactory.getInstance (aLocale).getAmPmStrings (), m_nID);
+    return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getAmPmStrings (), m_nID);
   }
 
   @Nullable

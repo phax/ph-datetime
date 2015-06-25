@@ -16,48 +16,26 @@
  */
 package com.helger.datetime.comparators;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.joda.time.LocalTime;
 
 import com.helger.commons.compare.AbstractComparator;
-import com.helger.commons.compare.CompareUtils;
-import com.helger.commons.compare.ESortOrder;
+import com.helger.commons.compare.CompareHelper;
 
 /**
  * Comparator for {@link LocalTime} objects.
- * 
+ *
  * @author Philip Helger
  */
 public class ComparatorLocalTime extends AbstractComparator <LocalTime>
 {
-  private final boolean m_bNullValueComeFirst;
-
   public ComparatorLocalTime ()
-  {
-    this (CompareUtils.DEFAULT_NULL_VALUES_COME_FIRST);
-  }
-
-  public ComparatorLocalTime (@Nonnull final ESortOrder eSortOrder)
-  {
-    this (eSortOrder, CompareUtils.DEFAULT_NULL_VALUES_COME_FIRST);
-  }
-
-  public ComparatorLocalTime (final boolean bNullValueComeFirst)
-  {
-    m_bNullValueComeFirst = bNullValueComeFirst;
-  }
-
-  public ComparatorLocalTime (@Nonnull final ESortOrder eSortOrder, final boolean bNullValueComeFirst)
-  {
-    super (eSortOrder);
-    m_bNullValueComeFirst = bNullValueComeFirst;
-  }
+  {}
 
   @Override
   protected int mainCompare (@Nullable final LocalTime aDateTime1, @Nullable final LocalTime aDateTime2)
   {
-    return CompareUtils.nullSafeCompare (aDateTime1, aDateTime2, m_bNullValueComeFirst);
+    return CompareHelper.compare (aDateTime1, aDateTime2, isNullValuesComeFirst ());
   }
 }

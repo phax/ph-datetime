@@ -16,6 +16,7 @@
  */
 package com.helger.datetime;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -24,9 +25,8 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTimeConstants;
 
-import com.helger.commons.collections.ArrayHelper;
-import com.helger.commons.id.IHasSimpleIntID;
-import com.helger.commons.lang.DateFormatSymbolsFactory;
+import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.id.IHasIntID;
 import com.helger.commons.lang.EnumHelper;
 
 /**
@@ -34,7 +34,7 @@ import com.helger.commons.lang.EnumHelper;
  *
  * @author Philip Helger
  */
-public enum EMonth implements IHasSimpleIntID
+public enum EMonth implements IHasIntID
 {
   JANUARY (DateTimeConstants.JANUARY, Calendar.JANUARY),
   FEBRUARY (DateTimeConstants.FEBRUARY, Calendar.FEBRUARY),
@@ -82,13 +82,13 @@ public enum EMonth implements IHasSimpleIntID
   @Nullable
   public String getMonthName (@Nonnull final Locale aLocale)
   {
-    return ArrayHelper.getSafeElement (DateFormatSymbolsFactory.getInstance (aLocale).getMonths (), m_nCalID);
+    return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getMonths (), m_nCalID);
   }
 
   @Nullable
   public String getMonthShortName (@Nonnull final Locale aLocale)
   {
-    return ArrayHelper.getSafeElement (DateFormatSymbolsFactory.getInstance (aLocale).getShortMonths (), m_nCalID);
+    return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getShortMonths (), m_nCalID);
   }
 
   @Nullable
