@@ -392,26 +392,6 @@ public final class PDTHelper
     return compare (aPeriod1, aPeriod2) <= 0;
   }
 
-  /**
-   * <code>null</code> safe compare.<br>
-   * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
-   * except that the parameter class does not implement
-   * {@link java.lang.Comparable} in a Generics-way!
-   *
-   * @param aDuration1
-   *        First object. May be <code>null</code>.
-   * @param aDuration2
-   *        Second object. May be <code>null</code>.
-   * @return -1, 0 or +1
-   */
-  public static int nullSafeCompare (@Nullable final Duration aDuration1, @Nullable final Duration aDuration2)
-  {
-    return aDuration1 == aDuration2 ? 0 : aDuration1 == null ? -1
-                                                            : aDuration2 == null ? +1
-                                                                                : aDuration1.compareTo (aDuration2);
-  }
-
   public static boolean isGreater (@Nonnull final Duration aDuration1, @Nonnull final Duration aDuration2)
   {
     return aDuration1.compareTo (aDuration2) > 0;
@@ -430,24 +410,6 @@ public final class PDTHelper
   public static boolean isLessOrEqual (@Nonnull final Duration aDuration1, @Nonnull final Duration aDuration2)
   {
     return aDuration1.compareTo (aDuration2) <= 0;
-  }
-
-  /**
-   * <code>null</code> safe compare.<br>
-   * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
-   * except that the parameter class does not implement
-   * {@link java.lang.Comparable} in a Generics-way!
-   *
-   * @param aDT1
-   *        First object. May be <code>null</code>.
-   * @param aDT2
-   *        Second object. May be <code>null</code>.
-   * @return -1, 0 or +1
-   */
-  public static int nullSafeCompare (@Nullable final DateTime aDT1, @Nullable final DateTime aDT2)
-  {
-    return aDT1 == aDT2 ? 0 : aDT1 == null ? -1 : aDT2 == null ? +1 : aDT1.compareTo (aDT2);
   }
 
   public static boolean isGreater (@Nonnull final DateTime aDT1, @Nonnull final DateTime aDT2)
@@ -470,24 +432,6 @@ public final class PDTHelper
     return aDT1.compareTo (aDT2) <= 0;
   }
 
-  /**
-   * <code>null</code> safe compare.<br>
-   * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
-   * except that the parameter class does not implement
-   * {@link java.lang.Comparable} in a Generics-way!
-   *
-   * @param aDate1
-   *        First object. May be <code>null</code>.
-   * @param aDate2
-   *        Second object. May be <code>null</code>.
-   * @return -1, 0 or +1
-   */
-  public static int nullSafeCompare (@Nullable final LocalDate aDate1, @Nullable final LocalDate aDate2)
-  {
-    return aDate1 == aDate2 ? 0 : aDate1 == null ? -1 : aDate2 == null ? +1 : aDate1.compareTo (aDate2);
-  }
-
   public static boolean isGreater (@Nonnull final LocalDate aDate1, @Nonnull final LocalDate aDate2)
   {
     return aDate1.compareTo (aDate2) > 0;
@@ -506,24 +450,6 @@ public final class PDTHelper
   public static boolean isLessOrEqual (@Nonnull final LocalDate aDate1, @Nonnull final LocalDate aDate2)
   {
     return aDate1.compareTo (aDate2) <= 0;
-  }
-
-  /**
-   * <code>null</code> safe compare.<br>
-   * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
-   * except that the parameter class does not implement
-   * {@link java.lang.Comparable} in a Generics-way!
-   *
-   * @param aTime1
-   *        First object. May be <code>null</code>.
-   * @param aTime2
-   *        Second object. May be <code>null</code>.
-   * @return -1, 0 or +1
-   */
-  public static int nullSafeCompare (@Nullable final LocalTime aTime1, @Nullable final LocalTime aTime2)
-  {
-    return aTime1 == aTime2 ? 0 : aTime1 == null ? -1 : aTime2 == null ? +1 : aTime1.compareTo (aTime2);
   }
 
   public static boolean isGreater (@Nonnull final LocalTime aTime1, @Nonnull final LocalTime aTime2)
