@@ -546,26 +546,6 @@ public final class PDTHelper
     return aTime1.compareTo (aTime2) <= 0;
   }
 
-  /**
-   * <code>null</code> safe compare.<br>
-   * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
-   * except that the parameter class does not implement
-   * {@link java.lang.Comparable} in a Generics-way!
-   *
-   * @param aDateTime1
-   *        First object. May be <code>null</code>.
-   * @param aDateTime2
-   *        Second object. May be <code>null</code>.
-   * @return -1, 0 or +1
-   */
-  public static int nullSafeCompare (@Nullable final LocalDateTime aDateTime1, @Nullable final LocalDateTime aDateTime2)
-  {
-    return aDateTime1 == aDateTime2 ? 0 : aDateTime1 == null ? -1
-                                                            : aDateTime2 == null ? +1
-                                                                                : aDateTime1.compareTo (aDateTime2);
-  }
-
   public static boolean isGreater (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
   {
     return aDateTime1.compareTo (aDateTime2) > 0;
