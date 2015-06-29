@@ -29,7 +29,7 @@ import org.joda.time.LocalDate;
 import org.junit.Test;
 
 import com.helger.datetime.PDTFactory;
-import com.helger.datetime.PDTUtils;
+import com.helger.datetime.util.PDTHelper;
 
 /**
  * @author svdi1de
@@ -43,10 +43,10 @@ public final class CalendarUtilTest
     final LocalDate dateSaturday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 13);
     final LocalDate dateSunday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 14);
     final LocalDate dateMonday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 15);
-    assertFalse (PDTUtils.isWeekend (dateFriday));
-    assertTrue (PDTUtils.isWeekend (dateSaturday));
-    assertTrue (PDTUtils.isWeekend (dateSunday));
-    assertFalse (PDTUtils.isWeekend (dateMonday));
+    assertFalse (PDTHelper.isWeekend (dateFriday));
+    assertTrue (PDTHelper.isWeekend (dateSaturday));
+    assertTrue (PDTHelper.isWeekend (dateSunday));
+    assertFalse (PDTHelper.isWeekend (dateMonday));
   }
 
   @Test

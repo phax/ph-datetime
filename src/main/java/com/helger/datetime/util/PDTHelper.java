@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;//NOPMD
+package com.helger.datetime.util;//NOPMD
 
 import java.util.Comparator;
 
@@ -24,7 +24,6 @@ import javax.annotation.concurrent.Immutable;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -36,6 +35,8 @@ import org.joda.time.base.AbstractPartial;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.datetime.CPDT;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Some date/time utility methods.
@@ -43,12 +44,12 @@ import com.helger.commons.annotation.PresentForCodeCoverage;
  * @author Philip Helger
  */
 @Immutable
-public final class PDTUtils
+public final class PDTHelper
 {
   @PresentForCodeCoverage
-  private static final PDTUtils s_aInstance = new PDTUtils ();
+  private static final PDTHelper s_aInstance = new PDTHelper ();
 
-  private PDTUtils ()
+  private PDTHelper ()
   {}
 
   public static boolean isNullValue (@Nullable final LocalDate aDate)
@@ -584,13 +585,5 @@ public final class PDTUtils
   public static boolean isLessOrEqual (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
   {
     return aDateTime1.compareTo (aDateTime2) <= 0;
-  }
-
-  @Nonnull
-  public static Duration createDuration (@Nonnull final LocalDateTime aDateTime1,
-                                         @Nonnull final LocalDateTime aDateTime2)
-  {
-    // Must be converted to DateTime to work
-    return new Duration (aDateTime1.toDateTime (DateTimeZone.UTC), aDateTime2.toDateTime (DateTimeZone.UTC));
   }
 }

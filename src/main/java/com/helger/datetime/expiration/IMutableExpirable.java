@@ -18,13 +18,13 @@ package com.helger.datetime.expiration;
 
 import javax.annotation.Nonnull;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import com.helger.commons.state.EChange;
 
 /**
  * Interface for objects that can expire.
- * 
+ *
  * @author Philip Helger
  */
 public interface IMutableExpirable extends IExpirable
@@ -32,18 +32,18 @@ public interface IMutableExpirable extends IExpirable
   /**
    * Change the expiration date time of this object. If you want to remove the
    * expiration, please call {@link #resetExpiration()} instead.
-   * 
+   *
    * @param aExpirationDateTime
    *        The new expiration date time. May not be <code>null</code>.
    * @return {@link EChange#CHANGED} if the expiration date time changed,
    *         {@link EChange#UNCHANGED} otherwise.
    */
   @Nonnull
-  EChange setExpirationDateTime (@Nonnull DateTime aExpirationDateTime);
+  EChange setExpirationDateTime (@Nonnull LocalDateTime aExpirationDateTime);
 
   /**
    * Remove any available expiration data.
-   * 
+   *
    * @return {@link EChange#CHANGED} if the expiration was reset,
    *         {@link EChange#UNCHANGED} if no expiration was defined.
    */

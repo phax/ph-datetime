@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.xml;
+package com.helger.datetime.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,6 +33,7 @@ import org.junit.Test;
 import com.helger.commons.CGlobal;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
+import com.helger.datetime.util.PDTXMLConverter;
 
 /**
  * Test class for class {@link PDTXMLConverter}

@@ -19,26 +19,27 @@ package com.helger.datetime.expiration;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of {@link IMutableExpirable}
  *
  * @author Philip Helger
  */
-public final class Expirable implements IMutableExpirable
+public class Expirable implements IMutableExpirable
 {
-  private DateTime m_aExpirationDateTime;
+  private LocalDateTime m_aExpirationDateTime;
 
   public Expirable ()
   {}
 
-  public Expirable (@Nullable final DateTime aExpirationDateTime)
+  public Expirable (@Nullable final LocalDateTime aExpirationDateTime)
   {
     m_aExpirationDateTime = aExpirationDateTime;
   }
@@ -50,17 +51,17 @@ public final class Expirable implements IMutableExpirable
 
   public boolean isExpired ()
   {
-    return isExpirationDefined () && getExpirationDateTime ().isBeforeNow ();
+    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
   }
 
   @Nullable
-  public DateTime getExpirationDateTime ()
+  public LocalDateTime getExpirationDateTime ()
   {
     return m_aExpirationDateTime;
   }
 
   @Nonnull
-  public EChange setExpirationDateTime (@Nullable final DateTime aExpirationDateTime)
+  public EChange setExpirationDateTime (@Nullable final LocalDateTime aExpirationDateTime)
   {
     if (EqualsHelper.equals (aExpirationDateTime, m_aExpirationDateTime))
       return EChange.UNCHANGED;

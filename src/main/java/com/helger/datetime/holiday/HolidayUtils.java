@@ -23,7 +23,7 @@ import javax.annotation.concurrent.Immutable;
 import org.joda.time.LocalDate;
 
 import com.helger.datetime.PDTFactory;
-import com.helger.datetime.PDTUtils;
+import com.helger.datetime.util.PDTHelper;
 
 /**
  * Some holiday utility methods.
@@ -38,7 +38,7 @@ public final class HolidayUtils
 
   public static boolean isWorkDay (@Nonnull final LocalDate aDate, @Nonnull final IHolidayManager aHolidayMgr)
   {
-    return PDTUtils.isWorkDay (aDate) && !aHolidayMgr.isHoliday (aDate);
+    return PDTHelper.isWorkDay (aDate) && !aHolidayMgr.isHoliday (aDate);
   }
 
   /**

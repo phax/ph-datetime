@@ -29,8 +29,8 @@ import org.joda.time.LocalDate;
 import org.joda.time.chrono.IslamicChronology;
 
 import com.helger.datetime.PDTFactory;
-import com.helger.datetime.PDTUtils;
 import com.helger.datetime.config.PDTConfig;
+import com.helger.datetime.util.PDTHelper;
 
 /**
  * Utility class for date operations.
@@ -136,13 +136,13 @@ public final class CalendarUtil
    * it's not a weekend day (usually Saturday and Sunday).
    *
    * @return The next matching date.
-   * @see PDTUtils#isWorkDay(LocalDate)
+   * @see PDTHelper#isWorkDay(LocalDate)
    */
   @Nonnull
   public static LocalDate getCurrentOrNextWorkDay ()
   {
     LocalDate aDT = PDTFactory.getCurrentLocalDate ();
-    while (!PDTUtils.isWorkDay (aDT))
+    while (!PDTHelper.isWorkDay (aDT))
       aDT = aDT.plusDays (1);
     return aDT;
   }

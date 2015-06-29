@@ -19,12 +19,13 @@ package com.helger.datetime.expiration;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of {@link IMutableExpirableWithReplacement}
@@ -33,15 +34,16 @@ import com.helger.commons.string.ToStringGenerator;
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
  */
-public final class ExpirableWithReplacement <DATATYPE> implements IMutableExpirableWithReplacement <DATATYPE>
+public class ExpirableWithReplacement <DATATYPE> implements IMutableExpirableWithReplacement <DATATYPE>
 {
-  private DateTime m_aExpirationDateTime;
+  private LocalDateTime m_aExpirationDateTime;
   private DATATYPE m_aReplacement;
 
   public ExpirableWithReplacement ()
   {}
 
-  public ExpirableWithReplacement (@Nullable final DateTime aExpirationDateTime, @Nullable final DATATYPE aReplacement)
+  public ExpirableWithReplacement (@Nullable final LocalDateTime aExpirationDateTime,
+                                   @Nullable final DATATYPE aReplacement)
   {
     m_aExpirationDateTime = aExpirationDateTime;
     m_aReplacement = aReplacement;
@@ -54,17 +56,17 @@ public final class ExpirableWithReplacement <DATATYPE> implements IMutableExpira
 
   public boolean isExpired ()
   {
-    return isExpirationDefined () && getExpirationDateTime ().isBeforeNow ();
+    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
   }
 
   @Nullable
-  public DateTime getExpirationDateTime ()
+  public LocalDateTime getExpirationDateTime ()
   {
     return m_aExpirationDateTime;
   }
 
   @Nonnull
-  public EChange setExpirationDateTime (@Nullable final DateTime aExpirationDateTime)
+  public EChange setExpirationDateTime (@Nullable final LocalDateTime aExpirationDateTime)
   {
     if (EqualsHelper.equals (aExpirationDateTime, m_aExpirationDateTime))
       return EChange.UNCHANGED;

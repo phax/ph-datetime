@@ -28,6 +28,7 @@ import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -360,6 +361,20 @@ public final class PDTFactory
   public static LocalTime createLocalTime (@Nonnull final LocalDateTime aLocalDateTime)
   {
     return aLocalDateTime.toLocalTime ();
+  }
+
+  @Nonnull
+  public static Duration createDuration (@Nonnull final DateTime aDateTime1, @Nonnull final DateTime aDateTime2)
+  {
+    return new Duration (aDateTime1, aDateTime2);
+  }
+
+  @Nonnull
+  public static Duration createDuration (@Nonnull final LocalDateTime aDateTime1,
+                                         @Nonnull final LocalDateTime aDateTime2)
+  {
+    // Must be converted to DateTime to work
+    return createDuration (createDateTime (aDateTime1), createDateTime (aDateTime2));
   }
 
   @Nonnull

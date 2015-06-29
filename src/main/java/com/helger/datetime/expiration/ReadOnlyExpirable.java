@@ -18,11 +18,12 @@ package com.helger.datetime.expiration;
 
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of {@link IExpirable}
@@ -31,9 +32,9 @@ import com.helger.commons.string.ToStringGenerator;
  */
 public final class ReadOnlyExpirable implements IExpirable
 {
-  private final DateTime m_aExpirationDateTime;
+  private final LocalDateTime m_aExpirationDateTime;
 
-  public ReadOnlyExpirable (@Nullable final DateTime aExpirationDateTime)
+  public ReadOnlyExpirable (@Nullable final LocalDateTime aExpirationDateTime)
   {
     m_aExpirationDateTime = aExpirationDateTime;
   }
@@ -45,11 +46,11 @@ public final class ReadOnlyExpirable implements IExpirable
 
   public boolean isExpired ()
   {
-    return isExpirationDefined () && getExpirationDateTime ().isBeforeNow ();
+    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
   }
 
   @Nullable
-  public DateTime getExpirationDateTime ()
+  public LocalDateTime getExpirationDateTime ()
   {
     return m_aExpirationDateTime;
   }
