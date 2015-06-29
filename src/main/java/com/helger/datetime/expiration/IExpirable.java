@@ -16,37 +16,40 @@
  */
 package com.helger.datetime.expiration;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 
-import com.helger.commons.state.EChange;
-
 /**
- * Interface for objects that can expire.
+ * Read-only interface for objects that can expire.
  * 
  * @author Philip Helger
  */
-public interface IExpirable extends IReadonlyExpirable
+public interface IExpirable
 {
   /**
-   * Change the expiration date time of this object. If you want to remove the
-   * expiration, please call {@link #resetExpiration()} instead.
+   * Check if the object has an expiration date defined. To check if the page is
+   * already expired, use {@link #isExpired()} instead.
    * 
-   * @param aExpirationDateTime
-   *        The new expiration date time. May not be <code>null</code>.
-   * @return {@link EChange#CHANGED} if the expiration date time changed,
-   *         {@link EChange#UNCHANGED} otherwise.
+   * @return <code>true</code> if an expiration date is defined,
+   *         <code>false</code> otherwise.
    */
-  @Nonnull
-  EChange setExpirationDateTime (@Nonnull DateTime aExpirationDateTime);
+  boolean isExpirationDefined ();
 
   /**
-   * Remove any available expiration data.
+   * Check if this object is already expired. This is only possible if an
+   * expiration date is defined.
    * 
-   * @return {@link EChange#CHANGED} if the expiration was reset,
-   *         {@link EChange#UNCHANGED} if no expiration was defined.
+   * @return <code>true</code> if an expiration date is defined and the
+   *         expiration date is in the past, <code>false</code> otherwise.
+   * @see #isExpirationDefined()
    */
-  @Nonnull
-  EChange resetExpiration ();
+  boolean isExpired ();
+
+  /**
+   * @return The date time when the object will expire/expired. May be
+   *         <code>null</code> if no expiration is defined.
+   */
+  @Nullable
+  DateTime getExpirationDateTime ();
 }

@@ -25,18 +25,18 @@ import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
- * Default implementation of {@link IReadonlyExpirableWithReplacement}
+ * Default implementation of {@link IExpirableWithReplacement}
  *
  * @author Philip Helger
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
  */
-public final class ReadonlyExpirableWithReplacement <DATATYPE> implements IReadonlyExpirableWithReplacement <DATATYPE>
+public final class ReadOnlyExpirableWithReplacement <DATATYPE> implements IExpirableWithReplacement <DATATYPE>
 {
   private final DateTime m_aExpirationDateTime;
   private final DATATYPE m_aReplacement;
 
-  public ReadonlyExpirableWithReplacement (@Nullable final DateTime aExpirationDateTime,
+  public ReadOnlyExpirableWithReplacement (@Nullable final DateTime aExpirationDateTime,
                                            @Nullable final DATATYPE aReplacement)
   {
     m_aExpirationDateTime = aExpirationDateTime;
@@ -70,9 +70,9 @@ public final class ReadonlyExpirableWithReplacement <DATATYPE> implements IReado
   {
     if (o == this)
       return true;
-    if (!(o instanceof ReadonlyExpirableWithReplacement <?>))
+    if (!(o instanceof ReadOnlyExpirableWithReplacement <?>))
       return false;
-    final ReadonlyExpirableWithReplacement <?> rhs = (ReadonlyExpirableWithReplacement <?>) o;
+    final ReadOnlyExpirableWithReplacement <?> rhs = (ReadOnlyExpirableWithReplacement <?>) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime) &&
            EqualsHelper.equals (m_aReplacement, rhs.m_aReplacement);
   }

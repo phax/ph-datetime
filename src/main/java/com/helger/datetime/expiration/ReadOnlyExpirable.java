@@ -25,15 +25,15 @@ import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
- * Default implementation of {@link IReadonlyExpirable}
+ * Default implementation of {@link IExpirable}
  *
  * @author Philip Helger
  */
-public final class ReadonlyExpirable implements IReadonlyExpirable
+public final class ReadOnlyExpirable implements IExpirable
 {
   private final DateTime m_aExpirationDateTime;
 
-  public ReadonlyExpirable (@Nullable final DateTime aExpirationDateTime)
+  public ReadOnlyExpirable (@Nullable final DateTime aExpirationDateTime)
   {
     m_aExpirationDateTime = aExpirationDateTime;
   }
@@ -59,9 +59,9 @@ public final class ReadonlyExpirable implements IReadonlyExpirable
   {
     if (o == this)
       return true;
-    if (!(o instanceof ReadonlyExpirable))
+    if (!(o instanceof ReadOnlyExpirable))
       return false;
-    final ReadonlyExpirable rhs = (ReadonlyExpirable) o;
+    final ReadOnlyExpirable rhs = (ReadOnlyExpirable) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);
   }
 

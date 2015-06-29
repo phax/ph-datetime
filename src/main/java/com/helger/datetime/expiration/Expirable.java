@@ -27,11 +27,11 @@ import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
- * Default implementation of {@link IExpirable}
+ * Default implementation of {@link IMutableExpirable}
  *
  * @author Philip Helger
  */
-public final class Expirable implements IExpirable
+public final class Expirable implements IMutableExpirable
 {
   private DateTime m_aExpirationDateTime;
 

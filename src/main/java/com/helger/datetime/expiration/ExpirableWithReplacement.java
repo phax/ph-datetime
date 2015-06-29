@@ -27,13 +27,13 @@ import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
- * Default implementation of {@link IExpirableWithReplacement}
+ * Default implementation of {@link IMutableExpirableWithReplacement}
  *
  * @author Philip Helger
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
  */
-public final class ExpirableWithReplacement <DATATYPE> implements IExpirableWithReplacement <DATATYPE>
+public final class ExpirableWithReplacement <DATATYPE> implements IMutableExpirableWithReplacement <DATATYPE>
 {
   private DateTime m_aExpirationDateTime;
   private DATATYPE m_aReplacement;
