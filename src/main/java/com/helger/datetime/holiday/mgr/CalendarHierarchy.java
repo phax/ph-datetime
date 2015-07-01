@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsImmutableObject;
 import com.helger.commons.collection.CollectionHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
@@ -57,8 +58,7 @@ public final class CalendarHierarchy implements IHasID <String>
                             @Nonnull final String sID,
                             @Nullable final ECountry eCountry)
   {
-    if (sID == null)
-      throw new NullPointerException ("id");
+    ValueEnforcer.notNull (sID, "ID");
     m_sID = aParent == null ? sID : aParent.getID () + "_" + sID;
     m_eCountry = eCountry;
   }
@@ -100,7 +100,7 @@ public final class CalendarHierarchy implements IHasID <String>
   {
     if (o == this)
       return true;
-    if (!(o instanceof CalendarHierarchy))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final CalendarHierarchy rhs = (CalendarHierarchy) o;
     return m_sID.equals (rhs.m_sID);

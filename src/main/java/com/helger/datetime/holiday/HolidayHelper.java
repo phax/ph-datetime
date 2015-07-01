@@ -22,18 +22,19 @@ import javax.annotation.concurrent.Immutable;
 
 import org.joda.time.LocalDate;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**
  * Some holiday utility methods.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
-public final class HolidayUtils
+public final class HolidayHelper
 {
-  private HolidayUtils ()
+  private HolidayHelper ()
   {}
 
   public static boolean isWorkDay (@Nonnull final LocalDate aDate, @Nonnull final IHolidayManager aHolidayMgr)
@@ -44,7 +45,7 @@ public final class HolidayUtils
   /**
    * Get the number of working days between start date (incl.) and end date
    * (incl.). An optional holiday calculator can be used as well.
-   * 
+   *
    * @param aStartDate
    *        The start date. May not be <code>null</code>.
    * @param aEndDate
@@ -59,12 +60,9 @@ public final class HolidayUtils
                                     @Nonnull final LocalDate aEndDate,
                                     @Nonnull final IHolidayManager aHolidayMgr)
   {
-    if (aStartDate == null)
-      throw new NullPointerException ("startDate");
-    if (aEndDate == null)
-      throw new NullPointerException ("endDate");
-    if (aHolidayMgr == null)
-      throw new NullPointerException ("holidayCalc");
+    ValueEnforcer.notNull (aStartDate, "StartDate");
+    ValueEnforcer.notNull (aEndDate, "EndDate");
+    ValueEnforcer.notNull (aHolidayMgr, "HolidayMgr");
 
     final boolean bFlip = aStartDate.isAfter (aEndDate);
     LocalDate aCurDate = bFlip ? aEndDate : aStartDate;
@@ -85,18 +83,18 @@ public final class HolidayUtils
    * working day, the current day is returned. A working day is determined by:
    * it's not a weekend day (usually Saturday and Sunday) and it's not a holiday
    * (based on the holiday manager).
-   * 
+   *
    * @param aHolidayMgr
    *        An optional holiday calculator to be used. May be <code>null</code>.
    * @return The next matching date.
-   * @see HolidayUtils#isWorkDay(LocalDate, IHolidayManager)
-   * @see CalendarUtil#getCurrentOrNextWorkDay()
+   * @see HolidayHelper#isWorkDay(LocalDate, IHolidayManager)
+   * @see CalendarHelper#getCurrentOrNextWorkDay()
    */
   @Nonnull
   public static LocalDate getCurrentOrNextWorkDay (@Nullable final IHolidayManager aHolidayMgr)
   {
     if (aHolidayMgr == null)
-      return CalendarUtil.getCurrentOrNextWorkDay ();
+      return CalendarHelper.getCurrentOrNextWorkDay ();
     LocalDate aDT = PDTFactory.getCurrentLocalDate ();
     while (!isWorkDay (aDT, aHolidayMgr))
       aDT = aDT.plusDays (1);

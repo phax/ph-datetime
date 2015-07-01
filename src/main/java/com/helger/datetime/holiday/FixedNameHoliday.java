@@ -21,8 +21,8 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.hashcode.HashCodeGenerator;
-import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
 
 /**
@@ -43,10 +43,8 @@ public final class FixedNameHoliday implements ISingleHoliday
 
   public FixedNameHoliday (@Nonnull final IHolidayType aType, @Nonnull final String sHolidayName)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
-    if (StringHelper.hasNoText (sHolidayName))
-      throw new IllegalArgumentException ("empty name");
+    ValueEnforcer.notNull (aType, "Type");
+    ValueEnforcer.notEmpty (sHolidayName, "HolidayName");
     m_bIsOfficial = aType.isOfficialHoliday ();
     m_sHolidayName = sHolidayName;
   }
@@ -66,7 +64,7 @@ public final class FixedNameHoliday implements ISingleHoliday
   {
     if (o == this)
       return true;
-    if (!(o instanceof FixedNameHoliday))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final FixedNameHoliday rhs = (FixedNameHoliday) o;
     return m_bIsOfficial == rhs.m_bIsOfficial && m_sHolidayName.equals (rhs.m_sHolidayName);

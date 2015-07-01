@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import org.joda.time.LocalDate;
 import org.joda.time.ReadableInterval;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.datetime.PDTFactory;
@@ -86,8 +87,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   @Nullable
   public ISingleHoliday getHoliday (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
   {
-    if (aDate == null)
-      throw new NullPointerException ("date");
+    ValueEnforcer.notNull (aDate, "Date");
 
     final String sKey = _getKey (aDate, aArgs);
     HolidayMap aHolidayMap = m_aHolidaysPerYear.get (sKey);
@@ -103,8 +103,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   @ReturnsMutableCopy
   public HolidayMap getHolidays (@Nonnull final ReadableInterval aInterval, @Nullable final String... aArgs)
   {
-    if (aInterval == null)
-      throw new NullPointerException ("Interval is NULL.");
+    ValueEnforcer.notNull (aInterval, "Interval");
 
     final HolidayMap aHolidayMap = new HolidayMap ();
     for (int nYear = aInterval.getStart ().getYear (); nYear <= aInterval.getEnd ().getYear (); nYear++)

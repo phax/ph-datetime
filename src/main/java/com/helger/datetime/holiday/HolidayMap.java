@@ -27,7 +27,8 @@ import javax.annotation.Nullable;
 
 import org.joda.time.LocalDate;
 
-import com.helger.commons.annotation.ReturnsImmutableObject;
+import com.helger.commons.ValueEnforcer;
+import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.CollectionHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
@@ -58,17 +59,14 @@ public final class HolidayMap
 
   public void add (@Nonnull final LocalDate aDate, @Nonnull final ISingleHoliday aHoliday)
   {
-    if (aDate == null)
-      throw new NullPointerException ("date");
-    if (aHoliday == null)
-      throw new NullPointerException ("holiday");
+    ValueEnforcer.notNull (aDate, "Date");
+    ValueEnforcer.notNull (aHoliday, "Holiday");
     m_aMap.put (aDate, aHoliday);
   }
 
   public void addAll (@Nonnull final HolidayMap aSubHolidays)
   {
-    if (aSubHolidays == null)
-      throw new NullPointerException ("subHolidays");
+    ValueEnforcer.notNull (aSubHolidays, "SubHolidays");
     m_aMap.putAll (aSubHolidays.m_aMap);
   }
 
@@ -79,24 +77,24 @@ public final class HolidayMap
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Set <LocalDate> getAllDates ()
   {
-    return CollectionHelper.makeUnmodifiable (m_aMap.keySet ());
+    return CollectionHelper.newSet (m_aMap.keySet ());
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Collection <ISingleHoliday> getAllHolidays ()
   {
-    return CollectionHelper.makeUnmodifiable (m_aMap.values ());
+    return CollectionHelper.newList (m_aMap.values ());
   }
 
   @Nonnull
-  @ReturnsImmutableObject
+  @ReturnsMutableCopy
   public Map <LocalDate, ISingleHoliday> getMap ()
   {
-    return CollectionHelper.makeUnmodifiable (m_aMap);
+    return CollectionHelper.newMap (m_aMap);
   }
 
   @Nonnegative
@@ -115,7 +113,7 @@ public final class HolidayMap
   {
     if (o == this)
       return true;
-    if (!(o instanceof HolidayMap))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final HolidayMap rhs = (HolidayMap) o;
     return m_aMap.equals (rhs.m_aMap);

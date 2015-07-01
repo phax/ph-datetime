@@ -21,13 +21,13 @@ import java.util.Set;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
-import com.helger.datetime.holiday.CalendarUtil;
+import com.helger.datetime.holiday.CalendarHelper;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.IslamicHoliday;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -59,37 +59,37 @@ public class IslamicHolidayParser extends AbstractHolidayParser
       switch (aIslamicHoliday.getType ())
       {
         case NEWYEAR:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JANUARY, 1);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JANUARY, 1);
           break;
         case ASCHURA:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JANUARY, 10);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JANUARY, 10);
           break;
         case ID_AL_FITR:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.OCTOBER, 1);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.OCTOBER, 1);
           break;
         case ID_UL_ADHA:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.DECEMBER, 10);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.DECEMBER, 10);
           break;
         case LAILAT_AL_BARAT:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.AUGUST, 15);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.AUGUST, 15);
           break;
         case LAILAT_AL_MIRAJ:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JULY, 27);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.JULY, 27);
           break;
         case LAILAT_AL_QADR:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.SEPTEMBER, 27);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.SEPTEMBER, 27);
           break;
         case MAWLID_AN_NABI:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.MARCH, 12);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.MARCH, 12);
           break;
         case RAMADAN:
-          aIslamicHolidays = CalendarUtil.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.SEPTEMBER, 1);
+          aIslamicHolidays = CalendarHelper.getIslamicHolidaysInGregorianYear (nYear, DateTimeConstants.SEPTEMBER, 1);
           break;
         default:
           throw new IllegalArgumentException ("Unknown islamic holiday " + aIslamicHoliday.getType ());
       }
 
-      final IHolidayType aType = XMLUtil.getType (aIslamicHoliday.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aIslamicHoliday.getLocalizedType ());
       final String sPropertiesKey = "islamic." + aIslamicHoliday.getType ().name ();
       for (final LocalDate aDate : aIslamicHolidays)
         aHolidayMap.add (aDate, new ResourceBundleHoliday (aType, sPropertiesKey));

@@ -71,7 +71,7 @@ public final class ReadOnlyExpirableWithReplacement <DATATYPE> implements IExpir
   {
     if (o == this)
       return true;
-    if (!(o instanceof ReadOnlyExpirableWithReplacement <?>))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final ReadOnlyExpirableWithReplacement <?> rhs = (ReadOnlyExpirableWithReplacement <?>) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime) &&

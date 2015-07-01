@@ -25,7 +25,7 @@ import com.helger.datetime.holiday.config.Holiday;
 import com.helger.datetime.holiday.config.MoveableHoliday;
 import com.helger.datetime.holiday.config.MovingCondition;
 import com.helger.datetime.holiday.config.With;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 
 /**
  * The abstract base class for all {@link IHolidayParser} implementations.
@@ -124,7 +124,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    */
   protected static final boolean shallBeMoved (@Nonnull final LocalDate aFixed, @Nonnull final MovingCondition aMoveCond)
   {
-    return aFixed.getDayOfWeek () == XMLUtil.getWeekday (aMoveCond.getSubstitute ());
+    return aFixed.getDayOfWeek () == XMLHolidayHelper.getWeekday (aMoveCond.getSubstitute ());
   }
 
   /**
@@ -136,7 +136,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    */
   private static LocalDate _moveDate (final MovingCondition aMoveCond, final LocalDate aDate)
   {
-    final int nWeekday = XMLUtil.getWeekday (aMoveCond.getWeekday ());
+    final int nWeekday = XMLHolidayHelper.getWeekday (aMoveCond.getWeekday ());
     final int nDirection = aMoveCond.getWith () == With.NEXT ? 1 : -1;
 
     LocalDate aMovedDate = aDate;

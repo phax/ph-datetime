@@ -25,7 +25,7 @@ import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.FixedWeekdayInMonth;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.Which;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -51,7 +51,7 @@ public class FixedWeekdayInMonthParser extends AbstractHolidayParser
       if (!isValid (aFWM, nYear))
         continue;
       final LocalDate aDate = parse (nYear, aFWM);
-      final IHolidayType aType = XMLUtil.getType (aFWM.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aFWM.getLocalizedType ());
       final String sPropertyKey = aFWM.getDescriptionPropertiesKey ();
       aHolidays.add (aDate, new ResourceBundleHoliday (aType, sPropertyKey));
     }
@@ -59,14 +59,14 @@ public class FixedWeekdayInMonthParser extends AbstractHolidayParser
 
   protected static LocalDate parse (final int nYear, final FixedWeekdayInMonth aFixedWeekdayInMonth)
   {
-    LocalDate aDate = PDTFactory.createLocalDate (nYear, XMLUtil.getMonth (aFixedWeekdayInMonth.getMonth ()), 1);
+    LocalDate aDate = PDTFactory.createLocalDate (nYear, XMLHolidayHelper.getMonth (aFixedWeekdayInMonth.getMonth ()), 1);
     int nDirection = 1;
     if (aFixedWeekdayInMonth.getWhich () == Which.LAST)
     {
       aDate = aDate.withDayOfMonth (aDate.dayOfMonth ().getMaximumValue ());
       nDirection = -1;
     }
-    final int nWeekDay = XMLUtil.getWeekday (aFixedWeekdayInMonth.getWeekday ());
+    final int nWeekDay = XMLHolidayHelper.getWeekday (aFixedWeekdayInMonth.getWeekday ());
     while (aDate.getDayOfWeek () != nWeekDay)
     {
       aDate = aDate.plusDays (nDirection);

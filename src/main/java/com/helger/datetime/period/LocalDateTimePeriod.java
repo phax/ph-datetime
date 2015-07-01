@@ -23,15 +23,16 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of the {@link ILocalDateTimePeriod} interface.
- * 
+ *
  * @author Philip Helger
  */
 @NotThreadSafe
-public class LocalDateTimePeriod extends AbstractFlexiblePeriod <LocalDateTime> implements ILocalDateTimePeriod
+public class LocalDateTimePeriod extends AbstractFlexiblePeriod <LocalDateTime>implements ILocalDateTimePeriod
 {
   public LocalDateTimePeriod ()
   {
@@ -50,8 +51,7 @@ public class LocalDateTimePeriod extends AbstractFlexiblePeriod <LocalDateTime> 
 
   public final boolean isValidFor (@Nonnull final LocalDateTime aDate)
   {
-    if (aDate == null)
-      throw new NullPointerException ("date");
+    ValueEnforcer.notNull (aDate, "Date");
 
     final LocalDateTime aStart = getStart ();
     if (aStart != null && aStart.isAfter (aDate))

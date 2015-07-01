@@ -24,7 +24,7 @@ import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.RelativeToWeekdayInMonth;
 import com.helger.datetime.holiday.config.When;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 
 /**
  * @author Sven Diedrichsen
@@ -50,7 +50,7 @@ public class RelativeToWeekdayInMonthParser extends FixedWeekdayInMonthParser
       if (!isValid (aRelativeToWeekdayInMonth, nYear))
         continue;
 
-      final int nExpectedWeekday = XMLUtil.getWeekday (aRelativeToWeekdayInMonth.getWeekday ());
+      final int nExpectedWeekday = XMLHolidayHelper.getWeekday (aRelativeToWeekdayInMonth.getWeekday ());
       LocalDate aDate = parse (nYear, aRelativeToWeekdayInMonth.getFixedWeekday ());
       final int nDirection = (aRelativeToWeekdayInMonth.getWhen () == When.BEFORE ? -1 : 1);
       while (aDate.getDayOfWeek () != nExpectedWeekday)
@@ -58,7 +58,7 @@ public class RelativeToWeekdayInMonthParser extends FixedWeekdayInMonthParser
         aDate = aDate.plusDays (nDirection);
       }
 
-      final IHolidayType aType = XMLUtil.getType (aRelativeToWeekdayInMonth.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aRelativeToWeekdayInMonth.getLocalizedType ());
       final String sPropertyKey = aRelativeToWeekdayInMonth.getDescriptionPropertiesKey ();
       aHolidayMap.add (aDate, new ResourceBundleHoliday (aType, sPropertyKey));
     }

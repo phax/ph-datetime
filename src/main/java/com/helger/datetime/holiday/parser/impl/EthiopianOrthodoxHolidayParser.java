@@ -21,13 +21,13 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 import org.joda.time.chrono.CopticChronology;
 
-import com.helger.datetime.holiday.CalendarUtil;
+import com.helger.datetime.holiday.CalendarHelper;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.EthiopianOrthodoxHoliday;
 import com.helger.datetime.holiday.config.Holidays;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -65,7 +65,7 @@ public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
                                                                                final int nEOMonth,
                                                                                final int nEODay)
   {
-    return CalendarUtil.getDatesFromChronologyWithinGregorianYear (nEOMonth,
+    return CalendarHelper.getDatesFromChronologyWithinGregorianYear (nEOMonth,
                                                                    nEODay,
                                                                    nGregorianYear,
                                                                    CopticChronology.getInstanceUTC ());
@@ -95,7 +95,7 @@ public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
                                               aEthiopianOrthodoxHoliday.getType ());
       }
 
-      final IHolidayType aType = XMLUtil.getType (aEthiopianOrthodoxHoliday.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aEthiopianOrthodoxHoliday.getLocalizedType ());
       final String sPropertiesKey = "ethiopian.orthodox." + aEthiopianOrthodoxHoliday.getType ().name ();
       for (final LocalDate aDate : aEthiopianHolidays)
         aHolidayMap.add (aDate, new ResourceBundleHoliday (aType, sPropertiesKey));

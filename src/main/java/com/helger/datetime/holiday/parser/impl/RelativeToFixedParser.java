@@ -24,7 +24,7 @@ import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.RelativeToFixed;
 import com.helger.datetime.holiday.config.When;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -50,11 +50,11 @@ public class RelativeToFixedParser extends AbstractHolidayParser
       if (!isValid (aRelativeToFixed, nYear))
         continue;
 
-      LocalDate aFixed = XMLUtil.create (nYear, aRelativeToFixed.getDate ());
+      LocalDate aFixed = XMLHolidayHelper.create (nYear, aRelativeToFixed.getDate ());
       if (aRelativeToFixed.getWeekday () != null)
       {
         // if weekday is set -> move to weekday
-        final int nExpectedWeekday = XMLUtil.getWeekday (aRelativeToFixed.getWeekday ());
+        final int nExpectedWeekday = XMLHolidayHelper.getWeekday (aRelativeToFixed.getWeekday ());
         final int nDirection = (aRelativeToFixed.getWhen () == When.BEFORE ? -1 : 1);
         do
         {
@@ -70,7 +70,7 @@ public class RelativeToFixedParser extends AbstractHolidayParser
                                                                               : aRelativeToFixed.getDays ().intValue ());
         }
 
-      final IHolidayType aType = XMLUtil.getType (aRelativeToFixed.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aRelativeToFixed.getLocalizedType ());
       final String sPropertyKey = aRelativeToFixed.getDescriptionPropertiesKey ();
       aHolidays.add (aFixed, new ResourceBundleHoliday (aType, sPropertyKey));
     }

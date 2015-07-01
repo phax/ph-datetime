@@ -23,7 +23,7 @@ import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.Fixed;
 import com.helger.datetime.holiday.config.Holidays;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -49,9 +49,9 @@ public final class FixedParser extends AbstractHolidayParser
       if (!isValid (aFixed, nYear))
         continue;
 
-      final LocalDate aDate = XMLUtil.create (nYear, aFixed);
+      final LocalDate aDate = XMLHolidayHelper.create (nYear, aFixed);
       final LocalDate aMovedDate = moveDate (aFixed, aDate);
-      final IHolidayType aType = XMLUtil.getType (aFixed.getLocalizedType ());
+      final IHolidayType aType = XMLHolidayHelper.getType (aFixed.getLocalizedType ());
       final String sPropertyKey = aFixed.getDescriptionPropertiesKey ();
       aHolidays.add (aMovedDate, new ResourceBundleHoliday (aType, sPropertyKey));
     }

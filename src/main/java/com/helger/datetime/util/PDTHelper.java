@@ -278,8 +278,7 @@ public final class PDTHelper
 
   public static boolean isNewYearsEve (@Nonnull final LocalDate aDate)
   {
-    if (aDate == null)
-      throw new NullPointerException ("date");
+    ValueEnforcer.notNull (aDate, "Date");
     return aDate.getMonthOfYear () == DateTimeConstants.DECEMBER && aDate.getDayOfMonth () == 31;
   }
 

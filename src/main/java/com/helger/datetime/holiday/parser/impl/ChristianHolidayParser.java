@@ -20,13 +20,13 @@ import javax.annotation.Nonnull;
 
 import org.joda.time.LocalDate;
 
-import com.helger.datetime.holiday.CalendarUtil;
+import com.helger.datetime.holiday.CalendarHelper;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.config.ChristianHoliday;
 import com.helger.datetime.holiday.config.ChronologyType;
 import com.helger.datetime.holiday.config.Holidays;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 
 /**
  * This parser creates christian holidays for the given year relative to easter
@@ -121,8 +121,8 @@ public class ChristianHolidayParser extends RelativeToEasterSundayParser
         default:
           throw new IllegalArgumentException ("Unknown christian holiday type " + aChristianHoliday.getType ());
       }
-      final LocalDate aConvertedDate = CalendarUtil.convertToGregorianDate (aEasterSunday);
-      final IHolidayType aType = XMLUtil.getType (aChristianHoliday.getLocalizedType ());
+      final LocalDate aConvertedDate = CalendarHelper.convertToGregorianDate (aEasterSunday);
+      final IHolidayType aType = XMLHolidayHelper.getType (aChristianHoliday.getLocalizedType ());
       final String sPropertiesKey = "christian." + aChristianHoliday.getType ().name ();
       addChrstianHoliday (aConvertedDate, sPropertiesKey, aType, aHolidayMap);
     }

@@ -99,7 +99,7 @@ public class ExpirableWithReplacement <DATATYPE> implements IMutableExpirableWit
   {
     if (o == this)
       return true;
-    if (!(o instanceof ExpirableWithReplacement <?>))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final ExpirableWithReplacement <?> rhs = (ExpirableWithReplacement <?>) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime) &&

@@ -30,6 +30,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.string.StringHelper;
 
@@ -59,8 +60,7 @@ public final class PDTFromString
   @Nullable
   public static DateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
   {
-    if (aDF == null)
-      throw new NullPointerException ("dateTimeFormatter");
+    ValueEnforcer.notNull (aDF, "DateTimeFormatter");
 
     if (StringHelper.hasText (sValue))
       try

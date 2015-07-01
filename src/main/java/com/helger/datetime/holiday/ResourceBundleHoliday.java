@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.lang.ClassLoaderHelper;
@@ -60,12 +61,12 @@ public final class ResourceBundleHoliday implements ISingleHoliday
    */
   public ResourceBundleHoliday (@Nonnull final IHolidayType aType, @Nullable final String sPropertiesKey)
   {
-    if (aType == null)
-      throw new NullPointerException ("type");
+    ValueEnforcer.notNull (aType, "Type");
     m_bIsOfficial = aType.isOfficialHoliday ();
     m_aRBKey = StringHelper.hasNoText (sPropertiesKey) ? null
-                                                      : new ResourceBundleKey ("descriptions.holiday_descriptions",
-                                                                               "holiday.description." + sPropertiesKey);
+                                                       : new ResourceBundleKey ("descriptions.holiday_descriptions",
+                                                                                "holiday.description." +
+                                                                                                                     sPropertiesKey);
   }
 
   public boolean isOfficialHoliday ()
@@ -103,7 +104,7 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   {
     if (o == this)
       return true;
-    if (!(o instanceof ResourceBundleHoliday))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final ResourceBundleHoliday rhs = (ResourceBundleHoliday) o;
     return m_bIsOfficial == rhs.m_bIsOfficial && EqualsHelper.equals (m_aRBKey, rhs.m_aRBKey);

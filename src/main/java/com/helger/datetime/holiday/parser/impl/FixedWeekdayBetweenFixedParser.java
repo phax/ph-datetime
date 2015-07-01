@@ -23,7 +23,7 @@ import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.ResourceBundleHoliday;
 import com.helger.datetime.holiday.config.FixedWeekdayBetweenFixed;
 import com.helger.datetime.holiday.config.Holidays;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -55,9 +55,9 @@ public class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
       if (!isValid (aFixedWeekdayBetweenFixed, nYear))
         continue;
 
-      final int nExpectedWeekday = XMLUtil.getWeekday (aFixedWeekdayBetweenFixed.getWeekday ());
-      LocalDate aFrom = XMLUtil.create (nYear, aFixedWeekdayBetweenFixed.getFrom ());
-      final LocalDate aTo = XMLUtil.create (nYear, aFixedWeekdayBetweenFixed.getTo ());
+      final int nExpectedWeekday = XMLHolidayHelper.getWeekday (aFixedWeekdayBetweenFixed.getWeekday ());
+      LocalDate aFrom = XMLHolidayHelper.create (nYear, aFixedWeekdayBetweenFixed.getFrom ());
+      final LocalDate aTo = XMLHolidayHelper.create (nYear, aFixedWeekdayBetweenFixed.getTo ());
       LocalDate aResult = null;
       while (!aFrom.isAfter (aTo))
       {
@@ -71,7 +71,7 @@ public class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
 
       if (aResult != null)
       {
-        final IHolidayType aType = XMLUtil.getType (aFixedWeekdayBetweenFixed.getLocalizedType ());
+        final IHolidayType aType = XMLHolidayHelper.getType (aFixedWeekdayBetweenFixed.getLocalizedType ());
         final String sPropertyKey = aFixedWeekdayBetweenFixed.getDescriptionPropertiesKey ();
         aHolidayMap.add (aResult, new ResourceBundleHoliday (aType, sPropertyKey));
       }

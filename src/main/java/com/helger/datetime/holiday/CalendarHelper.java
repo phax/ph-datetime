@@ -39,9 +39,9 @@ import com.helger.datetime.util.PDTHelper;
  * @author Philip Helger
  */
 @Immutable
-public final class CalendarUtil
+public final class CalendarHelper
 {
-  private CalendarUtil ()
+  private CalendarHelper ()
   {}
 
   /**

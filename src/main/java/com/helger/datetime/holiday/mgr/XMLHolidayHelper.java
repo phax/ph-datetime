@@ -34,9 +34,9 @@ import com.helger.datetime.holiday.config.Weekday;
  * @author svdi1de
  * @author Philip Helger
  */
-public final class XMLUtil
+public final class XMLHolidayHelper
 {
-  private XMLUtil ()
+  private XMLHolidayHelper ()
   {}
 
   /**

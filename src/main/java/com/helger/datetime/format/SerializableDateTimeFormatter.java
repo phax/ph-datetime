@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
@@ -49,11 +50,11 @@ public final class SerializableDateTimeFormatter implements Serializable
 
   public static enum EFormatStyle
   {
-    SHORT ("S", DateFormat.SHORT),
-    MEDIUM ("M", DateFormat.MEDIUM),
-    LONG ("L", DateFormat.LONG),
-    FULL ("F", DateFormat.FULL),
-    NONE ("-", 4); // DateFormat.NONE
+   SHORT ("S", DateFormat.SHORT),
+   MEDIUM ("M", DateFormat.MEDIUM),
+   LONG ("L", DateFormat.LONG),
+   FULL ("F", DateFormat.FULL),
+   NONE ("-", 4); // DateFormat.NONE
 
     /** Default format style: {@link #MEDIUM} */
     public static final EFormatStyle DEFAULT = MEDIUM;
@@ -96,8 +97,7 @@ public final class SerializableDateTimeFormatter implements Serializable
                                          @Nullable final String sPattern,
                                          @Nullable final Locale aLocale)
   {
-    if (aFormatter == null)
-      throw new NullPointerException ("formatter");
+    ValueEnforcer.notNull (aFormatter, "Formatter");
     if (eDateStyle == null && eTimeStyle == null && sPattern == null)
       throw new IllegalArgumentException ("At least on descriptor must be present!");
     if ((eDateStyle != null && eTimeStyle == null) || (eDateStyle == null && eTimeStyle != null))
@@ -179,7 +179,7 @@ public final class SerializableDateTimeFormatter implements Serializable
   {
     if (o == this)
       return true;
-    if (!(o instanceof SerializableDateTimeFormatter))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final SerializableDateTimeFormatter rhs = (SerializableDateTimeFormatter) o;
     return EqualsHelper.equals (m_eDateStyle, rhs.m_eDateStyle) &&
@@ -262,10 +262,8 @@ public final class SerializableDateTimeFormatter implements Serializable
                                                       @Nonnull final EFormatStyle eTimeStyle,
                                                       @Nullable final Locale aLocale)
   {
-    if (eDateStyle == null)
-      throw new NullPointerException ("dateStyle");
-    if (eTimeStyle == null)
-      throw new NullPointerException ("timeStyle");
+    ValueEnforcer.notNull (eDateStyle, "DateStyle");
+    ValueEnforcer.notNull (eTimeStyle, "TimeStyle");
     return new SerializableDateTimeFormatter (_createFormatter (eDateStyle, eTimeStyle, aLocale),
                                               eDateStyle,
                                               eTimeStyle,
@@ -280,10 +278,10 @@ public final class SerializableDateTimeFormatter implements Serializable
   }
 
   @Nonnull
-  public static SerializableDateTimeFormatter create (@Nonnull final String sPattern, @Nullable final Locale aLocale) throws IllegalArgumentException
+  public static SerializableDateTimeFormatter create (@Nonnull final String sPattern,
+                                                      @Nullable final Locale aLocale) throws IllegalArgumentException
   {
-    if (sPattern == null)
-      throw new NullPointerException ("pattern");
+    ValueEnforcer.notNull (sPattern, "Pattern");
     return new SerializableDateTimeFormatter (_createFormatter (sPattern, aLocale), null, null, sPattern, aLocale);
   }
 }

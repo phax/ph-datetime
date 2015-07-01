@@ -79,7 +79,7 @@ public class Expirable implements IMutableExpirable
   {
     if (o == this)
       return true;
-    if (!(o instanceof Expirable))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final Expirable rhs = (Expirable) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);

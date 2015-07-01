@@ -60,7 +60,7 @@ public final class ReadOnlyExpirable implements IExpirable
   {
     if (o == this)
       return true;
-    if (!(o instanceof ReadOnlyExpirable))
+    if (o == null || !getClass ().equals (o.getClass ()))
       return false;
     final ReadOnlyExpirable rhs = (ReadOnlyExpirable) o;
     return EqualsHelper.equals (m_aExpirationDateTime, rhs.m_aExpirationDateTime);

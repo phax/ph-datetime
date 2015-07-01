@@ -23,7 +23,7 @@ import org.joda.time.chrono.JulianChronology;
 
 import com.helger.datetime.CPDT;
 import com.helger.datetime.config.PDTConfig;
-import com.helger.datetime.holiday.CalendarUtil;
+import com.helger.datetime.holiday.CalendarHelper;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.IHolidayType;
 import com.helger.datetime.holiday.ResourceBundleHoliday;
@@ -31,7 +31,7 @@ import com.helger.datetime.holiday.config.ChronologyType;
 import com.helger.datetime.holiday.config.HolidayType;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.RelativeToEasterSunday;
-import com.helger.datetime.holiday.mgr.XMLUtil;
+import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
@@ -54,7 +54,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
       final LocalDate aEasterSunday = getEasterSunday (nYear, aDay.getChronology ());
       aEasterSunday.plusDays (aDay.getDays ());
       final String sPropertiesKey = "christian." + aDay.getDescriptionPropertiesKey ();
-      addChrstianHoliday (aEasterSunday, sPropertiesKey, XMLUtil.getType (aDay.getLocalizedType ()), aHolidayMap);
+      addChrstianHoliday (aEasterSunday, sPropertiesKey, XMLHolidayHelper.getType (aDay.getLocalizedType ()), aHolidayMap);
     }
   }
 
@@ -75,7 +75,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
                                            final IHolidayType aHolidayType,
                                            final HolidayMap holidays)
   {
-    final LocalDate convertedDate = CalendarUtil.convertToGregorianDate (aDate);
+    final LocalDate convertedDate = CalendarHelper.convertToGregorianDate (aDate);
     holidays.add (convertedDate, new ResourceBundleHoliday (aHolidayType, sPropertiesKey));
   }
 
