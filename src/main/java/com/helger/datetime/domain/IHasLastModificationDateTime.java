@@ -18,11 +18,11 @@ package com.helger.datetime.domain;
 
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Interface for objects having a last modification date time.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHasLastModificationDateTime
@@ -32,5 +32,5 @@ public interface IHasLastModificationDateTime
    *         has not been modified yet.
    */
   @Nullable
-  DateTime getLastModificationDateTime ();
+  LocalDateTime getLastModificationDateTime ();
 }

@@ -18,11 +18,11 @@ package com.helger.datetime.domain;
 
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Interface for objects having a trash date time.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHasTrashDateTime
@@ -32,5 +32,5 @@ public interface IHasTrashDateTime
    *         trashed yet.
    */
   @Nullable
-  DateTime getTrashDateTime ();
+  LocalDateTime getTrashDateTime ();
 }

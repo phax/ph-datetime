@@ -18,11 +18,11 @@ package com.helger.datetime.domain;
 
 import javax.annotation.Nonnull;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Interface for objects having a creation date time.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHasCreationDateTime
@@ -31,5 +31,5 @@ public interface IHasCreationDateTime
    * @return The non-<code>null</code> creation date time of the object
    */
   @Nonnull
-  DateTime getCreationDateTime ();
+  LocalDateTime getCreationDateTime ();
 }

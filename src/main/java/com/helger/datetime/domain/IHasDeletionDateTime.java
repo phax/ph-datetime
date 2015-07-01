@@ -18,11 +18,11 @@ package com.helger.datetime.domain;
 
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Interface for objects having a deletion date time.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHasDeletionDateTime
@@ -32,5 +32,5 @@ public interface IHasDeletionDateTime
    *         been deleted yet.
    */
   @Nullable
-  DateTime getDeletionDateTime ();
+  LocalDateTime getDeletionDateTime ();
 }
