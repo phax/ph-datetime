@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.parser.impl;
+package com.helger.datetime.holiday.parser;
 
 import org.joda.time.LocalDate;
 

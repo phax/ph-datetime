@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.parser.impl;
+package com.helger.datetime.holiday.parser;
 
 import org.joda.time.LocalDate;
 
@@ -26,7 +26,6 @@ import com.helger.datetime.holiday.config.FixedWeekdayInMonth;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.Which;
 import com.helger.datetime.holiday.mgr.XMLHolidayHelper;
-import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
  * @author Sven Diedrichsen

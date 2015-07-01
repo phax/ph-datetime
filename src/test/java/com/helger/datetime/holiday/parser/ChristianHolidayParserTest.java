@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.parser.impl;
+package com.helger.datetime.holiday.parser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +33,8 @@ import com.helger.datetime.holiday.config.ChronologyType;
 import com.helger.datetime.holiday.config.Holidays;
 import com.helger.datetime.holiday.config.RelativeToEasterSunday;
 import com.helger.datetime.holiday.parser.AbstractHolidayParser;
+import com.helger.datetime.holiday.parser.ChristianHolidayParser;
+import com.helger.datetime.holiday.parser.RelativeToEasterSundayParser;
 
 /**
  * @author svdi1de

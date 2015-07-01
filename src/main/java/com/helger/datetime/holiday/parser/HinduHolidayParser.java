@@ -14,12 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.parser.impl;
+package com.helger.datetime.holiday.parser;
 
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.HinduHoliday;
 import com.helger.datetime.holiday.config.Holidays;
-import com.helger.datetime.holiday.parser.AbstractHolidayParser;
 
 /**
  * @author Sven Diedrichsen

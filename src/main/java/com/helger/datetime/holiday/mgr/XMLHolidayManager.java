@@ -46,17 +46,17 @@ import com.helger.commons.string.StringHelper;
 import com.helger.datetime.holiday.HolidayMap;
 import com.helger.datetime.holiday.config.Configuration;
 import com.helger.datetime.holiday.config.Holidays;
+import com.helger.datetime.holiday.parser.ChristianHolidayParser;
+import com.helger.datetime.holiday.parser.EthiopianOrthodoxHolidayParser;
+import com.helger.datetime.holiday.parser.FixedParser;
+import com.helger.datetime.holiday.parser.FixedWeekdayBetweenFixedParser;
+import com.helger.datetime.holiday.parser.FixedWeekdayInMonthParser;
+import com.helger.datetime.holiday.parser.FixedWeekdayRelativeToFixedParser;
+import com.helger.datetime.holiday.parser.HinduHolidayParser;
 import com.helger.datetime.holiday.parser.IHolidayParser;
-import com.helger.datetime.holiday.parser.impl.ChristianHolidayParser;
-import com.helger.datetime.holiday.parser.impl.EthiopianOrthodoxHolidayParser;
-import com.helger.datetime.holiday.parser.impl.FixedParser;
-import com.helger.datetime.holiday.parser.impl.FixedWeekdayBetweenFixedParser;
-import com.helger.datetime.holiday.parser.impl.FixedWeekdayInMonthParser;
-import com.helger.datetime.holiday.parser.impl.FixedWeekdayRelativeToFixedParser;
-import com.helger.datetime.holiday.parser.impl.HinduHolidayParser;
-import com.helger.datetime.holiday.parser.impl.IslamicHolidayParser;
-import com.helger.datetime.holiday.parser.impl.RelativeToFixedParser;
-import com.helger.datetime.holiday.parser.impl.RelativeToWeekdayInMonthParser;
+import com.helger.datetime.holiday.parser.IslamicHolidayParser;
+import com.helger.datetime.holiday.parser.RelativeToFixedParser;
+import com.helger.datetime.holiday.parser.RelativeToWeekdayInMonthParser;
 
 /**
  * Manager implementation for reading data from XML files. The files with the

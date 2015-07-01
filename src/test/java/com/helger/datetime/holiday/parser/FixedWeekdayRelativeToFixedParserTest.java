@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.holiday.parser.impl;
+package com.helger.datetime.holiday.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,6 +31,7 @@ import com.helger.datetime.holiday.config.Month;
 import com.helger.datetime.holiday.config.Weekday;
 import com.helger.datetime.holiday.config.When;
 import com.helger.datetime.holiday.config.Which;
+import com.helger.datetime.holiday.parser.FixedWeekdayRelativeToFixedParser;
 
 /**
  * @author Sven
