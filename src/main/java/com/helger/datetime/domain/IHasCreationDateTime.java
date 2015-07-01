@@ -14,23 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 import org.joda.time.DateTime;
 
 /**
- * Interface for objects having a deletion date time.
+ * Interface for objects having a creation date time.
  * 
  * @author Philip Helger
  */
-public interface IHasDeletionDateTime
+public interface IHasCreationDateTime
 {
   /**
-   * @return The deletion date time or <code>null</code> if the object has not
-   *         been deleted yet.
+   * @return The non-<code>null</code> creation date time of the object
    */
-  @Nullable
-  DateTime getDeletionDateTime ();
+  @Nonnull
+  DateTime getCreationDateTime ();
 }

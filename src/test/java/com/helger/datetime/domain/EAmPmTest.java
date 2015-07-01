@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
@@ -23,21 +23,22 @@ import java.util.Locale;
 
 import org.junit.Test;
 
+import com.helger.datetime.domain.EAmPm;
+
 /**
- * Test class for class {@link EDayOfWeek}.
- * 
+ * Test class for class {@link EAmPm}.
+ *
  * @author Philip Helger
  */
-public final class EDayOfWeekTest
+public final class EAmPmTest
 {
   @Test
   public void testBasic ()
   {
-    for (final EDayOfWeek e : EDayOfWeek.values ())
+    for (final EAmPm e : EAmPm.values ())
     {
-      assertSame (e, EDayOfWeek.getFromIDOrNull (e.getID ()));
-      assertNotNull (e.getWeekdayName (Locale.GERMANY));
-      assertNotNull (e.getWeekdayShortName (Locale.GERMANY));
+      assertSame (e, EAmPm.getFromIDOrNull (e.getID ()));
+      assertNotNull (e.getDisplayName (Locale.GERMANY));
     }
   }
 }

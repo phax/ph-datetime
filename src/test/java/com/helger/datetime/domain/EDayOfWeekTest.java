@@ -14,23 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
-import javax.annotation.Nullable;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
-import org.joda.time.DateTime;
+import java.util.Locale;
+
+import org.junit.Test;
+
+import com.helger.datetime.domain.EDayOfWeek;
 
 /**
- * Interface for objects having a last modification date time.
+ * Test class for class {@link EDayOfWeek}.
  * 
  * @author Philip Helger
  */
-public interface IHasLastModificationDateTime
+public final class EDayOfWeekTest
 {
-  /**
-   * @return The last modification date time or <code>null</code> if the object
-   *         has not been modified yet.
-   */
-  @Nullable
-  DateTime getLastModificationDateTime ();
+  @Test
+  public void testBasic ()
+  {
+    for (final EDayOfWeek e : EDayOfWeek.values ())
+    {
+      assertSame (e, EDayOfWeek.getFromIDOrNull (e.getID ()));
+      assertNotNull (e.getWeekdayName (Locale.GERMANY));
+      assertNotNull (e.getWeekdayShortName (Locale.GERMANY));
+    }
+  }
 }

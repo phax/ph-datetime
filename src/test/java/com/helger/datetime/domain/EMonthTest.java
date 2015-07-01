@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
@@ -22,6 +22,8 @@ import static org.junit.Assert.assertSame;
 import java.util.Locale;
 
 import org.junit.Test;
+
+import com.helger.datetime.domain.EMonth;
 
 /**
  * Test class for class {@link EMonth}.

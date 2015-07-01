@@ -14,29 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import javax.annotation.Nullable;
 
-import java.util.Locale;
-
-import org.junit.Test;
+import org.joda.time.DateTime;
 
 /**
- * Test class for class {@link EAmPm}.
- *
+ * Interface for objects having a last modification date time.
+ * 
  * @author Philip Helger
  */
-public final class EAmPmTest
+public interface IHasLastModificationDateTime
 {
-  @Test
-  public void testBasic ()
-  {
-    for (final EAmPm e : EAmPm.values ())
-    {
-      assertSame (e, EAmPm.getFromIDOrNull (e.getID ()));
-      assertNotNull (e.getDisplayName (Locale.GERMANY));
-    }
-  }
+  /**
+   * @return The last modification date time or <code>null</code> if the object
+   *         has not been modified yet.
+   */
+  @Nullable
+  DateTime getLastModificationDateTime ();
 }

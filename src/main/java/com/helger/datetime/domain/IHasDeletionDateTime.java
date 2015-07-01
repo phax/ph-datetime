@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime;
+package com.helger.datetime.domain;
 
 import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 
 /**
- * Interface for objects having a trash date time.
+ * Interface for objects having a deletion date time.
  * 
  * @author Philip Helger
  */
-public interface IHasTrashDateTime
+public interface IHasDeletionDateTime
 {
   /**
-   * @return The trash date time or <code>null</code> if the object has not been
-   *         trashed yet.
+   * @return The deletion date time or <code>null</code> if the object has not
+   *         been deleted yet.
    */
   @Nullable
-  DateTime getTrashDateTime ();
+  DateTime getDeletionDateTime ();
 }
