@@ -69,8 +69,8 @@ public final class HolidayManagerFactory
   {
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
     ValueEnforcer.notNull (aClass, "Class");
-    if (!ClassHelper.isInstancableClass (aClass))
-      throw new IllegalArgumentException ("The passed class must be public, not abstract and needs a no-argument ctor!");
+    ValueEnforcer.isTrue (ClassHelper.isInstancableClass (aClass),
+                          "The passed class must be public, not abstract and needs a no-argument ctor!");
 
     s_aRWLock.writeLock ().lock ();
     try
