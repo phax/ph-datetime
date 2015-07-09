@@ -24,9 +24,8 @@ import org.junit.Test;
 import com.helger.commons.locale.country.ECountry;
 import com.helger.datetime.PDTFactory;
 
-public class HolidayUKFuncTest extends AbstractCountryTestBase
+public final class HolidayUKFuncTest extends AbstractCountryTestBase
 {
-
   private static final int YEAR = 2010;
   private static final String ISO_CODE = "uk";
 

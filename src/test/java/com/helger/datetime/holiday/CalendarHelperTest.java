@@ -34,7 +34,7 @@ import com.helger.datetime.util.PDTHelper;
 /**
  * @author svdi1de
  */
-public final class CalendarUtilTest
+public final class CalendarHelperTest
 {
   @Test
   public void testWeekend ()

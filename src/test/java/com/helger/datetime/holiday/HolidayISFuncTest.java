@@ -21,7 +21,7 @@ import org.junit.Test;
 /**
  * @author svdi1de
  */
-public class HolidayISFuncTest extends AbstractCountryTestBase
+public final class HolidayISFuncTest extends AbstractCountryTestBase
 {
   private static final int YEAR = 2010;
   private static final String ISO_CODE = "is";

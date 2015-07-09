@@ -30,7 +30,7 @@ import org.junit.Test;
 import com.helger.commons.locale.country.ECountry;
 import com.helger.datetime.PDTFactory;
 
-public class HolidayDEFuncTest extends AbstractCountryTestBase
+public final class HolidayDEFuncTest extends AbstractCountryTestBase
 {
   private static final int YEAR = 2010;
   private static final String ISO_CODE = "de";

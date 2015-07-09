@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author sven
  */
-public class HolidayDescriptionFuncTest
+public final class HolidayDescriptionFuncTest
 {
   @Test
   public void testHolidayDescriptionsCompleteness () throws Exception

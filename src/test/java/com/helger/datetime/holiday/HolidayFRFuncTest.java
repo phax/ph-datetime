@@ -18,7 +18,7 @@ package com.helger.datetime.holiday;
 
 import org.junit.Test;
 
-public class HolidayFRFuncTest extends AbstractCountryTestBase
+public final class HolidayFRFuncTest extends AbstractCountryTestBase
 {
   private static final String ISO_CODE = "fr";
   private static final int YEAR = 2010;
