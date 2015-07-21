@@ -25,7 +25,7 @@
     <version>1.4.0</version>
   </parent>
   <artifactId>ph-datetime</artifactId>
-  <version>4.1.1-SNAPSHOT</version>
+  <version>4.1.1</version>
   <packaging>bundle</packaging>
   <name>ph-datetime</name>
   <description>Java date time library based on joda time</description>
@@ -44,7 +44,7 @@
     <connection>scm:git:git@github.com:phax/ph-datetime.git</connection>
     <developerConnection>scm:git:git@github.com:phax/ph-datetime.git</developerConnection>
     <url>http://github.com/phax/ph-datetime</url>
-    <tag>HEAD</tag>
+    <tag>ph-datetime-4.1.1</tag>
   </scm>
   
   <organization>
