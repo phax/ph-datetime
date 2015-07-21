@@ -39,7 +39,6 @@ import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.commons.io.stream.StreamHelper;
-import com.helger.commons.jaxb.JAXBContextCache;
 import com.helger.commons.lang.GenericReflection;
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.string.StringHelper;
@@ -57,6 +56,7 @@ import com.helger.datetime.holiday.parser.IHolidayParser;
 import com.helger.datetime.holiday.parser.IslamicHolidayParser;
 import com.helger.datetime.holiday.parser.RelativeToFixedParser;
 import com.helger.datetime.holiday.parser.RelativeToWeekdayInMonthParser;
+import com.helger.jaxb.JAXBContextCache;
 
 /**
  * Manager implementation for reading data from XML files. The files with the
