@@ -35,6 +35,7 @@ import org.joda.time.base.AbstractPartial;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.commons.compare.CompareHelper;
 import com.helger.datetime.CPDT;
 import com.helger.datetime.PDTFactory;
 
@@ -323,26 +324,9 @@ public final class PDTHelper
   }
 
   /**
-   * Compare two periods. The problem is, that
-   * <code>period1.equals (period2)</code> is not equal even though they are
-   * semantically equal.
-   *
-   * @param aPeriod1
-   *        First period. May not be <code>null</code>.
-   * @param aPeriod2
-   *        Second period. May not be <code>null</code>.
-   * @return negative value if aPeriod1 is less aPeriod2, 0 if equal, or
-   *         positive value if aPeriod1 greater aPeriod2
-   */
-  public static int compare (@Nonnull final Period aPeriod1, @Nonnull final Period aPeriod2)
-  {
-    return aPeriod1.toStandardDuration ().compareTo (aPeriod2.toStandardDuration ());
-  }
-
-  /**
    * <code>null</code> safe compare.<br>
    * Note: it has the same semantics as
-   * {@link com.helger.commons.compare.CompareUtils#nullSafeCompare(Comparable, Comparable)}
+   * {@link com.helger.commons.compare.CompareHelper#compare(Comparable, Comparable)}
    * except that the parameter class does not implement
    * {@link java.lang.Comparable} in a Generics-way!
    *
@@ -352,9 +336,35 @@ public final class PDTHelper
    *        Second object. May be <code>null</code>.
    * @return -1, 0 or +1
    */
-  public static int nullSafeCompare (@Nullable final Period aPeriod1, @Nullable final Period aPeriod2)
+  public static int compare (@Nullable final Period aPeriod1, @Nullable final Period aPeriod2)
   {
-    return aPeriod1 == aPeriod2 ? 0 : aPeriod1 == null ? -1 : aPeriod2 == null ? +1 : compare (aPeriod1, aPeriod2);
+    return compare (aPeriod1, aPeriod2, CompareHelper.DEFAULT_NULL_VALUES_COME_FIRST);
+  }
+
+  /**
+   * <code>null</code> safe compare.<br>
+   * Note: it has the same semantics as
+   * {@link com.helger.commons.compare.CompareHelper#compare(Comparable, Comparable, boolean)}
+   * except that the parameter class does not implement
+   * {@link java.lang.Comparable} in a Generics-way!
+   *
+   * @param aPeriod1
+   *        First object. May be <code>null</code>.
+   * @param aPeriod2
+   *        Second object. May be <code>null</code>.
+   * @return -1, 0 or +1
+   */
+  public static int compare (@Nullable final Period aPeriod1,
+                             @Nullable final Period aPeriod2,
+                             final boolean bNullValuesComeFirst)
+  {
+    if (aPeriod1 == aPeriod2)
+      return 0;
+    if (aPeriod1 == null)
+      return bNullValuesComeFirst ? -1 : +1;
+    if (aPeriod2 == null)
+      return bNullValuesComeFirst ? +1 : -1;
+    return aPeriod1.toStandardDuration ().compareTo (aPeriod2.toStandardDuration ());
   }
 
   /**
