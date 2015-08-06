@@ -18,6 +18,12 @@
 
 -->
 <changelog xmlns="http://www.helger.com/xsd/changelog/1.0" version="1.0" component="ph-datetime">
+  <release date="2015-08-06" version="4.2.0" />
+  <entry date="2015-08-06" category="api" action="change">
+    <change>
+      <text locale="en">Re-extracted ph-holiday into a separate project</text>
+    </change>
+  </entry>
   <release date="2015-07-21" version="4.1.1" />
   <entry date="2015-07-21" category="tech" action="update">
     <change>

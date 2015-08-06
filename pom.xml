@@ -21,16 +21,17 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.helger</groupId>
-    <artifactId>ph-datetime-parent-pom</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
+    <artifactId>parent-pom</artifactId>
+    <version>1.4.0</version>
   </parent>
-  <artifactId>ph-datetime</artifactId>
-  <packaging>bundle</packaging>
-  <name>ph-datetime</name>
-  <description>Java date time library based on joda time</description>
-  <url>https://github.com/phax/ph-datetime/ph-datetime</url>
+  <artifactId>ph-datetime-parent-pom</artifactId>
+  <version>4.2.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>ph-datetime-parent-pom</name>
+  <description>Base POM to build the ph-datetime projects</description>
+  <url>https://github.com/phax/ph-datetime</url>
   <inceptionYear>2014</inceptionYear>
-
+ 
   <licenses>
     <license>
       <name>Apache 2</name>
@@ -39,6 +40,13 @@
     </license>
   </licenses>
   
+  <scm>
+    <connection>scm:git:git@github.com:phax/ph-datetime.git</connection>
+    <developerConnection>scm:git:git@github.com:phax/ph-datetime.git</developerConnection>
+    <url>http://github.com/phax/ph-datetime</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <organization>
     <name>Philip Helger</name>
     <url>http://www.helger.com</url>
@@ -53,40 +61,53 @@
     </developer>
   </developers>
   
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-commons</artifactId>
+        <version>6.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-jaxb</artifactId>
+        <version>6.1.0</version>
+      </dependency>
+  
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>2.8.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-datetime</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-holiday</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
-      <groupId>com.helger</groupId>
-      <artifactId>ph-commons</artifactId>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-    </dependency>
-  
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <configuration>
-          <instructions>
-            <Export-Package>
-              com.helger.datetime.*
-            </Export-Package>
-            <Import-Package>
-              !javax.annotation.*,*
-            </Import-Package>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  
+  <modules>
+    <module>ph-datetime</module>
+    <module>ph-holiday</module>
+  </modules>
 </project>
