@@ -173,9 +173,7 @@ public final class PDTHelper
     return x.getMonthOfYear () == y.getMonthOfYear () && x.getDayOfMonth () == y.getDayOfMonth ();
   }
 
-  public static boolean isBetweenIncl (@Nullable final LocalDate aDate,
-                                       @Nullable final LocalDate aLowerBound,
-                                       @Nullable final LocalDate aUpperBound)
+  public static boolean isBetweenIncl (@Nullable final LocalDate aDate, @Nullable final LocalDate aLowerBound, @Nullable final LocalDate aUpperBound)
   {
     if (aDate == null || aLowerBound == null || aUpperBound == null)
       return false;
@@ -352,11 +350,12 @@ public final class PDTHelper
    *        First object. May be <code>null</code>.
    * @param aPeriod2
    *        Second object. May be <code>null</code>.
+   * @param bNullValuesComeFirst
+   *        <code>true</code> if null values come first, <code>false</code> if
+   *        they come last.
    * @return -1, 0 or +1
    */
-  public static int compare (@Nullable final Period aPeriod1,
-                             @Nullable final Period aPeriod2,
-                             final boolean bNullValuesComeFirst)
+  public static int compare (@Nullable final Period aPeriod1, @Nullable final Period aPeriod2, final boolean bNullValuesComeFirst)
   {
     if (aPeriod1 == aPeriod2)
       return 0;
@@ -486,8 +485,7 @@ public final class PDTHelper
     return aDateTime1.compareTo (aDateTime2) > 0;
   }
 
-  public static boolean isGreaterOrEqual (@Nonnull final LocalDateTime aDateTime1,
-                                          @Nonnull final LocalDateTime aDateTime2)
+  public static boolean isGreaterOrEqual (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
   {
     return aDateTime1.compareTo (aDateTime2) >= 0;
   }
