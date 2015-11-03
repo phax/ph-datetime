@@ -24,18 +24,18 @@ import org.joda.time.ReadableInterval;
 
 /**
  * Base interface for a holiday manager for one country.
- * 
+ *
  * @author Philip Helger
  */
 public interface IHolidayManager
 {
   /**
    * Check if the requested date is a holiday.
-   * 
+   *
    * @param aDate
    *        The potential holiday.
    * @param aArgs
-   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -> New
+   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New
    *        York holidays
    * @return is a holiday in the state/region
    */
@@ -43,11 +43,11 @@ public interface IHolidayManager
 
   /**
    * Get the holiday information for the requested date.
-   * 
+   *
    * @param aDate
    *        The potential holiday.
    * @param aArgs
-   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -> New
+   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New
    *        York holidays
    * @return The respective holiday.
    */
@@ -56,11 +56,11 @@ public interface IHolidayManager
 
   /**
    * Returns the holidays for the requested year and hierarchy structure.
-   * 
+   *
    * @param nYear
    *        i.e. 2010
    * @param aArgs
-   *        i.e. args = {'ny'}. returns US/New York holidays. No args ->
+   *        i.e. args = {'ny'}. returns US/New York holidays. No args -&gt;
    *        holidays common to whole country
    * @return the list of holidays for the requested year
    */
@@ -69,7 +69,7 @@ public interface IHolidayManager
 
   /**
    * Returns the holidays for the requested interval and hierarchy structure.
-   * 
+   *
    * @param aInterval
    *        the interval in which the holidays lie.
    * @param aArgs

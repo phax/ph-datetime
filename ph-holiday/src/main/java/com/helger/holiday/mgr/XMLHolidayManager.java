@@ -84,8 +84,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
 
     try
     {
-      final JAXBContext ctx = JAXBContextCache.getInstance ()
-                                              .getFromCache (com.helger.holiday.jaxb.ObjectFactory.class);
+      final JAXBContext ctx = JAXBContextCache.getInstance ().getFromCache (com.helger.holiday.jaxb.ObjectFactory.class);
       final Unmarshaller um = ctx.createUnmarshaller ();
       final JAXBElement <Configuration> aElement = GenericReflection.<Object, JAXBElement <Configuration>> uncheckedCast (um.unmarshal (aIS));
       return aElement.getValue ();
@@ -174,9 +173,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    */
   @Nonnull
   @ReturnsMutableCopy
-  private HolidayMap _getHolidays (final int nYear,
-                                   @Nonnull final Configuration aConfig,
-                                   @Nullable final String... aArgs)
+  private HolidayMap _getHolidays (final int nYear, @Nonnull final Configuration aConfig, @Nullable final String... aArgs)
   {
     if (s_aLogger.isDebugEnabled ())
       s_aLogger.debug ("Adding holidays for " + aConfig.getDescription ());
@@ -193,9 +190,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
         if (sHierarchy.equalsIgnoreCase (aSubConfig.getHierarchy ()))
         {
           // Recursive call
-          final HolidayMap aSubHolidays = _getHolidays (nYear,
-                                                        aSubConfig,
-                                                        ArrayHelper.getCopy (aArgs, 1, aArgs.length - 1));
+          final HolidayMap aSubHolidays = _getHolidays (nYear, aSubConfig, ArrayHelper.getCopy (aArgs, 1, aArgs.length - 1));
           aHolidayMap.addAll (aSubHolidays);
           break;
         }
@@ -229,8 +224,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
 
   /**
    * Returns the configurations hierarchy.<br>
-   * i.e. Hierarchy 'us' -> Children 'al','ak','ar', ... ,'wv','wy'. Every child
-   * might itself have children. The ids be used to call
+   * i.e. Hierarchy 'us' -&gt; Children 'al','ak','ar', ... ,'wv','wy'. Every
+   * child might itself have children. The ids be used to call
    * getHolidays()/isHoliday().
    */
   @Override
@@ -247,8 +242,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @return configuration hierarchy
    */
   @Nonnull
-  private static CalendarHierarchy _createConfigurationHierarchy (@Nonnull final Configuration aConfig,
-                                                                  @Nullable final CalendarHierarchy aParent)
+  private static CalendarHierarchy _createConfigurationHierarchy (@Nonnull final Configuration aConfig, @Nullable final CalendarHierarchy aParent)
   {
     final ECountry eCountry = ECountry.getFromIDOrNull (aConfig.getHierarchy ());
     final CalendarHierarchy aHierarchy = new CalendarHierarchy (aParent, aConfig.getHierarchy (), eCountry);
