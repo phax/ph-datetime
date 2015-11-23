@@ -18,6 +18,11 @@
 
 -->
 <changelog xmlns="http://www.helger.com/xsd/changelog/1.0" version="1.0" component="ph-datetime">
+  <entry date="2015-11-23" category="tech" action="update">
+    <change>
+      <text locale="en">Updated to Joda-Time 2.9.1</text>
+    </change>
+  </entry>
   <release date="2015-11-03" version="4.2.1" />
   <entry date="2015-11-03" category="tech" action="update">
     <change>
