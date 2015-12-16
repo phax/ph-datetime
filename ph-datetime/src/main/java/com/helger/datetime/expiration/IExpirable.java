@@ -20,6 +20,8 @@ import javax.annotation.Nullable;
 
 import org.joda.time.LocalDateTime;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * Read-only interface for objects that can expire.
  *
@@ -37,6 +39,13 @@ public interface IExpirable
   boolean isExpirationDefined ();
 
   /**
+   * @return The date time when the object will expire/expired. May be
+   *         <code>null</code> if no expiration is defined.
+   */
+  @Nullable
+  LocalDateTime getExpirationDateTime ();
+
+  /**
    * Check if this object is already expired. This is only possible if an
    * expiration date is defined.
    *
@@ -44,12 +53,8 @@ public interface IExpirable
    *         expiration date is in the past, <code>false</code> otherwise.
    * @see #isExpirationDefined()
    */
-  boolean isExpired ();
-
-  /**
-   * @return The date time when the object will expire/expired. May be
-   *         <code>null</code> if no expiration is defined.
-   */
-  @Nullable
-  LocalDateTime getExpirationDateTime ();
+  default boolean isExpired ()
+  {
+    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
+  }
 }

@@ -68,198 +68,112 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     _registerJodaConverter ();
 
     final Class <?> [] aSourceClasses = new Class <?> [] { String.class,
-                                                          Calendar.class,
-                                                          GregorianCalendar.class,
-                                                          Date.class,
-                                                          AtomicInteger.class,
-                                                          AtomicLong.class,
-                                                          BigDecimal.class,
-                                                          BigInteger.class,
-                                                          Byte.class,
-                                                          Double.class,
-                                                          Float.class,
-                                                          Integer.class,
-                                                          Long.class,
-                                                          Short.class };
+                                                           Calendar.class,
+                                                           GregorianCalendar.class,
+                                                           Date.class,
+                                                           AtomicInteger.class,
+                                                           AtomicLong.class,
+                                                           BigDecimal.class,
+                                                           BigInteger.class,
+                                                           Byte.class,
+                                                           Double.class,
+                                                           Float.class,
+                                                           Integer.class,
+                                                           Long.class,
+                                                           Short.class };
 
     // DateTime
-    aRegistry.registerTypeConverter (aSourceClasses, DateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public DateTime convert (@Nonnull final Object aSource)
-      {
-        return new DateTime (aSource, PDTConfig.getDefaultChronology ());
-      }
-    });
-    aRegistry.registerTypeConverter (LocalDate.class, DateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public DateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createDateTime ((LocalDate) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalTime.class, DateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public DateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createDateTime ((LocalTime) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalDateTime.class, DateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public DateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createDateTime ((LocalDateTime) aSource);
-      }
-    });
+    aRegistry.registerTypeConverter (aSourceClasses,
+                                     DateTime.class,
+                                     aSource -> new DateTime (aSource, PDTConfig.getDefaultChronology ()));
+    aRegistry.registerTypeConverter (LocalDate.class,
+                                     DateTime.class,
+                                     aSource -> PDTFactory.createDateTime ((LocalDate) aSource));
+    aRegistry.registerTypeConverter (LocalTime.class,
+                                     DateTime.class,
+                                     aSource -> PDTFactory.createDateTime ((LocalTime) aSource));
+    aRegistry.registerTypeConverter (LocalDateTime.class,
+                                     DateTime.class,
+                                     aSource -> PDTFactory.createDateTime ((LocalDateTime) aSource));
 
     // LocalDateTime
-    aRegistry.registerTypeConverter (aSourceClasses, LocalDateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDateTime convert (@Nonnull final Object aSource)
-      {
-        return new LocalDateTime (aSource, PDTConfig.getDefaultChronology ());
-      }
-    });
-    aRegistry.registerTypeConverter (DateTime.class, LocalDateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalDateTime ((DateTime) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalDate.class, LocalDateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalDateTime ((LocalDate) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalTime.class, LocalDateTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDateTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalDateTime ((LocalTime) aSource);
-      }
-    });
+    aRegistry.registerTypeConverter (aSourceClasses,
+                                     LocalDateTime.class,
+                                     aSource -> new LocalDateTime (aSource, PDTConfig.getDefaultChronology ()));
+    aRegistry.registerTypeConverter (DateTime.class,
+                                     LocalDateTime.class,
+                                     aSource -> PDTFactory.createLocalDateTime ((DateTime) aSource));
+    aRegistry.registerTypeConverter (LocalDate.class,
+                                     LocalDateTime.class,
+                                     aSource -> PDTFactory.createLocalDateTime ((LocalDate) aSource));
+    aRegistry.registerTypeConverter (LocalTime.class,
+                                     LocalDateTime.class,
+                                     aSource -> PDTFactory.createLocalDateTime ((LocalTime) aSource));
 
     // LocalDate
-    aRegistry.registerTypeConverter (aSourceClasses, LocalDate.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDate convert (@Nonnull final Object aSource)
-      {
-        return new LocalDate (aSource, PDTConfig.getDefaultChronology ());
-      }
-    });
-    aRegistry.registerTypeConverter (DateTime.class, LocalDate.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDate convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalDate ((DateTime) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalDateTime.class, LocalDate.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalDate convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalDate ((LocalDateTime) aSource);
-      }
-    });
+    aRegistry.registerTypeConverter (aSourceClasses,
+                                     LocalDate.class,
+                                     aSource -> new LocalDate (aSource, PDTConfig.getDefaultChronology ()));
+    aRegistry.registerTypeConverter (DateTime.class,
+                                     LocalDate.class,
+                                     aSource -> PDTFactory.createLocalDate ((DateTime) aSource));
+    aRegistry.registerTypeConverter (LocalDateTime.class,
+                                     LocalDate.class,
+                                     aSource -> PDTFactory.createLocalDate ((LocalDateTime) aSource));
 
     // LocalTime
-    aRegistry.registerTypeConverter (aSourceClasses, LocalTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalTime convert (@Nonnull final Object aSource)
-      {
-        return new LocalTime (aSource, PDTConfig.getDefaultChronology ());
-      }
-    });
-    aRegistry.registerTypeConverter (DateTime.class, LocalTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalTime ((DateTime) aSource);
-      }
-    });
-    aRegistry.registerTypeConverter (LocalDateTime.class, LocalTime.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public LocalTime convert (@Nonnull final Object aSource)
-      {
-        return PDTFactory.createLocalTime ((LocalDateTime) aSource);
-      }
-    });
+    aRegistry.registerTypeConverter (aSourceClasses,
+                                     LocalTime.class,
+                                     aSource -> new LocalTime (aSource, PDTConfig.getDefaultChronology ()));
+    aRegistry.registerTypeConverter (DateTime.class,
+                                     LocalTime.class,
+                                     aSource -> PDTFactory.createLocalTime ((DateTime) aSource));
+    aRegistry.registerTypeConverter (LocalDateTime.class,
+                                     LocalTime.class,
+                                     aSource -> PDTFactory.createLocalTime ((LocalDateTime) aSource));
 
     // Duration
     aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, Duration.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public Duration convert (@Nonnull final Object aSource)
-      {
-        return new Duration (aSource);
-      }
-    });
+                                                        AtomicInteger.class,
+                                                        AtomicLong.class,
+                                                        BigDecimal.class,
+                                                        BigInteger.class,
+                                                        Byte.class,
+                                                        Double.class,
+                                                        Float.class,
+                                                        Integer.class,
+                                                        Long.class,
+                                                        Short.class },
+                                     Duration.class,
+                                     aSource -> new Duration (aSource));
 
     // Period
     aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, Period.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public Period convert (@Nonnull final Object aSource)
-      {
-        return new Period (aSource);
-      }
-    });
+                                                        AtomicInteger.class,
+                                                        AtomicLong.class,
+                                                        BigDecimal.class,
+                                                        BigInteger.class,
+                                                        Byte.class,
+                                                        Double.class,
+                                                        Float.class,
+                                                        Integer.class,
+                                                        Long.class,
+                                                        Short.class },
+                                     Period.class, aSource -> new Period (aSource));
 
     // MutablePeriod
     aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                       AtomicInteger.class,
-                                                       AtomicLong.class,
-                                                       BigDecimal.class,
-                                                       BigInteger.class,
-                                                       Byte.class,
-                                                       Double.class,
-                                                       Float.class,
-                                                       Integer.class,
-                                                       Long.class,
-                                                       Short.class }, MutablePeriod.class, new ITypeConverter ()
-    {
-      @Nonnull
-      public MutablePeriod convert (@Nonnull final Object aSource)
-      {
-        return new MutablePeriod (aSource);
-      }
-    });
+                                                        AtomicInteger.class,
+                                                        AtomicLong.class,
+                                                        BigDecimal.class,
+                                                        BigInteger.class,
+                                                        Byte.class,
+                                                        Double.class,
+                                                        Float.class,
+                                                        Integer.class,
+                                                        Long.class,
+                                                        Short.class },
+                                     MutablePeriod.class,
+                                     aSource -> new MutablePeriod (aSource));
   }
 }

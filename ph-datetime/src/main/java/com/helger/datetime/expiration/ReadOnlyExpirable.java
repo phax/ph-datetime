@@ -23,7 +23,6 @@ import org.joda.time.LocalDateTime;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.string.ToStringGenerator;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of {@link IExpirable}
@@ -42,11 +41,6 @@ public final class ReadOnlyExpirable implements IExpirable
   public boolean isExpirationDefined ()
   {
     return m_aExpirationDateTime != null;
-  }
-
-  public boolean isExpired ()
-  {
-    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
   }
 
   @Nullable

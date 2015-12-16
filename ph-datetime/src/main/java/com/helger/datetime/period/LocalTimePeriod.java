@@ -24,7 +24,6 @@ import org.joda.time.LocalTime;
 import org.joda.time.Period;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of the {@link ILocalTimePeriod} interface.
@@ -32,7 +31,7 @@ import com.helger.datetime.PDTFactory;
  * @author Philip Helger
  */
 @NotThreadSafe
-public class LocalTimePeriod extends AbstractFlexiblePeriod <LocalTime>implements ILocalTimePeriod
+public class LocalTimePeriod extends AbstractFlexiblePeriod <LocalTime> implements ILocalTimePeriod
 {
   public LocalTimePeriod ()
   {
@@ -60,11 +59,6 @@ public class LocalTimePeriod extends AbstractFlexiblePeriod <LocalTime>implement
     if (aEnd != null && aEnd.isBefore (aDate))
       return false;
     return true;
-  }
-
-  public final boolean isValidForNow ()
-  {
-    return isValidFor (PDTFactory.getCurrentLocalTime ());
   }
 
   public boolean canConvertToPeriod ()

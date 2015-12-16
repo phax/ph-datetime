@@ -30,7 +30,6 @@ import org.joda.time.Period;
 import org.junit.Test;
 
 import com.helger.datetime.PDTFactory;
-import com.helger.datetime.util.PDTHelper;
 
 /**
  * Test class for class {@link PDTHelper}.

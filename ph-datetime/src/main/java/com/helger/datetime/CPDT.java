@@ -51,7 +51,9 @@ public final class CPDT
   public static final LocalTime NULL_LOCAL_TIME = PDTFactory.createLocalTime (0, 0, 0);
   /** Default null local date time : 1.1.1970 00:00:00.000 */
   public static final LocalDateTime NULL_LOCAL_DATETIME = NULL_LOCAL_DATE.toLocalDateTime (NULL_LOCAL_TIME);
-  /** Default null date time : 1.1.1970 00:00:00.000 with the default timezone! */
+  /**
+   * Default null date time : 1.1.1970 00:00:00.000 with the default timezone!
+   */
   public static final DateTime NULL_DATETIME = PDTFactory.createDateTimeFromMillis (0);
   /** Default null date time : 1.1.1970 00:00:00.000 with the UTC timezone! */
   public static final DateTime NULL_DATETIME_UTC = PDTFactory.createDateTimeFromMillisUTC (0);

@@ -160,8 +160,9 @@ public final class PDTFactory
   @Nonnull
   public static DateTime createDateTime (@Nonnull final Calendar aCalendar)
   {
-    return new DateTime (aCalendar, PDTConfig.getDefaultChronology ()
-                                             .withZone (DateTimeZone.forTimeZone (aCalendar.getTimeZone ())));
+    return new DateTime (aCalendar,
+                         PDTConfig.getDefaultChronology ()
+                                  .withZone (DateTimeZone.forTimeZone (aCalendar.getTimeZone ())));
   }
 
   @Nonnull

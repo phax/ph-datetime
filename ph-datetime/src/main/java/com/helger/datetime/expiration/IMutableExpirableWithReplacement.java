@@ -24,16 +24,17 @@ import com.helger.commons.state.EChange;
 /**
  * Interface for objects that can expire but offer a replacement once the object
  * expires.
- * 
+ *
  * @author Philip Helger
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
  */
-public interface IMutableExpirableWithReplacement <DATATYPE> extends IMutableExpirable, IExpirableWithReplacement <DATATYPE>
+public interface IMutableExpirableWithReplacement <DATATYPE>
+                                                  extends IMutableExpirable, IExpirableWithReplacement <DATATYPE>
 {
   /**
    * Define a replacement in case this object expires.
-   * 
+   *
    * @param aReplacement
    *        The replacement object to use.
    * @return {@link EChange#CHANGED} if something was changed,

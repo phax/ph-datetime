@@ -23,11 +23,9 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import com.helger.datetime.domain.EMonth;
-
 /**
  * Test class for class {@link EMonth}.
- * 
+ *
  * @author Philip Helger
  */
 public final class EMonthTest

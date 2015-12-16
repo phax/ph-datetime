@@ -22,7 +22,7 @@ import org.joda.time.Interval;
 
 /**
  * Interface for objects providing an {@link Interval}.
- * 
+ *
  * @author Philip Helger
  */
 public interface IIntervalProvider
@@ -35,7 +35,7 @@ public interface IIntervalProvider
 
   /**
    * Get the current object as a Joda {@link Interval}.
-   * 
+   *
    * @return The interval as a Joda time object.Never <code>null</code>.
    */
   @Nonnull

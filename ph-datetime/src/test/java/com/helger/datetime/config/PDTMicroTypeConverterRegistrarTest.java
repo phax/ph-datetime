@@ -29,7 +29,7 @@ import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link PDTMicroTypeConverterRegistrar}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTMicroTypeConverterRegistrarTest

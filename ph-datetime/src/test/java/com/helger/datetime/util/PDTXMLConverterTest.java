@@ -33,11 +33,10 @@ import org.junit.Test;
 import com.helger.commons.CGlobal;
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
-import com.helger.datetime.util.PDTXMLConverter;
 
 /**
  * Test class for class {@link PDTXMLConverter}
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTXMLConverterTest
@@ -130,7 +129,8 @@ public final class PDTXMLConverterTest
     assertEquals (aLDT.getMinuteOfHour (), c1.getMinute ());
     assertEquals (aLDT.getSecondOfMinute (), c1.getSecond ());
     assertEquals (aLDT.getMillisOfSecond (), c1.getMillisecond ());
-    assertEquals (aLDT.getChronology ().getZone ().getOffset (aLDT) / CGlobal.MILLISECONDS_PER_MINUTE,
+    assertEquals (aLDT.getChronology ().getZone ().getOffset (aLDT) /
+                  CGlobal.MILLISECONDS_PER_MINUTE,
                   c1.getTimezone ());
     final DateTime aLDT2 = PDTXMLConverter.getDateTime (c1);
     assertNotNull (aLDT2);

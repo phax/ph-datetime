@@ -25,7 +25,6 @@ import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of {@link IMutableExpirable}
@@ -49,11 +48,6 @@ public class Expirable implements IMutableExpirable
     return m_aExpirationDateTime != null;
   }
 
-  public boolean isExpired ()
-  {
-    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
-  }
-
   @Nullable
   public LocalDateTime getExpirationDateTime ()
   {
@@ -67,11 +61,6 @@ public class Expirable implements IMutableExpirable
       return EChange.UNCHANGED;
     m_aExpirationDateTime = aExpirationDateTime;
     return EChange.CHANGED;
-  }
-
-  public EChange resetExpiration ()
-  {
-    return setExpirationDateTime (null);
   }
 
   @Override

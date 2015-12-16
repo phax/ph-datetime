@@ -17,6 +17,7 @@
 package com.helger.datetime.expiration;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.joda.time.LocalDateTime;
 
@@ -34,12 +35,12 @@ public interface IMutableExpirable extends IExpirable
    * expiration, please call {@link #resetExpiration()} instead.
    *
    * @param aExpirationDateTime
-   *        The new expiration date time. May not be <code>null</code>.
+   *        The new expiration date time. May be <code>null</code>.
    * @return {@link EChange#CHANGED} if the expiration date time changed,
    *         {@link EChange#UNCHANGED} otherwise.
    */
   @Nonnull
-  EChange setExpirationDateTime (@Nonnull LocalDateTime aExpirationDateTime);
+  EChange setExpirationDateTime (@Nullable LocalDateTime aExpirationDateTime);
 
   /**
    * Remove any available expiration data.
@@ -48,5 +49,8 @@ public interface IMutableExpirable extends IExpirable
    *         {@link EChange#UNCHANGED} if no expiration was defined.
    */
   @Nonnull
-  EChange resetExpiration ();
+  default EChange resetExpiration ()
+  {
+    return setExpirationDateTime (null);
+  }
 }

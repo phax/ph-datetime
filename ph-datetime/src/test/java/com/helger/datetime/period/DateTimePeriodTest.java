@@ -190,8 +190,9 @@ public final class DateTimePeriodTest
     assertFalse (vr.isValidFor (PDTFactory.createDateTime (2011, DateTimeConstants.NOVEMBER, 19)));
     assertFalse (vr.isValidFor (PDTFactory.createDateTime (9999, DateTimeConstants.DECEMBER, 31)));
     CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new DateTimePeriod (aStart, aEnd));
-    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new DateTimePeriod (aStart.plusDays (1),
-                                                                                                   aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
+                                                                           new DateTimePeriod (aStart.plusDays (1),
+                                                                                               aEnd));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
                                                                            new DateTimePeriod (aStart,
                                                                                                aEnd.plusDays (1)));

@@ -287,7 +287,8 @@ public final class PDTFormatter
    *         If the pattern is illegal
    */
   @Nonnull
-  public static DateTimeFormatter getForPattern (@Nonnull final String sPattern, @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
+  public static DateTimeFormatter getForPattern (@Nonnull final String sPattern,
+                                                 @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
   {
     return getWithLocaleAndChrono (DateTimeFormat.forPattern (sPattern), aDisplayLocale);
   }

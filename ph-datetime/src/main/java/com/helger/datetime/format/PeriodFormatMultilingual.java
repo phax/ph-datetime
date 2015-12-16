@@ -104,9 +104,9 @@ public final class PeriodFormatMultilingual
     final String sSepFront = EText.LONG_SEPARATOR_FRONT.getDisplayText (aContentLocale);
     final String sSepFinal = EText.LONG_SEPARATOR_LAST.getDisplayText (aContentLocale);
     return new String [] { " ",
-                          sSepFront.trim (),
-                          sSepFront.trim () + sSepFinal.trim () + " ",
-                          sSepFront.trim () + sSepFinal };
+                           sSepFront.trim (),
+                           sSepFront.trim () + sSepFinal.trim () + " ",
+                           sSepFront.trim () + sSepFinal };
   }
 
   @Nonnull

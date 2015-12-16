@@ -22,7 +22,7 @@ import org.joda.time.Period;
 
 /**
  * Interface for objects providing a {@link Period}.
- * 
+ *
  * @author Philip Helger
  */
 public interface IPeriodProvider
@@ -35,7 +35,7 @@ public interface IPeriodProvider
 
   /**
    * Get the current object as a Joda {@link Period}.
-   * 
+   *
    * @return The period as a Joda time object. Never <code>null</code>.
    */
   @Nonnull

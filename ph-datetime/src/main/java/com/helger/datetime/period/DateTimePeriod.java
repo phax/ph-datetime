@@ -25,7 +25,6 @@ import org.joda.time.Interval;
 import org.joda.time.Period;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Default implementation of the {@link IDateTimePeriod} interface.
@@ -33,7 +32,7 @@ import com.helger.datetime.PDTFactory;
  * @author Philip Helger
  */
 @NotThreadSafe
-public class DateTimePeriod extends AbstractFlexiblePeriod <DateTime>implements IDateTimePeriod
+public class DateTimePeriod extends AbstractFlexiblePeriod <DateTime> implements IDateTimePeriod
 {
   public DateTimePeriod ()
   {
@@ -61,11 +60,6 @@ public class DateTimePeriod extends AbstractFlexiblePeriod <DateTime>implements 
     if (aEnd != null && aEnd.isBefore (aDate))
       return false;
     return true;
-  }
-
-  public final boolean isValidForNow ()
-  {
-    return isValidFor (PDTFactory.getCurrentDateTime ());
   }
 
   public boolean canConvertToPeriod ()

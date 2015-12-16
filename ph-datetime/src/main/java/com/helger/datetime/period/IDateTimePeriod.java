@@ -18,13 +18,18 @@ package com.helger.datetime.period;
 
 import org.joda.time.DateTime;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * This interface is used for storing a period consisting of exactly a start and
  * end date time.
- * 
+ *
  * @author Philip Helger
  */
 public interface IDateTimePeriod extends IFlexiblePeriod <DateTime>, IIntervalProvider
 {
-  /* empty */
+  default boolean isValidForNow ()
+  {
+    return isValidFor (PDTFactory.getCurrentDateTime ());
+  }
 }

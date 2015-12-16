@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 /**
  * Base interface for an object that has a validity range based on arbitrary
  * objects.
- * 
+ *
  * @author Philip Helger
  * @param <DATATYPE>
  *        Date and time type
@@ -32,7 +32,7 @@ public interface IFlexiblePeriod <DATATYPE> extends IPeriodProvider, IHasStartAn
 {
   /**
    * Check if this object is valid for this specific date.
-   * 
+   *
    * @param aDate
    *        The date to be checked. May not be <code>null</code>.
    * @return <code>true</code> if this object is valid for this date,
@@ -43,7 +43,7 @@ public interface IFlexiblePeriod <DATATYPE> extends IPeriodProvider, IHasStartAn
   /**
    * This is a shortcut method for checking the validity of the object for the
    * current date and time.
-   * 
+   *
    * @return <code>true</code> if this object is valid for the current date,
    *         <code>false</code> otherwise.
    */

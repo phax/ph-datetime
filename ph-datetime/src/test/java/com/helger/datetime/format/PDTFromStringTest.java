@@ -36,7 +36,7 @@ import com.helger.datetime.config.PDTConfig;
 
 /**
  * Test class for class {@link PDTFromString}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTFromStringTest

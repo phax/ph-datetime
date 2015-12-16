@@ -26,7 +26,7 @@ import org.junit.Test;
 
 /**
  * Test class for class {@link PDTConfig}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTConfigTest
@@ -66,8 +66,8 @@ public final class PDTConfigTest
       if (!DateTimeZone.getDefault ().getID ().equals ("UTC"))
       {
         // And therefore this must not be equal
-        assertTrue (!PDTConfig.getDefaultDateTimeZone ().equals (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ()
-                                                                          .getZone ()));
+        assertTrue (!PDTConfig.getDefaultDateTimeZone ()
+                              .equals (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ()));
       }
     }
     finally

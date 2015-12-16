@@ -23,11 +23,9 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import com.helger.datetime.domain.EDayOfWeek;
-
 /**
  * Test class for class {@link EDayOfWeek}.
- * 
+ *
  * @author Philip Helger
  */
 public final class EDayOfWeekTest

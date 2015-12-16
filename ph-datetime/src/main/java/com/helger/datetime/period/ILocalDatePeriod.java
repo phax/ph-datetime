@@ -18,13 +18,18 @@ package com.helger.datetime.period;
 
 import org.joda.time.LocalDate;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * This interface is used for storing a period consisting of exactly a start and
  * end date.
- * 
+ *
  * @author Philip Helger
  */
 public interface ILocalDatePeriod extends IFlexiblePeriod <LocalDate>
 {
-  /* empty */
+  default boolean isValidForNow ()
+  {
+    return isValidFor (PDTFactory.getCurrentLocalDate ());
+  }
 }

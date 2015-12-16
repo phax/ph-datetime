@@ -29,14 +29,12 @@ import org.joda.time.convert.PartialConverter;
  * A generic Joda converter that is based on Joda's LongConverter but works with
  * arbitrary {@link Number} objects. This makes it easier to use
  * {@link java.math.BigInteger} and the like for type conversion.
- * 
+ *
  * @author Philip Helger
  */
 @Immutable
-final class PDTJodaNumberConverter extends AbstractConverter implements
-                                                            InstantConverter,
-                                                            PartialConverter,
-                                                            DurationConverter
+final class PDTJodaNumberConverter extends AbstractConverter
+                                   implements InstantConverter, PartialConverter, DurationConverter
 {
   /**
    * Singleton instance.

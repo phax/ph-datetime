@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 /**
  * Read-only interface for objects that can expire but offer a replacement once
  * the object expires.
- * 
+ *
  * @author Philip Helger
  * @param <DATATYPE>
  *        The type of the object use for defining a replacement.
@@ -32,7 +32,7 @@ public interface IExpirableWithReplacement <DATATYPE> extends IExpirable
    * In case the object has an expiration date defined and is expired, the
    * object returned by this method directs to replacement object to be used
    * instead.
-   * 
+   *
    * @return <code>null</code> if no replacement is defined, a non-
    *         <code>null</code> object otherwise.
    */

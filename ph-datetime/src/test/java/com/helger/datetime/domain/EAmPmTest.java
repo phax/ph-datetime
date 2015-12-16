@@ -23,8 +23,6 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import com.helger.datetime.domain.EAmPm;
-
 /**
  * Test class for class {@link EAmPm}.
  *

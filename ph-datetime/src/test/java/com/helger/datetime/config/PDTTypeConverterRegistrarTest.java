@@ -51,21 +51,21 @@ import com.helger.datetime.PDTFactory;
 public final class PDTTypeConverterRegistrarTest
 {
   private static final Object [] NUMBERS = new Object [] { new AtomicInteger (17),
-                                                          new AtomicLong (1234567890),
-                                                          new BigDecimal ("11238712367812368712368.32123213"),
-                                                          new BigInteger ("23127893819732"),
-                                                          Byte.valueOf ((byte) 5),
-                                                          Double.valueOf (123.234234),
-                                                          Float.valueOf (123433.324f),
-                                                          Integer.valueOf (567),
-                                                          Long.valueOf (213687123617283L),
-                                                          Short.valueOf ((short) 12345),
-                                                          new MutableByte ((byte) 47),
-                                                          new MutableDouble (34432.45465),
-                                                          new MutableFloat (3245678.1f),
-                                                          new MutableInt (4711),
-                                                          new MutableLong (4567890987654l),
-                                                          new MutableShort (65532), };
+                                                           new AtomicLong (1234567890),
+                                                           new BigDecimal ("11238712367812368712368.32123213"),
+                                                           new BigInteger ("23127893819732"),
+                                                           Byte.valueOf ((byte) 5),
+                                                           Double.valueOf (123.234234),
+                                                           Float.valueOf (123433.324f),
+                                                           Integer.valueOf (567),
+                                                           Long.valueOf (213687123617283L),
+                                                           Short.valueOf ((short) 12345),
+                                                           new MutableByte ((byte) 47),
+                                                           new MutableDouble (34432.45465),
+                                                           new MutableFloat (3245678.1f),
+                                                           new MutableInt (4711),
+                                                           new MutableLong (4567890987654l),
+                                                           new MutableShort (65532), };
 
   @Test
   public void testDateTime ()

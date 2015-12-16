@@ -20,11 +20,9 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import com.helger.datetime.util.PDTIOHelper;
-
 /**
  * Test class for class {@link PDTIOHelper}.
- * 
+ *
  * @author Philip Helger
  */
 public final class PDTIOHelperTest
