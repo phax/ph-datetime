@@ -31,7 +31,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 
 /**
  * This parser calculates gregorian dates for the different islamic holidays.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */

@@ -35,7 +35,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 
 /**
  * This parser creates holidays relative to easter sunday.
- * 
+ *
  * @author Sven Diedrichsen
  * @version $Id: $
  */
@@ -53,13 +53,16 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
       final LocalDate aEasterSunday = getEasterSunday (nYear, aDay.getChronology ());
       aEasterSunday.plusDays (aDay.getDays ());
       final String sPropertiesKey = "christian." + aDay.getDescriptionPropertiesKey ();
-      addChrstianHoliday (aEasterSunday, sPropertiesKey, XMLHolidayHelper.getType (aDay.getLocalizedType ()), aHolidayMap);
+      addChrstianHoliday (aEasterSunday,
+                          sPropertiesKey,
+                          XMLHolidayHelper.getType (aDay.getLocalizedType ()),
+                          aHolidayMap);
     }
   }
 
   /**
    * Adds the given day to the list of holidays.
-   * 
+   *
    * @param aDate
    *        The day
    * @param sPropertiesKey
@@ -80,7 +83,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
 
   /**
    * Returns the easter Sunday for a given year.
-   * 
+   *
    * @param nYear
    *        The year to retrieve Easter Sunday date
    * @return Easter Sunday.
@@ -97,7 +100,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
 
   /**
    * Returns the easter Sunday within the julian chronology.
-   * 
+   *
    * @param nYear
    *        The year to retrieve Julian Easter Sunday date
    * @return julian easter Sunday
@@ -122,7 +125,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
 
   /**
    * Returns the easter Sunday within the gregorian chronology.
-   * 
+   *
    * @param nYear
    *        The year to retrieve Gregorian Easter Sunday date
    * @return gregorian easter Sunday.

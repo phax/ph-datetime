@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Descriptor interface for a single holiday.
- * 
+ *
  * @author Philip Helger
  */
 public interface ISingleHoliday extends IHolidayType

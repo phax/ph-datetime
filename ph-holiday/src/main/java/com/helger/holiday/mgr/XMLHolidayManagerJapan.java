@@ -60,8 +60,9 @@ public final class XMLHolidayManagerJapan extends XMLHolidayManager
       if (aHolidays.containsHolidayForDate (aTwoDaysLater))
       {
         final LocalDate aBridgingDate = aTwoDaysLater.minusDays (1);
-        aAdditionalHolidays.add (aBridgingDate, new ResourceBundleHoliday (EHolidayType.OFFICIAL_HOLIDAY,
-                                                                           BRIDGING_HOLIDAY_PROPERTIES_KEY));
+        aAdditionalHolidays.add (aBridgingDate,
+                                 new ResourceBundleHoliday (EHolidayType.OFFICIAL_HOLIDAY,
+                                                            BRIDGING_HOLIDAY_PROPERTIES_KEY));
       }
     }
     aHolidays.addAll (aAdditionalHolidays);

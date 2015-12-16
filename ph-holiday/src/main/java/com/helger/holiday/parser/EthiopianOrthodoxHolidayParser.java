@@ -31,7 +31,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 
 /**
  * Calculates the ethiopian orthodox holidays.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
@@ -52,12 +52,12 @@ public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
    * Ethiopian orthodox month and day. Because the Ethiopian orthodox year
    * different from the gregorian there may be more than one occurrence of an
    * Ethiopian orthodox date in an gregorian year.
-   * 
+   *
    * @param nGregorianYear
    * @param nEOMonth
-   *          orthodox month
+   *        orthodox month
    * @param nEODay
-   *          orthodox day
+   *        orthodox day
    * @return List of gregorian dates for the Ethiopian orthodox month/day.
    */
   private static Set <LocalDate> _getEthiopianOrthodoxHolidaysInGregorianYear (final int nGregorianYear,
@@ -65,9 +65,9 @@ public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
                                                                                final int nEODay)
   {
     return CalendarHelper.getDatesFromChronologyWithinGregorianYear (nEOMonth,
-                                                                   nEODay,
-                                                                   nGregorianYear,
-                                                                   CopticChronology.getInstanceUTC ());
+                                                                     nEODay,
+                                                                     nGregorianYear,
+                                                                     CopticChronology.getInstanceUTC ());
   }
 
   public void parse (final int nYear, final HolidayMap aHolidayMap, final Holidays aConfig)

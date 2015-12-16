@@ -20,7 +20,7 @@ package com.helger.holiday;
  * Type of holiday. Each holiday can be placed in a category and this is
  * represented by this type. The categories can mark a holiday as a official
  * holiday or not.
- * 
+ *
  * @author tboven
  * @author Philip Helger
  */
@@ -28,7 +28,7 @@ public interface IHolidayType
 {
   /**
    * Checks if is official holiday.
-   * 
+   *
    * @return <code>true</code>, if is official holiday
    */
   boolean isOfficialHoliday ();

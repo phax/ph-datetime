@@ -28,7 +28,7 @@ import com.helger.commons.locale.country.ECountry;
 
 /**
  * The Class ISOCodesTest.
- * 
+ *
  * @author svdi1de
  */
 public final class ISOCodesFuncTest
@@ -37,7 +37,7 @@ public final class ISOCodesFuncTest
 
   /**
    * Returns a list of ISO codes.
-   * 
+   *
    * @return 2-digit ISO codes.
    */
   public static final Set <String> getISOCodes ()

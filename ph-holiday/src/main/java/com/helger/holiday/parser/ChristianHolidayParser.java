@@ -31,7 +31,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 /**
  * This parser creates christian holidays for the given year relative to easter
  * sunday.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */

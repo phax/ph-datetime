@@ -16,7 +16,6 @@
  */
 package com.helger.holiday.mgr;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,6 @@ import org.joda.time.ReadableInterval;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
-import com.helger.datetime.PDTFactory;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayManager;
 import com.helger.holiday.ISingleHoliday;
@@ -49,26 +47,6 @@ public abstract class AbstractHolidayManager implements IHolidayManager
 
   protected AbstractHolidayManager ()
   {}
-
-  /**
-   * Check if the passed calendar is a holiday
-   *
-   * @param aCalendar
-   *        Calendar
-   * @param args
-   *        Optional args
-   * @return <code>true</code> if it is a holiday
-   * @see #isHoliday(LocalDate, String...)
-   */
-  public boolean isHoliday (@Nonnull final Calendar aCalendar, final String... args)
-  {
-    return isHoliday (PDTFactory.createLocalDate (aCalendar), args);
-  }
-
-  public boolean isHoliday (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
-  {
-    return getHoliday (aDate, aArgs) != null;
-  }
 
   @Nonnull
   private static String _getKey (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)

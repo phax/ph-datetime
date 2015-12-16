@@ -91,12 +91,12 @@ public final class ChristianHolidayParserTest
   {
     final HolidayMap aHolidays = new HolidayMap ();
     final Holidays aConfig = _createConfig (ChristianHolidayType.EASTER,
-                                           ChristianHolidayType.CLEAN_MONDAY,
-                                           ChristianHolidayType.EASTER_SATURDAY,
-                                           ChristianHolidayType.EASTER_TUESDAY,
-                                           ChristianHolidayType.GENERAL_PRAYER_DAY,
-                                           ChristianHolidayType.PENTECOST,
-                                           ChristianHolidayType.SACRED_HEART);
+                                            ChristianHolidayType.CLEAN_MONDAY,
+                                            ChristianHolidayType.EASTER_SATURDAY,
+                                            ChristianHolidayType.EASTER_TUESDAY,
+                                            ChristianHolidayType.GENERAL_PRAYER_DAY,
+                                            ChristianHolidayType.PENTECOST,
+                                            ChristianHolidayType.SACRED_HEART);
     s_aParser.parse (2011, aHolidays, aConfig);
     final List <LocalDate> expected = new ArrayList <LocalDate> ();
     expected.add (PDTFactory.createLocalDate (2011, 3, 7));

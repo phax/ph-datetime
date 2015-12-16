@@ -27,7 +27,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 
 /**
  * Parses the configuration for fixed weekdays between two fixed dates.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */

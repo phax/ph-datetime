@@ -41,7 +41,7 @@ public final class XMLHolidayHelper
 
   /**
    * Returns the {@link DateTimeConstants} value for the given weekday.
-   * 
+   *
    * @param eWeekday
    *        Day of week to convert
    * @return {@link DateTimeConstants} value.
@@ -72,7 +72,7 @@ public final class XMLHolidayHelper
 
   /**
    * Returns the {@link DateTimeConstants} value for the given month.
-   * 
+   *
    * @param eMonth
    *        Month of year to convert
    * @return {@link DateTimeConstants} value.
@@ -113,7 +113,7 @@ public final class XMLHolidayHelper
 
   /**
    * Gets the type.
-   * 
+   *
    * @param eType
    *        the type of holiday in the config
    * @return the type of holiday
@@ -134,7 +134,7 @@ public final class XMLHolidayHelper
 
   /**
    * Creates the date from the month/day within the specified year.
-   * 
+   *
    * @param nYear
    *        Year to created the date for
    * @param aFixed

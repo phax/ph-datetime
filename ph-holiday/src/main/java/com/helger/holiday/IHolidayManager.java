@@ -16,11 +16,15 @@
  */
 package com.helger.holiday;
 
+import java.util.Calendar;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.joda.time.LocalDate;
 import org.joda.time.ReadableInterval;
+
+import com.helger.datetime.PDTFactory;
 
 /**
  * Base interface for a holiday manager for one country.
@@ -29,6 +33,21 @@ import org.joda.time.ReadableInterval;
  */
 public interface IHolidayManager
 {
+  /**
+   * Check if the passed calendar is a holiday
+   *
+   * @param aCalendar
+   *        Calendar
+   * @param args
+   *        Optional args
+   * @return <code>true</code> if it is a holiday
+   * @see #isHoliday(LocalDate, String...)
+   */
+  default boolean isHoliday (@Nonnull final Calendar aCalendar, final String... args)
+  {
+    return isHoliday (PDTFactory.createLocalDate (aCalendar), args);
+  }
+
   /**
    * Check if the requested date is a holiday.
    *
@@ -39,7 +58,10 @@ public interface IHolidayManager
    *        York holidays
    * @return is a holiday in the state/region
    */
-  boolean isHoliday (@Nonnull LocalDate aDate, @Nullable String... aArgs);
+  default boolean isHoliday (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
+  {
+    return getHoliday (aDate, aArgs) != null;
+  }
 
   /**
    * Get the holiday information for the requested date.

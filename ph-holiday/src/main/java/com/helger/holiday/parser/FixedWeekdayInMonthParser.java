@@ -58,7 +58,9 @@ public class FixedWeekdayInMonthParser extends AbstractHolidayParser
 
   protected static LocalDate parse (final int nYear, final FixedWeekdayInMonth aFixedWeekdayInMonth)
   {
-    LocalDate aDate = PDTFactory.createLocalDate (nYear, XMLHolidayHelper.getMonth (aFixedWeekdayInMonth.getMonth ()), 1);
+    LocalDate aDate = PDTFactory.createLocalDate (nYear,
+                                                  XMLHolidayHelper.getMonth (aFixedWeekdayInMonth.getMonth ()),
+                                                  1);
     int nDirection = 1;
     if (aFixedWeekdayInMonth.getWhich () == Which.LAST)
     {

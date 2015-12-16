@@ -29,7 +29,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
 
 /**
  * The abstract base class for all {@link IHolidayParser} implementations.
- * 
+ *
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
@@ -42,7 +42,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   /**
    * Evaluates if the provided <code>Holiday</code> instance is valid for the
    * provided year.
-   * 
+   *
    * @param aHoliday
    *        The holiday configuration entry to validate
    * @param nYear
@@ -57,7 +57,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   /**
    * Checks cyclic holidays and checks if the requested year is hit within the
    * cycles.
-   * 
+   *
    * @param aHoliday
    *        Holiday
    * @param nYear
@@ -102,7 +102,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
 
   /**
    * Checks whether the holiday is within the valid date range.
-   * 
+   *
    * @param aHoliday
    * @param nYear
    * @return is valid.
@@ -113,23 +113,23 @@ public abstract class AbstractHolidayParser implements IHolidayParser
            (aHoliday.getValidTo () == null || aHoliday.getValidTo ().intValue () >= nYear);
   }
 
-
   /**
    * Determines if the provided date shall be substituted.
-   * 
+   *
    * @param aFixed
    *        The date to be checked. May not be <code>null</code>.
    * @param aMoveCond
    *        The move condition. May not be <code>null</code>.
    */
-  protected static final boolean shallBeMoved (@Nonnull final LocalDate aFixed, @Nonnull final MovingCondition aMoveCond)
+  protected static final boolean shallBeMoved (@Nonnull final LocalDate aFixed,
+                                               @Nonnull final MovingCondition aMoveCond)
   {
     return aFixed.getDayOfWeek () == XMLHolidayHelper.getWeekday (aMoveCond.getSubstitute ());
   }
 
   /**
    * Moves the date using the FixedMoving information
-   * 
+   *
    * @param aMoveCond
    * @param aDate
    * @return The moved date
@@ -150,7 +150,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   /**
    * Moves a date if there are any moving conditions for this holiday and any of
    * them fit.
-   * 
+   *
    * @param aMoveableHoliday
    * @param aFixed
    * @return the moved date
