@@ -12,7 +12,7 @@ In3p62HtxBij5B96NcgnrWasHBXKCfCuQKoVV2U0LcJjBFW7vb3cBb8KAlnXlZYefiXacroajMGzGpOB
 71/iffbU9zoju1m8Ip36TT9X6TBpWdPvA1C8OlDVDvjEmTcMEXcWeHVMMSVE++BIp3SwHVaaxuROzLmm0s71avKXffUaIA="
     
 jdk:
-  - openjdk6
+  - oraclejdk8
   
 cache:
   directories:
