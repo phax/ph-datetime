@@ -17,8 +17,6 @@
 package com.helger.datetime.config;
 
 import java.util.TimeZone;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.GuardedBy;
@@ -34,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.commons.concurrent.SimpleReadWriteLock;
 import com.helger.commons.state.ESuccess;
 import com.helger.datetime.PDTFactory;
 
@@ -53,7 +52,7 @@ public final class PDTConfig
   public static final boolean DEFAULT_USE_ISO_CHRONOLOGY = true;
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (PDTConfig.class);
-  private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
+  private static final SimpleReadWriteLock s_aRWLock = new SimpleReadWriteLock ();
   @GuardedBy ("s_aRWLock")
   private static DateTimeZone s_aDefaultDateTimeZone;
   @GuardedBy ("s_aRWLock")
@@ -84,26 +83,23 @@ public final class PDTConfig
   {
     ValueEnforcer.notEmpty (sDateTimeZoneID, "DateTimeZoneID");
 
-    s_aRWLock.writeLock ().lock ();
-    try
-    {
-      // Try to resolve ID -> throws IAE if unknown
-      s_aDefaultDateTimeZone = DateTimeZone.forID (sDateTimeZoneID);
-      // getTimeZone falls back to GMT if unknown
-      final TimeZone aDefaultTimeZone = TimeZone.getTimeZone (sDateTimeZoneID);
-      TimeZone.setDefault (aDefaultTimeZone);
-      return ESuccess.SUCCESS;
-    }
-    catch (final IllegalArgumentException ex)
-    {
-      // time zone ID is unknown
-      s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'");
-      return ESuccess.FAILURE;
-    }
-    finally
-    {
-      s_aRWLock.writeLock ().unlock ();
-    }
+    return s_aRWLock.writeLocked ( () -> {
+      try
+      {
+        // Try to resolve ID -> throws IAE if unknown
+        s_aDefaultDateTimeZone = DateTimeZone.forID (sDateTimeZoneID);
+        // getTimeZone falls back to GMT if unknown
+        final TimeZone aDefaultTimeZone = TimeZone.getTimeZone (sDateTimeZoneID);
+        TimeZone.setDefault (aDefaultTimeZone);
+        return ESuccess.SUCCESS;
+      }
+      catch (final IllegalArgumentException ex)
+      {
+        // time zone ID is unknown
+        s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'");
+        return ESuccess.FAILURE;
+      }
+    });
   }
 
   /**
@@ -113,15 +109,7 @@ public final class PDTConfig
   @Nonnull
   public static DateTimeZone getDefaultDateTimeZone ()
   {
-    s_aRWLock.readLock ().lock ();
-    try
-    {
-      return s_aDefaultDateTimeZone;
-    }
-    finally
-    {
-      s_aRWLock.readLock ().unlock ();
-    }
+    return s_aRWLock.readLocked ( () -> s_aDefaultDateTimeZone);
   }
 
   /**
@@ -139,15 +127,7 @@ public final class PDTConfig
    */
   public static boolean isUseISOChronology ()
   {
-    s_aRWLock.readLock ().lock ();
-    try
-    {
-      return s_bUseISOChronology;
-    }
-    finally
-    {
-      s_aRWLock.readLock ().unlock ();
-    }
+    return s_aRWLock.readLocked ( () -> s_bUseISOChronology);
   }
 
   /**
@@ -160,15 +140,9 @@ public final class PDTConfig
    */
   public static void setUseISOChronology (final boolean bUse)
   {
-    s_aRWLock.writeLock ().lock ();
-    try
-    {
+    s_aRWLock.writeLocked ( () -> {
       s_bUseISOChronology = bUse;
-    }
-    finally
-    {
-      s_aRWLock.writeLock ().unlock ();
-    }
+    });
   }
 
   /**
