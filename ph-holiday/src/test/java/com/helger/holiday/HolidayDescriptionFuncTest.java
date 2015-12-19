@@ -40,13 +40,9 @@ public final class HolidayDescriptionFuncTest
   {
     final File folder = new File ("src/main/resources/descriptions");
     assertTrue (folder.isDirectory ());
-    final File [] descriptions = folder.listFiles (new FilenameFilter ()
-    {
-      public boolean accept (final File dir, final String name)
-      {
-        return name.startsWith ("holiday_descriptions") && name.endsWith (".properties");
-      }
-    });
+    final File [] descriptions = folder.listFiles ((FilenameFilter) (dir,
+                                                                     name) -> name.startsWith ("holiday_descriptions") &&
+                                                                              name.endsWith (".properties"));
     assertNotNull (descriptions);
     assertTrue (descriptions.length > 0);
 
