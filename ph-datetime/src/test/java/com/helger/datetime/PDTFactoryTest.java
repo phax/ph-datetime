@@ -109,11 +109,10 @@ public final class PDTFactoryTest
   public void testChronology ()
   {
     final Calendar aCal = new GregorianCalendar (2011, Calendar.JULY, 31);
-    aCal.setTimeZone (PDTConfig.getDefaultDateTimeZone ().toTimeZone ());
     final Date aDate = aCal.getTime ();
 
     LocalDate aLD = PDTFactory.createLocalDate (aDate);
-    assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
+    assertEquals (aDate, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toDate ());
     assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
     assertEquals (PDTConfig.getDefaultChronologyUTC (), aLD.getChronology ());
     DateTime aDT = PDTFactory.createDateTime (aLD);
