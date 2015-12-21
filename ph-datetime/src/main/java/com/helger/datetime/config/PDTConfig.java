@@ -113,6 +113,16 @@ public final class PDTConfig
   }
 
   /**
+   * @return The default time zone to use. Never <code>null</code>. The default
+   *         is {@link #DEFAULT_DATETIMEZONEID}.
+   */
+  @Nonnull
+  public static TimeZone getDefaultTimeZone ()
+  {
+    return getDefaultDateTimeZone ().toTimeZone ();
+  }
+
+  /**
    * @return The default UTC date time zone. Never <code>null</code>.
    */
   @Nonnull

@@ -109,6 +109,7 @@ public final class PDTFactoryTest
   public void testChronology ()
   {
     final Calendar aCal = new GregorianCalendar (2011, Calendar.JULY, 31);
+    aCal.setTimeZone (PDTConfig.getDefaultTimeZone ());
     final Date aDate = aCal.getTime ();
 
     LocalDate aLD = PDTFactory.createLocalDate (aDate);
