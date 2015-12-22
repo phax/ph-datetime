@@ -16,8 +16,7 @@
  */
 package com.helger.datetime.config;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,8 +24,7 @@ import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
@@ -35,6 +33,7 @@ import com.helger.commons.annotation.IsSPIImplementation;
 import com.helger.commons.typeconvert.ITypeConverter;
 import com.helger.commons.typeconvert.ITypeConverterRegistrarSPI;
 import com.helger.commons.typeconvert.ITypeConverterRegistry;
+import com.helger.commons.typeconvert.TypeConverter;
 import com.helger.commons.typeconvert.TypeConverterRegistry;
 import com.helger.datetime.CPDT;
 
@@ -50,16 +49,23 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
 {
   public void registerTypeConverter (@Nonnull final ITypeConverterRegistry aRegistry)
   {
-    final Class <?> [] aSourceClasses = new Class <?> [] { AtomicInteger.class,
-                                                           AtomicLong.class,
-                                                           BigDecimal.class,
-                                                           BigInteger.class,
-                                                           Byte.class,
-                                                           Double.class,
-                                                           Float.class,
-                                                           Integer.class,
-                                                           Long.class,
-                                                           Short.class };
+    // Destination: Instant
+    final Function <Number, Instant> fToInstant = aSource -> Instant.ofEpochMilli (aSource.longValue ());
+    aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class, Instant.class, fToInstant);
+    aRegistry.registerTypeConverter (Date.class, Instant.class, Date::toInstant);
+    aRegistry.registerTypeConverter (ZonedDateTime.class, Instant.class, ZonedDateTime::toInstant);
+    aRegistry.registerTypeConverter (LocalDateTime.class,
+                                     Instant.class,
+                                     aSource -> TypeConverter.convertIfNecessary (aSource, ZonedDateTime.class)
+                                                             .toInstant ());
+    aRegistry.registerTypeConverter (LocalDate.class,
+                                     Instant.class,
+                                     aSource -> TypeConverter.convertIfNecessary (aSource, ZonedDateTime.class)
+                                                             .toInstant ());
+    aRegistry.registerTypeConverter (LocalTime.class,
+                                     Instant.class,
+                                     aSource -> TypeConverter.convertIfNecessary (aSource, ZonedDateTime.class)
+                                                             .toInstant ());
 
     // Destination: ZonedDateTime
     aRegistry.registerTypeConverter (GregorianCalendar.class, ZonedDateTime.class, GregorianCalendar::toZonedDateTime);
@@ -78,6 +84,13 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (LocalDateTime.class,
                                      ZonedDateTime.class,
                                      aSource -> ZonedDateTime.of (aSource, PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (Instant.class,
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
+                                                                         ZonedDateTime.class,
+                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
+                                                                                                                      ZonedDateTime.class));
 
     // Destination: LocalDateTime
     aRegistry.registerTypeConverter (GregorianCalendar.class,
@@ -92,6 +105,13 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (LocalTime.class,
                                      LocalDateTime.class,
                                      aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, aSource));
+    aRegistry.registerTypeConverter (Instant.class,
+                                     LocalDateTime.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
+                                                                         LocalDateTime.class,
+                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
+                                                                                                                      LocalDateTime.class));
 
     // Destination: LocalDate
     aRegistry.registerTypeConverter (GregorianCalendar.class,
@@ -101,6 +121,14 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (ZonedDateTime.class, LocalDate.class, ZonedDateTime::toLocalDate);
     aRegistry.registerTypeConverter (OffsetDateTime.class, LocalDate.class, OffsetDateTime::toLocalDate);
     aRegistry.registerTypeConverter (LocalDateTime.class, LocalDate.class, LocalDateTime::toLocalDate);
+    aRegistry.registerTypeConverter (Instant.class,
+                                     LocalDate.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ())
+                                                             .toLocalDate ());
+    aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
+                                                                         LocalDate.class,
+                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
+                                                                                                                      LocalDate.class));
 
     // Destination: LocalTime
     aRegistry.registerTypeConverter (GregorianCalendar.class,
@@ -110,10 +138,13 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (ZonedDateTime.class, LocalTime.class, ZonedDateTime::toLocalTime);
     aRegistry.registerTypeConverter (OffsetDateTime.class, LocalTime.class, OffsetDateTime::toLocalTime);
     aRegistry.registerTypeConverter (LocalDateTime.class, LocalTime.class, LocalDateTime::toLocalTime);
-
-    // Date -> ZonedDateTime -> destination
-    aRegistry.registerTypeConverterRuleFixedSourceAnyDestination (Date.class,
-                                                                  aSource -> ZonedDateTime.ofInstant (aSource.toInstant (),
-                                                                                                      PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (Instant.class,
+                                     LocalTime.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ())
+                                                             .toLocalTime ());
+    aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
+                                                                         LocalTime.class,
+                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
+                                                                                                                      LocalTime.class));
   }
 }

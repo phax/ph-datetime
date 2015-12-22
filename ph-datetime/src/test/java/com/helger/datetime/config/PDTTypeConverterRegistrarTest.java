@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -144,13 +143,5 @@ public final class PDTTypeConverterRegistrarTest
       final LocalDate aNow2 = TypeConverter.convertIfNecessary (aDT, aNow.getClass ());
       assertEquals (aNow, aNow2);
     }
-  }
-
-  @Test
-  public void testDuration ()
-  {
-    for (final Object aNumber : NUMBERS)
-      assertNotNull (TypeConverter.convertIfNecessary (aNumber, Duration.class));
-    assertNotNull (TypeConverter.convertIfNecessary ("PT12345677777S", Duration.class));
   }
 }
