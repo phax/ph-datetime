@@ -18,9 +18,9 @@ package com.helger.datetime.format;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.time.Period;
 import java.util.Locale;
 
-import org.joda.time.Period;
 import org.junit.Test;
 
 import com.helger.commons.locale.LocaleCache;

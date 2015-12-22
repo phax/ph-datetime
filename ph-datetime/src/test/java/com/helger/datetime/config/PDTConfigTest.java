@@ -21,7 +21,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
 /**
@@ -34,7 +33,7 @@ public final class PDTConfigTest
   @Test
   public void testTimeZones ()
   {
-    DateTimeZone aDTZ = PDTConfig.getDefaultDateTimeZone ();
+    DateTimeZone aDTZ = PDTConfig.getDefaultZoneId ();
     assertNotNull (aDTZ);
 
     aDTZ = PDTConfig.getDateTimeZoneUTC ();
@@ -54,11 +53,11 @@ public final class PDTConfigTest
 
       // Regular
       assertTrue (PDTConfig.setDefaultDateTimeZoneID ("Europe/Berlin").isSuccess ());
-      assertEquals ("Europe/Berlin", PDTConfig.getDefaultDateTimeZone ().getID ());
+      assertEquals ("Europe/Berlin", PDTConfig.getDefaultZoneId ().getID ());
 
       // I hope this is not the standard time zone anywhere
       assertTrue (PDTConfig.setDefaultDateTimeZoneID ("UTC").isSuccess ());
-      assertEquals ("UTC", PDTConfig.getDefaultDateTimeZone ().getID ());
+      assertEquals ("UTC", PDTConfig.getDefaultZoneId ().getID ());
 
       // The default date time zone was not modified
       assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ());
@@ -66,7 +65,7 @@ public final class PDTConfigTest
       if (!DateTimeZone.getDefault ().getID ().equals ("UTC"))
       {
         // And therefore this must not be equal
-        assertTrue (!PDTConfig.getDefaultDateTimeZone ()
+        assertTrue (!PDTConfig.getDefaultZoneId ()
                               .equals (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ()));
       }
     }

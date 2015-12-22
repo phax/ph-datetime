@@ -17,13 +17,12 @@
 package com.helger.datetime.domain;
 
 import java.text.DateFormatSymbols;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.joda.time.DateTimeConstants;
 
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.id.IHasIntID;
@@ -36,39 +35,39 @@ import com.helger.commons.lang.EnumHelper;
  */
 public enum EMonth implements IHasIntID
 {
-  JANUARY (DateTimeConstants.JANUARY, Calendar.JANUARY),
-  FEBRUARY (DateTimeConstants.FEBRUARY, Calendar.FEBRUARY),
-  MARCH (DateTimeConstants.MARCH, Calendar.MARCH),
-  APRIL (DateTimeConstants.APRIL, Calendar.APRIL),
-  MAY (DateTimeConstants.MAY, Calendar.MAY),
-  JUNE (DateTimeConstants.JUNE, Calendar.JUNE),
-  JULY (DateTimeConstants.JULY, Calendar.JULY),
-  AUGUST (DateTimeConstants.AUGUST, Calendar.AUGUST),
-  SEPTEMBER (DateTimeConstants.SEPTEMBER, Calendar.SEPTEMBER),
-  OCTOBER (DateTimeConstants.OCTOBER, Calendar.OCTOBER),
-  NOVEMBER (DateTimeConstants.NOVEMBER, Calendar.NOVEMBER),
-  DECEMBER (DateTimeConstants.DECEMBER, Calendar.DECEMBER);
+  JANUARY (Month.JANUARY, Calendar.JANUARY),
+  FEBRUARY (Month.FEBRUARY, Calendar.FEBRUARY),
+  MARCH (Month.MARCH, Calendar.MARCH),
+  APRIL (Month.APRIL, Calendar.APRIL),
+  MAY (Month.MAY, Calendar.MAY),
+  JUNE (Month.JUNE, Calendar.JUNE),
+  JULY (Month.JULY, Calendar.JULY),
+  AUGUST (Month.AUGUST, Calendar.AUGUST),
+  SEPTEMBER (Month.SEPTEMBER, Calendar.SEPTEMBER),
+  OCTOBER (Month.OCTOBER, Calendar.OCTOBER),
+  NOVEMBER (Month.NOVEMBER, Calendar.NOVEMBER),
+  DECEMBER (Month.DECEMBER, Calendar.DECEMBER);
 
-  private final int m_nJodaID;
+  private final Month m_eMonth;
   private final int m_nCalID;
 
-  private EMonth (final int nJodaID, final int nCalID)
+  private EMonth (final Month eMonth, final int nCalID)
   {
-    m_nJodaID = nJodaID;
+    m_eMonth = eMonth;
     m_nCalID = nCalID;
   }
 
   public int getID ()
   {
-    return m_nJodaID;
+    return getMonthConstant ();
   }
 
   /**
    * @return The joda time ID
    */
-  public int getDateTimeConstant ()
+  public int getMonthConstant ()
   {
-    return m_nJodaID;
+    return m_eMonth.getValue ();
   }
 
   /**

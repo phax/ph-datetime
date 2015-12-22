@@ -16,9 +16,9 @@
  */
 package com.helger.datetime.domain;
 
-import javax.annotation.Nonnull;
+import java.time.LocalDateTime;
 
-import org.joda.time.LocalDateTime;
+import javax.annotation.Nonnull;
 
 /**
  * Interface for objects having a creation date time.

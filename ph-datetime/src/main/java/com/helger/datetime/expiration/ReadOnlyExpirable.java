@@ -16,9 +16,9 @@
  */
 package com.helger.datetime.expiration;
 
-import javax.annotation.Nullable;
+import java.time.LocalDateTime;
 
-import org.joda.time.LocalDateTime;
+import javax.annotation.Nullable;
 
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;

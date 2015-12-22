@@ -16,11 +16,9 @@
  */
 package com.helger.datetime.expiration;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Nullable;
-
-import org.joda.time.LocalDateTime;
-
-import com.helger.datetime.PDTFactory;
 
 /**
  * Read-only interface for objects that can expire.
@@ -55,6 +53,6 @@ public interface IExpirable
    */
   default boolean isExpired ()
   {
-    return isExpirationDefined () && getExpirationDateTime ().isBefore (PDTFactory.getCurrentLocalDateTime ());
+    return isExpirationDefined () && getExpirationDateTime ().isBefore (LocalDateTime.now ());
   }
 }

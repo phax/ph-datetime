@@ -16,18 +16,17 @@
  */
 package com.helger.datetime.format;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.ReadableInstant;
-import org.joda.time.ReadablePartial;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
 
@@ -48,52 +47,44 @@ public final class PDTToString
   @Nullable
   public static String getAsString (@Nullable final LocalDate aDate, @Nonnull final Locale aDisplayLocale)
   {
-    return aDate == null ? null : PDTFormatter.getDefaultFormatterDate (aDisplayLocale).print (aDate);
+    return aDate == null ? null : PDTFormatter.getDefaultFormatterDate (aDisplayLocale).format (aDate);
   }
 
   @Nullable
   public static String getAsString (@Nullable final LocalTime aTime, @Nonnull final Locale aDisplayLocale)
   {
-    return aTime == null ? null : PDTFormatter.getDefaultFormatterTime (aDisplayLocale).print (aTime);
+    return aTime == null ? null : PDTFormatter.getDefaultFormatterTime (aDisplayLocale).format (aTime);
   }
 
   @Nullable
   public static String getAsString (@Nullable final LocalDateTime aDateTime, @Nonnull final Locale aDisplayLocale)
   {
-    return aDateTime == null ? null : PDTFormatter.getDefaultFormatterDateTime (aDisplayLocale).print (aDateTime);
+    return aDateTime == null ? null : PDTFormatter.getDefaultFormatterDateTime (aDisplayLocale).format (aDateTime);
   }
 
   @Nullable
-  public static String getAsString (@Nullable final DateTime aDateTime, @Nonnull final Locale aDisplayLocale)
+  public static String getAsString (@Nullable final ZonedDateTime aDateTime, @Nonnull final Locale aDisplayLocale)
   {
-    return aDateTime == null ? null : PDTFormatter.getDefaultFormatterDateTime (aDisplayLocale).print (aDateTime);
+    return aDateTime == null ? null : PDTFormatter.getDefaultFormatterDateTime (aDisplayLocale).format (aDateTime);
   }
 
   @Nullable
-  public static String getAsString (@Nonnull final String sFormatPattern, @Nullable final ReadablePartial aPartial)
+  public static String getAsString (@Nullable final OffsetDateTime aDateTime, @Nonnull final Locale aDisplayLocale)
+  {
+    return aDateTime == null ? null : PDTFormatter.getDefaultFormatterDateTime (aDisplayLocale).format (aDateTime);
+  }
+
+  @Nullable
+  public static String getAsString (@Nonnull final String sFormatPattern, @Nullable final TemporalAccessor aPartial)
   {
     return getAsString (sFormatPattern, aPartial, (Locale) null);
   }
 
   @Nullable
   public static String getAsString (@Nonnull final String sFormatPattern,
-                                    @Nullable final ReadablePartial aPartial,
+                                    @Nullable final TemporalAccessor aPartial,
                                     @Nullable final Locale aDisplayLocale)
   {
-    return aPartial == null ? null : PDTFormatter.getForPattern (sFormatPattern, aDisplayLocale).print (aPartial);
-  }
-
-  @Nullable
-  public static String getAsString (@Nonnull final String sFormatPattern, @Nullable final ReadableInstant aInstant)
-  {
-    return getAsString (sFormatPattern, aInstant, (Locale) null);
-  }
-
-  @Nullable
-  public static String getAsString (@Nonnull final String sFormatPattern,
-                                    @Nullable final ReadableInstant aInstant,
-                                    @Nullable final Locale aDisplayLocale)
-  {
-    return aInstant == null ? null : PDTFormatter.getForPattern (sFormatPattern, aDisplayLocale).print (aInstant);
+    return aPartial == null ? null : PDTFormatter.getForPattern (sFormatPattern, aDisplayLocale).format (aPartial);
   }
 }

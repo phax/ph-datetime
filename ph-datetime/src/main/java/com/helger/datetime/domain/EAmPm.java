@@ -22,8 +22,6 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joda.time.DateTimeConstants;
-
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.id.IHasIntID;
 import com.helger.commons.lang.EnumHelper;
@@ -35,8 +33,8 @@ import com.helger.commons.lang.EnumHelper;
  */
 public enum EAmPm implements IHasIntID
 {
-  AM (DateTimeConstants.AM),
-  PM (DateTimeConstants.PM);
+  AM (0),
+  PM (1);
 
   private final int m_nID;
 

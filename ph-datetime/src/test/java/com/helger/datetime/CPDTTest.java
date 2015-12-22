@@ -18,8 +18,6 @@ package com.helger.datetime;
 
 import static org.junit.Assert.assertEquals;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 import org.junit.Test;
 
 import com.helger.datetime.config.PDTConfig;

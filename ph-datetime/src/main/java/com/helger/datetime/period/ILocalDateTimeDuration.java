@@ -16,28 +16,18 @@
  */
 package com.helger.datetime.period;
 
-import javax.annotation.Nonnull;
-
-import org.joda.time.Interval;
+import java.time.LocalDateTime;
 
 /**
- * Interface for objects providing an {@link Interval}.
+ * This interface is used for storing a period consisting of exactly a start and
+ * end date time.
  *
  * @author Philip Helger
  */
-public interface IIntervalProvider
+public interface ILocalDateTimeDuration extends IFlexibleDuration <LocalDateTime>
 {
-  /**
-   * @return <code>true</code> if this object can be converted to a
-   *         {@link Interval}.
-   */
-  boolean canConvertToInterval ();
-
-  /**
-   * Get the current object as a Joda {@link Interval}.
-   *
-   * @return The interval as a Joda time object.Never <code>null</code>.
-   */
-  @Nonnull
-  Interval getAsInterval ();
+  default boolean isValidForNow ()
+  {
+    return isValidFor (LocalDateTime.now ());
+  }
 }

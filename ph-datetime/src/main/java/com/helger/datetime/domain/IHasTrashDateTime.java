@@ -16,9 +16,9 @@
  */
 package com.helger.datetime.domain;
 
-import javax.annotation.Nullable;
+import java.time.LocalDateTime;
 
-import org.joda.time.LocalDateTime;
+import javax.annotation.Nullable;
 
 /**
  * Interface for objects having a trash date time.

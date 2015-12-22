@@ -21,16 +21,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.Period;
 import org.junit.Test;
 
 import com.helger.datetime.config.PDTConfig;
@@ -113,29 +111,29 @@ public final class PDTFactoryTest
     final Date aDate = aCal.getTime ();
 
     LocalDate aLD = PDTFactory.createLocalDate (aDate);
-    assertEquals (aDate, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toDate ());
-    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
+    assertEquals (aDate, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultZoneId ()).toDate ());
+    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultZoneId ()).toCalendar (null));
     assertEquals (PDTConfig.getDefaultChronologyUTC (), aLD.getChronology ());
     DateTime aDT = PDTFactory.createDateTime (aLD);
     assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
 
     aLD = PDTFactory.createLocalDate (aCal);
     assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
+    assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultZoneId ()).toCalendar (null));
 
     PDTConfig.setUseISOChronology (!PDTConfig.DEFAULT_USE_ISO_CHRONOLOGY);
     try
     {
       aLD = PDTFactory.createLocalDate (aDate);
       assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
+      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultZoneId ()).toCalendar (null));
       assertEquals (PDTConfig.getDefaultChronologyUTC (), aLD.getChronology ());
       aDT = PDTFactory.createDateTime (aLD);
       assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
 
       aLD = PDTFactory.createLocalDate (aCal);
       assertEquals (aDate, aLD.toDateTimeAtStartOfDay ().toDate ());
-      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultDateTimeZone ()).toCalendar (null));
+      assertEquals (aCal, aLD.toDateTimeAtStartOfDay (PDTConfig.getDefaultZoneId ()).toCalendar (null));
     }
     finally
     {

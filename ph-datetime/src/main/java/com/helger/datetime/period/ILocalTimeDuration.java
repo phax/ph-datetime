@@ -16,9 +16,7 @@
  */
 package com.helger.datetime.period;
 
-import org.joda.time.LocalTime;
-
-import com.helger.datetime.PDTFactory;
+import java.time.LocalTime;
 
 /**
  * This interface is used for storing a period consisting of exactly a start and
@@ -26,10 +24,10 @@ import com.helger.datetime.PDTFactory;
  *
  * @author Philip Helger
  */
-public interface ILocalTimePeriod extends IFlexiblePeriod <LocalTime>
+public interface ILocalTimeDuration extends IFlexibleDuration <LocalTime>
 {
   default boolean isValidForNow ()
   {
-    return isValidFor (PDTFactory.getCurrentLocalTime ());
+    return isValidFor (LocalTime.now ());
   }
 }

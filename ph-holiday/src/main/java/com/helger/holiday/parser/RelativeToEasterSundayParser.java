@@ -152,6 +152,6 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
     return new LocalDate (nYear,
                           (nMonth == 3 ? DateTimeConstants.MARCH : DateTimeConstants.APRIL),
                           nDay,
-                          GregorianChronology.getInstance (PDTConfig.getDefaultDateTimeZone ()));
+                          GregorianChronology.getInstance (PDTConfig.getDefaultZoneId ()));
   }
 }

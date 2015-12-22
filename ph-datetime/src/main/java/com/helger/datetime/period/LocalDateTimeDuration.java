@@ -16,61 +16,56 @@
  */
 package com.helger.datetime.period;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
-
 import com.helger.commons.ValueEnforcer;
 
 /**
- * Default implementation of the {@link ILocalDatePeriod} interface.
+ * Default implementation of the {@link ILocalDateTimeDuration} interface.
  *
  * @author Philip Helger
  */
 @NotThreadSafe
-public class LocalDatePeriod extends AbstractFlexiblePeriod <LocalDate> implements ILocalDatePeriod
+public class LocalDateTimeDuration extends AbstractFlexibleDuration <LocalDateTime> implements ILocalDateTimeDuration
 {
-  public LocalDatePeriod ()
+  public LocalDateTimeDuration ()
   {
     this (null, null);
   }
 
-  public LocalDatePeriod (@Nullable final LocalDate aStart)
+  public LocalDateTimeDuration (@Nullable final LocalDateTime aStart)
   {
     this (aStart, null);
   }
 
-  public LocalDatePeriod (@Nullable final LocalDate aStart, @Nullable final LocalDate aEnd)
+  public LocalDateTimeDuration (@Nullable final LocalDateTime aStart, @Nullable final LocalDateTime aEnd)
   {
     super (aStart, aEnd);
   }
 
-  public final boolean isValidFor (@Nonnull final LocalDate aDate)
+  public final boolean isValidFor (@Nonnull final LocalDateTime aDate)
   {
     ValueEnforcer.notNull (aDate, "Date");
 
-    final LocalDate aStart = getStart ();
+    final LocalDateTime aStart = getStart ();
     if (aStart != null && aStart.isAfter (aDate))
       return false;
-    final LocalDate aEnd = getEnd ();
+    final LocalDateTime aEnd = getEnd ();
     if (aEnd != null && aEnd.isBefore (aDate))
       return false;
     return true;
   }
 
-  public boolean canConvertToPeriod ()
-  {
-    return getStart () != null && getEnd () != null;
-  }
-
   @Nonnull
-  public final Period getAsPeriod ()
+  public final Duration getAsDuration ()
   {
-    if (!canConvertToPeriod ())
-      throw new IllegalStateException ("Cannot convert to a Period!");
-    return new Period (getStart (), getEnd ());
+    if (!canConvertToDuration ())
+      throw new IllegalStateException ("Cannot convert to a Duration!");
+    return Duration.between (getStart (), getEnd ());
   }
 }

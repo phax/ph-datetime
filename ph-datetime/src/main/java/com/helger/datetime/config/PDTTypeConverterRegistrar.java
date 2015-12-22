@@ -18,6 +18,11 @@ package com.helger.datetime.config;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -27,21 +32,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.MutablePeriod;
-import org.joda.time.Period;
-import org.joda.time.convert.ConverterManager;
-
 import com.helger.commons.annotation.IsSPIImplementation;
 import com.helger.commons.typeconvert.ITypeConverter;
 import com.helger.commons.typeconvert.ITypeConverterRegistrarSPI;
 import com.helger.commons.typeconvert.ITypeConverterRegistry;
 import com.helger.commons.typeconvert.TypeConverterRegistry;
-import com.helger.datetime.PDTFactory;
+import com.helger.datetime.CPDT;
 
 /**
  * Register all {@link ITypeConverter} objects to the central
@@ -53,20 +49,8 @@ import com.helger.datetime.PDTFactory;
 @IsSPIImplementation
 public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarSPI
 {
-  private static void _registerJodaConverter ()
-  {
-    // Register generic Number converters, that work with Long, Integer,
-    // BigInteger etc.
-    ConverterManager.getInstance ().addInstantConverter (PDTJodaNumberConverter.INSTANCE);
-    ConverterManager.getInstance ().addPartialConverter (PDTJodaNumberConverter.INSTANCE);
-    ConverterManager.getInstance ().addDurationConverter (PDTJodaNumberConverter.INSTANCE);
-  }
-
   public void registerTypeConverter (@Nonnull final ITypeConverterRegistry aRegistry)
   {
-    // Register Joda native converters
-    _registerJodaConverter ();
-
     final Class <?> [] aSourceClasses = new Class <?> [] { String.class,
                                                            Calendar.class,
                                                            GregorianCalendar.class,
@@ -82,55 +66,60 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                            Long.class,
                                                            Short.class };
 
-    // DateTime
+    // ZonedDateTime
     aRegistry.registerTypeConverter (aSourceClasses,
-                                     DateTime.class,
-                                     aSource -> new DateTime (aSource, PDTConfig.getDefaultChronology ()));
+                                     ZonedDateTime.class,
+                                     aSource -> new ZonedDateTime (aSource, PDTConfig.getDefaultChronology ()));
     aRegistry.registerTypeConverter (LocalDate.class,
-                                     DateTime.class,
-                                     aSource -> PDTFactory.createDateTime ((LocalDate) aSource));
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.of ((LocalDate) aSource,
+                                                                  CPDT.NULL_LOCAL_TIME,
+                                                                  PDTConfig.getDefaultZoneId ()));
     aRegistry.registerTypeConverter (LocalTime.class,
-                                     DateTime.class,
-                                     aSource -> PDTFactory.createDateTime ((LocalTime) aSource));
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.of (CPDT.NULL_LOCAL_DATE,
+                                                                  (LocalTime) aSource,
+                                                                  PDTConfig.getDefaultZoneId ()));
     aRegistry.registerTypeConverter (LocalDateTime.class,
-                                     DateTime.class,
-                                     aSource -> PDTFactory.createDateTime ((LocalDateTime) aSource));
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.of ((LocalDateTime) aSource,
+                                                                  PDTConfig.getDefaultZoneId ()));
 
     // LocalDateTime
     aRegistry.registerTypeConverter (aSourceClasses,
                                      LocalDateTime.class,
                                      aSource -> new LocalDateTime (aSource, PDTConfig.getDefaultChronology ()));
-    aRegistry.registerTypeConverter (DateTime.class,
+    aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalDateTime.class,
-                                     aSource -> PDTFactory.createLocalDateTime ((DateTime) aSource));
+                                     aSource -> ((ZonedDateTime) aSource).toLocalDateTime ());
     aRegistry.registerTypeConverter (LocalDate.class,
                                      LocalDateTime.class,
-                                     aSource -> PDTFactory.createLocalDateTime ((LocalDate) aSource));
+                                     aSource -> LocalDateTime.of ((LocalDate) aSource, CPDT.NULL_LOCAL_TIME));
     aRegistry.registerTypeConverter (LocalTime.class,
                                      LocalDateTime.class,
-                                     aSource -> PDTFactory.createLocalDateTime ((LocalTime) aSource));
+                                     aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, (LocalTime) aSource));
 
     // LocalDate
     aRegistry.registerTypeConverter (aSourceClasses,
                                      LocalDate.class,
                                      aSource -> new LocalDate (aSource, PDTConfig.getDefaultChronology ()));
-    aRegistry.registerTypeConverter (DateTime.class,
+    aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalDate.class,
-                                     aSource -> PDTFactory.createLocalDate ((DateTime) aSource));
+                                     aSource -> ((ZonedDateTime) aSource).toLocalDate ());
     aRegistry.registerTypeConverter (LocalDateTime.class,
                                      LocalDate.class,
-                                     aSource -> PDTFactory.createLocalDate ((LocalDateTime) aSource));
+                                     aSource -> ((LocalDateTime) aSource).toLocalDate ());
 
     // LocalTime
     aRegistry.registerTypeConverter (aSourceClasses,
                                      LocalTime.class,
                                      aSource -> new LocalTime (aSource, PDTConfig.getDefaultChronology ()));
-    aRegistry.registerTypeConverter (DateTime.class,
+    aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalTime.class,
-                                     aSource -> PDTFactory.createLocalTime ((DateTime) aSource));
+                                     aSource -> ((ZonedDateTime) aSource).toLocalTime ());
     aRegistry.registerTypeConverter (LocalDateTime.class,
                                      LocalTime.class,
-                                     aSource -> PDTFactory.createLocalTime ((LocalDateTime) aSource));
+                                     aSource -> ((LocalDateTime) aSource).toLocalTime ());
 
     // Duration
     aRegistry.registerTypeConverter (new Class <?> [] { String.class,
@@ -160,20 +149,5 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                         Long.class,
                                                         Short.class },
                                      Period.class, aSource -> new Period (aSource));
-
-    // MutablePeriod
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                        AtomicInteger.class,
-                                                        AtomicLong.class,
-                                                        BigDecimal.class,
-                                                        BigInteger.class,
-                                                        Byte.class,
-                                                        Double.class,
-                                                        Float.class,
-                                                        Integer.class,
-                                                        Long.class,
-                                                        Short.class },
-                                     MutablePeriod.class,
-                                     aSource -> new MutablePeriod (aSource));
   }
 }

@@ -17,13 +17,12 @@
 package com.helger.datetime.domain;
 
 import java.text.DateFormatSymbols;
+import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.joda.time.DateTimeConstants;
 
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.id.IHasIntID;
@@ -36,26 +35,26 @@ import com.helger.commons.lang.EnumHelper;
  */
 public enum EDayOfWeek implements IHasIntID
 {
-  MONDAY (DateTimeConstants.MONDAY, Calendar.MONDAY),
-  TUESDAY (DateTimeConstants.TUESDAY, Calendar.TUESDAY),
-  WEDNESDAY (DateTimeConstants.WEDNESDAY, Calendar.WEDNESDAY),
-  THURSDAY (DateTimeConstants.THURSDAY, Calendar.THURSDAY),
-  FRIDAY (DateTimeConstants.FRIDAY, Calendar.FRIDAY),
-  SATURDAY (DateTimeConstants.SATURDAY, Calendar.SATURDAY),
-  SUNDAY (DateTimeConstants.SUNDAY, Calendar.SUNDAY);
+  MONDAY (DayOfWeek.MONDAY, Calendar.MONDAY),
+  TUESDAY (DayOfWeek.TUESDAY, Calendar.TUESDAY),
+  WEDNESDAY (DayOfWeek.WEDNESDAY, Calendar.WEDNESDAY),
+  THURSDAY (DayOfWeek.THURSDAY, Calendar.THURSDAY),
+  FRIDAY (DayOfWeek.FRIDAY, Calendar.FRIDAY),
+  SATURDAY (DayOfWeek.SATURDAY, Calendar.SATURDAY),
+  SUNDAY (DayOfWeek.SUNDAY, Calendar.SUNDAY);
 
-  private final int m_nJodaID;
+  private final DayOfWeek m_eDayOfWeek;
   private final int m_nCalID;
 
-  private EDayOfWeek (final int nJodaID, final int nCalID)
+  private EDayOfWeek (final DayOfWeek eDayOfWeek, final int nCalID)
   {
-    m_nJodaID = nJodaID;
+    m_eDayOfWeek = eDayOfWeek;
     m_nCalID = nCalID;
   }
 
   public int getID ()
   {
-    return m_nJodaID;
+    return getDateTimeConstant ();
   }
 
   /**
@@ -63,7 +62,7 @@ public enum EDayOfWeek implements IHasIntID
    */
   public int getDateTimeConstant ()
   {
-    return m_nJodaID;
+    return m_eDayOfWeek.getValue ();
   }
 
   /**

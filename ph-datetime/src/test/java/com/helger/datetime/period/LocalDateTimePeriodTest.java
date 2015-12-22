@@ -23,16 +23,16 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDateTime;
-import org.joda.time.Period;
+import java.time.LocalDateTime;
+import java.time.Period;
+
 import org.junit.Test;
 
 import com.helger.commons.mock.CommonsTestHelper;
 import com.helger.datetime.PDTFactory;
 
 /**
- * Test class for class {@link LocalDateTimePeriod}.
+ * Test class for class {@link LocalDateTimeDuration}.
  *
  * @author Philip Helger
  */
@@ -41,13 +41,13 @@ public final class LocalDateTimePeriodTest
   @Test
   public void testAll ()
   {
-    LocalDateTimePeriod p = new LocalDateTimePeriod ();
+    LocalDateTimeDuration p = new LocalDateTimeDuration ();
     assertNull (p.getStart ());
     assertNull (p.getEnd ());
 
     try
     {
-      p.getAsPeriod ();
+      p.getAsDuration ();
       fail ();
     }
     catch (final IllegalStateException ex)
@@ -57,7 +57,7 @@ public final class LocalDateTimePeriodTest
 
     try
     {
-      p.getAsPeriod ();
+      p.getAsDuration ();
       fail ();
     }
     catch (final IllegalStateException ex)
@@ -65,7 +65,7 @@ public final class LocalDateTimePeriodTest
 
     p.setEnd (PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 11));
 
-    final Period per = p.getAsPeriod ();
+    final Period per = p.getAsDuration ();
     assertNotNull (per);
     assertEquals (0, per.getYears ());
     assertEquals (0, per.getMonths ());
@@ -75,44 +75,44 @@ public final class LocalDateTimePeriodTest
     assertEquals (0, per.getSeconds ());
     assertEquals (0, per.getMillis ());
 
-    p = new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 10));
+    p = new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 10));
     assertNotNull (p.getStart ());
     assertNull (p.getEnd ());
 
-    p = new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 10),
+    p = new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 10),
                                  PDTFactory.createLocalDateTime (2010, DateTimeConstants.FEBRUARY, 11));
     assertNotNull (p.getStart ());
     assertNotNull (p.getEnd ());
-    assertEquals (per, p.getAsPeriod ());
+    assertEquals (per, p.getAsDuration ());
 
     CommonsTestHelper.testDefaultImplementationWithEqualContentObject (p,
-                                                                       new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010,
+                                                                       new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010,
                                                                                                                                 DateTimeConstants.FEBRUARY,
                                                                                                                                 10),
                                                                                                 PDTFactory.createLocalDateTime (2010,
                                                                                                                                 DateTimeConstants.FEBRUARY,
                                                                                                                                 11)));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
-                                                                           new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010,
+                                                                           new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     11),
                                                                                                     PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     11)));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
-                                                                           new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010,
+                                                                           new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     10),
                                                                                                     PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     12)));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
-                                                                           new LocalDateTimePeriod (null,
+                                                                           new LocalDateTimeDuration (null,
                                                                                                     PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     11)));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (p,
-                                                                           new LocalDateTimePeriod (PDTFactory.createLocalDateTime (2010,
+                                                                           new LocalDateTimeDuration (PDTFactory.createLocalDateTime (2010,
                                                                                                                                     DateTimeConstants.FEBRUARY,
                                                                                                                                     10),
                                                                                                     null));
@@ -121,13 +121,13 @@ public final class LocalDateTimePeriodTest
   @Test
   public void testValidity ()
   {
-    LocalDateTimePeriod vr = new LocalDateTimePeriod (null, null);
+    LocalDateTimeDuration vr = new LocalDateTimeDuration (null, null);
     assertNull (vr.getStart ());
     assertNull (vr.getEnd ());
     assertTrue (vr.isValidForNow ());
     assertTrue (vr.isValidFor (PDTFactory.createLocalDateTime (2000, DateTimeConstants.JANUARY, 1)));
     assertTrue (vr.isValidFor (PDTFactory.createLocalDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimePeriod (null, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimeDuration (null, null));
 
     try
     {
@@ -138,7 +138,7 @@ public final class LocalDateTimePeriodTest
     {}
 
     final LocalDateTime aStart = PDTFactory.createLocalDateTime (2011, DateTimeConstants.JULY, 18, 12, 35);
-    vr = new LocalDateTimePeriod (aStart, null);
+    vr = new LocalDateTimeDuration (aStart, null);
     assertEquals (aStart, vr.getStart ());
     assertNull (vr.getEnd ());
     assertTrue (vr.isValidForNow ());
@@ -150,10 +150,10 @@ public final class LocalDateTimePeriodTest
     assertTrue (vr.isValidFor (PDTFactory.createLocalDateTime (2011, DateTimeConstants.JULY, 19)));
     // End date
     assertTrue (vr.isValidFor (PDTFactory.createLocalDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimeDuration (aStart, null));
 
     final LocalDateTime aEnd = PDTFactory.createLocalDateTime (2011, DateTimeConstants.NOVEMBER, 18, 15, 12);
-    vr = new LocalDateTimePeriod (aStart, aEnd);
+    vr = new LocalDateTimeDuration (aStart, aEnd);
     assertEquals (aStart, vr.getStart ());
     assertEquals (aEnd, vr.getEnd ());
     assertFalse (vr.isValidForNow ());
@@ -169,14 +169,14 @@ public final class LocalDateTimePeriodTest
     assertFalse (vr.isValidFor (PDTFactory.createLocalDateTime (2011, DateTimeConstants.NOVEMBER, 18, 15, 13)));
     assertFalse (vr.isValidFor (PDTFactory.createLocalDateTime (2011, DateTimeConstants.NOVEMBER, 19)));
     assertFalse (vr.isValidFor (PDTFactory.createLocalDateTime (9999, DateTimeConstants.DECEMBER, 31)));
-    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimePeriod (aStart, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithEqualContentObject (vr, new LocalDateTimeDuration (aStart, aEnd));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
-                                                                           new LocalDateTimePeriod (aStart.plusDays (1),
+                                                                           new LocalDateTimeDuration (aStart.plusDays (1),
                                                                                                     aEnd));
     CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr,
-                                                                           new LocalDateTimePeriod (aStart,
+                                                                           new LocalDateTimeDuration (aStart,
                                                                                                     aEnd.plusDays (1)));
-    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalDateTimePeriod (null, aEnd));
-    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalDateTimePeriod (aStart, null));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalDateTimeDuration (null, aEnd));
+    CommonsTestHelper.testDefaultImplementationWithDifferentContentObject (vr, new LocalDateTimeDuration (aStart, null));
   }
 }

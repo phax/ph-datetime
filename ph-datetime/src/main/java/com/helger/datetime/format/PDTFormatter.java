@@ -16,14 +16,14 @@
  */
 package com.helger.datetime.format;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
-
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.datetime.config.PDTConfig;
@@ -37,6 +37,23 @@ import com.helger.datetime.config.PDTConfig;
 @Immutable
 public final class PDTFormatter
 {
+  public static final String PATTERN_DATE_SHORT = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.SHORT)).toPattern ();
+  public static final String PATTERN_DATE_MEDIUM = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.MEDIUM)).toPattern ();
+  public static final String PATTERN_DATE_LONG = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.LONG)).toPattern ();
+  public static final String PATTERN_DATE_FULL = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.FULL)).toPattern ();
+  public static final String PATTERN_TIME_SHORT = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.SHORT)).toPattern ();
+  public static final String PATTERN_TIME_MEDIUM = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.MEDIUM)).toPattern ();
+  public static final String PATTERN_TIME_LONG = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.LONG)).toPattern ();
+  public static final String PATTERN_TIME_FULL = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.FULL)).toPattern ();
+  public static final String PATTERN_DATETIME_SHORT = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.SHORT,
+                                                                                                          DateFormat.SHORT)).toPattern ();
+  public static final String PATTERN_DATETIME_MEDIUM = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.MEDIUM,
+                                                                                                           DateFormat.MEDIUM)).toPattern ();
+  public static final String PATTERN_DATETIME_LONG = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.LONG,
+                                                                                                         DateFormat.LONG)).toPattern ();
+  public static final String PATTERN_DATETIME_FULL = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.FULL,
+                                                                                                         DateFormat.FULL)).toPattern ();
+
   @PresentForCodeCoverage
   private static final PDTFormatter s_aInstance = new PDTFormatter ();
 
@@ -84,7 +101,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.shortDate (), aDisplayLocale);
+    return getForPattern (PATTERN_DATE_SHORT, aDisplayLocale);
   }
 
   /**
@@ -97,7 +114,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.mediumDate (), aDisplayLocale);
+    return getForPattern (PATTERN_DATE_MEDIUM, aDisplayLocale);
   }
 
   /**
@@ -110,7 +127,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.longDate (), aDisplayLocale);
+    return getForPattern (PATTERN_DATE_LONG, aDisplayLocale);
   }
 
   /**
@@ -123,7 +140,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.fullDate (), aDisplayLocale);
+    return getForPattern (PATTERN_DATE_FULL, aDisplayLocale);
   }
 
   /**
@@ -150,7 +167,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.shortTime (), aDisplayLocale);
+    return getForPattern (PATTERN_TIME_SHORT, aDisplayLocale);
   }
 
   /**
@@ -163,7 +180,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.mediumTime (), aDisplayLocale);
+    return getForPattern (PATTERN_TIME_MEDIUM, aDisplayLocale);
   }
 
   /**
@@ -176,7 +193,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.longTime (), aDisplayLocale);
+    return getForPattern (PATTERN_TIME_LONG, aDisplayLocale);
   }
 
   /**
@@ -189,7 +206,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.fullTime (), aDisplayLocale);
+    return getForPattern (PATTERN_TIME_FULL, aDisplayLocale);
   }
 
   /**
@@ -216,7 +233,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.shortDateTime (), aDisplayLocale);
+    return getForPattern (PATTERN_DATETIME_SHORT, aDisplayLocale);
   }
 
   /**
@@ -229,7 +246,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.mediumDateTime (), aDisplayLocale);
+    return getForPattern (PATTERN_DATETIME_MEDIUM, aDisplayLocale);
   }
 
   /**
@@ -242,7 +259,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.longDateTime (), aDisplayLocale);
+    return getForPattern (PATTERN_DATETIME_LONG, aDisplayLocale);
   }
 
   /**
@@ -255,7 +272,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocaleAndChrono (DateTimeFormat.fullDateTime (), aDisplayLocale);
+    return getForPattern (PATTERN_DATETIME_FULL, aDisplayLocale);
   }
 
   /**
@@ -290,6 +307,6 @@ public final class PDTFormatter
   public static DateTimeFormatter getForPattern (@Nonnull final String sPattern,
                                                  @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
   {
-    return getWithLocaleAndChrono (DateTimeFormat.forPattern (sPattern), aDisplayLocale);
+    return getWithLocaleAndChrono (DateTimeFormatter.ofPattern (sPattern), aDisplayLocale);
   }
 }

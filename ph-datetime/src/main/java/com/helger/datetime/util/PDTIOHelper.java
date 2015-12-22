@@ -16,16 +16,15 @@
  */
 package com.helger.datetime.util;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-
 import com.helger.commons.annotation.PresentForCodeCoverage;
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.format.PDTToString;
 
 /**
@@ -55,7 +54,7 @@ public final class PDTIOHelper
   @Nonnull
   public static String getCurrentDateTimeForFilename ()
   {
-    return getDateTimeForFilename (PDTFactory.getCurrentDateTime ());
+    return getDateTimeForFilename (ZonedDateTime.now ());
   }
 
   /**
@@ -66,7 +65,7 @@ public final class PDTIOHelper
    * @return The formatted string.
    */
   @Nonnull
-  public static String getDateTimeForFilename (@Nonnull final DateTime aDT)
+  public static String getDateTimeForFilename (@Nonnull final ZonedDateTime aDT)
   {
     return PDTToString.getAsString (PATTERN_DATETIME, aDT);
   }
@@ -77,7 +76,7 @@ public final class PDTIOHelper
   @Nonnull
   public static String getCurrentLocalDateTimeForFilename ()
   {
-    return getLocalDateTimeForFilename (PDTFactory.getCurrentLocalDateTime ());
+    return getLocalDateTimeForFilename (LocalDateTime.now ());
   }
 
   /**
@@ -98,7 +97,7 @@ public final class PDTIOHelper
    */
   public static String getCurrentDateForFilename ()
   {
-    return getDateForFilename (PDTFactory.getCurrentLocalDate ());
+    return getDateForFilename (LocalDate.now ());
   }
 
   /**
@@ -118,7 +117,7 @@ public final class PDTIOHelper
    */
   public static String getCurrentTimeForFilename ()
   {
-    return getTimeForFilename (PDTFactory.getCurrentLocalTime ());
+    return getTimeForFilename (LocalTime.now ());
   }
 
   /**

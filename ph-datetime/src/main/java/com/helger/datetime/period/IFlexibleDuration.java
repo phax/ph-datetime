@@ -28,8 +28,13 @@ import javax.annotation.Nonnull;
  * @param <DATATYPE>
  *        Date and time type
  */
-public interface IFlexiblePeriod <DATATYPE> extends IPeriodProvider, IHasStartAndEnd <DATATYPE>, Serializable
+public interface IFlexibleDuration <DATATYPE> extends IDurationProvider, IHasStartAndEnd <DATATYPE>, Serializable
 {
+  default boolean canConvertToDuration ()
+  {
+    return getStart () != null && getEnd () != null;
+  }
+
   /**
    * Check if this object is valid for this specific date.
    *

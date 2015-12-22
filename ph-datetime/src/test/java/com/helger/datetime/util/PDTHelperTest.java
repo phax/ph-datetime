@@ -22,11 +22,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.Period;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+
 import org.junit.Test;
 
 import com.helger.datetime.PDTFactory;

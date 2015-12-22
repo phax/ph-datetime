@@ -16,75 +16,56 @@
  */
 package com.helger.datetime.period;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.Period;
-
 import com.helger.commons.ValueEnforcer;
 
 /**
- * Default implementation of the {@link IDateTimePeriod} interface.
+ * Default implementation of the {@link ILocalTimeDuration} interface.
  *
  * @author Philip Helger
  */
 @NotThreadSafe
-public class DateTimePeriod extends AbstractFlexiblePeriod <DateTime> implements IDateTimePeriod
+public class LocalTimeDuration extends AbstractFlexibleDuration <LocalTime> implements ILocalTimeDuration
 {
-  public DateTimePeriod ()
+  public LocalTimeDuration ()
   {
     this (null, null);
   }
 
-  public DateTimePeriod (@Nullable final DateTime aStart)
+  public LocalTimeDuration (@Nullable final LocalTime aStart)
   {
     this (aStart, null);
   }
 
-  public DateTimePeriod (@Nullable final DateTime aStart, @Nullable final DateTime aEnd)
+  public LocalTimeDuration (@Nullable final LocalTime aStart, @Nullable final LocalTime aEnd)
   {
     super (aStart, aEnd);
   }
 
-  public final boolean isValidFor (@Nonnull final DateTime aDate)
+  public final boolean isValidFor (@Nonnull final LocalTime aDate)
   {
     ValueEnforcer.notNull (aDate, "Date");
 
-    final DateTime aStart = getStart ();
+    final LocalTime aStart = getStart ();
     if (aStart != null && aStart.isAfter (aDate))
       return false;
-    final DateTime aEnd = getEnd ();
+    final LocalTime aEnd = getEnd ();
     if (aEnd != null && aEnd.isBefore (aDate))
       return false;
     return true;
   }
 
-  public boolean canConvertToPeriod ()
-  {
-    return getStart () != null && getEnd () != null;
-  }
-
   @Nonnull
-  public final Period getAsPeriod ()
+  public final Duration getAsDuration ()
   {
-    if (!canConvertToPeriod ())
-      throw new IllegalStateException ("Cannot convert to a Period!");
-    return new Period (getStart (), getEnd ());
-  }
-
-  public boolean canConvertToInterval ()
-  {
-    return getStart () != null && getEnd () != null;
-  }
-
-  @Nonnull
-  public Interval getAsInterval ()
-  {
-    if (!canConvertToInterval ())
-      throw new IllegalStateException ("Cannot convert to an Interval!");
-    return new Interval (getStart (), getEnd ());
+    if (!canConvertToDuration ())
+      throw new IllegalStateException ("Cannot convert to a Duration!");
+    return Duration.between (getStart (), getEnd ());
   }
 }

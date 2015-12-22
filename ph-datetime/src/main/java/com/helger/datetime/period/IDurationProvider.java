@@ -16,28 +16,28 @@
  */
 package com.helger.datetime.period;
 
+import java.time.Duration;
+
 import javax.annotation.Nonnull;
 
-import org.joda.time.Period;
-
 /**
- * Interface for objects providing a {@link Period}.
+ * Interface for objects providing a {@link Duration}.
  *
  * @author Philip Helger
  */
-public interface IPeriodProvider
+public interface IDurationProvider
 {
   /**
    * @return <code>true</code> if this object can be converted to a
-   *         {@link Period}.
+   *         {@link Duration}.
    */
-  boolean canConvertToPeriod ();
+  boolean canConvertToDuration ();
 
   /**
-   * Get the current object as a Joda {@link Period}.
+   * Get the current object as a JDK {@link Duration}.
    *
-   * @return The period as a Joda time object. Never <code>null</code>.
+   * @return The period as a JDK 8 Duration object. Never <code>null</code>.
    */
   @Nonnull
-  Period getAsPeriod ();
+  Duration getAsDuration ();
 }

@@ -16,17 +16,17 @@
  */
 package com.helger.datetime.format;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,20 +52,21 @@ public final class PDTFromString
   {}
 
   @Nullable
-  public static DateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
+  public static ZonedDateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
     return getDateTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
   }
 
   @Nullable
-  public static DateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
+  public static ZonedDateTime getDateTimeFromString (@Nullable final String sValue,
+                                                     @Nonnull final DateTimeFormatter aDF)
   {
     ValueEnforcer.notNull (aDF, "DateTimeFormatter");
 
     if (StringHelper.hasText (sValue))
       try
       {
-        return aDF.parseDateTime (sValue);
+        return aDF.parse (sValue, ZonedDateTime::from);
       }
       catch (final IllegalArgumentException ex)
       {
@@ -83,7 +84,8 @@ public final class PDTFromString
    * @return <code>null</code> if parsing failed.
    */
   @Nullable
-  public static DateTime getDefaultDateFromString (@Nullable final String sValue, @Nullable final Locale aParseLocale)
+  public static ZonedDateTime getDefaultDateFromString (@Nullable final String sValue,
+                                                        @Nullable final Locale aParseLocale)
   {
     return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterDate (aParseLocale));
   }
@@ -96,7 +98,8 @@ public final class PDTFromString
    * @return <code>null</code> if parsing failed.
    */
   @Nullable
-  public static DateTime getDefaultTimeFromString (@Nullable final String sValue, @Nullable final Locale aParseLocale)
+  public static ZonedDateTime getDefaultTimeFromString (@Nullable final String sValue,
+                                                        @Nullable final Locale aParseLocale)
   {
     return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterTime (aParseLocale));
   }
@@ -109,8 +112,8 @@ public final class PDTFromString
    * @return <code>null</code> if parsing failed.
    */
   @Nullable
-  public static DateTime getDefaultDateTimeFromString (@Nullable final String sValue,
-                                                       @Nullable final Locale aParseLocale)
+  public static ZonedDateTime getDefaultDateTimeFromString (@Nullable final String sValue,
+                                                            @Nullable final Locale aParseLocale)
   {
     return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterDateTime (aParseLocale));
   }
@@ -124,14 +127,14 @@ public final class PDTFromString
   @Nullable
   public static LocalDate getLocalDateFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, aDF);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
     return aDT == null ? null : aDT.toLocalDate ();
   }
 
   @Nullable
   public static LocalDate getLocalDateFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, sPattern);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
     return aDT == null ? null : aDT.toLocalDate ();
   }
 
@@ -146,14 +149,14 @@ public final class PDTFromString
   public static LocalDateTime getLocalDateTimeFromString (@Nullable final String sValue,
                                                           @Nonnull final DateTimeFormatter aDF)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, aDF);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
     return aDT == null ? null : aDT.toLocalDateTime ();
   }
 
   @Nullable
   public static LocalDateTime getLocalDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, sPattern);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
     return aDT == null ? null : aDT.toLocalDateTime ();
   }
 
@@ -166,14 +169,14 @@ public final class PDTFromString
   @Nullable
   public static LocalTime getLocalTimeFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, aDF);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
     return aDT == null ? null : aDT.toLocalTime ();
   }
 
   @Nullable
   public static LocalTime getLocalTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final DateTime aDT = getDateTimeFromString (sValue, sPattern);
+    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
     return aDT == null ? null : aDT.toLocalTime ();
   }
 }

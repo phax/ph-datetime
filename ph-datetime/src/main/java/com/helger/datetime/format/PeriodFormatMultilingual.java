@@ -22,9 +22,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
-
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.annotation.Translatable;
 import com.helger.commons.text.IMultilingualText;

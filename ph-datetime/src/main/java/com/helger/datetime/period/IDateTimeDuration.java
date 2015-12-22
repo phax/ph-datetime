@@ -16,9 +16,7 @@
  */
 package com.helger.datetime.period;
 
-import org.joda.time.DateTime;
-
-import com.helger.datetime.PDTFactory;
+import java.time.ZonedDateTime;
 
 /**
  * This interface is used for storing a period consisting of exactly a start and
@@ -26,10 +24,10 @@ import com.helger.datetime.PDTFactory;
  *
  * @author Philip Helger
  */
-public interface IDateTimePeriod extends IFlexiblePeriod <DateTime>, IIntervalProvider
+public interface IDateTimeDuration extends IFlexibleDuration <ZonedDateTime>
 {
   default boolean isValidForNow ()
   {
-    return isValidFor (PDTFactory.getCurrentDateTime ());
+    return isValidFor (ZonedDateTime.now ());
   }
 }
