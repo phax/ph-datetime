@@ -21,8 +21,8 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -50,11 +50,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
 {
   public void registerTypeConverter (@Nonnull final ITypeConverterRegistry aRegistry)
   {
-    final Class <?> [] aSourceClasses = new Class <?> [] { String.class,
-                                                           Calendar.class,
-                                                           GregorianCalendar.class,
-                                                           Date.class,
-                                                           AtomicInteger.class,
+    final Class <?> [] aSourceClasses = new Class <?> [] { AtomicInteger.class,
                                                            AtomicLong.class,
                                                            BigDecimal.class,
                                                            BigInteger.class,
@@ -65,90 +61,59 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                            Long.class,
                                                            Short.class };
 
-    // ZonedDateTime
-    // aRegistry.registerTypeConverter (aSourceClasses,
-    // ZonedDateTime.class,
-    // aSource -> new ZonedDateTime (aSource, PDTConfig.getDefaultChronology
-    // ()));
+    // Destination: ZonedDateTime
+    aRegistry.registerTypeConverter (GregorianCalendar.class, ZonedDateTime.class, GregorianCalendar::toZonedDateTime);
+    aRegistry.registerTypeConverter (String.class, ZonedDateTime.class, ZonedDateTime::parse);
+    aRegistry.registerTypeConverter (OffsetDateTime.class, ZonedDateTime.class, OffsetDateTime::toZonedDateTime);
     aRegistry.registerTypeConverter (LocalDate.class,
                                      ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of ((LocalDate) aSource,
+                                     aSource -> ZonedDateTime.of (aSource,
                                                                   CPDT.NULL_LOCAL_TIME,
                                                                   PDTConfig.getDefaultZoneId ()));
     aRegistry.registerTypeConverter (LocalTime.class,
                                      ZonedDateTime.class,
                                      aSource -> ZonedDateTime.of (CPDT.NULL_LOCAL_DATE,
-                                                                  (LocalTime) aSource,
+                                                                  aSource,
                                                                   PDTConfig.getDefaultZoneId ()));
     aRegistry.registerTypeConverter (LocalDateTime.class,
                                      ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of ((LocalDateTime) aSource,
-                                                                  PDTConfig.getDefaultZoneId ()));
+                                     aSource -> ZonedDateTime.of (aSource, PDTConfig.getDefaultZoneId ()));
 
-    // LocalDateTime
-    // aRegistry.registerTypeConverter (aSourceClasses,
-    // LocalDateTime.class,
-    // aSource -> new LocalDateTime (aSource, PDTConfig.getDefaultChronology
-    // ()));
-    aRegistry.registerTypeConverter (ZonedDateTime.class,
+    // Destination: LocalDateTime
+    aRegistry.registerTypeConverter (GregorianCalendar.class,
                                      LocalDateTime.class,
-                                     aSource -> ((ZonedDateTime) aSource).toLocalDateTime ());
+                                     aSource -> aSource.toZonedDateTime ().toLocalDateTime ());
+    aRegistry.registerTypeConverter (String.class, LocalDateTime.class, LocalDateTime::parse);
+    aRegistry.registerTypeConverter (ZonedDateTime.class, LocalDateTime.class, ZonedDateTime::toLocalDateTime);
+    aRegistry.registerTypeConverter (OffsetDateTime.class, LocalDateTime.class, OffsetDateTime::toLocalDateTime);
     aRegistry.registerTypeConverter (LocalDate.class,
                                      LocalDateTime.class,
-                                     aSource -> LocalDateTime.of ((LocalDate) aSource, CPDT.NULL_LOCAL_TIME));
+                                     aSource -> LocalDateTime.of (aSource, CPDT.NULL_LOCAL_TIME));
     aRegistry.registerTypeConverter (LocalTime.class,
                                      LocalDateTime.class,
-                                     aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, (LocalTime) aSource));
+                                     aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, aSource));
 
-    // LocalDate
-    // aRegistry.registerTypeConverter (aSourceClasses,
-    // LocalDate.class,
-    // aSource -> new LocalDate (aSource, PDTConfig.getDefaultChronology ()));
-    aRegistry.registerTypeConverter (ZonedDateTime.class,
+    // Destination: LocalDate
+    aRegistry.registerTypeConverter (GregorianCalendar.class,
                                      LocalDate.class,
-                                     aSource -> ((ZonedDateTime) aSource).toLocalDate ());
-    aRegistry.registerTypeConverter (LocalDateTime.class,
-                                     LocalDate.class,
-                                     aSource -> ((LocalDateTime) aSource).toLocalDate ());
+                                     aSource -> aSource.toZonedDateTime ().toLocalDate ());
+    aRegistry.registerTypeConverter (String.class, LocalDate.class, LocalDate::parse);
+    aRegistry.registerTypeConverter (ZonedDateTime.class, LocalDate.class, ZonedDateTime::toLocalDate);
+    aRegistry.registerTypeConverter (OffsetDateTime.class, LocalDate.class, OffsetDateTime::toLocalDate);
+    aRegistry.registerTypeConverter (LocalDateTime.class, LocalDate.class, LocalDateTime::toLocalDate);
 
-    // LocalTime
-    // aRegistry.registerTypeConverter (aSourceClasses,
-    // LocalTime.class,
-    // aSource -> new LocalTime (aSource, PDTConfig.getDefaultChronology ()));
-    aRegistry.registerTypeConverter (ZonedDateTime.class,
+    // Destination: LocalTime
+    aRegistry.registerTypeConverter (GregorianCalendar.class,
                                      LocalTime.class,
-                                     aSource -> ((ZonedDateTime) aSource).toLocalTime ());
-    aRegistry.registerTypeConverter (LocalDateTime.class,
-                                     LocalTime.class,
-                                     aSource -> ((LocalDateTime) aSource).toLocalTime ());
+                                     aSource -> aSource.toZonedDateTime ().toLocalTime ());
+    aRegistry.registerTypeConverter (String.class, LocalTime.class, LocalTime::parse);
+    aRegistry.registerTypeConverter (ZonedDateTime.class, LocalTime.class, ZonedDateTime::toLocalTime);
+    aRegistry.registerTypeConverter (OffsetDateTime.class, LocalTime.class, OffsetDateTime::toLocalTime);
+    aRegistry.registerTypeConverter (LocalDateTime.class, LocalTime.class, LocalDateTime::toLocalTime);
 
-    // Duration
-    // aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-    // AtomicInteger.class,
-    // AtomicLong.class,
-    // BigDecimal.class,
-    // BigInteger.class,
-    // Byte.class,
-    // Double.class,
-    // Float.class,
-    // Integer.class,
-    // Long.class,
-    // Short.class },
-    // Duration.class,
-    // aSource -> new Duration (aSource));
-
-    // Period
-    // aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-    // AtomicInteger.class,
-    // AtomicLong.class,
-    // BigDecimal.class,
-    // BigInteger.class,
-    // Byte.class,
-    // Double.class,
-    // Float.class,
-    // Integer.class,
-    // Long.class,
-    // Short.class },
-    // Period.class, aSource -> new Period (aSource));
+    // Date -> ZonedDateTime -> destination
+    aRegistry.registerTypeConverterRuleFixedSourceAnyDestination (Date.class,
+                                                                  aSource -> ZonedDateTime.ofInstant (aSource.toInstant (),
+                                                                                                      PDTConfig.getDefaultZoneId ()));
   }
 }
