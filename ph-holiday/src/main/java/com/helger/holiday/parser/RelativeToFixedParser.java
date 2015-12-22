@@ -16,7 +16,8 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
@@ -53,7 +54,7 @@ public class RelativeToFixedParser extends AbstractHolidayParser
       if (aRelativeToFixed.getWeekday () != null)
       {
         // if weekday is set -> move to weekday
-        final int nExpectedWeekday = XMLHolidayHelper.getWeekday (aRelativeToFixed.getWeekday ());
+        final DayOfWeek nExpectedWeekday = XMLHolidayHelper.getWeekday (aRelativeToFixed.getWeekday ());
         final int nDirection = (aRelativeToFixed.getWhen () == When.BEFORE ? -1 : 1);
         do
         {

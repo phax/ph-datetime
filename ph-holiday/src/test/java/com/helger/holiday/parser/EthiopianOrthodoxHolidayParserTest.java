@@ -16,11 +16,11 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.datetime.PDTFactory;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.EthiopianOrthodoxHoliday;
 import com.helger.holiday.jaxb.EthiopianOrthodoxHolidayType;

@@ -16,15 +16,15 @@
  */
 package com.helger.holiday;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joda.time.LocalDate;
-import org.joda.time.ReadableInterval;
+import org.threeten.extra.Interval;
 
-import com.helger.datetime.PDTFactory;
+import com.helger.commons.typeconvert.TypeConverter;
 
 /**
  * Base interface for a holiday manager for one country.
@@ -45,7 +45,7 @@ public interface IHolidayManager
    */
   default boolean isHoliday (@Nonnull final Calendar aCalendar, final String... args)
   {
-    return isHoliday (PDTFactory.createLocalDate (aCalendar), args);
+    return isHoliday (TypeConverter.convertIfNecessary (aCalendar, LocalDate.class), args);
   }
 
   /**
@@ -99,5 +99,5 @@ public interface IHolidayManager
    * @return list of holidays within the interval
    */
   @Nonnull
-  HolidayMap getHolidays (@Nonnull ReadableInterval aInterval, @Nullable String... aArgs);
+  HolidayMap getHolidays (@Nonnull Interval aInterval, @Nullable String... aArgs);
 }

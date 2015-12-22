@@ -16,13 +16,12 @@
  */
 package com.helger.holiday.mgr;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-
-import com.helger.datetime.PDTFactory;
 import com.helger.holiday.EHolidayType;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.jaxb.Fixed;
@@ -47,24 +46,24 @@ public final class XMLHolidayHelper
    * @return {@link DateTimeConstants} value.
    */
   @Nonnegative
-  public static int getWeekday (@Nonnull final Weekday eWeekday)
+  public static DayOfWeek getWeekday (@Nonnull final Weekday eWeekday)
   {
     switch (eWeekday)
     {
       case MONDAY:
-        return DateTimeConstants.MONDAY;
+        return DayOfWeek.MONDAY;
       case TUESDAY:
-        return DateTimeConstants.TUESDAY;
+        return DayOfWeek.TUESDAY;
       case WEDNESDAY:
-        return DateTimeConstants.WEDNESDAY;
+        return DayOfWeek.WEDNESDAY;
       case THURSDAY:
-        return DateTimeConstants.THURSDAY;
+        return DayOfWeek.THURSDAY;
       case FRIDAY:
-        return DateTimeConstants.FRIDAY;
+        return DayOfWeek.FRIDAY;
       case SATURDAY:
-        return DateTimeConstants.SATURDAY;
+        return DayOfWeek.SATURDAY;
       case SUNDAY:
-        return DateTimeConstants.SUNDAY;
+        return DayOfWeek.SUNDAY;
       default:
         throw new IllegalArgumentException ("Unknown weekday " + eWeekday);
     }
@@ -78,34 +77,34 @@ public final class XMLHolidayHelper
    * @return {@link DateTimeConstants} value.
    */
   @Nonnegative
-  public static int getMonth (@Nonnull final Month eMonth)
+  public static java.time.Month getMonth (@Nonnull final Month eMonth)
   {
     switch (eMonth)
     {
       case JANUARY:
-        return DateTimeConstants.JANUARY;
+        return java.time.Month.JANUARY;
       case FEBRUARY:
-        return DateTimeConstants.FEBRUARY;
+        return java.time.Month.FEBRUARY;
       case MARCH:
-        return DateTimeConstants.MARCH;
+        return java.time.Month.MARCH;
       case APRIL:
-        return DateTimeConstants.APRIL;
+        return java.time.Month.APRIL;
       case MAY:
-        return DateTimeConstants.MAY;
+        return java.time.Month.MAY;
       case JUNE:
-        return DateTimeConstants.JUNE;
+        return java.time.Month.JUNE;
       case JULY:
-        return DateTimeConstants.JULY;
+        return java.time.Month.JULY;
       case AUGUST:
-        return DateTimeConstants.AUGUST;
+        return java.time.Month.AUGUST;
       case SEPTEMBER:
-        return DateTimeConstants.SEPTEMBER;
+        return java.time.Month.SEPTEMBER;
       case OCTOBER:
-        return DateTimeConstants.OCTOBER;
+        return java.time.Month.OCTOBER;
       case NOVEMBER:
-        return DateTimeConstants.NOVEMBER;
+        return java.time.Month.NOVEMBER;
       case DECEMBER:
-        return DateTimeConstants.DECEMBER;
+        return java.time.Month.DECEMBER;
       default:
         throw new IllegalArgumentException ("Unknown month " + eMonth);
     }
@@ -144,6 +143,6 @@ public final class XMLHolidayHelper
   @Nonnull
   public static LocalDate create (@Nonnegative final int nYear, @Nonnull final Fixed aFixed)
   {
-    return PDTFactory.createLocalDate (nYear, getMonth (aFixed.getMonth ()), aFixed.getDay ().intValue ());
+    return LocalDate.of (nYear, getMonth (aFixed.getMonth ()), aFixed.getDay ().intValue ());
   }
 }

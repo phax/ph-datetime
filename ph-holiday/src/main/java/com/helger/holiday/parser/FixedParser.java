@@ -16,7 +16,7 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;

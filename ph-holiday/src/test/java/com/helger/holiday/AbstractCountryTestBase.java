@@ -21,12 +21,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import org.joda.time.LocalDate;
 
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.holiday.mgr.AbstractHolidayManager;

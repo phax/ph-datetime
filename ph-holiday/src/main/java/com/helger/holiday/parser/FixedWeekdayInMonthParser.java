@@ -16,9 +16,9 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
-import com.helger.datetime.PDTFactory;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.ResourceBundleHoliday;
@@ -58,16 +58,14 @@ public class FixedWeekdayInMonthParser extends AbstractHolidayParser
 
   protected static LocalDate parse (final int nYear, final FixedWeekdayInMonth aFixedWeekdayInMonth)
   {
-    LocalDate aDate = PDTFactory.createLocalDate (nYear,
-                                                  XMLHolidayHelper.getMonth (aFixedWeekdayInMonth.getMonth ()),
-                                                  1);
+    LocalDate aDate = LocalDate.of (nYear, XMLHolidayHelper.getMonth (aFixedWeekdayInMonth.getMonth ()), 1);
     int nDirection = 1;
     if (aFixedWeekdayInMonth.getWhich () == Which.LAST)
     {
       aDate = aDate.withDayOfMonth (aDate.dayOfMonth ().getMaximumValue ());
       nDirection = -1;
     }
-    final int nWeekDay = XMLHolidayHelper.getWeekday (aFixedWeekdayInMonth.getWeekday ());
+    final DayOfWeek nWeekDay = XMLHolidayHelper.getWeekday (aFixedWeekdayInMonth.getWeekday ());
     while (aDate.getDayOfWeek () != nWeekDay)
     {
       aDate = aDate.plusDays (nDirection);

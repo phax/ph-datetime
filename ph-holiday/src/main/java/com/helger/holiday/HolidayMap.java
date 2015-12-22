@@ -16,6 +16,7 @@
  */
 package com.helger.holiday;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,8 +25,6 @@ import java.util.Set;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.joda.time.LocalDate;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;

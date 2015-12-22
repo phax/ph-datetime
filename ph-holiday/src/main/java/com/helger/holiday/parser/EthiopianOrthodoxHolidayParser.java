@@ -16,10 +16,10 @@
  */
 package com.helger.holiday.parser;
 
+import java.time.LocalDate;
 import java.util.Set;
 
-import org.joda.time.LocalDate;
-import org.joda.time.chrono.CopticChronology;
+import org.threeten.extra.chrono.CopticChronology;
 
 import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
@@ -67,7 +67,7 @@ public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
     return CalendarHelper.getDatesFromChronologyWithinGregorianYear (nEOMonth,
                                                                      nEODay,
                                                                      nGregorianYear,
-                                                                     CopticChronology.getInstanceUTC ());
+                                                                     CopticChronology.INSTANCE);
   }
 
   public void parse (final int nYear, final HolidayMap aHolidayMap, final Holidays aConfig)

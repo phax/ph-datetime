@@ -66,6 +66,11 @@
       <groupId>com.helger</groupId>
       <artifactId>ph-datetime</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.threeten</groupId>
+      <artifactId>threeten-extra</artifactId>
+      <version>0.9</version>
+    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>

@@ -16,7 +16,8 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
@@ -54,7 +55,7 @@ public class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
       if (!isValid (aFixedWeekdayBetweenFixed, nYear))
         continue;
 
-      final int nExpectedWeekday = XMLHolidayHelper.getWeekday (aFixedWeekdayBetweenFixed.getWeekday ());
+      final DayOfWeek nExpectedWeekday = XMLHolidayHelper.getWeekday (aFixedWeekdayBetweenFixed.getWeekday ());
       LocalDate aFrom = XMLHolidayHelper.create (nYear, aFixedWeekdayBetweenFixed.getFrom ());
       final LocalDate aTo = XMLHolidayHelper.create (nYear, aFixedWeekdayBetweenFixed.getTo ());
       LocalDate aResult = null;

@@ -16,11 +16,10 @@
  */
 package com.helger.holiday.mgr;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import org.joda.time.LocalDate;
 
 import com.helger.commons.locale.country.ECountry;
 import com.helger.holiday.EHolidayType;

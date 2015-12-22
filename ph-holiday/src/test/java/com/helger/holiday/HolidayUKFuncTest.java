@@ -18,11 +18,12 @@ package com.helger.holiday;
 
 import static org.junit.Assert.assertTrue;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.Test;
 
 import com.helger.commons.locale.country.ECountry;
-import com.helger.datetime.PDTFactory;
 
 public final class HolidayUKFuncTest extends AbstractCountryTestBase
 {
@@ -55,8 +56,8 @@ public final class HolidayUKFuncTest extends AbstractCountryTestBase
 
   private void doChristmasContainmentTest (final int year, final int dayOfChristmas, final int dayOfBoxingday)
   {
-    final LocalDate christmas = PDTFactory.createLocalDate (year, 12, dayOfChristmas);
-    final LocalDate boxingday = PDTFactory.createLocalDate (year, 12, dayOfBoxingday);
+    final LocalDate christmas = LocalDate.of (year, Month.DECEMBER, dayOfChristmas);
+    final LocalDate boxingday = LocalDate.of (year, Month.DECEMBER, dayOfBoxingday);
     final IHolidayManager holidayManager = HolidayManagerFactory.getHolidayManager (ECountry.UK);
     final HolidayMap holidays = holidayManager.getHolidays (year);
     assertTrue ("There should be christmas on " + christmas, holidays.containsHolidayForDate (christmas));

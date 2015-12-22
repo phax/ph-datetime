@@ -16,18 +16,19 @@
  */
 package com.helger.holiday.mgr;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joda.time.LocalDate;
-import org.joda.time.ReadableInterval;
+import org.threeten.extra.Interval;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.typeconvert.TypeConverter;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayManager;
 import com.helger.holiday.ISingleHoliday;
@@ -79,16 +80,18 @@ public abstract class AbstractHolidayManager implements IHolidayManager
 
   @Nonnull
   @ReturnsMutableCopy
-  public HolidayMap getHolidays (@Nonnull final ReadableInterval aInterval, @Nullable final String... aArgs)
+  public HolidayMap getHolidays (@Nonnull final Interval aInterval, @Nullable final String... aArgs)
   {
     ValueEnforcer.notNull (aInterval, "Interval");
 
     final HolidayMap aHolidayMap = new HolidayMap ();
-    for (int nYear = aInterval.getStart ().getYear (); nYear <= aInterval.getEnd ().getYear (); nYear++)
+    final int nStartYear = TypeConverter.convertIfNecessary (aInterval.getStart (), LocalDate.class).getYear ();
+    final int nEndYear = TypeConverter.convertIfNecessary (aInterval.getEnd (), LocalDate.class).getYear ();
+    for (int nYear = nStartYear; nYear <= nEndYear; nYear++)
     {
       final HolidayMap yearHolidays = getHolidays (nYear, aArgs);
       for (final Map.Entry <LocalDate, ISingleHoliday> aEntry : yearHolidays.getMap ().entrySet ())
-        if (aInterval.contains (aEntry.getKey ().toDateTimeAtStartOfDay ()))
+        if (aInterval.contains (aEntry.getKey ()))
           aHolidayMap.add (aEntry.getKey (), aEntry.getValue ());
     }
     return aHolidayMap;

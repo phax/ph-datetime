@@ -16,10 +16,11 @@
  */
 package com.helger.holiday.parser;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-
-import org.joda.time.LocalDate;
 
 import com.helger.holiday.jaxb.Holiday;
 import com.helger.holiday.jaxb.MoveableHoliday;
@@ -136,7 +137,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    */
   private static LocalDate _moveDate (final MovingCondition aMoveCond, final LocalDate aDate)
   {
-    final int nWeekday = XMLHolidayHelper.getWeekday (aMoveCond.getWeekday ());
+    final DayOfWeek nWeekday = XMLHolidayHelper.getWeekday (aMoveCond.getWeekday ());
     final int nDirection = aMoveCond.getWith () == With.NEXT ? 1 : -1;
 
     LocalDate aMovedDate = aDate;

@@ -22,20 +22,19 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.timing.StopWatch;
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
 import com.helger.holiday.mgr.AbstractHolidayManager;
 import com.helger.holiday.mgr.CalendarHierarchy;
@@ -54,30 +53,30 @@ public final class HolidayManagerFactoryTest
 
   static
   {
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.FEBRUARY, 17));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.AUGUST, 30));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.APRIL, 2));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.APRIL, 5));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.NOVEMBER, 17));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.NOVEMBER, 28));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JANUARY, 1));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JANUARY, 18));
-    s_aTestDays.add (PDTFactory.createLocalDate (2010, DateTimeConstants.NOVEMBER, 26));
+    s_aTestDays.add (LocalDate.of (2010, Month.FEBRUARY, 17));
+    s_aTestDays.add (LocalDate.of (2010, Month.AUGUST, 30));
+    s_aTestDays.add (LocalDate.of (2010, Month.APRIL, 2));
+    s_aTestDays.add (LocalDate.of (2010, Month.APRIL, 5));
+    s_aTestDays.add (LocalDate.of (2010, Month.NOVEMBER, 17));
+    s_aTestDays.add (LocalDate.of (2010, Month.NOVEMBER, 28));
+    s_aTestDays.add (LocalDate.of (2010, Month.JANUARY, 1));
+    s_aTestDays.add (LocalDate.of (2010, Month.JANUARY, 18));
+    s_aTestDays.add (LocalDate.of (2010, Month.NOVEMBER, 26));
     s_aTestDays_l1.addAll (s_aTestDays);
-    s_aTestDays_l1.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JANUARY, 2));
+    s_aTestDays_l1.add (LocalDate.of (2010, Month.JANUARY, 2));
     s_aTestDays_l2.addAll (s_aTestDays_l1);
-    s_aTestDays_l2.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JANUARY, 3));
+    s_aTestDays_l2.add (LocalDate.of (2010, Month.JANUARY, 3));
 
     s_aTestDays_l11.addAll (s_aTestDays);
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JULY, 27));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.JULY, 9));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.FEBRUARY, 26));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.AUGUST, 11));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.SEPTEMBER, 6));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.SEPTEMBER, 10));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.NOVEMBER, 17));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.DECEMBER, 8));
-    s_aTestDays_l11.add (PDTFactory.createLocalDate (2010, DateTimeConstants.DECEMBER, 17));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.JULY, 27));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.JULY, 9));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.FEBRUARY, 26));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.AUGUST, 11));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.SEPTEMBER, 6));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.SEPTEMBER, 10));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.NOVEMBER, 17));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 8));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 17));
   }
 
   @Test
@@ -116,7 +115,7 @@ public final class HolidayManagerFactoryTest
   @Test
   public void testIsHolidayPerformance () throws Exception
   {
-    LocalDate date = PDTFactory.createLocalDate (2010, 1, 1);
+    LocalDate date = LocalDate.of (2010, 1, 1);
     int count = 0;
     long sumDuration = 0;
     while (date.getYear () < 2011)
@@ -157,7 +156,7 @@ public final class HolidayManagerFactoryTest
     final HolidayMap aHolidays = aMgr.getHolidays (2010);
     for (final LocalDate aDate : aHolidays.getMap ().keySet ())
     {
-      assertEquals ("Wrong chronology for date " + aDate, PDTConfig.getDefaultChronologyUTC (), aDate.getChronology ());
+      assertEquals ("Wrong chronology for date " + aDate, PDTConfig.getDefaultChronology (), aDate.getChronology ());
     }
   }
 
@@ -241,9 +240,8 @@ public final class HolidayManagerFactoryTest
   public void testAT ()
   {
     final IHolidayManager aMgr = HolidayManagerFactory.getHolidayManager (ECountry.AT);
-    assertTrue (aMgr.isHoliday (PDTFactory.createLocalDate (2010, DateTimeConstants.DECEMBER, 25)));
+    assertTrue (aMgr.isHoliday (LocalDate.of (2010, Month.DECEMBER, 25)));
     assertEquals ("Heilige Drei Könige",
-                  aMgr.getHoliday (PDTFactory.createLocalDate (2010, DateTimeConstants.JANUARY, 6))
-                      .getHolidayName (Locale.GERMAN));
+                  aMgr.getHoliday (LocalDate.of (2010, Month.JANUARY, 6)).getHolidayName (Locale.GERMAN));
   }
 }

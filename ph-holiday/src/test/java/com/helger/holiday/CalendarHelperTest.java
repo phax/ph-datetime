@@ -21,14 +21,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
 import org.junit.Test;
 
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**
@@ -39,10 +38,10 @@ public final class CalendarHelperTest
   @Test
   public void testWeekend ()
   {
-    final LocalDate dateFriday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 12);
-    final LocalDate dateSaturday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 13);
-    final LocalDate dateSunday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 14);
-    final LocalDate dateMonday = PDTFactory.createLocalDate (2010, DateTimeConstants.MARCH, 15);
+    final LocalDate dateFriday = LocalDate.of (2010, Month.MARCH, 12);
+    final LocalDate dateSaturday = LocalDate.of (2010, Month.MARCH, 13);
+    final LocalDate dateSunday = LocalDate.of (2010, Month.MARCH, 14);
+    final LocalDate dateMonday = LocalDate.of (2010, Month.MARCH, 15);
     assertFalse (PDTHelper.isWeekend (dateFriday));
     assertTrue (PDTHelper.isWeekend (dateSaturday));
     assertTrue (PDTHelper.isWeekend (dateSunday));
@@ -53,9 +52,9 @@ public final class CalendarHelperTest
   public void testCalendarIslamicNewYear ()
   {
     final Set <LocalDate> expected = new HashSet <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2008, DateTimeConstants.JANUARY, 10));
-    expected.add (PDTFactory.createLocalDate (2008, DateTimeConstants.DECEMBER, 29));
-    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 1, 1);
+    expected.add (LocalDate.of (2008, Month.JANUARY, 10));
+    expected.add (LocalDate.of (2008, Month.DECEMBER, 29));
+    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, Month.JANUARY, 1);
     assertNotNull (holidays);
     assertEquals ("Wrong number of islamic new years in 2008.", expected.size (), holidays.size ());
     assertEquals ("Wrong islamic New Year holidays in 2008.", expected, holidays);
@@ -65,8 +64,8 @@ public final class CalendarHelperTest
   public void testCalendarIslamicAschura2008 ()
   {
     final Set <LocalDate> expected = new HashSet <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2008, DateTimeConstants.JANUARY, 19));
-    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 1, 10);
+    expected.add (LocalDate.of (2008, Month.JANUARY, 19));
+    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, Month.JANUARY, 10);
     assertNotNull (holidays);
     assertEquals ("Wrong number of islamic Aschura holidays in 2008.", expected.size (), holidays.size ());
     assertEquals ("Wrong islamic Aschura holidays in 2008.", expected, holidays);
@@ -76,9 +75,9 @@ public final class CalendarHelperTest
   public void testCalendarIslamicAschura2009 ()
   {
     final Set <LocalDate> expected = new HashSet <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2009, DateTimeConstants.JANUARY, 7));
-    expected.add (PDTFactory.createLocalDate (2009, DateTimeConstants.DECEMBER, 27));
-    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, 1, 10);
+    expected.add (LocalDate.of (2009, Month.JANUARY, 7));
+    expected.add (LocalDate.of (2009, Month.DECEMBER, 27));
+    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, Month.JANUARY, 10);
     assertNotNull (holidays);
     assertEquals ("Wrong number of islamic Aschura holidays in 2009.", expected.size (), holidays.size ());
     assertEquals ("Wrong islamic Aschura holidays in 2009.", expected, holidays);
@@ -88,8 +87,8 @@ public final class CalendarHelperTest
   public void testCalendarIslamicIdAlFitr2008 ()
   {
     final Set <LocalDate> expected = new HashSet <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2008, DateTimeConstants.OCTOBER, 2));
-    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 10, 1);
+    expected.add (LocalDate.of (2008, Month.OCTOBER, 2));
+    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, Month.OCTOBER, 1);
     assertNotNull (holidays);
     assertEquals ("Wrong number of islamic IdAlFitr holidays in 2008.", expected.size (), holidays.size ());
     assertEquals ("Wrong islamic IdAlFitr holidays in 2008.", expected, holidays);
@@ -99,8 +98,8 @@ public final class CalendarHelperTest
   public void testCalendarIslamicIdAlFitr2009 ()
   {
     final Set <LocalDate> expected = new HashSet <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2009, DateTimeConstants.SEPTEMBER, 21));
-    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, 10, 1);
+    expected.add (LocalDate.of (2009, Month.SEPTEMBER, 21));
+    final Set <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, Month.OCTOBER, 1);
     assertNotNull (holidays);
     assertEquals ("Wrong number of islamic IdAlFitr holidays in 2009.", expected.size (), holidays.size ());
     assertEquals ("Wrong islamic IdAlFitr holidays in 2009.", expected, holidays);

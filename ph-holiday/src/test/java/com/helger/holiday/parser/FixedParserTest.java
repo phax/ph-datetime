@@ -16,15 +16,14 @@
  */
 package com.helger.holiday.parser;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.helger.commons.collection.CollectionHelper;
-import com.helger.datetime.PDTFactory;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.Holidays;

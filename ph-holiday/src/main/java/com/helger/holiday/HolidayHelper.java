@@ -16,14 +16,13 @@
  */
 package com.helger.holiday;
 
+import java.time.LocalDate;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
-import org.joda.time.LocalDate;
-
 import com.helger.commons.ValueEnforcer;
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**
@@ -95,7 +94,7 @@ public final class HolidayHelper
   {
     if (aHolidayMgr == null)
       return CalendarHelper.getCurrentOrNextWorkDay ();
-    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
+    LocalDate aDT = LocalDate.now ();
     while (!isWorkDay (aDT, aHolidayMgr))
       aDT = aDT.plusDays (1);
     return aDT;

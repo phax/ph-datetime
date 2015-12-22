@@ -16,10 +16,11 @@
  */
 package com.helger.holiday.parser;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.joda.time.chrono.GregorianChronology;
-import org.joda.time.chrono.JulianChronology;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZonedDateTime;
+
+import org.threeten.extra.chrono.JulianChronology;
 
 import com.helger.datetime.CPDT;
 import com.helger.datetime.config.PDTConfig;
@@ -117,10 +118,9 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
     x = d + e + 114;
     nMonth = x / 31;
     nDay = (x % 31) + 1;
-    return new LocalDate (nYear,
-                          (nMonth == 3 ? DateTimeConstants.MARCH : DateTimeConstants.APRIL),
-                          nDay,
-                          JulianChronology.getInstance ());
+    return ZonedDateTime.of (LocalDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL), nDay),
+                             CPDT.NULL_LOCAL_TIME,
+                             JulianChronology.INSTANCE);
   }
 
   /**

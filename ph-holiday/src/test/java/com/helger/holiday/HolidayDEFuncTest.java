@@ -20,15 +20,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
 import org.junit.Test;
+import org.threeten.extra.Interval;
 
 import com.helger.commons.locale.country.ECountry;
-import com.helger.datetime.PDTFactory;
 
 public final class HolidayDEFuncTest extends AbstractCountryTestBase
 {
@@ -47,13 +47,13 @@ public final class HolidayDEFuncTest extends AbstractCountryTestBase
     try
     {
       final IHolidayManager instance = HolidayManagerFactory.getHolidayManager (ECountry.DE);
-      final Interval interval = new Interval (PDTFactory.createLocalDate (2010, 10, 1).toDateTimeAtStartOfDay (),
-                                              PDTFactory.createLocalDate (2011, 1, 31).toDateTimeAtStartOfDay ());
+      final Interval interval = Interval.of (LocalDate.of (2010, Month.OCTOBER, 1),
+                                             LocalDate.of (2011, Month.JANUARY, 31));
       final HolidayMap holidays = instance.getHolidays (interval);
-      final List <LocalDate> expected = Arrays.asList (PDTFactory.createLocalDate (2010, 12, 25),
-                                                       PDTFactory.createLocalDate (2010, 12, 26),
-                                                       PDTFactory.createLocalDate (2010, 10, 3),
-                                                       PDTFactory.createLocalDate (2011, 1, 1));
+      final List <LocalDate> expected = Arrays.asList (LocalDate.of (2010, Month.DECEMBER, 25),
+                                                       LocalDate.of (2010, Month.DECEMBER, 26),
+                                                       LocalDate.of (2010, Month.OCTOBER, 3),
+                                                       LocalDate.of (2011, Month.JANUARY, 1));
       assertEquals ("Wrong number of holidays", expected.size (), holidays.size ());
       for (final LocalDate d : expected)
       {

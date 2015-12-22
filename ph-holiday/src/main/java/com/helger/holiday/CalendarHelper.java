@@ -16,19 +16,17 @@
  */
 package com.helger.holiday;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.chrono.Chronology;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.joda.time.Chronology;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.chrono.IslamicChronology;
+import org.threeten.extra.Interval;
 
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
 import com.helger.datetime.util.PDTHelper;
 
@@ -60,7 +58,7 @@ public final class CalendarHelper
    * @return List of gregorian dates for the islamic month/day.
    */
   public static Set <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
-                                                                   final int nIslamicMonth,
+                                                                   final Month nIslamicMonth,
                                                                    final int nIslamicDay)
   {
     return getDatesFromChronologyWithinGregorianYear (nIslamicMonth,
@@ -90,10 +88,10 @@ public final class CalendarHelper
                                                                            final Chronology aTargetChronoUTC)
   {
     final Set <LocalDate> aHolidays = new HashSet <LocalDate> ();
-    final LocalDate aFirstGregorianDate = PDTFactory.createLocalDate (nGregorianYear, DateTimeConstants.JANUARY, 1);
-    final LocalDate aLastGregorianDate = PDTFactory.createLocalDate (nGregorianYear, DateTimeConstants.DECEMBER, 31);
+    final LocalDate aFirstGregorianDate = LocalDate.of (nGregorianYear, Month.JANUARY, 1);
+    final LocalDate aLastGregorianDate = LocalDate.of (nGregorianYear, Month.DECEMBER, 31);
 
-    final LocalDate aFirstTargetDate = new LocalDate (aFirstGregorianDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ())
+    final LocalDate aFirstTargetDate = new LocalDate (aFirstGregorianDate.toDateTimeAtStartOfDay (PDTConfig.getUTCZoneId ())
                                                                          .getMillis (),
                                                       aTargetChronoUTC);
     final LocalDate aLastTargetDate = new LocalDate (aLastGregorianDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ())
@@ -126,8 +124,7 @@ public final class CalendarHelper
   @Nonnull
   public static LocalDate convertToGregorianDate (@Nonnull final LocalDate aDate)
   {
-    return PDTFactory.createLocalDateFromMillis (aDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ())
-                                                      .getMillis ());
+    return LocalDate.ofFromMillis (aDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ()).getMillis ());
   }
 
   /**
@@ -141,7 +138,7 @@ public final class CalendarHelper
   @Nonnull
   public static LocalDate getCurrentOrNextWorkDay ()
   {
-    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
+    LocalDate aDT = LocalDate.now ();
     while (!PDTHelper.isWorkDay (aDT))
       aDT = aDT.plusDays (1);
     return aDT;
