@@ -16,6 +16,7 @@
  */
 package com.helger.holiday.mgr;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +92,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
     {
       final HolidayMap yearHolidays = getHolidays (nYear, aArgs);
       for (final Map.Entry <LocalDate, ISingleHoliday> aEntry : yearHolidays.getMap ().entrySet ())
-        if (aInterval.contains (aEntry.getKey ()))
+        if (aInterval.contains (TypeConverter.convertIfNecessary (aEntry.getKey (), Instant.class)))
           aHolidayMap.add (aEntry.getKey (), aEntry.getValue ());
     }
     return aHolidayMap;

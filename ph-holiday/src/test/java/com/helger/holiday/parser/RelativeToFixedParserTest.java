@@ -16,6 +16,8 @@
  */
 package com.helger.holiday.parser;
 
+import java.time.LocalDate;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -72,7 +74,7 @@ public final class RelativeToFixedParserTest
     s_aParser.parse (2011, aHolidays, config);
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
-                         PDTFactory.createLocalDate (2011, 8, 11),
+                         LocalDate.of (2011, 8, 11),
                          CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 
@@ -92,7 +94,7 @@ public final class RelativeToFixedParserTest
     s_aParser.parse (2011, aHolidays, config);
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
-                         PDTFactory.createLocalDate (2011, 8, 2),
+                         LocalDate.of (2011, 8, 2),
                          CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }

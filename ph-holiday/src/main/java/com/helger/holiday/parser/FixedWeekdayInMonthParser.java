@@ -62,7 +62,7 @@ public class FixedWeekdayInMonthParser extends AbstractHolidayParser
     int nDirection = 1;
     if (aFixedWeekdayInMonth.getWhich () == Which.LAST)
     {
-      aDate = aDate.withDayOfMonth (aDate.dayOfMonth ().getMaximumValue ());
+      aDate = aDate.plusMonths (1).withDayOfMonth (1).minusDays (1);
       nDirection = -1;
     }
     final DayOfWeek nWeekDay = XMLHolidayHelper.getWeekday (aFixedWeekdayInMonth.getWeekday ());

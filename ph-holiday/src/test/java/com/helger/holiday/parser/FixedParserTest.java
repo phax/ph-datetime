@@ -47,7 +47,7 @@ public final class FixedParserTest
                                        createFixed (5, Month.MAY, Integer.valueOf (2011), null));
     final HolidayMap set = new HolidayMap ();
     s_aParser.parse (2010, set, h);
-    _containsAll (set, PDTFactory.createLocalDate (2010, 1, 1), PDTFactory.createLocalDate (2010, 3, 3));
+    _containsAll (set, LocalDate.of (2010, 1, 1), LocalDate.of (2010, 3, 3));
   }
 
   @Test
@@ -61,7 +61,7 @@ public final class FixedParserTest
                                                     createMoving (Weekday.SUNDAY, With.NEXT, Weekday.MONDAY)));
     final HolidayMap set = new HolidayMap ();
     s_aParser.parse (2011, set, h);
-    _containsAll (set, PDTFactory.createLocalDate (2011, 1, 7), PDTFactory.createLocalDate (2011, 1, 24));
+    _containsAll (set, LocalDate.of (2011, 1, 7), LocalDate.of (2011, 1, 24));
   }
 
   @Test

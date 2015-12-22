@@ -16,6 +16,8 @@
  */
 package com.helger.holiday.parser;
 
+import java.time.LocalDate;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -67,7 +69,7 @@ public final class FixedWeekdayBetweenFixedParserTest
     parser.parse (2011, aHolidays, config);
     Assert.assertEquals ("Wrong number of results.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
-                         PDTFactory.createLocalDate (2011, 1, 19),
+                         LocalDate.of (2011, 1, 19),
                          CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }

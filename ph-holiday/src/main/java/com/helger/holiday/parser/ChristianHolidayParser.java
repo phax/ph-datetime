@@ -17,6 +17,8 @@
 package com.helger.holiday.parser;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Nonnull;
 
@@ -59,7 +61,7 @@ public class ChristianHolidayParser extends RelativeToEasterSundayParser
       if (!isValid (aChristianHoliday, nYear))
         continue;
 
-      LocalDate aEasterSunday;
+      ChronoLocalDate aEasterSunday;
       if (aChristianHoliday.getChronology () == ChronologyType.JULIAN)
         aEasterSunday = getJulianEasterSunday (nYear);
       else
@@ -74,49 +76,49 @@ public class ChristianHolidayParser extends RelativeToEasterSundayParser
           break;
         case CLEAN_MONDAY:
         case SHROVE_MONDAY:
-          aEasterSunday = aEasterSunday.minusDays (48);
+          aEasterSunday = aEasterSunday.minus (48, ChronoUnit.DAYS);
           break;
         case MARDI_GRAS:
         case CARNIVAL:
-          aEasterSunday = aEasterSunday.minusDays (47);
+          aEasterSunday = aEasterSunday.minus (47, ChronoUnit.DAYS);
           break;
         case ASH_WEDNESDAY:
-          aEasterSunday = aEasterSunday.minusDays (46);
+          aEasterSunday = aEasterSunday.minus (46, ChronoUnit.DAYS);
           break;
         case MAUNDY_THURSDAY:
-          aEasterSunday = aEasterSunday.minusDays (3);
+          aEasterSunday = aEasterSunday.minus (3, ChronoUnit.DAYS);
           break;
         case GOOD_FRIDAY:
-          aEasterSunday = aEasterSunday.minusDays (2);
+          aEasterSunday = aEasterSunday.minus (2, ChronoUnit.DAYS);
           break;
         case EASTER_SATURDAY:
-          aEasterSunday = aEasterSunday.minusDays (1);
+          aEasterSunday = aEasterSunday.minus (1, ChronoUnit.DAYS);
           break;
         case EASTER_MONDAY:
-          aEasterSunday = aEasterSunday.plusDays (1);
+          aEasterSunday = aEasterSunday.plus (1, ChronoUnit.DAYS);
           break;
         case EASTER_TUESDAY:
-          aEasterSunday = aEasterSunday.plusDays (2);
+          aEasterSunday = aEasterSunday.plus (2, ChronoUnit.DAYS);
           break;
         case GENERAL_PRAYER_DAY:
-          aEasterSunday = aEasterSunday.plusDays (26);
+          aEasterSunday = aEasterSunday.plus (26, ChronoUnit.DAYS);
           break;
         case ASCENSION_DAY:
-          aEasterSunday = aEasterSunday.plusDays (39);
+          aEasterSunday = aEasterSunday.plus (39, ChronoUnit.DAYS);
           break;
         case PENTECOST:
         case WHIT_SUNDAY:
-          aEasterSunday = aEasterSunday.plusDays (49);
+          aEasterSunday = aEasterSunday.plus (49, ChronoUnit.DAYS);
           break;
         case WHIT_MONDAY:
         case PENTECOST_MONDAY:
-          aEasterSunday = aEasterSunday.plusDays (50);
+          aEasterSunday = aEasterSunday.plus (50, ChronoUnit.DAYS);
           break;
         case CORPUS_CHRISTI:
-          aEasterSunday = aEasterSunday.plusDays (60);
+          aEasterSunday = aEasterSunday.plus (60, ChronoUnit.DAYS);
           break;
         case SACRED_HEART:
-          aEasterSunday = aEasterSunday.plusDays (68);
+          aEasterSunday = aEasterSunday.plus (68, ChronoUnit.DAYS);
           break;
         default:
           throw new IllegalArgumentException ("Unknown christian holiday type " + aChristianHoliday.getType ());

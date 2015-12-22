@@ -19,6 +19,8 @@ package com.helger.holiday.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 
 import com.helger.commons.collection.CollectionHelper;
@@ -83,7 +85,7 @@ public final class RelativeToWeekdayInMonthParserTest
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
     assertEquals ("Wrong date.",
-                  PDTFactory.createLocalDate (2011, 7, 12),
+                  LocalDate.of (2011, 7, 12),
                   CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
   }
 }

@@ -56,7 +56,7 @@ public final class ChristianHolidayParserTest
     s_aParser.parse (2011, aHolidays, aConfig);
     Assert.assertEquals ("Wrong number of aHolidays.", 1, aHolidays.size ());
     final LocalDate aEasterDate = CollectionHelper.getFirstElement (aHolidays.getAllDates ());
-    final LocalDate aEndDate = PDTFactory.createLocalDate (2011, 4, 24);
+    final LocalDate aEndDate = LocalDate.of (2011, 4, 24);
     Assert.assertEquals ("Wrong easter date.", aEndDate, aEasterDate);
   }
 
@@ -78,7 +78,7 @@ public final class ChristianHolidayParserTest
     final RelativeToEasterSundayParser aParser = new RelativeToEasterSundayParser ();
     aParser.parse (2011, aHolidays, aConfig);
     final List <LocalDate> aExpected = new ArrayList <LocalDate> ();
-    aExpected.add (PDTFactory.createLocalDate (2011, 4, 24));
+    aExpected.add (LocalDate.of (2011, 4, 24));
     Assert.assertEquals ("Wrong number of aHolidays.", aExpected.size (), aHolidays.size ());
     Assert.assertEquals ("Wrong holiday.",
                          aExpected.get (0),
@@ -98,13 +98,13 @@ public final class ChristianHolidayParserTest
                                             ChristianHolidayType.SACRED_HEART);
     s_aParser.parse (2011, aHolidays, aConfig);
     final List <LocalDate> expected = new ArrayList <LocalDate> ();
-    expected.add (PDTFactory.createLocalDate (2011, 3, 7));
-    expected.add (PDTFactory.createLocalDate (2011, 4, 23));
-    expected.add (PDTFactory.createLocalDate (2011, 4, 24));
-    expected.add (PDTFactory.createLocalDate (2011, 4, 26));
-    expected.add (PDTFactory.createLocalDate (2011, 5, 20));
-    expected.add (PDTFactory.createLocalDate (2011, 6, 12));
-    expected.add (PDTFactory.createLocalDate (2011, 7, 1));
+    expected.add (LocalDate.of (2011, 3, 7));
+    expected.add (LocalDate.of (2011, 4, 23));
+    expected.add (LocalDate.of (2011, 4, 24));
+    expected.add (LocalDate.of (2011, 4, 26));
+    expected.add (LocalDate.of (2011, 5, 20));
+    expected.add (LocalDate.of (2011, 6, 12));
+    expected.add (LocalDate.of (2011, 7, 1));
 
     Assert.assertEquals ("Wrong number of aHolidays.", expected.size (), aHolidays.size ());
 

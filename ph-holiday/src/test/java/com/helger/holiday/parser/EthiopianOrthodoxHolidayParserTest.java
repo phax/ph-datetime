@@ -52,9 +52,9 @@ public final class EthiopianOrthodoxHolidayParserTest
     config.getEthiopianOrthodoxHoliday ().add (createHoliday (EthiopianOrthodoxHolidayType.TIMKAT));
     s_aParser.parse (2010, aHolidays, config);
     Assert.assertEquals ("Wrong number of aHolidays.", 3, aHolidays.size ());
-    _assertContains (PDTFactory.createLocalDate (2010, 1, 18), aHolidays);
-    _assertContains (PDTFactory.createLocalDate (2010, 9, 11), aHolidays);
-    _assertContains (PDTFactory.createLocalDate (2010, 9, 27), aHolidays);
+    _assertContains (LocalDate.of (2010, 1, 18), aHolidays);
+    _assertContains (LocalDate.of (2010, 9, 11), aHolidays);
+    _assertContains (LocalDate.of (2010, 9, 27), aHolidays);
   }
 
   private static void _assertContains (final LocalDate date, final HolidayMap aHolidays)

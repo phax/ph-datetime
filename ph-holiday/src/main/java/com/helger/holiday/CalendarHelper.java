@@ -18,7 +18,9 @@ package com.helger.holiday;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
+import java.time.chrono.IsoChronology;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -122,8 +124,11 @@ public final class CalendarHelper
    * @return Converted date
    */
   @Nonnull
-  public static LocalDate convertToGregorianDate (@Nonnull final LocalDate aDate)
+  public static LocalDate convertToGregorianDate (@Nonnull final ChronoLocalDate aDate)
   {
+    if (aDate.getChronology () == IsoChronology.INSTANCE)
+      return LocalDate.from (aDate);
+    // FIXME
     return LocalDate.ofFromMillis (aDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ()).getMillis ());
   }
 

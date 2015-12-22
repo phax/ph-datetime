@@ -18,12 +18,12 @@ package com.helger.holiday.parser;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.ZonedDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 
-import org.threeten.extra.chrono.JulianChronology;
+import org.threeten.extra.chrono.JulianDate;
 
 import com.helger.datetime.CPDT;
-import com.helger.datetime.config.PDTConfig;
 import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
@@ -51,8 +51,8 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
     {
       if (!isValid (aDay, nYear))
         continue;
-      final LocalDate aEasterSunday = getEasterSunday (nYear, aDay.getChronology ());
-      aEasterSunday.plusDays (aDay.getDays ());
+      final ChronoLocalDate aEasterSunday = getEasterSunday (nYear, aDay.getChronology ());
+      aEasterSunday.plus (aDay.getDays (), ChronoUnit.DAYS);
       final String sPropertiesKey = "christian." + aDay.getDescriptionPropertiesKey ();
       addChrstianHoliday (aEasterSunday,
                           sPropertiesKey,
@@ -73,7 +73,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
    * @param holidays
    *        a {@link java.util.Set} object.
    */
-  protected final void addChrstianHoliday (final LocalDate aDate,
+  protected final void addChrstianHoliday (final ChronoLocalDate aDate,
                                            final String sPropertiesKey,
                                            final IHolidayType aHolidayType,
                                            final HolidayMap holidays)
@@ -89,12 +89,12 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
    *        The year to retrieve Easter Sunday date
    * @return Easter Sunday.
    */
-  public static LocalDate getEasterSunday (final int nYear)
+  public static ChronoLocalDate getEasterSunday (final int nYear)
   {
     return nYear <= CPDT.LAST_JULIAN_YEAR ? getJulianEasterSunday (nYear) : getGregorianEasterSunday (nYear);
   }
 
-  public static LocalDate getEasterSunday (final int nYear, final ChronologyType eType)
+  public static ChronoLocalDate getEasterSunday (final int nYear, final ChronologyType eType)
   {
     return eType == ChronologyType.JULIAN ? getJulianEasterSunday (nYear) : getGregorianEasterSunday (nYear);
   }
@@ -106,7 +106,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
    *        The year to retrieve Julian Easter Sunday date
    * @return julian easter Sunday
    */
-  public static LocalDate getJulianEasterSunday (final int nYear)
+  public static JulianDate getJulianEasterSunday (final int nYear)
   {
     int a, b, c, d, e;
     int x, nMonth, nDay;
@@ -118,9 +118,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
     x = d + e + 114;
     nMonth = x / 31;
     nDay = (x % 31) + 1;
-    return ZonedDateTime.of (LocalDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL), nDay),
-                             CPDT.NULL_LOCAL_TIME,
-                             JulianChronology.INSTANCE);
+    return JulianDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL).getValue (), nDay);
   }
 
   /**
@@ -149,9 +147,6 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
     x = h + k - 7 * l + 114;
     nMonth = x / 31;
     nDay = (x % 31) + 1;
-    return new LocalDate (nYear,
-                          (nMonth == 3 ? DateTimeConstants.MARCH : DateTimeConstants.APRIL),
-                          nDay,
-                          GregorianChronology.getInstance (PDTConfig.getDefaultZoneId ()));
+    return LocalDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL), nDay);
   }
 }
