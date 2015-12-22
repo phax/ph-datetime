@@ -14,20 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.datetime.period;
+package com.helger.datetime.domain;
 
-import java.time.LocalTime;
+import javax.annotation.Nullable;
 
 /**
- * This interface is used for storing a period consisting of exactly a start and
- * end date.
+ * Base interface for an object that has a start and an end.
  *
  * @author Philip Helger
+ * @param <DATATYPE>
+ *        Date and time type
  */
-public interface ILocalTimeDuration extends IFlexibleDuration <LocalTime>
+public interface IHasStartAndEnd <DATATYPE>
 {
-  default boolean isValidForNow ()
-  {
-    return isValidFor (LocalTime.now ());
-  }
+  /**
+   * @return The start. May be <code>null</code>.
+   */
+  @Nullable
+  DATATYPE getStart ();
+
+  /**
+   * @return The end. May be <code>null</code>.
+   */
+  @Nullable
+  DATATYPE getEnd ();
 }

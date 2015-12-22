@@ -21,6 +21,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.ZoneId;
+
 import org.junit.Test;
 
 /**
@@ -33,18 +35,12 @@ public final class PDTConfigTest
   @Test
   public void testTimeZones ()
   {
-    DateTimeZone aDTZ = PDTConfig.getDefaultZoneId ();
+    ZoneId aDTZ = PDTConfig.getDefaultZoneId ();
     assertNotNull (aDTZ);
 
-    aDTZ = PDTConfig.getDateTimeZoneUTC ();
+    aDTZ = PDTConfig.getUTCZoneId ();
     assertNotNull (aDTZ);
-    assertEquals ("UTC", aDTZ.getID ());
-
-    assertNotNull (PDTConfig.getDefaultChronologyUTC ());
-    assertEquals (PDTConfig.getDateTimeZoneUTC (), PDTConfig.getDefaultChronologyUTC ().getZone ());
-
-    assertNotNull (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ());
-    assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ());
+    assertEquals ("UTC", aDTZ.getId ());
 
     try
     {
@@ -53,21 +49,11 @@ public final class PDTConfigTest
 
       // Regular
       assertTrue (PDTConfig.setDefaultDateTimeZoneID ("Europe/Berlin").isSuccess ());
-      assertEquals ("Europe/Berlin", PDTConfig.getDefaultZoneId ().getID ());
+      assertEquals ("Europe/Berlin", PDTConfig.getDefaultZoneId ().getId ());
 
       // I hope this is not the standard time zone anywhere
       assertTrue (PDTConfig.setDefaultDateTimeZoneID ("UTC").isSuccess ());
-      assertEquals ("UTC", PDTConfig.getDefaultZoneId ().getID ());
-
-      // The default date time zone was not modified
-      assertEquals (DateTimeZone.getDefault (), PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ());
-
-      if (!DateTimeZone.getDefault ().getID ().equals ("UTC"))
-      {
-        // And therefore this must not be equal
-        assertTrue (!PDTConfig.getDefaultZoneId ()
-                              .equals (PDTConfig.getDefaultChronologyWithDefaultDateTimeZone ().getZone ()));
-      }
+      assertEquals ("UTC", PDTConfig.getDefaultZoneId ().getId ());
     }
     finally
     {

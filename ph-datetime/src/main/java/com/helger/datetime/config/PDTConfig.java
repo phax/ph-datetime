@@ -16,6 +16,7 @@
  */
 package com.helger.datetime.config;
 
+import java.time.DateTimeException;
 import java.time.ZoneId;
 import java.time.chrono.Chronology;
 import java.time.chrono.IsoChronology;
@@ -82,7 +83,7 @@ public final class PDTConfig
       TimeZone.setDefault (aDefaultTimeZone);
       return ESuccess.SUCCESS;
     }
-    catch (final IllegalArgumentException ex)
+    catch (final DateTimeException ex)
     {
       // time zone ID is unknown
       s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'");
@@ -98,6 +99,12 @@ public final class PDTConfig
   public static ZoneId getDefaultZoneId ()
   {
     return TimeZone.getDefault ().toZoneId ();
+  }
+
+  @Nonnull
+  public static ZoneId getUTCZoneId ()
+  {
+    return ZoneId.of ("UTC");
   }
 
   /**

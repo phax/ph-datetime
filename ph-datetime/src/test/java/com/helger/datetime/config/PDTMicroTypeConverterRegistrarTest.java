@@ -18,6 +18,10 @@ package com.helger.datetime.config;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -25,7 +29,6 @@ import org.junit.Test;
 
 import com.helger.commons.microdom.convert.MicroTypeConverter;
 import com.helger.datetime.CPDT;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link PDTMicroTypeConverterRegistrar}.
@@ -41,10 +44,10 @@ public final class PDTMicroTypeConverterRegistrarTest
   {
     assertNotNull (MicroTypeConverter.convertToMicroElement (new GregorianCalendar (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (new Date (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentDateTime (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalDateTime (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalDate (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalTime (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (ZonedDateTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDateTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDate.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalTime.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_DURATION, ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_PERIOD, ELEMENT_NAME));
   }

@@ -24,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoField;
 
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -31,8 +33,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Test;
 
 import com.helger.commons.CGlobal;
-import com.helger.datetime.PDTFactory;
-import com.helger.datetime.config.PDTConfig;
 
 /**
  * Test class for class {@link PDTXMLConverter}
@@ -56,11 +56,11 @@ public final class PDTXMLConverterTest
   public void testLocalDate ()
   {
     assertNull (PDTXMLConverter.getXMLCalendarDate ((LocalDate) null));
-    final LocalDate aLD = PDTFactory.getCurrentLocalDate ();
+    final LocalDate aLD = LocalDate.now ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendarDate (aLD);
     assertNotNull (c1);
     assertEquals (aLD.getYear (), c1.getYear ());
-    assertEquals (aLD.getMonthOfYear (), c1.getMonth ());
+    assertEquals (aLD.getMonth ().getValue (), c1.getMonth ());
     assertEquals (aLD.getDayOfMonth (), c1.getDay ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getHour ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getMinute ());
@@ -77,16 +77,16 @@ public final class PDTXMLConverterTest
   public void testLocalTime ()
   {
     assertNull (PDTXMLConverter.getXMLCalendarTime ((LocalTime) null));
-    final LocalTime aLT = PDTFactory.getCurrentLocalTime ();
+    final LocalTime aLT = LocalTime.now ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendarTime (aLT);
     assertNotNull (c1);
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getYear ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getMonth ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getDay ());
-    assertEquals (aLT.getHourOfDay (), c1.getHour ());
-    assertEquals (aLT.getMinuteOfHour (), c1.getMinute ());
-    assertEquals (aLT.getSecondOfMinute (), c1.getSecond ());
-    assertEquals (aLT.getMillisOfSecond (), c1.getMillisecond ());
+    assertEquals (aLT.getHour (), c1.getHour ());
+    assertEquals (aLT.getMinute (), c1.getMinute ());
+    assertEquals (aLT.getSecond (), c1.getSecond ());
+    assertEquals (aLT.get (ChronoField.MILLI_OF_SECOND), c1.getMillisecond ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getTimezone ());
     final LocalTime aLT2 = PDTXMLConverter.getLocalTime (c1);
     assertNotNull (aLT2);
@@ -98,16 +98,16 @@ public final class PDTXMLConverterTest
   public void testLocalDateTime ()
   {
     assertNull (PDTXMLConverter.getXMLCalendar ((LocalDateTime) null));
-    final LocalDateTime aLDT = PDTFactory.getCurrentLocalDateTime ();
+    final LocalDateTime aLDT = LocalDateTime.now ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendar (aLDT);
     assertNotNull (c1);
     assertEquals (aLDT.getYear (), c1.getYear ());
-    assertEquals (aLDT.getMonthOfYear (), c1.getMonth ());
+    assertEquals (aLDT.getMonth ().getValue (), c1.getMonth ());
     assertEquals (aLDT.getDayOfMonth (), c1.getDay ());
-    assertEquals (aLDT.getHourOfDay (), c1.getHour ());
-    assertEquals (aLDT.getMinuteOfHour (), c1.getMinute ());
-    assertEquals (aLDT.getSecondOfMinute (), c1.getSecond ());
-    assertEquals (aLDT.getMillisOfSecond (), c1.getMillisecond ());
+    assertEquals (aLDT.getHour (), c1.getHour ());
+    assertEquals (aLDT.getMinute (), c1.getMinute ());
+    assertEquals (aLDT.getSecond (), c1.getSecond ());
+    assertEquals (aLDT.get (ChronoField.MILLI_OF_SECOND), c1.getMillisecond ());
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getTimezone ());
     final LocalDateTime aLT2 = PDTXMLConverter.getLocalDateTime (c1);
     assertNotNull (aLT2);
@@ -118,25 +118,22 @@ public final class PDTXMLConverterTest
   @Test
   public void testDateTime ()
   {
-    assertNull (PDTXMLConverter.getXMLCalendar ((DateTime) null));
-    final DateTime aLDT = PDTFactory.getCurrentDateTime ();
+    assertNull (PDTXMLConverter.getXMLCalendar ((ZonedDateTime) null));
+    final ZonedDateTime aLDT = ZonedDateTime.now ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendar (aLDT);
     assertNotNull (c1);
     assertEquals (aLDT.getYear (), c1.getYear ());
-    assertEquals (aLDT.getMonthOfYear (), c1.getMonth ());
+    assertEquals (aLDT.getMonth ().getValue (), c1.getMonth ());
     assertEquals (aLDT.getDayOfMonth (), c1.getDay ());
-    assertEquals (aLDT.getHourOfDay (), c1.getHour ());
-    assertEquals (aLDT.getMinuteOfHour (), c1.getMinute ());
-    assertEquals (aLDT.getSecondOfMinute (), c1.getSecond ());
-    assertEquals (aLDT.getMillisOfSecond (), c1.getMillisecond ());
-    assertEquals (aLDT.getChronology ().getZone ().getOffset (aLDT) /
-                  CGlobal.MILLISECONDS_PER_MINUTE,
-                  c1.getTimezone ());
-    final DateTime aLDT2 = PDTXMLConverter.getDateTime (c1);
+    assertEquals (aLDT.getHour (), c1.getHour ());
+    assertEquals (aLDT.getMinute (), c1.getMinute ());
+    assertEquals (aLDT.getSecond (), c1.getSecond ());
+    assertEquals (aLDT.get (ChronoField.MILLI_OF_SECOND), c1.getMillisecond ());
+    assertEquals (aLDT.getOffset ().get (ChronoField.OFFSET_SECONDS) / CGlobal.SECONDS_PER_MINUTE, c1.getTimezone ());
+    final ZonedDateTime aLDT2 = PDTXMLConverter.getDateTime (c1);
     assertNotNull (aLDT2);
-    assertEquals (aLDT.withChronology (PDTConfig.getDefaultChronology ()),
-                  aLDT2.withChronology (PDTConfig.getDefaultChronology ()));
-    assertNull (PDTXMLConverter.getDateTime (null));
+    assertEquals (aLDT.toLocalDateTime (), aLDT2.toLocalDateTime ());
+    assertEquals (aLDT.getOffset (), aLDT2.getOffset ());
   }
 
   @Test

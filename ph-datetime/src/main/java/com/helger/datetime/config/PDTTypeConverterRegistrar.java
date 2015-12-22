@@ -21,7 +21,6 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,9 +66,10 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                            Short.class };
 
     // ZonedDateTime
-    aRegistry.registerTypeConverter (aSourceClasses,
-                                     ZonedDateTime.class,
-                                     aSource -> new ZonedDateTime (aSource, PDTConfig.getDefaultChronology ()));
+    // aRegistry.registerTypeConverter (aSourceClasses,
+    // ZonedDateTime.class,
+    // aSource -> new ZonedDateTime (aSource, PDTConfig.getDefaultChronology
+    // ()));
     aRegistry.registerTypeConverter (LocalDate.class,
                                      ZonedDateTime.class,
                                      aSource -> ZonedDateTime.of ((LocalDate) aSource,
@@ -86,9 +86,10 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                                   PDTConfig.getDefaultZoneId ()));
 
     // LocalDateTime
-    aRegistry.registerTypeConverter (aSourceClasses,
-                                     LocalDateTime.class,
-                                     aSource -> new LocalDateTime (aSource, PDTConfig.getDefaultChronology ()));
+    // aRegistry.registerTypeConverter (aSourceClasses,
+    // LocalDateTime.class,
+    // aSource -> new LocalDateTime (aSource, PDTConfig.getDefaultChronology
+    // ()));
     aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalDateTime.class,
                                      aSource -> ((ZonedDateTime) aSource).toLocalDateTime ());
@@ -100,9 +101,9 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                      aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, (LocalTime) aSource));
 
     // LocalDate
-    aRegistry.registerTypeConverter (aSourceClasses,
-                                     LocalDate.class,
-                                     aSource -> new LocalDate (aSource, PDTConfig.getDefaultChronology ()));
+    // aRegistry.registerTypeConverter (aSourceClasses,
+    // LocalDate.class,
+    // aSource -> new LocalDate (aSource, PDTConfig.getDefaultChronology ()));
     aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalDate.class,
                                      aSource -> ((ZonedDateTime) aSource).toLocalDate ());
@@ -111,9 +112,9 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                      aSource -> ((LocalDateTime) aSource).toLocalDate ());
 
     // LocalTime
-    aRegistry.registerTypeConverter (aSourceClasses,
-                                     LocalTime.class,
-                                     aSource -> new LocalTime (aSource, PDTConfig.getDefaultChronology ()));
+    // aRegistry.registerTypeConverter (aSourceClasses,
+    // LocalTime.class,
+    // aSource -> new LocalTime (aSource, PDTConfig.getDefaultChronology ()));
     aRegistry.registerTypeConverter (ZonedDateTime.class,
                                      LocalTime.class,
                                      aSource -> ((ZonedDateTime) aSource).toLocalTime ());
@@ -122,32 +123,32 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                      aSource -> ((LocalDateTime) aSource).toLocalTime ());
 
     // Duration
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                        AtomicInteger.class,
-                                                        AtomicLong.class,
-                                                        BigDecimal.class,
-                                                        BigInteger.class,
-                                                        Byte.class,
-                                                        Double.class,
-                                                        Float.class,
-                                                        Integer.class,
-                                                        Long.class,
-                                                        Short.class },
-                                     Duration.class,
-                                     aSource -> new Duration (aSource));
+    // aRegistry.registerTypeConverter (new Class <?> [] { String.class,
+    // AtomicInteger.class,
+    // AtomicLong.class,
+    // BigDecimal.class,
+    // BigInteger.class,
+    // Byte.class,
+    // Double.class,
+    // Float.class,
+    // Integer.class,
+    // Long.class,
+    // Short.class },
+    // Duration.class,
+    // aSource -> new Duration (aSource));
 
     // Period
-    aRegistry.registerTypeConverter (new Class <?> [] { String.class,
-                                                        AtomicInteger.class,
-                                                        AtomicLong.class,
-                                                        BigDecimal.class,
-                                                        BigInteger.class,
-                                                        Byte.class,
-                                                        Double.class,
-                                                        Float.class,
-                                                        Integer.class,
-                                                        Long.class,
-                                                        Short.class },
-                                     Period.class, aSource -> new Period (aSource));
+    // aRegistry.registerTypeConverter (new Class <?> [] { String.class,
+    // AtomicInteger.class,
+    // AtomicLong.class,
+    // BigDecimal.class,
+    // BigInteger.class,
+    // Byte.class,
+    // Double.class,
+    // Float.class,
+    // Integer.class,
+    // Long.class,
+    // Short.class },
+    // Period.class, aSource -> new Period (aSource));
   }
 }

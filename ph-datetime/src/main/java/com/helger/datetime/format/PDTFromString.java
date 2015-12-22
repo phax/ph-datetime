@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
@@ -68,10 +69,10 @@ public final class PDTFromString
       {
         return aDF.parse (sValue, ZonedDateTime::from);
       }
-      catch (final IllegalArgumentException ex)
+      catch (final DateTimeParseException ex)
       {
         if (s_aLogger.isDebugEnabled ())
-          s_aLogger.debug ("Failed to parse date '" + sValue + "' with " + aDF);
+          s_aLogger.debug ("Failed to parse ZonedDateTime '" + sValue + "' with " + aDF);
       }
     return null;
   }
@@ -127,15 +128,25 @@ public final class PDTFromString
   @Nullable
   public static LocalDate getLocalDateFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
-    return aDT == null ? null : aDT.toLocalDate ();
+    ValueEnforcer.notNull (aDF, "DateTimeFormatter");
+
+    if (StringHelper.hasText (sValue))
+      try
+      {
+        return aDF.parse (sValue, LocalDate::from);
+      }
+      catch (final DateTimeParseException ex)
+      {
+        if (s_aLogger.isDebugEnabled ())
+          s_aLogger.debug ("Failed to parse LocalDate '" + sValue + "' with " + aDF);
+      }
+    return null;
   }
 
   @Nullable
   public static LocalDate getLocalDateFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
-    return aDT == null ? null : aDT.toLocalDate ();
+    return getLocalDateFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
   }
 
   @Nullable
@@ -149,15 +160,25 @@ public final class PDTFromString
   public static LocalDateTime getLocalDateTimeFromString (@Nullable final String sValue,
                                                           @Nonnull final DateTimeFormatter aDF)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
-    return aDT == null ? null : aDT.toLocalDateTime ();
+    ValueEnforcer.notNull (aDF, "DateTimeFormatter");
+
+    if (StringHelper.hasText (sValue))
+      try
+      {
+        return aDF.parse (sValue, LocalDateTime::from);
+      }
+      catch (final DateTimeParseException ex)
+      {
+        if (s_aLogger.isDebugEnabled ())
+          s_aLogger.debug ("Failed to parse LocalDateTime '" + sValue + "' with " + aDF);
+      }
+    return null;
   }
 
   @Nullable
   public static LocalDateTime getLocalDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
-    return aDT == null ? null : aDT.toLocalDateTime ();
+    return getLocalDateTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
   }
 
   @Nullable
@@ -169,14 +190,24 @@ public final class PDTFromString
   @Nullable
   public static LocalTime getLocalTimeFromString (@Nullable final String sValue, @Nonnull final DateTimeFormatter aDF)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, aDF);
-    return aDT == null ? null : aDT.toLocalTime ();
+    ValueEnforcer.notNull (aDF, "DateTimeFormatter");
+
+    if (StringHelper.hasText (sValue))
+      try
+      {
+        return aDF.parse (sValue, LocalTime::from);
+      }
+      catch (final DateTimeParseException ex)
+      {
+        if (s_aLogger.isDebugEnabled ())
+          s_aLogger.debug ("Failed to parse LocalTime '" + sValue + "' with " + aDF);
+      }
+    return null;
   }
 
   @Nullable
   public static LocalTime getLocalTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    final ZonedDateTime aDT = getDateTimeFromString (sValue, sPattern);
-    return aDT == null ? null : aDT.toLocalTime ();
+    return getLocalTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
   }
 }

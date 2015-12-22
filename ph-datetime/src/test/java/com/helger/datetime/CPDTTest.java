@@ -18,9 +18,10 @@ package com.helger.datetime;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import java.time.Month;
+import java.time.ZonedDateTime;
 
-import com.helger.datetime.config.PDTConfig;
+import org.junit.Test;
 
 /**
  * Test class for class {@link CPDT}.
@@ -33,29 +34,29 @@ public final class CPDTTest
   public void testNullLocalDate ()
   {
     assertEquals (1, CPDT.NULL_LOCAL_DATE.getDayOfMonth ());
-    assertEquals (DateTimeConstants.JANUARY, CPDT.NULL_LOCAL_DATE.getMonthOfYear ());
+    assertEquals (Month.JANUARY, CPDT.NULL_LOCAL_DATE.getMonth ());
     assertEquals (CPDT.MIN_YEAR_INT32, CPDT.NULL_LOCAL_DATE.getYear ());
   }
 
   @Test
   public void testNullLocalTime ()
   {
-    assertEquals (0, CPDT.NULL_LOCAL_TIME.getHourOfDay ());
-    assertEquals (0, CPDT.NULL_LOCAL_TIME.getMinuteOfHour ());
-    assertEquals (0, CPDT.NULL_LOCAL_TIME.getSecondOfMinute ());
-    assertEquals (0, CPDT.NULL_LOCAL_TIME.getMillisOfSecond ());
+    assertEquals (0, CPDT.NULL_LOCAL_TIME.getHour ());
+    assertEquals (0, CPDT.NULL_LOCAL_TIME.getMinute ());
+    assertEquals (0, CPDT.NULL_LOCAL_TIME.getSecond ());
+    assertEquals (0, CPDT.NULL_LOCAL_TIME.getNano ());
   }
 
   @Test
   public void testNullLocalDateTime ()
   {
     assertEquals (1, CPDT.NULL_LOCAL_DATETIME.getDayOfMonth ());
-    assertEquals (DateTimeConstants.JANUARY, CPDT.NULL_LOCAL_DATETIME.getMonthOfYear ());
+    assertEquals (Month.JANUARY, CPDT.NULL_LOCAL_DATETIME.getMonth ());
     assertEquals (CPDT.MIN_YEAR_INT32, CPDT.NULL_LOCAL_DATETIME.getYear ());
-    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getHourOfDay ());
-    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getMinuteOfHour ());
-    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getSecondOfMinute ());
-    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getMillisOfSecond ());
+    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getHour ());
+    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getMinute ());
+    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getSecond ());
+    assertEquals (0, CPDT.NULL_LOCAL_DATETIME.getNano ());
   }
 
   @Test
@@ -63,37 +64,32 @@ public final class CPDTTest
   {
     // By default the local chronology is used - must be converted to UTC to
     // deliver a reall NULL date
-    final DateTime aNullDTUTC = CPDT.NULL_DATETIME.withChronology (PDTConfig.getDefaultChronologyUTC ());
+    final ZonedDateTime aNullDTUTC = CPDT.NULL_DATETIME_UTC;
     assertEquals (1, aNullDTUTC.getDayOfMonth ());
-    assertEquals (DateTimeConstants.JANUARY, aNullDTUTC.getMonthOfYear ());
+    assertEquals (Month.JANUARY, aNullDTUTC.getMonth ());
     assertEquals (CPDT.MIN_YEAR_INT32, aNullDTUTC.getYear ());
-    assertEquals (0, aNullDTUTC.getHourOfDay ());
-    assertEquals (0, aNullDTUTC.getMinuteOfHour ());
-    assertEquals (0, aNullDTUTC.getSecondOfMinute ());
-    assertEquals (0, aNullDTUTC.getMillisOfSecond ());
+    assertEquals (0, aNullDTUTC.getHour ());
+    assertEquals (0, aNullDTUTC.getMinute ());
+    assertEquals (0, aNullDTUTC.getSecond ());
+    assertEquals (0, aNullDTUTC.getNano ());
   }
 
   @Test
   public void testNullDateTimeUTC ()
   {
     assertEquals (1, CPDT.NULL_DATETIME_UTC.getDayOfMonth ());
-    assertEquals (DateTimeConstants.JANUARY, CPDT.NULL_DATETIME_UTC.getMonthOfYear ());
+    assertEquals (Month.JANUARY, CPDT.NULL_DATETIME_UTC.getMonth ());
     assertEquals (CPDT.MIN_YEAR_INT32, CPDT.NULL_DATETIME_UTC.getYear ());
-    assertEquals (0, CPDT.NULL_DATETIME_UTC.getHourOfDay ());
-    assertEquals (0, CPDT.NULL_DATETIME_UTC.getMinuteOfHour ());
-    assertEquals (0, CPDT.NULL_DATETIME_UTC.getSecondOfMinute ());
-    assertEquals (0, CPDT.NULL_DATETIME_UTC.getMillisOfSecond ());
+    assertEquals (0, CPDT.NULL_DATETIME_UTC.getHour ());
+    assertEquals (0, CPDT.NULL_DATETIME_UTC.getMinute ());
+    assertEquals (0, CPDT.NULL_DATETIME_UTC.getSecond ());
+    assertEquals (0, CPDT.NULL_DATETIME_UTC.getNano ());
   }
 
   @Test
   public void testNullPeriod ()
   {
-    assertEquals (0, CPDT.NULL_PERIOD.getMillis ());
-    assertEquals (0, CPDT.NULL_PERIOD.getSeconds ());
-    assertEquals (0, CPDT.NULL_PERIOD.getMinutes ());
-    assertEquals (0, CPDT.NULL_PERIOD.getHours ());
     assertEquals (0, CPDT.NULL_PERIOD.getDays ());
-    assertEquals (0, CPDT.NULL_PERIOD.getWeeks ());
     assertEquals (0, CPDT.NULL_PERIOD.getMonths ());
     assertEquals (0, CPDT.NULL_PERIOD.getYears ());
   }
@@ -101,10 +97,7 @@ public final class CPDTTest
   @Test
   public void testNullDuration ()
   {
-    assertEquals (0, CPDT.NULL_DURATION.getMillis ());
-    assertEquals (0, CPDT.NULL_DURATION.getStandardSeconds ());
-    assertEquals (0, CPDT.NULL_DURATION.getStandardMinutes ());
-    assertEquals (0, CPDT.NULL_DURATION.getStandardHours ());
-    assertEquals (0, CPDT.NULL_DURATION.getStandardDays ());
+    assertEquals (0, CPDT.NULL_DURATION.getNano ());
+    assertEquals (0, CPDT.NULL_DURATION.getSeconds ());
   }
 }

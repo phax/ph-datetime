@@ -165,9 +165,11 @@ public final class PDTHelper
     return x.getYear () == y.getYear () && x.getDayOfYear () == y.getDayOfYear ();
   }
 
-  public static boolean isSameYearAndWeek (@Nonnull final LocalDate x, @Nonnull final LocalDate y)
+  public static boolean isSameYearAndWeek (@Nonnull final LocalDate x,
+                                           @Nonnull final LocalDate y,
+                                           @Nonnull final Locale aLocale)
   {
-    return x.getYear () == y.getYear () && getWeekOfWeekBasedYear (x) == getWeekOfWeekBasedYear (y);
+    return x.getYear () == y.getYear () && getWeekOfWeekBasedYear (x, aLocale) == getWeekOfWeekBasedYear (y, aLocale);
   }
 
   public static boolean isSameMonthAndDay (@Nonnull final LocalDate x, @Nonnull final LocalDate y)
@@ -184,6 +186,12 @@ public final class PDTHelper
     return !aLowerBound.isAfter (aDate) && !aDate.isAfter (aUpperBound);
   }
 
+  @Nonnull
+  public static int getWeekOfWeekBasedYear (@Nonnull final TemporalAccessor aDT, @Nonnull final Locale aLocale)
+  {
+    return aDT.get (WeekFields.of (aLocale).weekOfWeekBasedYear ());
+  }
+
   /**
    * Get the start--week number for the passed year and month.
    *
@@ -192,15 +200,21 @@ public final class PDTHelper
    * @return the start week number.
    */
   @Nonnull
-  public static int getStartWeekOfMonth (@Nonnull final ZonedDateTime aDT)
+  public static int getStartWeekOfMonth (@Nonnull final LocalDateTime aDT, @Nonnull final Locale aLocale)
   {
-    return getWeekOfWeekBasedYear (aDT.withDayOfMonth (1));
+    return getWeekOfWeekBasedYear (aDT.withDayOfMonth (1), aLocale);
   }
 
   @Nonnull
-  public static int getWeekOfWeekBasedYear (@Nonnull final TemporalAccessor aDT)
+  public static int getStartWeekOfMonth (@Nonnull final LocalDate aDT, @Nonnull final Locale aLocale)
   {
-    return aDT.get (WeekFields.of (Locale.US).weekOfWeekBasedYear ());
+    return getWeekOfWeekBasedYear (aDT.withDayOfMonth (1), aLocale);
+  }
+
+  @Nonnull
+  public static int getStartWeekOfMonth (@Nonnull final ZonedDateTime aDT, @Nonnull final Locale aLocale)
+  {
+    return getWeekOfWeekBasedYear (aDT.withDayOfMonth (1), aLocale);
   }
 
   /**
@@ -211,9 +225,21 @@ public final class PDTHelper
    * @return The end week number.
    */
   @Nonnull
-  public static int getEndWeekOfMonth (@Nonnull final ZonedDateTime aDT)
+  public static int getEndWeekOfMonth (@Nonnull final LocalDateTime aDT, @Nonnull final Locale aLocale)
   {
-    return getWeekOfWeekBasedYear (aDT.plusMonths (1).withDayOfMonth (1).minusDays (1));
+    return getWeekOfWeekBasedYear (aDT.plusMonths (1).withDayOfMonth (1).minusDays (1), aLocale);
+  }
+
+  @Nonnull
+  public static int getEndWeekOfMonth (@Nonnull final LocalDate aDT, @Nonnull final Locale aLocale)
+  {
+    return getWeekOfWeekBasedYear (aDT.plusMonths (1).withDayOfMonth (1).minusDays (1), aLocale);
+  }
+
+  @Nonnull
+  public static int getEndWeekOfMonth (@Nonnull final ZonedDateTime aDT, @Nonnull final Locale aLocale)
+  {
+    return getWeekOfWeekBasedYear (aDT.plusMonths (1).withDayOfMonth (1).minusDays (1), aLocale);
   }
 
   @Nonnull

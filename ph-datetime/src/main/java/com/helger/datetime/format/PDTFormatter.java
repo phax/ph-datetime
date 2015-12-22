@@ -74,7 +74,10 @@ public final class PDTFormatter
   public static DateTimeFormatter getWithLocaleAndChrono (@Nonnull final DateTimeFormatter aFormatter,
                                                           @Nullable final Locale aDisplayLocale)
   {
-    return aFormatter.withLocale (aDisplayLocale).withChronology (PDTConfig.getDefaultChronology ());
+    DateTimeFormatter ret = aFormatter;
+    if (aDisplayLocale != null)
+      ret = ret.withLocale (aDisplayLocale);
+    return ret.withChronology (PDTConfig.getDefaultChronology ());
   }
 
   /**

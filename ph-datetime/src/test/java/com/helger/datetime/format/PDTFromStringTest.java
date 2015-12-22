@@ -24,11 +24,13 @@ import static org.junit.Assert.fail;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZonedDateTime;
+import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
 
-import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
 
 /**
@@ -42,16 +44,16 @@ public final class PDTFromStringTest
   public void testFromString ()
   {
     // No chronology
-    DateTimeFormatter aDTF = DateTimeFormat.forPattern ("yyyy/MM/dd HH:mm:ss");
+    DateTimeFormatter aDTF = PDTFormatter.getForPattern ("yyyy/MM/dd HH:mm:ss");
     assertNotNull (aDTF);
-    DateTime aDT = PDTFromString.getDateTimeFromString ("2009/03/28 15:06:34", aDTF);
+    LocalDateTime aDT = PDTFromString.getLocalDateTimeFromString ("2009/03/28 15:06:34", aDTF);
     assertNotNull (aDT);
-    assertEquals (ISOChronology.getInstance (), aDT.getChronology ());
+    assertEquals (IsoChronology.INSTANCE, aDT.getChronology ());
 
     // Our default chronology
     aDTF = PDTFormatter.getForPattern ("yyyy/MM/dd HH:mm:ss");
     assertNotNull (aDTF);
-    aDT = PDTFromString.getDateTimeFromString ("2009/03/28 15:06:34", aDTF);
+    aDT = PDTFromString.getLocalDateTimeFromString ("2009/03/28 15:06:34", aDTF);
     assertNotNull (aDT);
     assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
   }
@@ -59,15 +61,16 @@ public final class PDTFromStringTest
   @Test
   public void testDateTimeFromString ()
   {
-    assertEquals (PDTFactory.createDateTime (2000, DateTimeConstants.JULY, 6),
-                  PDTFromString.getDateTimeFromString ("2000.07.06", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getDateTimeFromString ("2000.07.06 abc", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getDateTimeFromString (null, "yyyy.MM.dd"));
+    assertEquals (LocalDateTime.of (2000, Month.JULY, 6, 0, 0),
+                  PDTFromString.getLocalDateTimeFromString ("2000.07.06 00:00", "yyyy.MM.dd HH:mm"));
+    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06", "yyyy.MM.dd"));
+    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06 abc", "yyyy.MM.dd"));
+    assertNull (PDTFromString.getLocalDateTimeFromString (null, "yyyy.MM.dd"));
 
     try
     {
       // Illegal DT pattern
-      PDTFromString.getDateTimeFromString ("2000.07.06", "abc");
+      PDTFromString.getLocalDateTimeFromString ("2000.07.06", "abc");
       fail ();
     }
     catch (final IllegalArgumentException ex)
@@ -76,7 +79,7 @@ public final class PDTFromStringTest
     try
     {
       // null DT pattern
-      PDTFromString.getDateTimeFromString ("2000.07.06", (DateTimeFormatter) null);
+      PDTFromString.getLocalDateTimeFromString ("2000.07.06", (DateTimeFormatter) null);
       fail ();
     }
     catch (final NullPointerException ex)
@@ -86,7 +89,7 @@ public final class PDTFromStringTest
   @Test
   public void testLocalDateFromString ()
   {
-    assertEquals (PDTFactory.createLocalDate (2000, DateTimeConstants.JULY, 6),
+    assertEquals (LocalDate.of (2000, Month.JULY, 6),
                   PDTFromString.getLocalDateFromString ("2000.07.06", "yyyy.MM.dd"));
     assertNull (PDTFromString.getLocalDateFromString ("2000.07.06 abc", "yyyy.MM.dd"));
     assertNull (PDTFromString.getLocalDateFromString (null, "yyyy.MM.dd"));
@@ -113,20 +116,20 @@ public final class PDTFromStringTest
   @Test
   public void testDefaultToStringAndBack ()
   {
-    final DateTime aDT = PDTFactory.getCurrentDateTime ();
+    final ZonedDateTime aDT = ZonedDateTime.now ();
     String sDT = aDT.toString ();
-    assertEquals (aDT, PDTFactory.createDateTime (sDT));
+    assertEquals (aDT, ZonedDateTime.parse (sDT));
 
-    final LocalDateTime aLDT = PDTFactory.getCurrentLocalDateTime ();
+    final LocalDateTime aLDT = LocalDateTime.now ();
     sDT = aLDT.toString ();
-    assertEquals (aLDT, PDTFactory.createLocalDateTime (sDT));
+    assertEquals (aLDT, LocalDateTime.parse (sDT));
 
-    final LocalDate aLD = PDTFactory.getCurrentLocalDate ();
+    final LocalDate aLD = LocalDate.now ();
     sDT = aLD.toString ();
-    assertEquals (aLD, PDTFactory.createLocalDate (sDT));
+    assertEquals (aLD, LocalDate.parse (sDT));
 
-    final LocalTime aLT = PDTFactory.getCurrentLocalTime ();
+    final LocalTime aLT = LocalTime.now ();
     sDT = aLT.toString ();
-    assertEquals (aLT, PDTFactory.createLocalTime (sDT));
+    assertEquals (aLT, LocalTime.parse (sDT));
   }
 }
