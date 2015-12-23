@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
+import java.time.chrono.HijrahChronology;
 import java.time.chrono.IsoChronology;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,13 +61,13 @@ public final class CalendarHelper
    * @return List of gregorian dates for the islamic month/day.
    */
   public static Set <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
-                                                                   final Month nIslamicMonth,
+                                                                   final int nIslamicMonth,
                                                                    final int nIslamicDay)
   {
     return getDatesFromChronologyWithinGregorianYear (nIslamicMonth,
                                                       nIslamicDay,
                                                       nGregorianYear,
-                                                      IslamicChronology.getInstanceUTC ());
+                                                      HijrahChronology.INSTANCE);
   }
 
   /**
