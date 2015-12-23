@@ -35,7 +35,6 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.timing.StopWatch;
-import com.helger.datetime.config.PDTConfig;
 import com.helger.holiday.mgr.AbstractHolidayManager;
 import com.helger.holiday.mgr.CalendarHierarchy;
 
@@ -147,17 +146,6 @@ public final class HolidayManagerFactoryTest
     assertFalse ("This date should NOT be a holiday.", m.isHoliday (c));
     c.add (Calendar.DAY_OF_YEAR, 1);
     assertTrue ("This date should be a holiday.", m.isHoliday (c));
-  }
-
-  @Test
-  public void testChronology () throws Exception
-  {
-    final IHolidayManager aMgr = HolidayManagerFactory.getHolidayManager ("test");
-    final HolidayMap aHolidays = aMgr.getHolidays (2010);
-    for (final LocalDate aDate : aHolidays.getMap ().keySet ())
-    {
-      assertEquals ("Wrong chronology for date " + aDate, PDTConfig.getDefaultChronology (), aDate.getChronology ());
-    }
   }
 
   private void _assertDates (final Set <LocalDate> aExpectedDates, final HolidayMap holidays)
