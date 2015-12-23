@@ -52,6 +52,14 @@ public final class PDTFromString
   private PDTFromString ()
   {}
 
+  private static void _onParseException (@Nonnull final String sDestType,
+                                         @Nonnull final String sValue,
+                                         @Nonnull final DateTimeFormatter aDF,
+                                         @Nonnull final DateTimeParseException ex)
+  {
+    s_aLogger.info ("Failed to parse " + sDestType + " '" + sValue + "' with " + aDF + ": " + ex.getMessage ());
+  }
+
   @Nullable
   public static ZonedDateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
@@ -71,8 +79,7 @@ public final class PDTFromString
       }
       catch (final DateTimeParseException ex)
       {
-        if (s_aLogger.isDebugEnabled ())
-          s_aLogger.debug ("Failed to parse ZonedDateTime '" + sValue + "' with " + aDF);
+        _onParseException ("ZonedDateTime", sValue, aDF, ex);
       }
     return null;
   }
@@ -137,8 +144,7 @@ public final class PDTFromString
       }
       catch (final DateTimeParseException ex)
       {
-        if (s_aLogger.isDebugEnabled ())
-          s_aLogger.debug ("Failed to parse LocalDate '" + sValue + "' with " + aDF);
+        _onParseException ("LocalDate", sValue, aDF, ex);
       }
     return null;
   }
@@ -169,8 +175,7 @@ public final class PDTFromString
       }
       catch (final DateTimeParseException ex)
       {
-        if (s_aLogger.isDebugEnabled ())
-          s_aLogger.debug ("Failed to parse LocalDateTime '" + sValue + "' with " + aDF);
+        _onParseException ("LocalDateTime", sValue, aDF, ex);
       }
     return null;
   }
@@ -199,8 +204,7 @@ public final class PDTFromString
       }
       catch (final DateTimeParseException ex)
       {
-        if (s_aLogger.isDebugEnabled ())
-          s_aLogger.debug ("Failed to parse LocalTime '" + sValue + "' with " + aDF);
+        _onParseException ("LocalTime", sValue, aDF, ex);
       }
     return null;
   }

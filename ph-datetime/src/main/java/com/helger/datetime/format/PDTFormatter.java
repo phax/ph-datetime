@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
-import com.helger.datetime.config.PDTConfig;
 
 /**
  * Create common {@link DateTimeFormatter} objects used for printing and parsing
@@ -71,13 +70,13 @@ public final class PDTFormatter
    * @return The modified date time formatter. Never <code>null</code>.
    */
   @Nonnull
-  public static DateTimeFormatter getWithLocaleAndChrono (@Nonnull final DateTimeFormatter aFormatter,
-                                                          @Nullable final Locale aDisplayLocale)
+  public static DateTimeFormatter getWithLocale (@Nonnull final DateTimeFormatter aFormatter,
+                                                 @Nullable final Locale aDisplayLocale)
   {
     DateTimeFormatter ret = aFormatter;
     if (aDisplayLocale != null)
       ret = ret.withLocale (aDisplayLocale);
-    return ret.withChronology (PDTConfig.getDefaultChronology ());
+    return ret;
   }
 
   /**
@@ -310,6 +309,6 @@ public final class PDTFormatter
   public static DateTimeFormatter getForPattern (@Nonnull final String sPattern,
                                                  @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
   {
-    return getWithLocaleAndChrono (DateTimeFormatter.ofPattern (sPattern), aDisplayLocale);
+    return getWithLocale (DateTimeFormatter.ofPattern (sPattern), aDisplayLocale);
   }
 }

@@ -18,8 +18,6 @@ package com.helger.datetime.config;
 
 import java.time.DateTimeException;
 import java.time.ZoneId;
-import java.time.chrono.Chronology;
-import java.time.chrono.IsoChronology;
 import java.util.TimeZone;
 
 import javax.annotation.Nonnull;
@@ -32,6 +30,7 @@ import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.state.ESuccess;
+import com.helger.datetime.PDTFactory;
 
 /**
  * This class provides the most basic settings for date time operating: the
@@ -115,18 +114,5 @@ public final class PDTConfig
   public static TimeZone getDefaultTimeZone ()
   {
     return TimeZone.getDefault ();
-  }
-
-  /**
-   * @return The default chronology ({@link ISOChronology} or
-   *         {@link GJChronology}) using the result of
-   *         {@link #getDefaultZoneId()}
-   * @see #isUseISOChronology()
-   * @see #getDefaultZoneId()
-   */
-  @Nonnull
-  public static Chronology getDefaultChronology ()
-  {
-    return IsoChronology.INSTANCE;
   }
 }

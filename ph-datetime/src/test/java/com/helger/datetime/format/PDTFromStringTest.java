@@ -31,8 +31,6 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
 
-import com.helger.datetime.config.PDTConfig;
-
 /**
  * Test class for class {@link PDTFromString}.
  *
@@ -55,7 +53,6 @@ public final class PDTFromStringTest
     assertNotNull (aDTF);
     aDT = PDTFromString.getLocalDateTimeFromString ("2009/03/28 15:06:34", aDTF);
     assertNotNull (aDT);
-    assertEquals (PDTConfig.getDefaultChronology (), aDT.getChronology ());
   }
 
   @Test
