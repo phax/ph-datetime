@@ -87,6 +87,14 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (Instant.class,
                                      ZonedDateTime.class,
                                      aSource -> ZonedDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (Date.class,
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.ofInstant (aSource.toInstant (),
+                                                                         PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (java.sql.Timestamp.class,
+                                     ZonedDateTime.class,
+                                     aSource -> ZonedDateTime.of (aSource.toLocalDateTime (),
+                                                                  PDTConfig.getDefaultZoneId ()));
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          ZonedDateTime.class,
                                                                          aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
@@ -108,6 +116,13 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (Instant.class,
                                      LocalDateTime.class,
                                      aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (Date.class,
+                                     LocalDateTime.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource.toInstant (),
+                                                                         PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (java.sql.Timestamp.class,
+                                     LocalDateTime.class,
+                                     java.sql.Timestamp::toLocalDateTime);
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          LocalDateTime.class,
                                                                          aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
@@ -125,6 +140,12 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                      LocalDate.class,
                                      aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ())
                                                              .toLocalDate ());
+    aRegistry.registerTypeConverter (Date.class,
+                                     LocalDate.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource.toInstant (),
+                                                                         PDTConfig.getDefaultZoneId ())
+                                                             .toLocalDate ());
+    aRegistry.registerTypeConverter (java.sql.Date.class, LocalDate.class, java.sql.Date::toLocalDate);
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          LocalDate.class,
                                                                          aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
@@ -142,9 +163,20 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                      LocalTime.class,
                                      aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ())
                                                              .toLocalTime ());
+    aRegistry.registerTypeConverter (Date.class,
+                                     LocalTime.class,
+                                     aSource -> LocalDateTime.ofInstant (aSource.toInstant (),
+                                                                         PDTConfig.getDefaultZoneId ())
+                                                             .toLocalTime ());
+    aRegistry.registerTypeConverter (java.sql.Time.class, LocalTime.class, java.sql.Time::toLocalTime);
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          LocalTime.class,
                                                                          aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
                                                                                                                       LocalTime.class));
+
+    // Destination: Date
+    aRegistry.registerTypeConverterRuleAnySourceFixedDestination (Date.class,
+                                                                  aSource -> Date.from (TypeConverter.convertIfNecessary (aSource,
+                                                                                                                          Instant.class)));
   }
 }
