@@ -21,6 +21,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.Year;
+import java.time.YearMonth;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,7 +37,7 @@ import com.helger.commons.typeconvert.ITypeConverterRegistrarSPI;
 import com.helger.commons.typeconvert.ITypeConverterRegistry;
 import com.helger.commons.typeconvert.TypeConverter;
 import com.helger.commons.typeconvert.TypeConverterRegistry;
-import com.helger.datetime.CPDT;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Register all {@link ITypeConverter} objects to the central
@@ -71,62 +73,35 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverter (GregorianCalendar.class, ZonedDateTime.class, GregorianCalendar::toZonedDateTime);
     aRegistry.registerTypeConverter (String.class, ZonedDateTime.class, ZonedDateTime::parse);
     aRegistry.registerTypeConverter (OffsetDateTime.class, ZonedDateTime.class, OffsetDateTime::toZonedDateTime);
-    aRegistry.registerTypeConverter (LocalDate.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of (aSource,
-                                                                  CPDT.NULL_LOCAL_TIME,
-                                                                  PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (LocalTime.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of (CPDT.NULL_LOCAL_DATE,
-                                                                  aSource,
-                                                                  PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (LocalDateTime.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of (aSource, PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (Instant.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (Date.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.ofInstant (aSource.toInstant (),
-                                                                         PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (java.sql.Timestamp.class,
-                                     ZonedDateTime.class,
-                                     aSource -> ZonedDateTime.of (aSource.toLocalDateTime (),
-                                                                  PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (LocalDate.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (LocalTime.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (LocalDateTime.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (YearMonth.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (Year.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (Instant.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (Date.class, ZonedDateTime.class, PDTFactory::createDateTime);
+    aRegistry.registerTypeConverter (java.sql.Timestamp.class, ZonedDateTime.class, PDTFactory::createDateTime);
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          ZonedDateTime.class,
-                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
-                                                                                                                      ZonedDateTime.class));
+                                                                         PDTFactory::createDateTime);
 
     // Destination: LocalDateTime
-    aRegistry.registerTypeConverter (GregorianCalendar.class,
-                                     LocalDateTime.class,
-                                     aSource -> aSource.toZonedDateTime ().toLocalDateTime ());
+    aRegistry.registerTypeConverter (GregorianCalendar.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
     aRegistry.registerTypeConverter (String.class, LocalDateTime.class, LocalDateTime::parse);
     aRegistry.registerTypeConverter (ZonedDateTime.class, LocalDateTime.class, ZonedDateTime::toLocalDateTime);
     aRegistry.registerTypeConverter (OffsetDateTime.class, LocalDateTime.class, OffsetDateTime::toLocalDateTime);
-    aRegistry.registerTypeConverter (LocalDate.class,
-                                     LocalDateTime.class,
-                                     aSource -> LocalDateTime.of (aSource, CPDT.NULL_LOCAL_TIME));
-    aRegistry.registerTypeConverter (LocalTime.class,
-                                     LocalDateTime.class,
-                                     aSource -> LocalDateTime.of (CPDT.NULL_LOCAL_DATE, aSource));
-    aRegistry.registerTypeConverter (Instant.class,
-                                     LocalDateTime.class,
-                                     aSource -> LocalDateTime.ofInstant (aSource, PDTConfig.getDefaultZoneId ()));
-    aRegistry.registerTypeConverter (Date.class,
-                                     LocalDateTime.class,
-                                     aSource -> LocalDateTime.ofInstant (aSource.toInstant (),
-                                                                         PDTConfig.getDefaultZoneId ()));
+    aRegistry.registerTypeConverter (LocalDate.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
+    aRegistry.registerTypeConverter (LocalTime.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
+    aRegistry.registerTypeConverter (YearMonth.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
+    aRegistry.registerTypeConverter (Year.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
+    aRegistry.registerTypeConverter (Instant.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
+    aRegistry.registerTypeConverter (Date.class, LocalDateTime.class, PDTFactory::createLocalDateTime);
     aRegistry.registerTypeConverter (java.sql.Timestamp.class,
                                      LocalDateTime.class,
                                      java.sql.Timestamp::toLocalDateTime);
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class,
                                                                          LocalDateTime.class,
-                                                                         aSource -> TypeConverter.convertIfNecessary (fToInstant.apply (aSource),
-                                                                                                                      LocalDateTime.class));
+                                                                         PDTFactory::createLocalDateTime);
 
     // Destination: LocalDate
     aRegistry.registerTypeConverter (GregorianCalendar.class,
