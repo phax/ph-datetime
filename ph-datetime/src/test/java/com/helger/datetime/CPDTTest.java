@@ -20,6 +20,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.Month;
 import java.time.ZonedDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.IsoChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -99,5 +106,21 @@ public final class CPDTTest
   {
     assertEquals (0, CPDT.NULL_DURATION.getNano ());
     assertEquals (0, CPDT.NULL_DURATION.getSeconds ());
+  }
+
+  @Test
+  public void testChrono ()
+  {
+    final ChronoLocalDate aDateISO = IsoChronology.INSTANCE.date (2010, 7, 6);
+    System.out.println (aDateISO);
+    final ChronoLocalDate aDateHijrah = HijrahChronology.INSTANCE.date (1400, 7, 6);
+    System.out.println (aDateHijrah);
+
+    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate (FormatStyle.SHORT)
+                                                             .withLocale (Locale.GERMANY)
+                                                             .withChronology (HijrahChronology.INSTANCE)
+                                                             .withDecimalStyle (DecimalStyle.of (Locale.GERMANY));
+    System.out.println (dateFormatter.format (aDateISO));
+    System.out.println (dateFormatter.format (aDateHijrah));
   }
 }

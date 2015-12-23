@@ -17,20 +17,17 @@
 package com.helger.holiday;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
 import java.time.chrono.IsoChronology;
+import java.time.temporal.ChronoField;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.threeten.extra.Interval;
-
-import com.helger.datetime.config.PDTConfig;
 import com.helger.datetime.util.PDTHelper;
 
 /**
@@ -90,25 +87,14 @@ public final class CalendarHelper
                                                                            final int nGregorianYear,
                                                                            final Chronology aTargetChronoUTC)
   {
-    final Set <LocalDate> aHolidays = new HashSet <LocalDate> ();
-    final LocalDate aFirstGregorianDate = LocalDate.of (nGregorianYear, Month.JANUARY, 1);
-    final LocalDate aLastGregorianDate = LocalDate.of (nGregorianYear, Month.DECEMBER, 31);
+    final ChronoLocalDate aFirstTargetDate = aTargetChronoUTC.date (nGregorianYear, 1, 1);
+    final ChronoLocalDate aLastTargetDate = aTargetChronoUTC.date (nGregorianYear, 12, 31);
 
-    final LocalDate aFirstTargetDate = new LocalDate (aFirstGregorianDate.toDateTimeAtStartOfDay (PDTConfig.getUTCZoneId ())
-                                                                         .getMillis (),
-                                                      aTargetChronoUTC);
-    final LocalDate aLastTargetDate = new LocalDate (aLastGregorianDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ())
-                                                                       .getMillis (),
-                                                     aTargetChronoUTC);
-
-    final Interval aInterv = new Interval (aFirstTargetDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ()),
-                                           aLastTargetDate.plusDays (1)
-                                                          .toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ()));
-
-    for (int nTargetYear = aFirstTargetDate.getYear (); nTargetYear <= aLastTargetDate.getYear (); ++nTargetYear)
+    final Set <LocalDate> aHolidays = new HashSet <> ();
+    for (int nTargetYear = aFirstTargetDate.get (ChronoField.YEAR); nTargetYear <= aLastTargetDate.get (ChronoField.YEAR); ++nTargetYear)
     {
-      final LocalDate aLocalDate = new LocalDate (nTargetYear, nTargetMonth, nTargetDay, aTargetChronoUTC);
-      if (aInterv.contains (aLocalDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ())))
+      final ChronoLocalDate aLocalDate = aTargetChronoUTC.date (nTargetYear, nTargetMonth, nTargetDay);
+      if (!aLocalDate.isBefore (aFirstTargetDate) && !aLocalDate.isAfter (aLastTargetDate))
       {
         aHolidays.add (convertToGregorianDate (aLocalDate));
       }
@@ -127,10 +113,7 @@ public final class CalendarHelper
   @Nonnull
   public static LocalDate convertToGregorianDate (@Nonnull final ChronoLocalDate aDate)
   {
-    if (aDate.getChronology () == IsoChronology.INSTANCE)
-      return LocalDate.from (aDate);
-    // FIXME
-    return LocalDate.ofFromMillis (aDate.toDateTimeAtStartOfDay (PDTConfig.getDateTimeZoneUTC ()).getMillis ());
+    return IsoChronology.INSTANCE.date (aDate);
   }
 
   /**

@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ import org.junit.Test;
 import org.threeten.extra.Interval;
 
 import com.helger.commons.locale.country.ECountry;
+import com.helger.commons.typeconvert.TypeConverter;
 
 public final class HolidayDEFuncTest extends AbstractCountryTestBase
 {
@@ -47,8 +49,10 @@ public final class HolidayDEFuncTest extends AbstractCountryTestBase
     try
     {
       final IHolidayManager instance = HolidayManagerFactory.getHolidayManager (ECountry.DE);
-      final Interval interval = Interval.of (LocalDate.of (2010, Month.OCTOBER, 1),
-                                             LocalDate.of (2011, Month.JANUARY, 31));
+      final Interval interval = Interval.of (TypeConverter.convertIfNecessary (LocalDate.of (2010, Month.OCTOBER, 1),
+                                                                               Instant.class),
+                                             TypeConverter.convertIfNecessary (LocalDate.of (2011, Month.JANUARY, 31),
+                                                                               Instant.class));
       final HolidayMap holidays = instance.getHolidays (interval);
       final List <LocalDate> expected = Arrays.asList (LocalDate.of (2010, Month.DECEMBER, 25),
                                                        LocalDate.of (2010, Month.DECEMBER, 26),
