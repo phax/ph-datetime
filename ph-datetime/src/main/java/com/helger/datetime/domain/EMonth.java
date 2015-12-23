@@ -63,7 +63,7 @@ public enum EMonth implements IHasIntID
   }
 
   /**
-   * @return The joda time ID
+   * @return The JDK8 time ID
    */
   public int getMonthConstant ()
   {

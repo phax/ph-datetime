@@ -53,6 +53,6 @@ public interface IExpirable
    */
   default boolean isExpired ()
   {
-    return isExpirationDefined () && getExpirationDateTime ().isBefore (LocalDateTime.now ());
+    return isExpirationDefined () && LocalDateTime.now ().isAfter (getExpirationDateTime ());
   }
 }
