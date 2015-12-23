@@ -88,10 +88,8 @@ public final class CalendarHelper
                                                                            final Chronology aTargetChrono)
   {
     final Year aIsoYear = Year.of (nGregorianYear);
-    final LocalDate aFirstIsoDate = aIsoYear.atDay (1);
-    final LocalDate aLastIsoDate = aIsoYear.plusYears (1).atDay (1).minusDays (1);
-    final ChronoLocalDate aFirstTargetDate = aTargetChrono.date (aFirstIsoDate);
-    final ChronoLocalDate aLastTargetDate = aTargetChrono.date (aLastIsoDate);
+    final ChronoLocalDate aFirstTargetDate = aTargetChrono.date (aIsoYear.atDay (1));
+    final ChronoLocalDate aLastTargetDate = aTargetChrono.date (aIsoYear.atDay (365 + (aIsoYear.isLeap () ? 1 : 0)));
 
     final Set <LocalDate> aHolidays = new HashSet <> ();
     final int nStartYear = aFirstTargetDate.get (ChronoField.YEAR);

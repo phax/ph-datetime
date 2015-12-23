@@ -40,7 +40,7 @@ import com.helger.commons.string.ToStringGenerator;
  */
 public final class HolidayMap
 {
-  private final Map <LocalDate, ISingleHoliday> m_aMap = new LinkedHashMap <LocalDate, ISingleHoliday> ();
+  private final Map <LocalDate, ISingleHoliday> m_aMap = new LinkedHashMap <> ();
 
   public HolidayMap ()
   {}

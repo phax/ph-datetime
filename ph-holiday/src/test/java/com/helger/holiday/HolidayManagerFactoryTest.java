@@ -46,10 +46,10 @@ public final class HolidayManagerFactoryTest
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HolidayManagerFactoryTest.class);
 
-  private static final Set <LocalDate> s_aTestDays = new HashSet <LocalDate> ();
-  private static final Set <LocalDate> s_aTestDays_l1 = new HashSet <LocalDate> ();
-  private static final Set <LocalDate> s_aTestDays_l2 = new HashSet <LocalDate> ();
-  private static final Set <LocalDate> s_aTestDays_l11 = new HashSet <LocalDate> ();
+  private static final Set <LocalDate> s_aTestDays = new HashSet <> ();
+  private static final Set <LocalDate> s_aTestDays_l1 = new HashSet <> ();
+  private static final Set <LocalDate> s_aTestDays_l2 = new HashSet <> ();
+  private static final Set <LocalDate> s_aTestDays_l11 = new HashSet <> ();
 
   static
   {
@@ -75,8 +75,8 @@ public final class HolidayManagerFactoryTest
     s_aTestDays_l11.add (LocalDate.of (2010, Month.SEPTEMBER, 6));
     s_aTestDays_l11.add (LocalDate.of (2010, Month.SEPTEMBER, 10));
     s_aTestDays_l11.add (LocalDate.of (2010, Month.NOVEMBER, 17));
-    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 8));
-    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 17));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 7));
+    s_aTestDays_l11.add (LocalDate.of (2010, Month.DECEMBER, 16));
   }
 
   @Test
@@ -160,6 +160,13 @@ public final class HolidayManagerFactoryTest
     }
   }
 
+  private void _assertDates (final Set <LocalDate> aExpectedDates, final HolidayMap holidays)
+  {
+    for (final LocalDate d : aExpectedDates)
+      if (!holidays.containsHolidayForDate (d))
+        fail ("Missing " + d + " in " + holidays);
+  }
+
   @Test
   public void testBaseDates () throws Exception
   {
@@ -167,18 +174,7 @@ public final class HolidayManagerFactoryTest
     final HolidayMap holidays = m.getHolidays (2010);
     assertNotNull (holidays);
     assertEquals ("Wrong number of dates.", s_aTestDays.size (), holidays.size ());
-    assertDates (s_aTestDays, holidays);
-  }
-
-  private void assertDates (final Set <LocalDate> dates, final HolidayMap holidays)
-  {
-    for (final LocalDate d : dates)
-    {
-      if (!holidays.containsHolidayForDate (d))
-      {
-        fail ("Missing " + d + " in " + holidays);
-      }
-    }
+    _assertDates (s_aTestDays, holidays);
   }
 
   @Test
@@ -188,7 +184,7 @@ public final class HolidayManagerFactoryTest
     final HolidayMap holidays = m.getHolidays (2010, "level1");
     assertNotNull (holidays);
     assertEquals ("Wrong number of dates.", s_aTestDays_l1.size (), holidays.size ());
-    assertDates (s_aTestDays_l1, holidays);
+    _assertDates (s_aTestDays_l1, holidays);
   }
 
   @Test
@@ -198,7 +194,7 @@ public final class HolidayManagerFactoryTest
     final HolidayMap holidays = m.getHolidays (2010, "level1", "level2");
     assertNotNull (holidays);
     assertEquals ("Wrong number of dates.", s_aTestDays_l2.size (), holidays.size ());
-    assertDates (s_aTestDays_l2, holidays);
+    _assertDates (s_aTestDays_l2, holidays);
   }
 
   @Test
@@ -207,7 +203,7 @@ public final class HolidayManagerFactoryTest
     final IHolidayManager m = HolidayManagerFactory.getHolidayManager ("test");
     final HolidayMap holidays = m.getHolidays (2010, "level11");
     assertNotNull (holidays);
-    assertDates (s_aTestDays_l11, holidays);
+    _assertDates (s_aTestDays_l11, holidays);
   }
 
   @Test

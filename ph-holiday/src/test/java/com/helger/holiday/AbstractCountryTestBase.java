@@ -22,8 +22,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -46,7 +44,8 @@ public abstract class AbstractCountryTestBase
    */
   protected void compareHierarchies (final CalendarHierarchy expected, final CalendarHierarchy found)
   {
-    assertNotNull ("Null description", found.getDescription (Locale.getDefault ()));
+    final Locale aLocale = Locale.US;
+    assertNotNull ("Null description", found.getDescription (aLocale));
     assertEquals ("Wrong hierarchy id.", expected.getID (), found.getID ());
     assertEquals ("Number of children wrong.", expected.getChildren ().size (), found.getChildren ().size ());
     for (final String id : expected.getChildren ().keySet ())
@@ -59,21 +58,21 @@ public abstract class AbstractCountryTestBase
   protected void compareData (final AbstractHolidayManager expected, final IHolidayManager found, final int year)
   {
     final CalendarHierarchy expectedHierarchy = expected.getHierarchy ();
-    final List <String> args = new ArrayList <String> ();
-    _compareDates (expected, found, expectedHierarchy, args, year);
+    _compareDates (expected, found, expectedHierarchy, new String [0], year);
   }
 
   private void _compareDates (final IHolidayManager aExpected,
                               final IHolidayManager aFound,
                               final CalendarHierarchy aHierarchy,
-                              final List <String> args,
+                              final String [] args,
                               final int nYear)
   {
-    final HolidayMap aExpectedHolidays = aExpected.getHolidays (nYear, ArrayHelper.newArray (args, String.class));
-    final HolidayMap aFoundHolidays = aFound.getHolidays (nYear, ArrayHelper.newArray (args, String.class));
+    final Locale aLocale = Locale.US;
+    final HolidayMap aExpectedHolidays = aExpected.getHolidays (nYear, args);
+    final HolidayMap aFoundHolidays = aFound.getHolidays (nYear, args);
     for (final Map.Entry <LocalDate, ISingleHoliday> aEntry : aExpectedHolidays.getMap ().entrySet ())
     {
-      assertNotNull ("Description is null.", aEntry.getValue ().getHolidayName (Locale.getDefault ()));
+      assertNotNull ("Description is null.", aEntry.getValue ().getHolidayName (aLocale));
       if (!aFoundHolidays.containsHolidayForDate (aEntry.getKey ()))
       {
         fail ("Could not find " +
@@ -81,16 +80,18 @@ public abstract class AbstractCountryTestBase
               " // " +
               aEntry.getValue () +
               " in " +
-              aHierarchy.getDescription (Locale.getDefault ()) +
+              aHierarchy.getDescription (aLocale) +
               " - " +
               aFoundHolidays);
       }
     }
     for (final String id : aHierarchy.getChildren ().keySet ())
     {
-      final ArrayList <String> newArgs = new ArrayList <String> (args);
-      newArgs.add (id);
-      _compareDates (aExpected, aFound, aHierarchy.getChildren ().get (id), newArgs, nYear);
+      _compareDates (aExpected,
+                     aFound,
+                     aHierarchy.getChildren ().get (id),
+                     ArrayHelper.getConcatenated (args, id),
+                     nYear);
     }
   }
 
