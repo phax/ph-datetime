@@ -17,10 +17,10 @@
 package com.helger.holiday;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
-import java.time.chrono.IsoChronology;
 import java.time.temporal.ChronoField;
 import java.util.HashSet;
 import java.util.Set;
@@ -77,7 +77,7 @@ public final class CalendarHelper
    *        Target day
    * @param nGregorianYear
    *        Gregorian year
-   * @param aTargetChronoUTC
+   * @param aTargetChrono
    *        Target chronology
    * @return the list of gregorian dates.
    */
@@ -85,35 +85,27 @@ public final class CalendarHelper
   public static Set <LocalDate> getDatesFromChronologyWithinGregorianYear (final int nTargetMonth,
                                                                            final int nTargetDay,
                                                                            final int nGregorianYear,
-                                                                           final Chronology aTargetChronoUTC)
+                                                                           final Chronology aTargetChrono)
   {
-    final ChronoLocalDate aFirstTargetDate = aTargetChronoUTC.date (nGregorianYear, 1, 1);
-    final ChronoLocalDate aLastTargetDate = aTargetChronoUTC.date (nGregorianYear, 12, 31);
+    final Year aIsoYear = Year.of (nGregorianYear);
+    final LocalDate aFirstIsoDate = aIsoYear.atDay (1);
+    final LocalDate aLastIsoDate = aIsoYear.plusYears (1).atDay (1).minusDays (1);
+    final ChronoLocalDate aFirstTargetDate = aTargetChrono.date (aFirstIsoDate);
+    final ChronoLocalDate aLastTargetDate = aTargetChrono.date (aLastIsoDate);
 
     final Set <LocalDate> aHolidays = new HashSet <> ();
-    for (int nTargetYear = aFirstTargetDate.get (ChronoField.YEAR); nTargetYear <= aLastTargetDate.get (ChronoField.YEAR); ++nTargetYear)
+    final int nStartYear = aFirstTargetDate.get (ChronoField.YEAR);
+    final int nEndYear = aLastTargetDate.get (ChronoField.YEAR);
+    for (int nTargetYear = nStartYear; nTargetYear <= nEndYear; ++nTargetYear)
     {
-      final ChronoLocalDate aLocalDate = aTargetChronoUTC.date (nTargetYear, nTargetMonth, nTargetDay);
+      final ChronoLocalDate aLocalDate = aTargetChrono.date (nTargetYear, nTargetMonth, nTargetDay);
       if (!aLocalDate.isBefore (aFirstTargetDate) && !aLocalDate.isAfter (aLastTargetDate))
       {
-        aHolidays.add (convertToGregorianDate (aLocalDate));
+        // Convert to ISO chronology
+        aHolidays.add (LocalDate.from (aLocalDate));
       }
     }
     return aHolidays;
-  }
-
-  /**
-   * Takes converts the provided date into a date within the gregorian
-   * chronology. If it is already a gregorian date it will return it.
-   *
-   * @param aDate
-   *        Date to convert
-   * @return Converted date
-   */
-  @Nonnull
-  public static LocalDate convertToGregorianDate (@Nonnull final ChronoLocalDate aDate)
-  {
-    return IsoChronology.INSTANCE.date (aDate);
   }
 
   /**

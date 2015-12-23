@@ -208,7 +208,6 @@ public final class HolidayManagerFactoryTest
     final HolidayMap holidays = m.getHolidays (2010, "level11");
     assertNotNull (holidays);
     assertDates (s_aTestDays_l11, holidays);
-
   }
 
   @Test

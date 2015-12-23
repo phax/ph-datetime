@@ -22,7 +22,6 @@ import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Nonnull;
 
-import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.jaxb.ChristianHoliday;
@@ -123,7 +122,7 @@ public class ChristianHolidayParser extends RelativeToEasterSundayParser
         default:
           throw new IllegalArgumentException ("Unknown christian holiday type " + aChristianHoliday.getType ());
       }
-      final LocalDate aConvertedDate = CalendarHelper.convertToGregorianDate (aEasterSunday);
+      final LocalDate aConvertedDate = LocalDate.from (aEasterSunday);
       final IHolidayType aType = XMLHolidayHelper.getType (aChristianHoliday.getLocalizedType ());
       final String sPropertiesKey = "christian." + aChristianHoliday.getType ().name ();
       addChrstianHoliday (aConvertedDate, sPropertiesKey, aType, aHolidayMap);

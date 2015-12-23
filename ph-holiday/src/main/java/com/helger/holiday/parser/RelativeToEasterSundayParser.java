@@ -24,7 +24,6 @@ import java.time.temporal.ChronoUnit;
 import org.threeten.extra.chrono.JulianDate;
 
 import com.helger.datetime.CPDT;
-import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.ResourceBundleHoliday;
@@ -78,7 +77,7 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
                                            final IHolidayType aHolidayType,
                                            final HolidayMap holidays)
   {
-    final LocalDate convertedDate = CalendarHelper.convertToGregorianDate (aDate);
+    final LocalDate convertedDate = LocalDate.from (aDate);
     holidays.add (convertedDate, new ResourceBundleHoliday (aHolidayType, sPropertiesKey));
   }
 
