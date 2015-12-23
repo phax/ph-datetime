@@ -18,6 +18,7 @@ package com.helger.datetime.config;
 
 import java.time.DateTimeException;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.TimeZone;
 
 import javax.annotation.Nonnull;
@@ -48,6 +49,8 @@ public final class PDTConfig
 
   private static final Logger s_aLogger = LoggerFactory.getLogger (PDTConfig.class);
 
+  private static ZoneId s_aDefaultZoneId;
+
   static
   {
     // Ensure the JDK timezone is aligned to our default
@@ -75,17 +78,20 @@ public final class PDTConfig
 
     try
     {
-      // Try to resolve ID -> throws IAE if unknown
-      final ZoneId aDefaultDateTimeZone = ZoneId.of (sDateTimeZoneID);
+      // Try to resolve ID -> throws exception if unknown
+      final ZoneId aDefaultZoneId = ZoneId.of (sDateTimeZoneID);
+
       // getTimeZone falls back to GMT if unknown
-      final TimeZone aDefaultTimeZone = TimeZone.getTimeZone (aDefaultDateTimeZone);
+      final TimeZone aDefaultTimeZone = TimeZone.getTimeZone (aDefaultZoneId);
+
+      s_aDefaultZoneId = aDefaultZoneId;
       TimeZone.setDefault (aDefaultTimeZone);
       return ESuccess.SUCCESS;
     }
     catch (final DateTimeException ex)
     {
       // time zone ID is unknown
-      s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'");
+      s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'", ex);
       return ESuccess.FAILURE;
     }
   }
@@ -97,13 +103,13 @@ public final class PDTConfig
   @Nonnull
   public static ZoneId getDefaultZoneId ()
   {
-    return TimeZone.getDefault ().toZoneId ();
+    return s_aDefaultZoneId;
   }
 
   @Nonnull
   public static ZoneId getUTCZoneId ()
   {
-    return ZoneId.of ("UTC");
+    return ZoneOffset.UTC;
   }
 
   /**

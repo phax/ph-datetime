@@ -40,7 +40,7 @@ public final class PDTConfigTest
 
     aDTZ = PDTConfig.getUTCZoneId ();
     assertNotNull (aDTZ);
-    assertEquals ("UTC", aDTZ.getId ());
+    assertEquals ("Z", aDTZ.getId ());
 
     try
     {
