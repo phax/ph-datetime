@@ -303,4 +303,24 @@ public final class PDTFactory
   {
     return createLocalDateTime (aMillis.longValue ());
   }
+
+  // LocalDate
+
+  @Nonnull
+  public static LocalDate createLocalDate (final int nYear, final Month eMonth, final int nDay)
+  {
+    return LocalDate.of (nYear, eMonth, nDay);
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final Date aDate)
+  {
+    return createLocalDateTime (aDate.toInstant ()).toLocalDate ();
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (final long nMillis)
+  {
+    return createLocalDateTime (nMillis).toLocalDate ();
+  }
 }
