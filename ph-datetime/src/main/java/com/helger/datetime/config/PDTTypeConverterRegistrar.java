@@ -16,11 +16,13 @@
  */
 package com.helger.datetime.config;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZonedDateTime;
@@ -169,5 +171,11 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     aRegistry.registerTypeConverterRuleAnySourceFixedDestination (Date.class,
                                                                   aSource -> Date.from (TypeConverter.convertIfNecessary (aSource,
                                                                                                                           Instant.class)));
+
+    // Destination: Duration
+    aRegistry.registerTypeConverter (String.class, Duration.class, aSource -> Duration.parse (aSource));
+
+    // Destination: Period
+    aRegistry.registerTypeConverter (String.class, Period.class, aSource -> Period.parse (aSource));
   }
 }
