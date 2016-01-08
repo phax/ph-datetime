@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.commons.datetime.DateTimeFormatterCache;
 
 /**
  * Create common {@link DateTimeFormatter} objects used for printing and parsing
@@ -36,22 +37,33 @@ import com.helger.commons.annotation.PresentForCodeCoverage;
 @Immutable
 public final class PDTFormatter
 {
-  public static final String PATTERN_DATE_SHORT = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.SHORT)).toPattern ();
-  public static final String PATTERN_DATE_MEDIUM = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.MEDIUM)).toPattern ();
-  public static final String PATTERN_DATE_LONG = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.LONG)).toPattern ();
-  public static final String PATTERN_DATE_FULL = ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.FULL)).toPattern ();
-  public static final String PATTERN_TIME_SHORT = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.SHORT)).toPattern ();
-  public static final String PATTERN_TIME_MEDIUM = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.MEDIUM)).toPattern ();
-  public static final String PATTERN_TIME_LONG = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.LONG)).toPattern ();
-  public static final String PATTERN_TIME_FULL = ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.FULL)).toPattern ();
-  public static final String PATTERN_DATETIME_SHORT = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.SHORT,
-                                                                                                          DateFormat.SHORT)).toPattern ();
-  public static final String PATTERN_DATETIME_MEDIUM = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.MEDIUM,
-                                                                                                           DateFormat.MEDIUM)).toPattern ();
-  public static final String PATTERN_DATETIME_LONG = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.LONG,
-                                                                                                         DateFormat.LONG)).toPattern ();
-  public static final String PATTERN_DATETIME_FULL = ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.FULL,
-                                                                                                         DateFormat.FULL)).toPattern ();
+  @Nonnull
+  public static String getJDK8Pattern (@Nonnull final SimpleDateFormat aSDF)
+  {
+    // Change "Year of era" (y) to "year" (u)
+    // Source:
+    // http://stackoverflow.com/questions/32823368/java-8-localdatetime-is-parsing-invalid-date
+    return aSDF.toPattern ().replace ('y', 'u');
+  }
+
+  public static final String PATTERN_DATE_SHORT = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.SHORT));
+  public static final String PATTERN_DATE_MEDIUM = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.MEDIUM));
+  public static final String PATTERN_DATE_LONG = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.LONG));
+  public static final String PATTERN_DATE_FULL = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateInstance (DateFormat.FULL));
+
+  public static final String PATTERN_TIME_SHORT = getJDK8Pattern ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.SHORT));
+  public static final String PATTERN_TIME_MEDIUM = getJDK8Pattern ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.MEDIUM));
+  public static final String PATTERN_TIME_LONG = getJDK8Pattern ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.LONG));
+  public static final String PATTERN_TIME_FULL = getJDK8Pattern ((SimpleDateFormat) DateFormat.getTimeInstance (DateFormat.FULL));
+
+  public static final String PATTERN_DATETIME_SHORT = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.SHORT,
+                                                                                                                         DateFormat.SHORT));
+  public static final String PATTERN_DATETIME_MEDIUM = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.MEDIUM,
+                                                                                                                          DateFormat.MEDIUM));
+  public static final String PATTERN_DATETIME_LONG = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.LONG,
+                                                                                                                        DateFormat.LONG));
+  public static final String PATTERN_DATETIME_FULL = getJDK8Pattern ((SimpleDateFormat) DateFormat.getDateTimeInstance (DateFormat.FULL,
+                                                                                                                        DateFormat.FULL));
 
   @PresentForCodeCoverage
   private static final PDTFormatter s_aInstance = new PDTFormatter ();
@@ -294,8 +306,8 @@ public final class PDTFormatter
   }
 
   /**
-   * Get the {@link DateTimeFormatter} for the given pattern and locale, using
-   * our default chronology.
+   * Get the STRICT {@link DateTimeFormatter} for the given pattern and locale,
+   * using our default chronology.
    *
    * @param sPattern
    *        The pattern to be parsed
@@ -309,6 +321,7 @@ public final class PDTFormatter
   public static DateTimeFormatter getForPattern (@Nonnull final String sPattern,
                                                  @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
   {
-    return getWithLocale (DateTimeFormatter.ofPattern (sPattern), aDisplayLocale);
+    final DateTimeFormatter aDTF = DateTimeFormatterCache.getDateTimeFormatterStrict (sPattern);
+    return getWithLocale (aDTF, aDisplayLocale);
   }
 }
