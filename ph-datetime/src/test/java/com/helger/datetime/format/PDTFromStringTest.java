@@ -42,14 +42,14 @@ public final class PDTFromStringTest
   public void testFromString ()
   {
     // No chronology
-    DateTimeFormatter aDTF = PDTFormatter.getForPattern ("yyyy/MM/dd HH:mm:ss");
+    DateTimeFormatter aDTF = PDTFormatter.getForPattern ("uuuu/MM/dd HH:mm:ss");
     assertNotNull (aDTF);
     LocalDateTime aDT = PDTFromString.getLocalDateTimeFromString ("2009/03/28 15:06:34", aDTF);
     assertNotNull (aDT);
     assertEquals (IsoChronology.INSTANCE, aDT.getChronology ());
 
     // Our default chronology
-    aDTF = PDTFormatter.getForPattern ("yyyy/MM/dd HH:mm:ss");
+    aDTF = PDTFormatter.getForPattern ("uuuu/MM/dd HH:mm:ss");
     assertNotNull (aDTF);
     aDT = PDTFromString.getLocalDateTimeFromString ("2009/03/28 15:06:34", aDTF);
     assertNotNull (aDT);
@@ -59,10 +59,10 @@ public final class PDTFromStringTest
   public void testDateTimeFromString ()
   {
     assertEquals (LocalDateTime.of (2000, Month.JULY, 6, 0, 0),
-                  PDTFromString.getLocalDateTimeFromString ("2000.07.06 00:00", "yyyy.MM.dd HH:mm"));
-    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06 abc", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getLocalDateTimeFromString (null, "yyyy.MM.dd"));
+                  PDTFromString.getLocalDateTimeFromString ("2000.07.06 00:00", "uuuu.MM.dd HH:mm"));
+    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06", "uuuu.MM.dd"));
+    assertNull (PDTFromString.getLocalDateTimeFromString ("2000.07.06 abc", "uuuu.MM.dd"));
+    assertNull (PDTFromString.getLocalDateTimeFromString (null, "uuuu.MM.dd"));
 
     try
     {
@@ -87,9 +87,9 @@ public final class PDTFromStringTest
   public void testLocalDateFromString ()
   {
     assertEquals (LocalDate.of (2000, Month.JULY, 6),
-                  PDTFromString.getLocalDateFromString ("2000.07.06", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getLocalDateFromString ("2000.07.06 abc", "yyyy.MM.dd"));
-    assertNull (PDTFromString.getLocalDateFromString (null, "yyyy.MM.dd"));
+                  PDTFromString.getLocalDateFromString ("2000.07.06", "uuuu.MM.dd"));
+    assertNull (PDTFromString.getLocalDateFromString ("2000.07.06 abc", "uuuu.MM.dd"));
+    assertNull (PDTFromString.getLocalDateFromString (null, "uuuu.MM.dd"));
 
     try
     {
