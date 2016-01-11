@@ -90,6 +90,8 @@ public final class PDTFromStringTest
                   PDTFromString.getLocalDateFromString ("2000.07.06", "uuuu.MM.dd"));
     assertNull (PDTFromString.getLocalDateFromString ("2000.07.06 abc", "uuuu.MM.dd"));
     assertNull (PDTFromString.getLocalDateFromString (null, "uuuu.MM.dd"));
+    // No February 30th
+    assertNull (PDTFromString.getLocalDateFromString ("2000.02.30", "uuuu.MM.dd"));
 
     try
     {
