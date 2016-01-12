@@ -21,15 +21,15 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.concurrent.SimpleReadWriteLock;
 import com.helger.commons.lang.ClassHelper;
 import com.helger.commons.lang.GenericReflection;
 import com.helger.commons.locale.country.ECountry;
@@ -44,12 +44,14 @@ import com.helger.holiday.mgr.XMLHolidayManagerJapan;
  */
 public final class HolidayManagerFactory
 {
-  private static final ReadWriteLock s_aRWLock = new ReentrantReadWriteLock ();
-  private static final Map <String, Class <? extends IHolidayManager>> s_aClassMap = new HashMap <String, Class <? extends IHolidayManager>> ();
-  private static final Map <String, IHolidayManager> s_aInstMap = new HashMap <String, IHolidayManager> ();
+  private static final SimpleReadWriteLock s_aRWLock = new SimpleReadWriteLock ();
+  @GuardedBy ("s_aRWLock")
+  private static final Map <String, Class <? extends IHolidayManager>> s_aClassMap = new HashMap <> ();
+  @GuardedBy ("s_aRWLock")
+  private static final Map <String, IHolidayManager> s_aInstMap = new HashMap <> ();
 
   /** All supported default countries */
-  private static final Set <String> s_aSupportedCountries = new HashSet <String> ();
+  private static final Set <String> s_aSupportedCountries = new HashSet <> ();
 
   static
   {
@@ -72,17 +74,11 @@ public final class HolidayManagerFactory
     ValueEnforcer.isTrue (ClassHelper.isInstancableClass (aClass),
                           "The passed class must be public, not abstract and needs a no-argument ctor!");
 
-    s_aRWLock.writeLock ().lock ();
-    try
-    {
+    s_aRWLock.writeLocked ( () -> {
       if (s_aClassMap.containsKey (sCountryID))
         throw new IllegalArgumentException ("A class for country " + sCountryID + " is already registered!");
       s_aClassMap.put (sCountryID, aClass);
-    }
-    finally
-    {
-      s_aRWLock.writeLock ().unlock ();
-    }
+    });
   }
 
   @Nonnull
@@ -105,40 +101,24 @@ public final class HolidayManagerFactory
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
 
     // is the instance already cached?
-    IHolidayManager aMgr;
-    s_aRWLock.readLock ().lock ();
-    try
-    {
-      aMgr = s_aInstMap.get (sCountryID);
-    }
-    finally
-    {
-      s_aRWLock.readLock ().unlock ();
-    }
+    final IHolidayManager aMgr = s_aRWLock.readLocked ( () -> s_aInstMap.get (sCountryID));
+    if (aMgr != null)
+      return aMgr;
 
-    if (aMgr == null)
-    {
-      s_aRWLock.writeLock ().lock ();
-      try
+    return s_aRWLock.writeLocked ( () -> {
+      // Check in writeLock again to be 100% sure
+      IHolidayManager aMgr2 = s_aInstMap.get (sCountryID);
+      if (aMgr2 == null)
       {
-        // Check in writeLock again to be 100% sure
-        aMgr = s_aInstMap.get (sCountryID);
-        if (aMgr == null)
-        {
-          // Is a special holiday manager registered?
-          final Class <? extends IHolidayManager> aClass = s_aClassMap.get (sCountryID);
-          aMgr = aClass != null ? GenericReflection.newInstance (aClass) : new XMLHolidayManager (sCountryID);
-          if (aMgr == null)
-            throw new IllegalArgumentException ("Failed to create holiday manager for country '" + sCountryID + "'");
-          s_aInstMap.put (sCountryID, aMgr);
-        }
+        // Is a special holiday manager registered?
+        final Class <? extends IHolidayManager> aClass = s_aClassMap.get (sCountryID);
+        aMgr2 = aClass != null ? GenericReflection.newInstance (aClass) : new XMLHolidayManager (sCountryID);
+        if (aMgr2 == null)
+          throw new IllegalArgumentException ("Failed to create holiday manager for country '" + sCountryID + "'");
+        s_aInstMap.put (sCountryID, aMgr2);
       }
-      finally
-      {
-        s_aRWLock.writeLock ().unlock ();
-      }
-    }
-    return aMgr;
+      return aMgr2;
+    });
   }
 
   /**
