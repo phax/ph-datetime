@@ -339,4 +339,11 @@ public final class PDTFactory
   {
     return createLocalDateTime (nMillis).toLocalDate ();
   }
+
+  // Year
+
+  public static int getCurrentYear ()
+  {
+    return Year.now ().getValue ();
+  }
 }
