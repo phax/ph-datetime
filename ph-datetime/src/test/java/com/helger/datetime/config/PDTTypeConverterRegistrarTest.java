@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 
+import com.helger.commons.microdom.convert.MicroTypeConverter;
 import com.helger.commons.mutable.MutableByte;
 import com.helger.commons.mutable.MutableDouble;
 import com.helger.commons.mutable.MutableFloat;
@@ -40,6 +41,7 @@ import com.helger.commons.mutable.MutableInt;
 import com.helger.commons.mutable.MutableLong;
 import com.helger.commons.mutable.MutableShort;
 import com.helger.commons.typeconvert.TypeConverter;
+import com.helger.datetime.CPDT;
 
 /**
  * Test class for class {@link PDTTypeConverterRegistrar}.
@@ -63,7 +65,8 @@ public final class PDTTypeConverterRegistrarTest
                                                            new MutableFloat (3245678.1f),
                                                            new MutableInt (4711),
                                                            new MutableLong (4567890987654l),
-                                                           new MutableShort (65532), };
+                                                           new MutableShort (65532) };
+  private static final String ELEMENT_NAME = "element";
 
   @Test
   public void testDateTime ()
@@ -128,7 +131,7 @@ public final class PDTTypeConverterRegistrarTest
     final LocalTime aNowTime2 = TypeConverter.convertIfNecessary (sNow, aNowTime.getClass ());
     assertEquals (aNowTime, aNowTime2);
 
-    // Test auto conversion between joda types
+    // Test auto conversion between default types
     for (final Class <?> aDestClass : new Class <?> [] { ZonedDateTime.class, LocalDateTime.class })
     {
       final LocalTime aNow = LocalTime.now ();
@@ -143,5 +146,18 @@ public final class PDTTypeConverterRegistrarTest
       final LocalDate aNow2 = TypeConverter.convertIfNecessary (aDT, aNow.getClass ());
       assertEquals (aNow, aNow2);
     }
+  }
+
+  @Test
+  public void testMicroTypeConversion ()
+  {
+    assertNotNull (MicroTypeConverter.convertToMicroElement (new GregorianCalendar (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (new Date (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (ZonedDateTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDateTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDate.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_DURATION, ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_PERIOD, ELEMENT_NAME));
   }
 }
