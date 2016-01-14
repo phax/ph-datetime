@@ -22,5 +22,5 @@ cache:
   - $HOME/.m2
 
 after_success:
-  - mvn deploy:deploy --settings travis-settings.xml
+  - mvn deploy --settings travis-settings.xml -DskipTests=true -B
   
