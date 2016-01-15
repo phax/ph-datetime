@@ -57,8 +57,8 @@ public final class PDTFromString
                                          @Nonnull final DateTimeFormatter aDF,
                                          @Nonnull final DateTimeParseException ex)
   {
-    if (s_aLogger.isDebugEnabled ())
-      s_aLogger.debug ("Failed to parse " + sDestType + " '" + sValue + "' with " + aDF + ": " + ex.getMessage ());
+    if (s_aLogger.isInfoEnabled ())
+      s_aLogger.warn ("Failed to parse " + sDestType + " '" + sValue + "' with " + aDF + ": " + ex.getMessage ());
   }
 
   @Nullable
