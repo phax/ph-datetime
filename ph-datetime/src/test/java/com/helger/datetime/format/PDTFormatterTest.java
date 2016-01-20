@@ -16,9 +16,14 @@
  */
 package com.helger.datetime.format;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -51,9 +56,9 @@ public final class PDTFormatterTest
   public void testGetForPattern ()
   {
     for (final Locale aLocale : LocaleCache.getInstance ().getAllLocales ())
-      assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd", aLocale));
-    assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd"));
-    assertNotNull (PDTFormatter.getForPattern ("yyyy-MM-dd", null));
+      assertNotNull (PDTFormatter.getForPattern ("uuuu-MM-dd", aLocale));
+    assertNotNull (PDTFormatter.getForPattern ("uuuu-MM-dd"));
+    assertNotNull (PDTFormatter.getForPattern ("uuuu-MM-dd", null));
 
     try
     {
@@ -62,5 +67,29 @@ public final class PDTFormatterTest
     }
     catch (final IllegalArgumentException ex)
     {}
+  }
+
+  @Test
+  public void testGetDefault ()
+  {
+    // Must be smart because "year or era" is used internally
+    assertEquals (LocalDate.of (2015, Month.FEBRUARY, 28),
+                  PDTFormatter.getDefaultFormatterDate (Locale.GERMANY)
+                              .withResolverStyle (ResolverStyle.SMART)
+                              .parse ("28.02.2015", LocalDate::from));
+    try
+    {
+      // There is no such thing as 30.2. in strict mode
+      PDTFormatter.getDefaultFormatterDate (Locale.GERMANY).parse ("30.02.2015", LocalDate::from);
+      fail ();
+    }
+    catch (final DateTimeParseException ex)
+    {}
+
+    // In smart mode this can be parsed
+    assertEquals (LocalDate.of (2015, Month.FEBRUARY, 28),
+                  PDTFormatter.getDefaultFormatterDate (Locale.GERMANY)
+                              .withResolverStyle (ResolverStyle.SMART)
+                              .parse ("30.02.2015", LocalDate::from));
   }
 }

@@ -18,6 +18,7 @@ package com.helger.datetime.format;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
@@ -53,13 +54,13 @@ public final class PDTFormatter
    * @return The modified date time formatter. Never <code>null</code>.
    */
   @Nonnull
-  public static DateTimeFormatter getWithLocale (@Nonnull final DateTimeFormatter aFormatter,
-                                                 @Nullable final Locale aDisplayLocale)
+  public static DateTimeFormatter getStrictWithLocale (@Nonnull final DateTimeFormatter aFormatter,
+                                                       @Nullable final Locale aDisplayLocale)
   {
     DateTimeFormatter ret = aFormatter;
     if (aDisplayLocale != null)
       ret = ret.withLocale (aDisplayLocale);
-    return ret;
+    return ret.withResolverStyle (ResolverStyle.STRICT);
   }
 
   /**
@@ -86,7 +87,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.SHORT), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.SHORT), aDisplayLocale);
   }
 
   /**
@@ -99,7 +100,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.MEDIUM), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.MEDIUM), aDisplayLocale);
   }
 
   /**
@@ -112,7 +113,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.LONG), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.LONG), aDisplayLocale);
   }
 
   /**
@@ -125,7 +126,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterDate (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.FULL), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDate (FormatStyle.FULL), aDisplayLocale);
   }
 
   /**
@@ -152,7 +153,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.SHORT), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.SHORT), aDisplayLocale);
   }
 
   /**
@@ -165,7 +166,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.MEDIUM), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.MEDIUM), aDisplayLocale);
   }
 
   /**
@@ -178,7 +179,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.LONG), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.LONG), aDisplayLocale);
   }
 
   /**
@@ -191,7 +192,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.FULL), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedTime (FormatStyle.FULL), aDisplayLocale);
   }
 
   /**
@@ -218,7 +219,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getShortFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.SHORT), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.SHORT), aDisplayLocale);
   }
 
   /**
@@ -231,7 +232,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getMediumFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.MEDIUM), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.MEDIUM), aDisplayLocale);
   }
 
   /**
@@ -244,7 +245,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getLongFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.LONG), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.LONG), aDisplayLocale);
   }
 
   /**
@@ -257,7 +258,7 @@ public final class PDTFormatter
   @Nonnull
   public static DateTimeFormatter getFullFormatterDateTime (@Nullable final Locale aDisplayLocale)
   {
-    return getWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.FULL), aDisplayLocale);
+    return getStrictWithLocale (DateTimeFormatter.ofLocalizedDateTime (FormatStyle.FULL), aDisplayLocale);
   }
 
   /**
@@ -293,6 +294,6 @@ public final class PDTFormatter
                                                  @Nullable final Locale aDisplayLocale) throws IllegalArgumentException
   {
     final DateTimeFormatter aDTF = DateTimeFormatterCache.getDateTimeFormatterStrict (sPattern);
-    return getWithLocale (aDTF, aDisplayLocale);
+    return getStrictWithLocale (aDTF, aDisplayLocale);
   }
 }
