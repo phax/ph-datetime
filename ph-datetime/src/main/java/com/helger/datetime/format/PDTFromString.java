@@ -62,14 +62,14 @@ public final class PDTFromString
   }
 
   @Nullable
-  public static ZonedDateTime getDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
+  public static ZonedDateTime getZonedDateTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
-    return getDateTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
+    return getZonedDateTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
   }
 
   @Nullable
-  public static ZonedDateTime getDateTimeFromString (@Nullable final String sValue,
-                                                     @Nonnull final DateTimeFormatter aDF)
+  public static ZonedDateTime getZonedDateTimeFromString (@Nullable final String sValue,
+                                                          @Nonnull final DateTimeFormatter aDF)
   {
     ValueEnforcer.notNull (aDF, "DateTimeFormatter");
 
@@ -83,48 +83,6 @@ public final class PDTFromString
         _onParseException ("ZonedDateTime", sValue, aDF, ex);
       }
     return null;
-  }
-
-  /**
-   * @param sValue
-   *        Date string to parse.
-   * @param aParseLocale
-   *        Locale to use.
-   * @return <code>null</code> if parsing failed.
-   */
-  @Nullable
-  public static ZonedDateTime getDefaultDateFromString (@Nullable final String sValue,
-                                                        @Nullable final Locale aParseLocale)
-  {
-    return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterDate (aParseLocale));
-  }
-
-  /**
-   * @param sValue
-   *        Time string to parse.
-   * @param aParseLocale
-   *        Locale to use.
-   * @return <code>null</code> if parsing failed.
-   */
-  @Nullable
-  public static ZonedDateTime getDefaultTimeFromString (@Nullable final String sValue,
-                                                        @Nullable final Locale aParseLocale)
-  {
-    return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterTime (aParseLocale));
-  }
-
-  /**
-   * @param sValue
-   *        Date and time string to parse.
-   * @param aParseLocale
-   *        Locale to use.
-   * @return <code>null</code> if parsing failed.
-   */
-  @Nullable
-  public static ZonedDateTime getDefaultDateTimeFromString (@Nullable final String sValue,
-                                                            @Nullable final Locale aParseLocale)
-  {
-    return getDateTimeFromString (sValue, PDTFormatter.getDefaultFormatterDateTime (aParseLocale));
   }
 
   @Nullable
