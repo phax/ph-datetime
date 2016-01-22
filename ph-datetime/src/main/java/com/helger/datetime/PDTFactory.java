@@ -30,6 +30,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
@@ -342,8 +343,9 @@ public final class PDTFactory
 
   // Year
 
+  @Nonnegative
   public static int getCurrentYear ()
   {
-    return Year.now ().getValue ();
+    return LocalDate.now ().getYear ();
   }
 }

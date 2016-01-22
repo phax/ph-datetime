@@ -138,4 +138,12 @@ public final class PDTHelperTest
     assertTrue (PDTHelper.isGreaterOrEqual (p2, p1));
     assertTrue (PDTHelper.isGreater (p2, p1));
   }
+
+  @Test
+  public void testDaysBetween ()
+  {
+    final LocalDate aStart = LocalDate.now ();
+    assertEquals (0, PDTHelper.getDaysBetween (aStart, aStart));
+    assertEquals (60, PDTHelper.getDaysBetween (LocalDate.of (2016, 1, 22), LocalDate.of (2016, 3, 22)));
+  }
 }

@@ -22,11 +22,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.WeekFields;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -416,5 +418,16 @@ public final class PDTHelper
   public static boolean isLessOrEqual (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
   {
     return aDateTime1.compareTo (aDateTime2) <= 0;
+  }
+
+  public static long getDaysBetween (@Nonnull final LocalDate aStartDate, @Nonnull final LocalDate aEndDate)
+  {
+    // Don't use "Period.between (start,end).getDays ()" because if the
+    // difference is e.g. "2 month" than the result would be 0!
+    if (false)
+      return Period.between (aStartDate, aEndDate).getDays ();
+
+    final long nSeconds = Duration.between (aStartDate.atStartOfDay (), aEndDate.atStartOfDay ()).getSeconds ();
+    return TimeUnit.SECONDS.toDays (nSeconds);
   }
 }
