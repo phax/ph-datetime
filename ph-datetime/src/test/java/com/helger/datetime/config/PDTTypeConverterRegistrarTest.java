@@ -21,13 +21,19 @@ import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.Year;
+import java.time.YearMonth;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -149,11 +155,52 @@ public final class PDTTypeConverterRegistrarTest
   }
 
   @Test
+  public void testConvertIntoEachOther ()
+  {
+    final Map <Class <?>, Object> aValues = new LinkedHashMap <> ();
+    aValues.put (Date.class, new Date ());
+    aValues.put (Calendar.class, Calendar.getInstance ());
+    aValues.put (GregorianCalendar.class, new GregorianCalendar ());
+    aValues.put (ZonedDateTime.class, ZonedDateTime.now ());
+    aValues.put (OffsetDateTime.class, OffsetDateTime.now ());
+    aValues.put (LocalDateTime.class, LocalDateTime.now ());
+    aValues.put (LocalDate.class, LocalDate.now ());
+    aValues.put (LocalTime.class, LocalTime.now ());
+    aValues.put (YearMonth.class, YearMonth.now ());
+    aValues.put (Year.class, Year.now ());
+    aValues.put (Instant.class, Instant.now ());
+
+    for (final Map.Entry <Class <?>, Object> aSrc : aValues.entrySet ())
+      for (final Class <?> aDst : aValues.keySet ())
+        if (aSrc.getKey () != aDst)
+        {
+          final boolean bIsTime = aSrc.getKey () == LocalTime.class || aDst == LocalTime.class;
+          if (bIsTime &&
+              (aSrc.getKey () == LocalDate.class ||
+               aDst == LocalDate.class ||
+               aSrc.getKey () == YearMonth.class ||
+               aDst == YearMonth.class ||
+               aSrc.getKey () == Year.class ||
+               aDst == Year.class))
+          {
+            // Not convertible
+          }
+          else
+          {
+            System.out.println ("Converting from " + aSrc.getKey ().getName () + " to " + aDst.getName ());
+            final Object aDstValue = TypeConverter.convertIfNecessary (aSrc.getValue (), aDst);
+            assertNotNull (aDstValue);
+          }
+        }
+  }
+
+  @Test
   public void testMicroTypeConversion ()
   {
     assertNotNull (MicroTypeConverter.convertToMicroElement (new GregorianCalendar (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (new Date (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (ZonedDateTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (OffsetDateTime.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDateTime.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDate.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalTime.now (), ELEMENT_NAME));

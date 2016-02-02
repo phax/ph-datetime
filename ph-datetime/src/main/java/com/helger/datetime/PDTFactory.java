@@ -253,13 +253,13 @@ public final class PDTFactory
   @Nonnull
   public static LocalDateTime createLocalDateTime (@Nonnull final YearMonth aYM)
   {
-    return createLocalDateTime (aYM.atDay (1));
+    return createLocalDateTime (createLocalDate (aYM));
   }
 
   @Nonnull
   public static LocalDateTime createLocalDateTime (@Nonnull final Year aYear)
   {
-    return createLocalDateTime (aYear.atDay (1));
+    return createLocalDateTime (createLocalDate (aYear));
   }
 
   @Nonnull
@@ -321,7 +321,7 @@ public final class PDTFactory
     return createLocalDateTime (aMillis.longValue ());
   }
 
-  // LocalDate
+  // To LocalDate
 
   @Nonnull
   public static LocalDate createLocalDate (final int nYear, final Month eMonth, final int nDay)
@@ -330,9 +330,9 @@ public final class PDTFactory
   }
 
   @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final Date aDate)
+  public static LocalDate createLocalDate (@Nonnull final GregorianCalendar aCalendar)
   {
-    return createLocalDateTime (aDate.toInstant ()).toLocalDate ();
+    return aCalendar.toZonedDateTime ().toLocalDate ();
   }
 
   @Nonnull
@@ -341,7 +341,83 @@ public final class PDTFactory
     return createLocalDateTime (nMillis).toLocalDate ();
   }
 
-  // Year
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final Instant aInstant)
+  {
+    return createLocalDateTime (aInstant).toLocalDate ();
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final Date aDate)
+  {
+    return createLocalDate (aDate.toInstant ());
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final YearMonth aYM)
+  {
+    return aYM.atDay (1);
+  }
+
+  @Nonnull
+  public static LocalDate createLocalDate (@Nonnull final Year aYear)
+  {
+    return aYear.atDay (1);
+  }
+
+  // To LocalTime
+
+  @Nonnull
+  public static LocalTime createLocalTime (@Nonnull final GregorianCalendar aCalendar)
+  {
+    return aCalendar.toZonedDateTime ().toLocalTime ();
+  }
+
+  @Nonnull
+  public static LocalTime createLocalTime (@Nonnull final Instant aInstant)
+  {
+    return createLocalDateTime (aInstant).toLocalTime ();
+  }
+
+  @Nonnull
+  public static LocalTime createLocalTime (@Nonnull final Date aDate)
+  {
+    return createLocalTime (aDate.toInstant ());
+  }
+
+  // To Date
+
+  @Nonnull
+  public static Date createDate (@Nonnull final ZonedDateTime aZDT)
+  {
+    return Date.from (aZDT.toInstant ());
+  }
+
+  @Nonnull
+  public static Date createDate (@Nonnull final OffsetDateTime aODT)
+  {
+    return Date.from (aODT.toInstant ());
+  }
+
+  @Nonnull
+  public static Date createDate (@Nonnull final LocalDateTime aLDT)
+  {
+    return createDate (createZonedDateTime (aLDT));
+  }
+
+  @Nonnull
+  public static Date createDate (@Nonnull final LocalDate aLD)
+  {
+    return createDate (createZonedDateTime (aLD));
+  }
+
+  @Nonnull
+  public static Date createDate (@Nonnull final LocalTime aLT)
+  {
+    return createDate (createZonedDateTime (aLT));
+  }
+
+  // Misc
 
   @Nonnegative
   public static int getCurrentYear ()
