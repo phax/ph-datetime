@@ -87,7 +87,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
       final JAXBContext ctx = JAXBContextCache.getInstance ()
                                               .getFromCache (com.helger.holiday.jaxb.ObjectFactory.class);
       final Unmarshaller um = ctx.createUnmarshaller ();
-      final JAXBElement <Configuration> aElement = GenericReflection.<Object, JAXBElement <Configuration>> uncheckedCast (um.unmarshal (aIS));
+      final JAXBElement <Configuration> aElement = GenericReflection.uncheckedCast (um.unmarshal (aIS));
       return aElement.getValue ();
     }
     catch (final JAXBException ex)
