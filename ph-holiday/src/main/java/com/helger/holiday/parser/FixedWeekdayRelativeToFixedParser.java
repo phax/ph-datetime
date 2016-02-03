@@ -33,7 +33,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class FixedWeekdayRelativeToFixedParser extends AbstractHolidayParser
+public final class FixedWeekdayRelativeToFixedParser extends AbstractHolidayParser
 {
   private static final FixedWeekdayRelativeToFixedParser s_aInstance = new FixedWeekdayRelativeToFixedParser ();
 

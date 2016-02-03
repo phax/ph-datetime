@@ -18,8 +18,8 @@ package com.helger.datetime.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,7 +48,7 @@ public final class PDTXMLConverterTest
     assertNotNull (c1);
     final XMLGregorianCalendar c2 = PDTXMLConverter.createNewCalendar ();
     assertNotNull (c2);
-    assertTrue (c1 != c2);
+    assertNotSame (c1, c2);
     assertEquals (c1, c2);
   }
 

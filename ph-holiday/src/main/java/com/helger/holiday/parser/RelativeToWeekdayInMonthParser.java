@@ -31,7 +31,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class RelativeToWeekdayInMonthParser extends FixedWeekdayInMonthParser
+public final class RelativeToWeekdayInMonthParser extends FixedWeekdayInMonthParser
 {
   private static final RelativeToWeekdayInMonthParser s_aInstance = new RelativeToWeekdayInMonthParser ();
 

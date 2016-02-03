@@ -32,7 +32,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
+public final class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
 {
   private static final FixedWeekdayBetweenFixedParser s_aInstance = new FixedWeekdayBetweenFixedParser ();
 

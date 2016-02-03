@@ -35,7 +35,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
+public final class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
 {
   private static final EthiopianOrthodoxHolidayParser s_aInstance = new EthiopianOrthodoxHolidayParser ();
 

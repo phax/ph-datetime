@@ -107,16 +107,14 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
    */
   public static JulianDate getJulianEasterSunday (final int nYear)
   {
-    int a, b, c, d, e;
-    int x, nMonth, nDay;
-    a = nYear % 4;
-    b = nYear % 7;
-    c = nYear % 19;
-    d = (19 * c + 15) % 30;
-    e = (2 * a + 4 * b - d + 34) % 7;
-    x = d + e + 114;
-    nMonth = x / 31;
-    nDay = (x % 31) + 1;
+    final int a = nYear % 4;
+    final int b = nYear % 7;
+    final int c = nYear % 19;
+    final int d = (19 * c + 15) % 30;
+    final int e = (2 * a + 4 * b - d + 34) % 7;
+    final int x = d + e + 114;
+    final int nMonth = x / 31;
+    final int nDay = (x % 31) + 1;
     return JulianDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL).getValue (), nDay);
   }
 
@@ -129,23 +127,21 @@ public class RelativeToEasterSundayParser extends AbstractHolidayParser
    */
   public static LocalDate getGregorianEasterSunday (final int nYear)
   {
-    int a, b, c, d, e, f, g, h, i, j, k, l;
-    int x, nMonth, nDay;
-    a = nYear % 19;
-    b = nYear / 100;
-    c = nYear % 100;
-    d = b / 4;
-    e = b % 4;
-    f = (b + 8) / 25;
-    g = (b - f + 1) / 3;
-    h = (19 * a + b - d - g + 15) % 30;
-    i = c / 4;
-    j = c % 4;
-    k = (32 + 2 * e + 2 * i - h - j) % 7;
-    l = (a + 11 * h + 22 * k) / 451;
-    x = h + k - 7 * l + 114;
-    nMonth = x / 31;
-    nDay = (x % 31) + 1;
+    final int a = nYear % 19;
+    final int b = nYear / 100;
+    final int c = nYear % 100;
+    final int d = b / 4;
+    final int e = b % 4;
+    final int f = (b + 8) / 25;
+    final int g = (b - f + 1) / 3;
+    final int h = (19 * a + b - d - g + 15) % 30;
+    final int i = c / 4;
+    final int j = c % 4;
+    final int k = (32 + 2 * e + 2 * i - h - j) % 7;
+    final int l = (a + 11 * h + 22 * k) / 451;
+    final int x = h + k - 7 * l + 114;
+    final int nMonth = x / 31;
+    final int nDay = (x % 31) + 1;
     return LocalDate.of (nYear, (nMonth == 3 ? Month.MARCH : Month.APRIL), nDay);
   }
 }

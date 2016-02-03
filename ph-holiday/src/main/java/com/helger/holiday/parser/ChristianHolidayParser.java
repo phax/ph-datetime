@@ -36,7 +36,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class ChristianHolidayParser extends RelativeToEasterSundayParser
+public final class ChristianHolidayParser extends RelativeToEasterSundayParser
 {
   private static final ChristianHolidayParser s_aInstance = new ChristianHolidayParser ();
 

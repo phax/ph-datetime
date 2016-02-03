@@ -33,7 +33,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class IslamicHolidayParser extends AbstractHolidayParser
+public final class IslamicHolidayParser extends AbstractHolidayParser
 {
   private static final IslamicHolidayParser s_aInstance = new IslamicHolidayParser ();
 

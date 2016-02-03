@@ -24,7 +24,7 @@ import com.helger.holiday.jaxb.Holidays;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class HinduHolidayParser extends AbstractHolidayParser
+public final class HinduHolidayParser extends AbstractHolidayParser
 {
   private static final HinduHolidayParser s_aInstance = new HinduHolidayParser ();
 

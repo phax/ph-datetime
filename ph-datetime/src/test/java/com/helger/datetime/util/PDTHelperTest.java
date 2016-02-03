@@ -112,7 +112,7 @@ public final class PDTHelperTest
     final Duration p1 = Duration.between (LocalTime.of (6, 0, 0), LocalTime.of (15, 0, 0));
     Duration p2 = Duration.ofHours (9);
     // Different field size
-    assertTrue (p1.equals (p2));
+    assertEquals (p1, p2);
 
     // But this leads to equality :)
     assertFalse (PDTHelper.isLess (p1, p2));

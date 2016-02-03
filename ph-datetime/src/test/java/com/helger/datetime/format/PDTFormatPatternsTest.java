@@ -68,7 +68,11 @@ public final class PDTFormatPatternsTest
   @Test
   public void testGetPattern ()
   {
-    String sDefault, sShort, sMedium, sLong, sFull;
+    String sDefault;
+    String sShort;
+    String sMedium;
+    String sLong;
+    String sFull;
     for (final Locale aLocale : LocaleCache.getInstance ().getAllLocales ())
     {
       // get pattern

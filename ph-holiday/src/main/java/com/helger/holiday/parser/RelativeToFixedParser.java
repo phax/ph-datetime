@@ -31,7 +31,7 @@ import com.helger.holiday.mgr.XMLHolidayHelper;
  * @author Sven Diedrichsen
  * @author Philip Helger
  */
-public class RelativeToFixedParser extends AbstractHolidayParser
+public final class RelativeToFixedParser extends AbstractHolidayParser
 {
   private static final RelativeToFixedParser s_aInstance = new RelativeToFixedParser ();
 
