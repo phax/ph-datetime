@@ -42,20 +42,9 @@ import com.helger.datetime.PDTFactory;
 @ThreadSafe
 public final class PDTConfig
 {
-  /**
-   * The default-default date time zone.
-   */
-  public static final String DEFAULT_DATETIMEZONEID = "Europe/Vienna";
-
   private static final Logger s_aLogger = LoggerFactory.getLogger (PDTConfig.class);
 
-  private static ZoneId s_aDefaultZoneId;
-
-  static
-  {
-    // Ensure the JDK timezone is aligned to our default
-    setDefaultDateTimeZoneID (DEFAULT_DATETIMEZONEID);
-  }
+  private static ZoneId s_aDefaultZoneId = TimeZone.getDefault ().toZoneId ();
 
   @PresentForCodeCoverage
   private static final PDTConfig s_aInstance = new PDTConfig ();
@@ -91,7 +80,7 @@ public final class PDTConfig
     catch (final DateTimeException ex)
     {
       // time zone ID is unknown
-      s_aLogger.warn ("Unsupported dateTimeZone ID '" + sDateTimeZoneID + "'", ex);
+      s_aLogger.warn ("Unsupported ZoneId '" + sDateTimeZoneID + "'", ex);
       return ESuccess.FAILURE;
     }
   }

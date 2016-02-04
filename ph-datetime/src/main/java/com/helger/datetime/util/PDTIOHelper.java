@@ -52,9 +52,9 @@ public final class PDTIOHelper
    * @return The current date time formatted for usage in a file name.
    */
   @Nonnull
-  public static String getCurrentDateTimeForFilename ()
+  public static String getCurrentZonedDateTimeForFilename ()
   {
-    return getDateTimeForFilename (ZonedDateTime.now ());
+    return getZonedDateTimeForFilename (ZonedDateTime.now ());
   }
 
   /**
@@ -65,7 +65,7 @@ public final class PDTIOHelper
    * @return The formatted string.
    */
   @Nonnull
-  public static String getDateTimeForFilename (@Nonnull final ZonedDateTime aDT)
+  public static String getZonedDateTimeForFilename (@Nonnull final ZonedDateTime aDT)
   {
     return PDTToString.getAsString (PATTERN_DATETIME, aDT);
   }

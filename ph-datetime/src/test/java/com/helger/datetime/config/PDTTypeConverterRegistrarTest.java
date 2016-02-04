@@ -21,11 +21,13 @@ import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZonedDateTime;
@@ -47,7 +49,6 @@ import com.helger.commons.mutable.MutableInt;
 import com.helger.commons.mutable.MutableLong;
 import com.helger.commons.mutable.MutableShort;
 import com.helger.commons.typeconvert.TypeConverter;
-import com.helger.datetime.CPDT;
 
 /**
  * Test class for class {@link PDTTypeConverterRegistrar}.
@@ -171,6 +172,15 @@ public final class PDTTypeConverterRegistrarTest
     aValues.put (Instant.class, Instant.now ());
 
     for (final Map.Entry <Class <?>, Object> aSrc : aValues.entrySet ())
+    {
+      // Convert to String and back
+      final String s = TypeConverter.convertIfNecessary (aSrc.getValue (), String.class);
+      assertNotNull (s);
+      final Object aSrcValue2 = TypeConverter.convertIfNecessary (s, aSrc.getKey ());
+      assertNotNull (aSrcValue2);
+      assertEquals ("Difference after reading from: " + s, aSrc.getValue (), aSrcValue2);
+
+      // COnvert to any other type
       for (final Class <?> aDst : aValues.keySet ())
         if (aSrc.getKey () != aDst)
         {
@@ -192,6 +202,7 @@ public final class PDTTypeConverterRegistrarTest
             assertNotNull (aDstValue);
           }
         }
+    }
   }
 
   @Test
@@ -204,7 +215,7 @@ public final class PDTTypeConverterRegistrarTest
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDateTime.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDate.now (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (LocalTime.now (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_DURATION, ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (CPDT.NULL_PERIOD, ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (Duration.ofHours (3), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (Period.ofDays (8), ELEMENT_NAME));
   }
 }

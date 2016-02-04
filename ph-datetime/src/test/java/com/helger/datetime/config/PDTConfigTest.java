@@ -35,12 +35,11 @@ public final class PDTConfigTest
   @Test
   public void testTimeZones ()
   {
-    ZoneId aDTZ = PDTConfig.getDefaultZoneId ();
+    final ZoneId aDTZ = PDTConfig.getDefaultZoneId ();
     assertNotNull (aDTZ);
 
-    aDTZ = PDTConfig.getUTCZoneId ();
-    assertNotNull (aDTZ);
-    assertEquals ("Z", aDTZ.getId ());
+    assertNotNull (PDTConfig.getUTCZoneId ());
+    assertEquals ("Z", PDTConfig.getUTCZoneId ().getId ());
 
     try
     {
@@ -57,7 +56,7 @@ public final class PDTConfigTest
     }
     finally
     {
-      assertTrue (PDTConfig.setDefaultDateTimeZoneID (PDTConfig.DEFAULT_DATETIMEZONEID).isSuccess ());
+      assertTrue (PDTConfig.setDefaultDateTimeZoneID (aDTZ.getId ()).isSuccess ());
     }
   }
 }

@@ -16,7 +16,12 @@
  */
 package com.helger.datetime.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.Test;
 
@@ -30,9 +35,14 @@ public final class PDTIOHelperTest
   @Test
   public void testAll ()
   {
-    assertNotNull (PDTIOHelper.getCurrentDateTimeForFilename ());
+    assertNotNull (PDTIOHelper.getCurrentZonedDateTimeForFilename ());
+    assertNotNull (PDTIOHelper.getCurrentLocalDateTimeForFilename ());
     assertNotNull (PDTIOHelper.getCurrentDateForFilename ());
     assertNotNull (PDTIOHelper.getCurrentTimeForFilename ());
-    assertNotNull (PDTIOHelper.getCurrentLocalDateTimeForFilename ());
+
+    assertEquals ("20051012_034512",
+                  PDTIOHelper.getLocalDateTimeForFilename (LocalDateTime.of (2005, 10, 12, 3, 45, 12)));
+    assertEquals ("20051012", PDTIOHelper.getDateForFilename (LocalDate.of (2005, 10, 12)));
+    assertEquals ("034512", PDTIOHelper.getTimeForFilename (LocalTime.of (3, 45, 12)));
   }
 }

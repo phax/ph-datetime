@@ -56,6 +56,7 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
     // Destination: Instant
     final Function <Number, Instant> fToInstant = aSource -> Instant.ofEpochMilli (aSource.longValue ());
     aRegistry.registerTypeConverterRuleAssignableSourceFixedDestination (Number.class, Instant.class, fToInstant);
+    aRegistry.registerTypeConverter (String.class, Instant.class, Instant::parse);
     aRegistry.registerTypeConverter (Date.class, Instant.class, Date::toInstant);
     aRegistry.registerTypeConverter (ZonedDateTime.class, Instant.class, ZonedDateTime::toInstant);
     aRegistry.registerTypeConverter (OffsetDateTime.class, Instant.class, OffsetDateTime::toInstant);
@@ -185,10 +186,12 @@ public final class PDTTypeConverterRegistrar implements ITypeConverterRegistrarS
                                                                                                                           Instant.class)));
 
     // Destination: YearMonth
+    aRegistry.registerTypeConverter (String.class, YearMonth.class, YearMonth::parse);
     aRegistry.registerTypeConverterRuleAnySourceFixedDestination (YearMonth.class,
                                                                   aSource -> YearMonth.from (TypeConverter.convertIfNecessary (aSource,
                                                                                                                                LocalDate.class)));
     // Destination: Year
+    aRegistry.registerTypeConverter (String.class, Year.class, Year::parse);
     aRegistry.registerTypeConverterRuleAnySourceFixedDestination (Year.class,
                                                                   aSource -> Year.from (TypeConverter.convertIfNecessary (aSource,
                                                                                                                           LocalDate.class)));
