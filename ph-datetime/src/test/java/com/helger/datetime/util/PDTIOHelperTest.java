@@ -35,7 +35,6 @@ public final class PDTIOHelperTest
   @Test
   public void testAll ()
   {
-    assertNotNull (PDTIOHelper.getCurrentZonedDateTimeForFilename ());
     assertNotNull (PDTIOHelper.getCurrentLocalDateTimeForFilename ());
     assertNotNull (PDTIOHelper.getCurrentDateForFilename ());
     assertNotNull (PDTIOHelper.getCurrentTimeForFilename ());

@@ -19,7 +19,6 @@ package com.helger.datetime.util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
@@ -47,28 +46,6 @@ public final class PDTIOHelper
 
   private PDTIOHelper ()
   {}
-
-  /**
-   * @return The current date time formatted for usage in a file name.
-   */
-  @Nonnull
-  public static String getCurrentZonedDateTimeForFilename ()
-  {
-    return getZonedDateTimeForFilename (ZonedDateTime.now ());
-  }
-
-  /**
-   * Get the passed date time formatted suitable for a file name.
-   *
-   * @param aDT
-   *        The date time to be formatted. May not be <code>null</code>.
-   * @return The formatted string.
-   */
-  @Nonnull
-  public static String getZonedDateTimeForFilename (@Nonnull final ZonedDateTime aDT)
-  {
-    return PDTToString.getAsString (PATTERN_DATETIME, aDT);
-  }
 
   /**
    * @return The current local date time formatted for usage in a file name.
