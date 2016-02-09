@@ -50,6 +50,12 @@ public final class PDTFactory
 
   // To ZonedDateTime
 
+  @Nonnegative
+  public static ZonedDateTime getCurrentZonedDateTime ()
+  {
+    return ZonedDateTime.now (_getZoneId ());
+  }
+
   @Nonnull
   public static ZonedDateTime createZonedDateTime (@Nonnull final OffsetDateTime aODT)
   {
@@ -140,6 +146,12 @@ public final class PDTFactory
   }
 
   // To OffsetDateTime
+
+  @Nonnegative
+  public static OffsetDateTime getCurrentOffsetDateTime ()
+  {
+    return OffsetDateTime.now (_getZoneId ());
+  }
 
   @Nonnull
   public static OffsetDateTime createOffsetDateTime (@Nonnull final ZonedDateTime aZDT)
@@ -232,6 +244,12 @@ public final class PDTFactory
 
   // To LocalDateTime
 
+  @Nonnegative
+  public static LocalDateTime getCurrentLocalDateTime ()
+  {
+    return LocalDateTime.now (_getZoneId ());
+  }
+
   @Nonnull
   public static LocalDateTime createLocalDateTime (@Nonnull final ZonedDateTime aDT)
   {
@@ -323,6 +341,12 @@ public final class PDTFactory
 
   // To LocalDate
 
+  @Nonnegative
+  public static LocalDate getCurrentLocalDate ()
+  {
+    return LocalDate.now (_getZoneId ());
+  }
+
   @Nonnull
   public static LocalDate createLocalDate (final int nYear, final Month eMonth, final int nDay)
   {
@@ -366,6 +390,12 @@ public final class PDTFactory
   }
 
   // To LocalTime
+
+  @Nonnegative
+  public static LocalTime getCurrentLocalTime ()
+  {
+    return LocalTime.now (_getZoneId ());
+  }
 
   @Nonnull
   public static LocalTime createLocalTime (@Nonnull final GregorianCalendar aCalendar)
