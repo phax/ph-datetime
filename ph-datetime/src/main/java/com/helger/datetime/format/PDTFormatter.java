@@ -107,8 +107,8 @@ public final class PDTFormatter
       super (LocalizedDateFormatCache.class.getName ());
     }
 
-    @Override
-    protected DateTimeFormatter getValueToCache (final CacheKey aKey)
+    @Nonnull
+    public String getSourcePattern (@Nonnull final CacheKey aKey)
     {
       final DateFormat aDF;
       switch (aKey.m_eDTType)
@@ -123,7 +123,13 @@ public final class PDTFormatter
           aDF = DateFormat.getDateTimeInstance (aKey.m_nStyle, aKey.m_nStyle, aKey.m_aLocale);
           break;
       }
-      String sPattern = ((SimpleDateFormat) aDF).toPattern ();
+      return ((SimpleDateFormat) aDF).toPattern ();
+    }
+
+    @Override
+    protected DateTimeFormatter getValueToCache (@Nonnull final CacheKey aKey)
+    {
+      String sPattern = getSourcePattern (aKey);
       // Change "year of era" to "year"
       sPattern = StringHelper.replaceAll (sPattern, 'y', 'u');
 
@@ -140,6 +146,12 @@ public final class PDTFormatter
 
   private PDTFormatter ()
   {}
+
+  @Nonnull
+  public static String getPattern (@Nonnull final EDTType eDTType, @Nullable final Locale aLocale, final int nStyle)
+  {
+    return s_aCache.getSourcePattern (new CacheKey (eDTType, aLocale, nStyle));
+  }
 
   /**
    * Assign the passed display locale to the passed date time formatter.
