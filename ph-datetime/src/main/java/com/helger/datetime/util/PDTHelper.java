@@ -199,6 +199,8 @@ public final class PDTHelper
    *
    * @param aDT
    *        The object to use year and month from.
+   * @param aLocale
+   *        Locale to use. May not be <code>null</code>.
    * @return the start week number.
    */
   @Nonnull
@@ -224,6 +226,8 @@ public final class PDTHelper
    *
    * @param aDT
    *        The object to use year and month from.
+   * @param aLocale
+   *        Locale to use. May not be <code>null</code>.
    * @return The end week number.
    */
   @Nonnull

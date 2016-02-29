@@ -121,6 +121,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    *        The date to be checked. May not be <code>null</code>.
    * @param aMoveCond
    *        The move condition. May not be <code>null</code>.
+   * @return <code>true</code> if it should be substituted
    */
   protected static final boolean shallBeMoved (@Nonnull final LocalDate aFixed,
                                                @Nonnull final MovingCondition aMoveCond)
@@ -153,7 +154,9 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    * them fit.
    *
    * @param aMoveableHoliday
+   *        Date
    * @param aFixed
+   *        Optional fixed date
    * @return the moved date
    */
   protected static final LocalDate moveDate (final MoveableHoliday aMoveableHoliday, final LocalDate aFixed)

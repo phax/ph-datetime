@@ -39,11 +39,11 @@ public final class XMLHolidayHelper
   {}
 
   /**
-   * Returns the {@link DateTimeConstants} value for the given weekday.
+   * Returns the {@link DayOfWeek} value for the given weekday.
    *
    * @param eWeekday
    *        Day of week to convert
-   * @return {@link DateTimeConstants} value.
+   * @return {@link DayOfWeek} value.
    */
   @Nonnegative
   public static DayOfWeek getWeekday (@Nonnull final Weekday eWeekday)
@@ -70,11 +70,11 @@ public final class XMLHolidayHelper
   }
 
   /**
-   * Returns the {@link DateTimeConstants} value for the given month.
+   * Returns the {@link java.time.Month} value for the given month.
    *
    * @param eMonth
    *        Month of year to convert
-   * @return {@link DateTimeConstants} value.
+   * @return {@link java.time.Month} value.
    */
   @Nonnegative
   public static java.time.Month getMonth (@Nonnull final Month eMonth)

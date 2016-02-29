@@ -110,7 +110,6 @@
           <bindingDirectory>${basedir}/src/main/jaxb</bindingDirectory>
           <schemaDirectory>${basedir}/src/main/resources/schemas</schemaDirectory>
           <extension>true</extension>
-          <specVersion>2.1</specVersion>
           <args>
             <arg>-no-header</arg>
             <arg>-Xph-default-locale</arg>

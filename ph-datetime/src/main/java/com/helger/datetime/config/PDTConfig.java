@@ -87,7 +87,7 @@ public final class PDTConfig
 
   /**
    * @return The default date time zone to use. Never <code>null</code>. The
-   *         default is {@link #DEFAULT_DATETIMEZONEID}.
+   *         default is defined by the system.
    */
   @Nonnull
   public static ZoneId getDefaultZoneId ()
@@ -103,7 +103,7 @@ public final class PDTConfig
 
   /**
    * @return The default time zone to use. Never <code>null</code>. The default
-   *         is {@link #DEFAULT_DATETIMEZONEID}.
+   *         is is defined by the system.
    */
   @Nonnull
   public static TimeZone getDefaultTimeZone ()
