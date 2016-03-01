@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.OffsetDateTime;
 import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
@@ -433,5 +434,67 @@ public final class PDTHelper
 
     final long nSeconds = Duration.between (aStartDate.atStartOfDay (), aEndDate.atStartOfDay ()).getSeconds ();
     return TimeUnit.SECONDS.toDays (nSeconds);
+  }
+
+  @Nonnull
+  public static LocalDate getMax (@Nonnull final LocalDate aDate1, @Nonnull final LocalDate aDate2)
+  {
+    return aDate1.isAfter (aDate2) ? aDate1 : aDate2;
+  }
+
+  @Nonnull
+  public static LocalTime getMax (@Nonnull final LocalTime aTime1, @Nonnull final LocalTime aTime2)
+  {
+    return aTime1.isAfter (aTime2) ? aTime1 : aTime2;
+  }
+
+  @Nonnull
+  public static LocalDateTime getMax (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
+  {
+    return aDateTime1.isAfter (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  @Nonnull
+  public static ZonedDateTime getMax (@Nonnull final ZonedDateTime aDateTime1, @Nonnull final ZonedDateTime aDateTime2)
+  {
+    return aDateTime1.isAfter (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  @Nonnull
+  public static OffsetDateTime getMax (@Nonnull final OffsetDateTime aDateTime1,
+                                       @Nonnull final OffsetDateTime aDateTime2)
+  {
+    return aDateTime1.isAfter (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  @Nonnull
+  public static LocalDate getMin (@Nonnull final LocalDate aDate1, @Nonnull final LocalDate aDate2)
+  {
+    return aDate1.isBefore (aDate2) ? aDate1 : aDate2;
+  }
+
+  @Nonnull
+  public static LocalTime getMin (@Nonnull final LocalTime aTime1, @Nonnull final LocalTime aTime2)
+  {
+    return aTime1.isBefore (aTime2) ? aTime1 : aTime2;
+  }
+
+  @Nonnull
+  public static LocalDateTime getMin (@Nonnull final LocalDateTime aDateTime1, @Nonnull final LocalDateTime aDateTime2)
+  {
+    return aDateTime1.isBefore (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  @Nonnull
+  public static ZonedDateTime getMin (@Nonnull final ZonedDateTime aDateTime1, @Nonnull final ZonedDateTime aDateTime2)
+  {
+    return aDateTime1.isBefore (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  @Nonnull
+  public static OffsetDateTime getMin (@Nonnull final OffsetDateTime aDateTime1,
+                                       @Nonnull final OffsetDateTime aDateTime2)
+  {
+    return aDateTime1.isBefore (aDateTime2) ? aDateTime1 : aDateTime2;
   }
 }
