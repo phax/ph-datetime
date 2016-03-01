@@ -34,13 +34,14 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 
+import com.helger.commons.collection.ext.CommonsLinkedHashMap;
+import com.helger.commons.collection.ext.ICommonsOrderedMap;
 import com.helger.commons.microdom.convert.MicroTypeConverter;
 import com.helger.commons.mutable.MutableByte;
 import com.helger.commons.mutable.MutableDouble;
@@ -158,7 +159,7 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testConvertIntoEachOther ()
   {
-    final Map <Class <?>, Object> aValues = new LinkedHashMap <> ();
+    final ICommonsOrderedMap <Class <?>, Object> aValues = new CommonsLinkedHashMap <> ();
     aValues.put (Date.class, new Date ());
     aValues.put (Calendar.class, Calendar.getInstance ());
     aValues.put (GregorianCalendar.class, new GregorianCalendar ());

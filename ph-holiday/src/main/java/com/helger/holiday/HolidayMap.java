@@ -17,10 +17,6 @@
 package com.helger.holiday;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -28,7 +24,10 @@ import javax.annotation.Nullable;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.collection.ext.CommonsLinkedHashMap;
+import com.helger.commons.collection.ext.ICommonsList;
+import com.helger.commons.collection.ext.ICommonsOrderedMap;
+import com.helger.commons.collection.ext.ICommonsOrderedSet;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.state.EChange;
 import com.helger.commons.string.ToStringGenerator;
@@ -40,7 +39,7 @@ import com.helger.commons.string.ToStringGenerator;
  */
 public final class HolidayMap
 {
-  private final Map <LocalDate, ISingleHoliday> m_aMap = new LinkedHashMap <> ();
+  private final ICommonsOrderedMap <LocalDate, ISingleHoliday> m_aMap = new CommonsLinkedHashMap <> ();
 
   public HolidayMap ()
   {}
@@ -77,23 +76,23 @@ public final class HolidayMap
 
   @Nonnull
   @ReturnsMutableCopy
-  public Set <LocalDate> getAllDates ()
+  public ICommonsOrderedSet <LocalDate> getAllDates ()
   {
-    return CollectionHelper.newSet (m_aMap.keySet ());
+    return m_aMap.copyOfKeySet ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public Collection <ISingleHoliday> getAllHolidays ()
+  public ICommonsList <ISingleHoliday> getAllHolidays ()
   {
-    return CollectionHelper.newList (m_aMap.values ());
+    return m_aMap.copyOfValues ();
   }
 
   @Nonnull
   @ReturnsMutableCopy
-  public Map <LocalDate, ISingleHoliday> getMap ()
+  public ICommonsOrderedMap <LocalDate, ISingleHoliday> getMap ()
   {
-    return CollectionHelper.newMap (m_aMap);
+    return m_aMap.getClone ();
   }
 
   @Nonnegative
