@@ -17,9 +17,7 @@
 package com.helger.holiday.mgr;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -37,6 +35,8 @@ import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.collection.ext.CommonsArrayList;
+import com.helger.commons.collection.ext.ICommonsList;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.commons.io.stream.StreamHelper;
 import com.helger.commons.lang.GenericReflection;
@@ -137,9 +137,9 @@ public class XMLHolidayManager extends AbstractHolidayManager
    */
   @Nonnull
   @ReturnsMutableCopy
-  private static List <IHolidayParser> _getParsers (@Nonnull final Holidays aConfig)
+  private static ICommonsList <IHolidayParser> _getParsers (@Nonnull final Holidays aConfig)
   {
-    final List <IHolidayParser> ret = new ArrayList <IHolidayParser> ();
+    final ICommonsList <IHolidayParser> ret = new CommonsArrayList <> ();
     if (!aConfig.getChristianHoliday ().isEmpty ())
       ret.add (ChristianHolidayParser.getInstance ());
     if (!aConfig.getEthiopianOrthodoxHoliday ().isEmpty ())
