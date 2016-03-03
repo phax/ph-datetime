@@ -34,4 +34,9 @@ public interface IHasDeletionDateTime
    */
   @Nullable
   LocalDateTime getDeletionDateTime ();
+
+  default boolean hasDeletionDateTime ()
+  {
+    return getDeletionDateTime () != null;
+  }
 }

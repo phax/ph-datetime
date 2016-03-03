@@ -34,4 +34,9 @@ public interface IHasLastModificationDateTime
    */
   @Nullable
   LocalDateTime getLastModificationDateTime ();
+
+  default boolean hasLastModificationDateTime ()
+  {
+    return getLastModificationDateTime () != null;
+  }
 }
