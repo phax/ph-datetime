@@ -20,15 +20,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
 
 import org.junit.Test;
+
+import com.helger.commons.collection.ext.CommonsHashMap;
+import com.helger.commons.collection.ext.CommonsHashSet;
+import com.helger.commons.collection.ext.ICommonsMap;
+import com.helger.commons.collection.ext.ICommonsSet;
+import com.helger.commons.lang.PropertiesHelper;
 
 /**
  * @author sven
@@ -46,28 +47,25 @@ public final class HolidayDescriptionFuncTest
     assertNotNull (descriptions);
     assertTrue (descriptions.length > 0);
 
-    final Set <String> propertiesNames = new HashSet <String> ();
-    final Map <String, Properties> descriptionProperties = new HashMap <String, Properties> ();
+    final ICommonsSet <String> propertiesNames = new CommonsHashSet <> ();
+    final ICommonsMap <String, ICommonsMap <String, String>> descriptionProperties = new CommonsHashMap <> ();
 
     for (final File descriptionFile : descriptions)
     {
-      final Properties props = new Properties ();
-      props.load (new FileInputStream (descriptionFile));
-      propertiesNames.addAll (props.stringPropertyNames ());
-      descriptionProperties.put (descriptionFile.getName (), props);
+      final ICommonsMap <String, String> aProps = PropertiesHelper.loadProperties (descriptionFile);
+      propertiesNames.addAll (aProps.keySet ());
+      descriptionProperties.put (descriptionFile.getName (), aProps);
     }
 
-    final Map <String, Set <String>> missingProperties = new HashMap <String, Set <String>> ();
+    final ICommonsMap <String, ICommonsSet <String>> missingProperties = new CommonsHashMap <> ();
 
-    for (final Map.Entry <String, Properties> entry : descriptionProperties.entrySet ())
-    {
-      if (!entry.getValue ().stringPropertyNames ().containsAll (propertiesNames))
+    for (final Map.Entry <String, ICommonsMap <String, String>> entry : descriptionProperties.entrySet ())
+      if (!entry.getValue ().keySet ().containsAll (propertiesNames))
       {
-        final Set <String> remainingProps = new HashSet <String> (propertiesNames);
-        remainingProps.removeAll (entry.getValue ().stringPropertyNames ());
+        final ICommonsSet <String> remainingProps = new CommonsHashSet <> (propertiesNames);
+        remainingProps.removeAll (entry.getValue ().keySet ());
         missingProperties.put (entry.getKey (), remainingProps);
       }
-    }
 
     assertTrue ("Following files are lacking properties: " + missingProperties, missingProperties.isEmpty ());
   }
