@@ -27,6 +27,7 @@ import javax.annotation.concurrent.Immutable;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.equals.EqualsHelper;
 import com.helger.commons.hashcode.HashCodeGenerator;
+import com.helger.commons.hashcode.IHashCodeGenerator;
 import com.helger.commons.lang.ClassLoaderHelper;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.string.ToStringGenerator;
@@ -47,8 +48,8 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   /** The properties key to retrieve the description with. */
   private final ResourceBundleKey m_aRBKey;
 
-  /** Cached hashCode result */
-  private Integer m_aHashCode;
+  // Status vars
+  private transient int m_nHashCode = IHashCodeGenerator.ILLEGAL_HASHCODE;
 
   /**
    * Constructs a holiday for a date using the provided properties key to
@@ -63,7 +64,10 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   {
     ValueEnforcer.notNull (aType, "Type");
     m_bIsOfficial = aType.isOfficialHoliday ();
-    m_aRBKey = StringHelper.hasNoText (sPropertiesKey) ? null : new ResourceBundleKey ("descriptions.holiday_descriptions", "holiday.description." + sPropertiesKey);
+    m_aRBKey = StringHelper.hasNoText (sPropertiesKey) ? null
+                                                       : new ResourceBundleKey ("descriptions.holiday_descriptions",
+                                                                                "holiday.description." +
+                                                                                                                     sPropertiesKey);
   }
 
   public boolean isOfficialHoliday ()
@@ -111,9 +115,10 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   public int hashCode ()
   {
     // We need a cached one!
-    if (m_aHashCode == null)
-      m_aHashCode = new HashCodeGenerator (this).append (m_bIsOfficial).append (m_aRBKey).getHashCodeObj ();
-    return m_aHashCode.intValue ();
+    int ret = m_nHashCode;
+    if (ret == IHashCodeGenerator.ILLEGAL_HASHCODE)
+      ret = m_nHashCode = new HashCodeGenerator (this).append (m_bIsOfficial).append (m_aRBKey).getHashCode ();
+    return ret;
   }
 
   @Override
