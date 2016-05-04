@@ -21,7 +21,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Locale;
@@ -91,5 +93,13 @@ public final class PDTFormatterTest
                   PDTFormatter.getDefaultFormatterDate (Locale.GERMANY)
                               .withResolverStyle (ResolverStyle.SMART)
                               .parse ("30.02.2015", LocalDate::from));
+  }
+
+  @Test
+  public void testSpecialCases ()
+  {
+    final LocalDateTime dt = LocalDateTime.of (2016, Month.MAY, 5, 20, 00, 00);
+    assertEquals ("2016-05-05T20:00", dt.toString ());
+    assertEquals ("2016-05-05T20:00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format (dt));
   }
 }
