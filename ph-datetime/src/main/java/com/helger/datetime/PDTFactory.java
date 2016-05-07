@@ -32,6 +32,7 @@ import java.util.GregorianCalendar;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.datetime.config.PDTConfig;
@@ -56,38 +57,38 @@ public final class PDTFactory
     return ZonedDateTime.now (_getZoneId ());
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final OffsetDateTime aODT)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final OffsetDateTime aODT)
   {
-    return aODT.toZonedDateTime ();
+    return aODT == null ? null : aODT.toZonedDateTime ();
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final LocalDateTime aLDT)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final LocalDateTime aLDT)
   {
-    return ZonedDateTime.of (aLDT, _getZoneId ());
+    return aLDT == null ? null : ZonedDateTime.of (aLDT, _getZoneId ());
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final LocalDate aLD)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final LocalDate aLD)
   {
     return createZonedDateTime (createLocalDateTime (aLD));
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final YearMonth aYM)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final YearMonth aYM)
   {
     return createZonedDateTime (createLocalDateTime (aYM));
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final Year aYear)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final Year aYear)
   {
     return createZonedDateTime (createLocalDateTime (aYear));
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final LocalTime aLT)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final LocalTime aLT)
   {
     return createZonedDateTime (createLocalDateTime (aLT));
   }
@@ -100,7 +101,7 @@ public final class PDTFactory
 
   @Nonnull
   public static ZonedDateTime createZonedDateTime (final int nYear,
-                                                   final Month eMonth,
+                                                   @Nonnull final Month eMonth,
                                                    final int nDay,
                                                    final int nHour,
                                                    final int nMinute,
@@ -109,26 +110,26 @@ public final class PDTFactory
     return createZonedDateTime (createLocalDateTime (nYear, eMonth, nDay, nHour, nMinute, nSecond));
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final Instant aInstant)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final Instant aInstant)
   {
-    return ZonedDateTime.ofInstant (aInstant, _getZoneId ());
+    return aInstant == null ? null : ZonedDateTime.ofInstant (aInstant, _getZoneId ());
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final GregorianCalendar aCal)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final GregorianCalendar aCal)
   {
-    return aCal.toZonedDateTime ();
+    return aCal == null ? null : aCal.toZonedDateTime ();
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final Date aDate)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final Date aDate)
   {
     return createZonedDateTime (createLocalDateTime (aDate));
   }
 
-  @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final Timestamp aTimestamp)
+  @Nullable
+  public static ZonedDateTime createZonedDateTime (@Nullable final Timestamp aTimestamp)
   {
     return createZonedDateTime (createLocalDateTime (aTimestamp));
   }
@@ -140,7 +141,7 @@ public final class PDTFactory
   }
 
   @Nonnull
-  public static ZonedDateTime createZonedDateTime (@Nonnull final Number aMillis)
+  public static ZonedDateTime createZonedDateTime (@Nullable final Number aMillis)
   {
     return createZonedDateTime (createLocalDateTime (aMillis));
   }
@@ -153,38 +154,38 @@ public final class PDTFactory
     return OffsetDateTime.now (_getZoneId ());
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final ZonedDateTime aZDT)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final ZonedDateTime aZDT)
   {
-    return aZDT.toOffsetDateTime ();
+    return aZDT == null ? null : aZDT.toOffsetDateTime ();
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final LocalDateTime aLDT)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final LocalDateTime aLDT)
   {
     return createOffsetDateTime (createZonedDateTime (aLDT));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final LocalDate aLD)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final LocalDate aLD)
   {
     return createOffsetDateTime (createZonedDateTime (aLD));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final YearMonth aYM)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final YearMonth aYM)
   {
     return createOffsetDateTime (createZonedDateTime (aYM));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final Year aYear)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final Year aYear)
   {
     return createOffsetDateTime (createZonedDateTime (aYear));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final LocalTime aLT)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final LocalTime aLT)
   {
     return createOffsetDateTime (createZonedDateTime (aLT));
   }
@@ -197,7 +198,7 @@ public final class PDTFactory
 
   @Nonnull
   public static OffsetDateTime createOffsetDateTime (final int nYear,
-                                                     final Month eMonth,
+                                                     @Nonnull final Month eMonth,
                                                      final int nDay,
                                                      final int nHour,
                                                      final int nMinute,
@@ -206,28 +207,28 @@ public final class PDTFactory
     return createOffsetDateTime (createZonedDateTime (nYear, eMonth, nDay, nHour, nMinute, nSecond));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final Instant aInstant)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final Instant aInstant)
   {
-    return OffsetDateTime.ofInstant (aInstant, _getZoneId ());
+    return aInstant == null ? null : OffsetDateTime.ofInstant (aInstant, _getZoneId ());
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final Date aDate)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final Date aDate)
   {
     return createOffsetDateTime (createLocalDateTime (aDate));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final Timestamp aTimestamp)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final Timestamp aTimestamp)
   {
     return createOffsetDateTime (createLocalDateTime (aTimestamp));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final GregorianCalendar aCal)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final GregorianCalendar aCal)
   {
-    return createOffsetDateTime (aCal.toZonedDateTime ());
+    return createOffsetDateTime (aCal == null ? null : aCal.toZonedDateTime ());
   }
 
   @Nonnull
@@ -236,8 +237,8 @@ public final class PDTFactory
     return createOffsetDateTime (createLocalDateTime (nMillis));
   }
 
-  @Nonnull
-  public static OffsetDateTime createOffsetDateTime (@Nonnull final Number aMillis)
+  @Nullable
+  public static OffsetDateTime createOffsetDateTime (@Nullable final Number aMillis)
   {
     return createOffsetDateTime (createLocalDateTime (aMillis));
   }
@@ -250,51 +251,51 @@ public final class PDTFactory
     return LocalDateTime.now (_getZoneId ());
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final ZonedDateTime aDT)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final ZonedDateTime aDT)
   {
-    return aDT.toLocalDateTime ();
+    return aDT == null ? null : aDT.toLocalDateTime ();
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final OffsetDateTime aDT)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final OffsetDateTime aDT)
   {
-    return aDT.toLocalDateTime ();
+    return aDT == null ? null : aDT.toLocalDateTime ();
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final LocalDate aLD)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final LocalDate aLD)
   {
-    return aLD.atStartOfDay ();
+    return aLD == null ? null : aLD.atStartOfDay ();
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final YearMonth aYM)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final YearMonth aYM)
   {
     return createLocalDateTime (createLocalDate (aYM));
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Year aYear)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final Year aYear)
   {
     return createLocalDateTime (createLocalDate (aYear));
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final LocalTime aLT)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final LocalTime aLT)
   {
-    return aLT.atDate (CPDT.NULL_LOCAL_DATE);
+    return aLT == null ? null : aLT.atDate (CPDT.NULL_LOCAL_DATE);
   }
 
   @Nonnull
-  public static LocalDateTime createLocalDateTime (final int nYear, final Month eMonth, final int nDay)
+  public static LocalDateTime createLocalDateTime (final int nYear, @Nonnull final Month eMonth, final int nDay)
   {
     return createLocalDateTime (nYear, eMonth, nDay, 0, 0, 0);
   }
 
   @Nonnull
   public static LocalDateTime createLocalDateTime (final int nYear,
-                                                   final Month eMonth,
+                                                   @Nonnull final Month eMonth,
                                                    final int nDay,
                                                    final int nHour,
                                                    final int nMinute,
@@ -303,28 +304,28 @@ public final class PDTFactory
     return LocalDateTime.of (nYear, eMonth, nDay, nHour, nMinute, nSecond);
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Instant aInstant)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final Instant aInstant)
   {
-    return LocalDateTime.ofInstant (aInstant, _getZoneId ());
+    return aInstant == null ? null : LocalDateTime.ofInstant (aInstant, _getZoneId ());
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Date aDate)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final Date aDate)
   {
-    return createLocalDateTime (aDate.toInstant ());
+    return aDate == null ? null : createLocalDateTime (aDate.toInstant ());
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Timestamp aDate)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final Timestamp aDate)
   {
-    return aDate.toLocalDateTime ();
+    return aDate == null ? null : aDate.toLocalDateTime ();
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final GregorianCalendar aCal)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final GregorianCalendar aCal)
   {
-    return createLocalDateTime (aCal.toZonedDateTime ());
+    return aCal == null ? null : createLocalDateTime (aCal.toZonedDateTime ());
   }
 
   @Nonnull
@@ -333,10 +334,10 @@ public final class PDTFactory
     return createLocalDateTime (Instant.ofEpochMilli (nMillis));
   }
 
-  @Nonnull
-  public static LocalDateTime createLocalDateTime (@Nonnull final Number aMillis)
+  @Nullable
+  public static LocalDateTime createLocalDateTime (@Nullable final Number aMillis)
   {
-    return createLocalDateTime (aMillis.longValue ());
+    return aMillis == null ? null : createLocalDateTime (aMillis.longValue ());
   }
 
   // To LocalDate
@@ -347,16 +348,16 @@ public final class PDTFactory
     return LocalDate.now (_getZoneId ());
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (final int nYear, final Month eMonth, final int nDay)
+  @Nullable
+  public static LocalDate createLocalDate (final int nYear, @Nonnull final Month eMonth, final int nDay)
   {
     return LocalDate.of (nYear, eMonth, nDay);
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final GregorianCalendar aCalendar)
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final GregorianCalendar aCalendar)
   {
-    return aCalendar.toZonedDateTime ().toLocalDate ();
+    return aCalendar == null ? null : aCalendar.toZonedDateTime ().toLocalDate ();
   }
 
   @Nonnull
@@ -365,28 +366,28 @@ public final class PDTFactory
     return createLocalDateTime (nMillis).toLocalDate ();
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final Instant aInstant)
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final Instant aInstant)
   {
-    return createLocalDateTime (aInstant).toLocalDate ();
+    return aInstant == null ? null : createLocalDateTime (aInstant).toLocalDate ();
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final Date aDate)
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final Date aDate)
   {
-    return createLocalDate (aDate.toInstant ());
+    return aDate == null ? null : createLocalDate (aDate.toInstant ());
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final YearMonth aYM)
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final YearMonth aYM)
   {
-    return aYM.atDay (1);
+    return aYM == null ? null : aYM.atDay (1);
   }
 
-  @Nonnull
-  public static LocalDate createLocalDate (@Nonnull final Year aYear)
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final Year aYear)
   {
-    return aYear.atDay (1);
+    return aYear == null ? null : aYear.atDay (1);
   }
 
   // To LocalTime
@@ -397,52 +398,52 @@ public final class PDTFactory
     return LocalTime.now (_getZoneId ());
   }
 
-  @Nonnull
-  public static LocalTime createLocalTime (@Nonnull final GregorianCalendar aCalendar)
+  @Nullable
+  public static LocalTime createLocalTime (@Nullable final GregorianCalendar aCalendar)
   {
-    return aCalendar.toZonedDateTime ().toLocalTime ();
+    return aCalendar == null ? null : aCalendar.toZonedDateTime ().toLocalTime ();
   }
 
-  @Nonnull
-  public static LocalTime createLocalTime (@Nonnull final Instant aInstant)
+  @Nullable
+  public static LocalTime createLocalTime (@Nullable final Instant aInstant)
   {
-    return createLocalDateTime (aInstant).toLocalTime ();
+    return aInstant == null ? null : createLocalDateTime (aInstant).toLocalTime ();
   }
 
-  @Nonnull
-  public static LocalTime createLocalTime (@Nonnull final Date aDate)
+  @Nullable
+  public static LocalTime createLocalTime (@Nullable final Date aDate)
   {
-    return createLocalTime (aDate.toInstant ());
+    return aDate == null ? null : createLocalTime (aDate.toInstant ());
   }
 
   // To Date
 
-  @Nonnull
-  public static Date createDate (@Nonnull final ZonedDateTime aZDT)
+  @Nullable
+  public static Date createDate (@Nullable final ZonedDateTime aZDT)
   {
-    return Date.from (aZDT.toInstant ());
+    return aZDT == null ? null : Date.from (aZDT.toInstant ());
   }
 
-  @Nonnull
-  public static Date createDate (@Nonnull final OffsetDateTime aODT)
+  @Nullable
+  public static Date createDate (@Nullable final OffsetDateTime aODT)
   {
-    return Date.from (aODT.toInstant ());
+    return aODT == null ? null : Date.from (aODT.toInstant ());
   }
 
-  @Nonnull
-  public static Date createDate (@Nonnull final LocalDateTime aLDT)
+  @Nullable
+  public static Date createDate (@Nullable final LocalDateTime aLDT)
   {
     return createDate (createZonedDateTime (aLDT));
   }
 
-  @Nonnull
-  public static Date createDate (@Nonnull final LocalDate aLD)
+  @Nullable
+  public static Date createDate (@Nullable final LocalDate aLD)
   {
     return createDate (createZonedDateTime (aLD));
   }
 
-  @Nonnull
-  public static Date createDate (@Nonnull final LocalTime aLT)
+  @Nullable
+  public static Date createDate (@Nullable final LocalTime aLT)
   {
     return createDate (createZonedDateTime (aLT));
   }
