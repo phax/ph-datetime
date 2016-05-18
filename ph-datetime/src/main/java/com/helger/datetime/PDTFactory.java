@@ -298,6 +298,16 @@ public final class PDTFactory
                                                    @Nonnull final Month eMonth,
                                                    final int nDay,
                                                    final int nHour,
+                                                   final int nMinute)
+  {
+    return createLocalDateTime (nYear, eMonth, nDay, nHour, nMinute, 0);
+  }
+
+  @Nonnull
+  public static LocalDateTime createLocalDateTime (final int nYear,
+                                                   @Nonnull final Month eMonth,
+                                                   final int nDay,
+                                                   final int nHour,
                                                    final int nMinute,
                                                    final int nSecond)
   {
