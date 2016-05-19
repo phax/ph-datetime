@@ -34,7 +34,6 @@ import org.junit.Test;
 
 import com.helger.datetime.PDTFactory;
 import com.helger.datetime.config.PDTConfig;
-import com.helger.datetime.util.PDTWebDateHelper;
 
 /**
  * Test class for class {@link PDTWebDateHelper}.
@@ -146,5 +145,15 @@ public final class PDTWebDateHelperTest
     }
     catch (final NullPointerException ex)
     {}
+  }
+
+  @Test
+  public void testXSDLocalDateTime ()
+  {
+    final LocalDateTime d = PDTFactory.createLocalDateTime (2011, Month.JULY, 6, 12, 34);
+    final String s = PDTWebDateHelper.getAsStringXSD (d);
+    assertEquals ("2011-07-06T12:34:00.000", s);
+    final LocalDateTime d2 = PDTWebDateHelper.getLocalDateTimeFromXSD (s);
+    assertEquals (d, d2);
   }
 }
