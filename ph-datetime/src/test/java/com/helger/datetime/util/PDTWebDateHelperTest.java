@@ -19,7 +19,6 @@ package com.helger.datetime.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -120,14 +119,7 @@ public final class PDTWebDateHelperTest
     final String s = PDTWebDateHelper.getAsStringXSD (aDT);
     assertNotNull (s);
     assertEquals (aDT, PDTWebDateHelper.getDateTimeFromXSD (s));
-
-    try
-    {
-      PDTWebDateHelper.getAsStringXSD ((ZonedDateTime) null);
-      fail ();
-    }
-    catch (final NullPointerException ex)
-    {}
+    assertNull (PDTWebDateHelper.getAsStringXSD ((ZonedDateTime) null));
   }
 
   @Test
@@ -137,14 +129,7 @@ public final class PDTWebDateHelperTest
     final String s = PDTWebDateHelper.getAsStringXSD (aDT);
     assertNotNull (s);
     assertEquals (aDT, PDTWebDateHelper.getLocalDateFromXSD (s));
-
-    try
-    {
-      PDTWebDateHelper.getAsStringXSD ((LocalDate) null);
-      fail ();
-    }
-    catch (final NullPointerException ex)
-    {}
+    assertNull (PDTWebDateHelper.getAsStringXSD ((LocalDate) null));
   }
 
   @Test
