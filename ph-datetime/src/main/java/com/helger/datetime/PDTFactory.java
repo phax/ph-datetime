@@ -465,4 +465,29 @@ public final class PDTFactory
   {
     return LocalDate.now ().getYear ();
   }
+
+  public static long getMillis (@Nonnull final LocalDate aLD)
+  {
+    return createZonedDateTime (aLD).toInstant ().toEpochMilli ();
+  }
+
+  public static long getMillis (@Nonnull final LocalTime aLT)
+  {
+    return createZonedDateTime (aLT).toInstant ().toEpochMilli ();
+  }
+
+  public static long getMillis (@Nonnull final LocalDateTime aLDT)
+  {
+    return createZonedDateTime (aLDT).toInstant ().toEpochMilli ();
+  }
+
+  public static long getMillis (@Nonnull final OffsetDateTime aODT)
+  {
+    return aODT.toInstant ().toEpochMilli ();
+  }
+
+  public static long getMillis (@Nonnull final ZonedDateTime aZDT)
+  {
+    return aZDT.toInstant ().toEpochMilli ();
+  }
 }
