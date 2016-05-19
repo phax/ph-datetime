@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 
 import javax.annotation.Nullable;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * Read-only interface for objects that can expire.
  *
@@ -53,6 +55,6 @@ public interface IExpirable
    */
   default boolean isExpired ()
   {
-    return isExpirationDefined () && LocalDateTime.now ().isAfter (getExpirationDateTime ());
+    return isExpirationDefined () && PDTFactory.getCurrentLocalDateTime ().isAfter (getExpirationDateTime ());
   }
 }

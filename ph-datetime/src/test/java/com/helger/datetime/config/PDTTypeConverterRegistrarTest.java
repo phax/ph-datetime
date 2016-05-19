@@ -50,6 +50,7 @@ import com.helger.commons.mutable.MutableInt;
 import com.helger.commons.mutable.MutableLong;
 import com.helger.commons.mutable.MutableShort;
 import com.helger.commons.typeconvert.TypeConverter;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link PDTTypeConverterRegistrar}.
@@ -86,7 +87,7 @@ public final class PDTTypeConverterRegistrarTest
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, ZonedDateTime.class));
 
     // Test auto conversion to and from string
-    final ZonedDateTime aNow = ZonedDateTime.now ();
+    final ZonedDateTime aNow = PDTFactory.getCurrentZonedDateTime ();
     final String sNow = TypeConverter.convertIfNecessary (aNow, String.class);
     final ZonedDateTime aNow2 = TypeConverter.convertIfNecessary (sNow, aNow.getClass ());
     assertEquals (aNow, aNow2);
@@ -102,7 +103,7 @@ public final class PDTTypeConverterRegistrarTest
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalDateTime.class));
 
     // Test auto conversion to and from string
-    final LocalDateTime aNow = LocalDateTime.now ();
+    final LocalDateTime aNow = PDTFactory.getCurrentLocalDateTime ();
     final String sNow = TypeConverter.convertIfNecessary (aNow, String.class);
     final LocalDateTime aNow2 = TypeConverter.convertIfNecessary (sNow, aNow.getClass ());
     assertEquals (aNow, aNow2);
@@ -118,7 +119,7 @@ public final class PDTTypeConverterRegistrarTest
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalDate.class));
 
     // Test auto conversion to and from string
-    final LocalDate aNow = LocalDate.now ();
+    final LocalDate aNow = PDTFactory.getCurrentLocalDate ();
     final String sNow = TypeConverter.convertIfNecessary (aNow, String.class);
     final LocalDate aNow2 = TypeConverter.convertIfNecessary (sNow, aNow.getClass ());
     assertEquals (aNow, aNow2);
@@ -134,7 +135,7 @@ public final class PDTTypeConverterRegistrarTest
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalTime.class));
 
     // Test auto conversion to and from string
-    final LocalTime aNowTime = LocalTime.now ();
+    final LocalTime aNowTime = PDTFactory.getCurrentLocalTime ();
     final String sNow = TypeConverter.convertIfNecessary (aNowTime, String.class);
     final LocalTime aNowTime2 = TypeConverter.convertIfNecessary (sNow, aNowTime.getClass ());
     assertEquals (aNowTime, aNowTime2);
@@ -142,14 +143,14 @@ public final class PDTTypeConverterRegistrarTest
     // Test auto conversion between default types
     for (final Class <?> aDestClass : new Class <?> [] { ZonedDateTime.class, LocalDateTime.class })
     {
-      final LocalTime aNow = LocalTime.now ();
+      final LocalTime aNow = PDTFactory.getCurrentLocalTime ();
       final Object aDT = TypeConverter.convertIfNecessary (aNow, aDestClass);
       final LocalTime aNow2 = TypeConverter.convertIfNecessary (aDT, aNow.getClass ());
       assertEquals (aNow, aNow2);
     }
     for (final Class <?> aDestClass : new Class <?> [] { ZonedDateTime.class, LocalDateTime.class })
     {
-      final LocalDate aNow = LocalDate.now ();
+      final LocalDate aNow = PDTFactory.getCurrentLocalDate ();
       final Object aDT = TypeConverter.convertIfNecessary (aNow, aDestClass);
       final LocalDate aNow2 = TypeConverter.convertIfNecessary (aDT, aNow.getClass ());
       assertEquals (aNow, aNow2);
@@ -163,11 +164,11 @@ public final class PDTTypeConverterRegistrarTest
     aValues.put (Date.class, new Date ());
     aValues.put (Calendar.class, Calendar.getInstance ());
     aValues.put (GregorianCalendar.class, new GregorianCalendar ());
-    aValues.put (ZonedDateTime.class, ZonedDateTime.now ());
-    aValues.put (OffsetDateTime.class, OffsetDateTime.now ());
-    aValues.put (LocalDateTime.class, LocalDateTime.now ());
-    aValues.put (LocalDate.class, LocalDate.now ());
-    aValues.put (LocalTime.class, LocalTime.now ());
+    aValues.put (ZonedDateTime.class, PDTFactory.getCurrentZonedDateTime ());
+    aValues.put (OffsetDateTime.class, PDTFactory.getCurrentOffsetDateTime ());
+    aValues.put (LocalDateTime.class, PDTFactory.getCurrentLocalDateTime ());
+    aValues.put (LocalDate.class, PDTFactory.getCurrentLocalDate ());
+    aValues.put (LocalTime.class, PDTFactory.getCurrentLocalTime ());
     aValues.put (YearMonth.class, YearMonth.now ());
     aValues.put (Year.class, Year.now ());
     aValues.put (Instant.class, Instant.now ());
@@ -211,11 +212,11 @@ public final class PDTTypeConverterRegistrarTest
   {
     assertNotNull (MicroTypeConverter.convertToMicroElement (new GregorianCalendar (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (new Date (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (ZonedDateTime.now (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (OffsetDateTime.now (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDateTime.now (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalDate.now (), ELEMENT_NAME));
-    assertNotNull (MicroTypeConverter.convertToMicroElement (LocalTime.now (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentZonedDateTime (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentOffsetDateTime (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalDateTime (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalDate (), ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentLocalTime (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (Duration.ofHours (3), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (Period.ofDays (8), ELEMENT_NAME));
   }

@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.datetime.PDTFactory;
 import com.helger.datetime.format.PDTToString;
 
 /**
@@ -53,7 +54,7 @@ public final class PDTIOHelper
   @Nonnull
   public static String getCurrentLocalDateTimeForFilename ()
   {
-    return getLocalDateTimeForFilename (LocalDateTime.now ());
+    return getLocalDateTimeForFilename (PDTFactory.getCurrentLocalDateTime ());
   }
 
   /**
@@ -74,7 +75,7 @@ public final class PDTIOHelper
    */
   public static String getCurrentDateForFilename ()
   {
-    return getDateForFilename (LocalDate.now ());
+    return getDateForFilename (PDTFactory.getCurrentLocalDate ());
   }
 
   /**
@@ -94,7 +95,7 @@ public final class PDTIOHelper
    */
   public static String getCurrentTimeForFilename ()
   {
-    return getTimeForFilename (LocalTime.now ());
+    return getTimeForFilename (PDTFactory.getCurrentLocalTime ());
   }
 
   /**

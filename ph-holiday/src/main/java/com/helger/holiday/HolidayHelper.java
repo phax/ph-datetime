@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.ValueEnforcer;
+import com.helger.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**
@@ -94,7 +95,7 @@ public final class HolidayHelper
   {
     if (aHolidayMgr == null)
       return CalendarHelper.getCurrentOrNextWorkDay ();
-    LocalDate aDT = LocalDate.now ();
+    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
     while (!isWorkDay (aDT, aHolidayMgr))
       aDT = aDT.plusDays (1);
     return aDT;

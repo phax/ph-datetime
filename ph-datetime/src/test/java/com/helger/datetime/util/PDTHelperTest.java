@@ -31,6 +31,8 @@ import java.util.Locale;
 
 import org.junit.Test;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * Test class for class {@link PDTHelper}.
  *
@@ -71,12 +73,12 @@ public final class PDTHelperTest
   public void testGetWeekDaysBetweenl ()
   {
     final Locale aLocale = Locale.GERMANY;
-    final LocalDate aWeekendDate = LocalDate.now ().with (WeekFields.of (aLocale).dayOfWeek (),
-                                                          DayOfWeek.SUNDAY.getValue ());
-    final LocalDate aStartDate = LocalDate.now ().with (WeekFields.of (aLocale).dayOfWeek (),
-                                                        DayOfWeek.MONDAY.getValue ());
-    final LocalDate aEndDate = LocalDate.now ().with (WeekFields.of (aLocale).dayOfWeek (),
-                                                      DayOfWeek.TUESDAY.getValue ());
+    final LocalDate aWeekendDate = PDTFactory.getCurrentLocalDate ().with (WeekFields.of (aLocale).dayOfWeek (),
+                                                                           DayOfWeek.SUNDAY.getValue ());
+    final LocalDate aStartDate = PDTFactory.getCurrentLocalDate ().with (WeekFields.of (aLocale).dayOfWeek (),
+                                                                         DayOfWeek.MONDAY.getValue ());
+    final LocalDate aEndDate = PDTFactory.getCurrentLocalDate ().with (WeekFields.of (aLocale).dayOfWeek (),
+                                                                       DayOfWeek.TUESDAY.getValue ());
     assertEquals (0, PDTHelper.getWeekDays (aWeekendDate, aWeekendDate));
     assertEquals (1, PDTHelper.getWeekDays (aStartDate, aStartDate));
     assertEquals (2, PDTHelper.getWeekDays (aStartDate, aEndDate));
@@ -142,7 +144,7 @@ public final class PDTHelperTest
   @Test
   public void testDaysBetween ()
   {
-    final LocalDate aStart = LocalDate.now ();
+    final LocalDate aStart = PDTFactory.getCurrentLocalDate ();
     assertEquals (0, PDTHelper.getDaysBetween (aStart, aStart));
     assertEquals (60, PDTHelper.getDaysBetween (LocalDate.of (2016, 1, 22), LocalDate.of (2016, 3, 22)));
   }

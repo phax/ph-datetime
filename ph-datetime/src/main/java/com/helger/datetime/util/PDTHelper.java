@@ -38,6 +38,7 @@ import javax.annotation.concurrent.Immutable;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.datetime.CPDT;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Some date/time utility methods.
@@ -252,7 +253,7 @@ public final class PDTHelper
   @Nonnull
   public static LocalDate getCurrentOrNextWeekday ()
   {
-    LocalDate aDT = LocalDate.now ();
+    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
     while (isWeekend (aDT))
       aDT = aDT.plusDays (1);
     return aDT;
@@ -268,7 +269,7 @@ public final class PDTHelper
   @Nonnull
   public static LocalDate getCurrentOrNextWorkDay ()
   {
-    LocalDate aDT = LocalDate.now ();
+    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
     while (isWorkDay (aDT))
       aDT = aDT.plusDays (1);
     return aDT;

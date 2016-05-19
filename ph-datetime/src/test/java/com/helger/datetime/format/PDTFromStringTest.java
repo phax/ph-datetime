@@ -31,6 +31,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
 
+import com.helger.datetime.PDTFactory;
+
 /**
  * Test class for class {@link PDTFromString}.
  *
@@ -115,19 +117,19 @@ public final class PDTFromStringTest
   @Test
   public void testDefaultToStringAndBack ()
   {
-    final ZonedDateTime aDT = ZonedDateTime.now ();
+    final ZonedDateTime aDT = PDTFactory.getCurrentZonedDateTime ();
     String sDT = aDT.toString ();
     assertEquals (aDT, ZonedDateTime.parse (sDT));
 
-    final LocalDateTime aLDT = LocalDateTime.now ();
+    final LocalDateTime aLDT = PDTFactory.getCurrentLocalDateTime ();
     sDT = aLDT.toString ();
     assertEquals (aLDT, LocalDateTime.parse (sDT));
 
-    final LocalDate aLD = LocalDate.now ();
+    final LocalDate aLD = PDTFactory.getCurrentLocalDate ();
     sDT = aLD.toString ();
     assertEquals (aLD, LocalDate.parse (sDT));
 
-    final LocalTime aLT = LocalTime.now ();
+    final LocalTime aLT = PDTFactory.getCurrentLocalTime ();
     sDT = aLT.toString ();
     assertEquals (aLT, LocalTime.parse (sDT));
   }

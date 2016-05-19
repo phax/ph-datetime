@@ -33,6 +33,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Test;
 
 import com.helger.commons.CGlobal;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Test class for class {@link PDTXMLConverter}
@@ -56,7 +57,7 @@ public final class PDTXMLConverterTest
   public void testLocalDate ()
   {
     assertNull (PDTXMLConverter.getXMLCalendarDate ((LocalDate) null));
-    final LocalDate aLD = LocalDate.now ();
+    final LocalDate aLD = PDTFactory.getCurrentLocalDate ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendarDate (aLD);
     assertNotNull (c1);
     assertEquals (aLD.getYear (), c1.getYear ());
@@ -77,7 +78,7 @@ public final class PDTXMLConverterTest
   public void testLocalTime ()
   {
     assertNull (PDTXMLConverter.getXMLCalendarTime ((LocalTime) null));
-    final LocalTime aLT = LocalTime.now ();
+    final LocalTime aLT = PDTFactory.getCurrentLocalTime ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendarTime (aLT);
     assertNotNull (c1);
     assertEquals (DatatypeConstants.FIELD_UNDEFINED, c1.getYear ());
@@ -98,7 +99,7 @@ public final class PDTXMLConverterTest
   public void testLocalDateTime ()
   {
     assertNull (PDTXMLConverter.getXMLCalendar ((LocalDateTime) null));
-    final LocalDateTime aLDT = LocalDateTime.now ();
+    final LocalDateTime aLDT = PDTFactory.getCurrentLocalDateTime ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendar (aLDT);
     assertNotNull (c1);
     assertEquals (aLDT.getYear (), c1.getYear ());
@@ -119,7 +120,7 @@ public final class PDTXMLConverterTest
   public void testDateTime ()
   {
     assertNull (PDTXMLConverter.getXMLCalendar ((ZonedDateTime) null));
-    final ZonedDateTime aLDT = ZonedDateTime.now ();
+    final ZonedDateTime aLDT = PDTFactory.getCurrentZonedDateTime ();
     final XMLGregorianCalendar c1 = PDTXMLConverter.getXMLCalendar (aLDT);
     assertNotNull (c1);
     assertEquals (aLDT.getYear (), c1.getYear ());

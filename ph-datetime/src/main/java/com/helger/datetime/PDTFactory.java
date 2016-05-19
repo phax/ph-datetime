@@ -463,7 +463,7 @@ public final class PDTFactory
   @Nonnegative
   public static int getCurrentYear ()
   {
-    return LocalDate.now ().getYear ();
+    return getCurrentLocalDate ().getYear ();
   }
 
   public static long getMillis (@Nonnull final LocalDate aLD)

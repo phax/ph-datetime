@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 import com.helger.commons.CGlobal;
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.exception.InitializationException;
+import com.helger.datetime.PDTFactory;
 
 /**
  * Utility class for XML date/time data type handling.
@@ -135,7 +136,7 @@ public final class PDTXMLConverter
   @Nonnull
   public static XMLGregorianCalendar getXMLCalendarDateNow ()
   {
-    return getXMLCalendarDate (LocalDate.now ());
+    return getXMLCalendarDate (PDTFactory.getCurrentLocalDate ());
   }
 
   /**
@@ -293,7 +294,7 @@ public final class PDTXMLConverter
   @Nonnull
   public static XMLGregorianCalendar getXMLCalendarTimeNow ()
   {
-    return getXMLCalendarTime (LocalTime.now ());
+    return getXMLCalendarTime (PDTFactory.getCurrentLocalTime ());
   }
 
   /**
@@ -462,7 +463,7 @@ public final class PDTXMLConverter
   @Nonnull
   public static XMLGregorianCalendar getXMLCalendarNow ()
   {
-    return getXMLCalendar (LocalDateTime.now ());
+    return getXMLCalendar (PDTFactory.getCurrentLocalDateTime ());
   }
 
   /**

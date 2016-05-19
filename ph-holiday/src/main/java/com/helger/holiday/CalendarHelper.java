@@ -28,6 +28,7 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.helger.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**
@@ -117,7 +118,7 @@ public final class CalendarHelper
   @Nonnull
   public static LocalDate getCurrentOrNextWorkDay ()
   {
-    LocalDate aDT = LocalDate.now ();
+    LocalDate aDT = PDTFactory.getCurrentLocalDate ();
     while (!PDTHelper.isWorkDay (aDT))
       aDT = aDT.plusDays (1);
     return aDT;
