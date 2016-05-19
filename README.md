@@ -2,9 +2,6 @@
 
 Java date time library based on [Joda-Time](http://www.joda.org/joda-time/) (up to version 4.x) and using JDK 8 date time libraries starting with version 5.
 
-
-Versions <= 3.3.1 are compatible with ph-commons < 6.0.
-Versions >= 4.0.0 are compatible with ph-commons >= 6.0.
 Versions >= 5 require JDK 8.
 
 ##Maven usage
