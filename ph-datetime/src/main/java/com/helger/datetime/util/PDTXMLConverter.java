@@ -25,6 +25,7 @@ import java.time.temporal.ChronoField;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnull;
@@ -42,6 +43,7 @@ import com.helger.commons.CGlobal;
 import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.exception.InitializationException;
 import com.helger.datetime.PDTFactory;
+import com.helger.datetime.config.PDTConfig;
 
 /**
  * Utility class for XML date/time data type handling.
@@ -98,7 +100,8 @@ public final class PDTXMLConverter
   @Nonnull
   public static GregorianCalendar getCalendar (@Nonnull final Date aDate)
   {
-    final GregorianCalendar aCalendar = new GregorianCalendar ();
+    final GregorianCalendar aCalendar = new GregorianCalendar (PDTConfig.getDefaultTimeZone (),
+                                                               Locale.getDefault (Locale.Category.FORMAT));
     aCalendar.setTime (aDate);
     return aCalendar;
   }
@@ -113,7 +116,8 @@ public final class PDTXMLConverter
   @Nonnull
   public static GregorianCalendar getCalendar (final long nMillis)
   {
-    final GregorianCalendar aCalendar = new GregorianCalendar ();
+    final GregorianCalendar aCalendar = new GregorianCalendar (PDTConfig.getDefaultTimeZone (),
+                                                               Locale.getDefault (Locale.Category.FORMAT));
     aCalendar.setTimeInMillis (nMillis);
     return aCalendar;
   }
