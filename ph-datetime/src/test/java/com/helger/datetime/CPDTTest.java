@@ -25,6 +25,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.HijrahChronology;
 import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DecimalStyle;
 import java.time.format.FormatStyle;
 import java.util.Locale;
@@ -117,10 +118,10 @@ public final class CPDTTest
     final ChronoLocalDate aDateHijrah = HijrahChronology.INSTANCE.date (1400, 7, 6);
     assertNotNull (aDateHijrah);
 
-    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate (FormatStyle.SHORT)
-                                                             .withLocale (Locale.GERMANY)
-                                                             .withChronology (HijrahChronology.INSTANCE)
-                                                             .withDecimalStyle (DecimalStyle.of (Locale.GERMANY));
+    final DateTimeFormatter dateFormatter = new DateTimeFormatterBuilder ().appendLocalized (FormatStyle.SHORT, null)
+                                                                           .toFormatter (Locale.GERMANY)
+                                                                           .withChronology (HijrahChronology.INSTANCE)
+                                                                           .withDecimalStyle (DecimalStyle.of (Locale.GERMANY));
     assertNotNull (dateFormatter.format (aDateISO));
     assertNotNull (dateFormatter.format (aDateHijrah));
   }

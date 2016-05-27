@@ -34,7 +34,6 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -84,9 +83,8 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testDateTime ()
   {
-    assertNotNull (TypeConverter.convertIfNecessary (Calendar.getInstance (Locale.getDefault ()), ZonedDateTime.class));
-    assertNotNull (TypeConverter.convertIfNecessary (new GregorianCalendar (Locale.getDefault ()),
-                                                     ZonedDateTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createCalendar (), ZonedDateTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createGregorianCalendar (), ZonedDateTime.class));
     assertNotNull (TypeConverter.convertIfNecessary (new Date (), ZonedDateTime.class));
     for (final Object aNumber : NUMBERS)
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, ZonedDateTime.class));
@@ -101,9 +99,8 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testLocalDateTime ()
   {
-    assertNotNull (TypeConverter.convertIfNecessary (Calendar.getInstance (Locale.getDefault ()), LocalDateTime.class));
-    assertNotNull (TypeConverter.convertIfNecessary (new GregorianCalendar (Locale.getDefault ()),
-                                                     LocalDateTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createCalendar (), LocalDateTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createGregorianCalendar (), LocalDateTime.class));
     assertNotNull (TypeConverter.convertIfNecessary (new Date (), LocalDateTime.class));
     for (final Object aNumber : NUMBERS)
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalDateTime.class));
@@ -118,8 +115,8 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testLocalDate ()
   {
-    assertNotNull (TypeConverter.convertIfNecessary (Calendar.getInstance (Locale.getDefault ()), LocalDate.class));
-    assertNotNull (TypeConverter.convertIfNecessary (new GregorianCalendar (Locale.getDefault ()), LocalDate.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createCalendar (), LocalDate.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createGregorianCalendar (), LocalDate.class));
     assertNotNull (TypeConverter.convertIfNecessary (new Date (), LocalDate.class));
     for (final Object aNumber : NUMBERS)
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalDate.class));
@@ -134,8 +131,8 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testLocalTime ()
   {
-    assertNotNull (TypeConverter.convertIfNecessary (Calendar.getInstance (Locale.getDefault ()), LocalTime.class));
-    assertNotNull (TypeConverter.convertIfNecessary (new GregorianCalendar (Locale.getDefault ()), LocalTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createCalendar (), LocalTime.class));
+    assertNotNull (TypeConverter.convertIfNecessary (PDTFactory.createGregorianCalendar (), LocalTime.class));
     assertNotNull (TypeConverter.convertIfNecessary (new Date (), LocalTime.class));
     for (final Object aNumber : NUMBERS)
       assertNotNull (TypeConverter.convertIfNecessary (aNumber, LocalTime.class));
@@ -168,16 +165,16 @@ public final class PDTTypeConverterRegistrarTest
   {
     final ICommonsOrderedMap <Class <?>, Object> aValues = new CommonsLinkedHashMap<> ();
     aValues.put (Date.class, new Date ());
-    aValues.put (Calendar.class, Calendar.getInstance (Locale.getDefault ()));
-    aValues.put (GregorianCalendar.class, new GregorianCalendar (Locale.getDefault ()));
+    aValues.put (Calendar.class, PDTFactory.createCalendar ());
+    aValues.put (GregorianCalendar.class, PDTFactory.createGregorianCalendar ());
     aValues.put (ZonedDateTime.class, PDTFactory.getCurrentZonedDateTime ());
     aValues.put (OffsetDateTime.class, PDTFactory.getCurrentOffsetDateTime ());
     aValues.put (LocalDateTime.class, PDTFactory.getCurrentLocalDateTime ());
     aValues.put (LocalDate.class, PDTFactory.getCurrentLocalDate ());
     aValues.put (LocalTime.class, PDTFactory.getCurrentLocalTime ());
-    aValues.put (YearMonth.class, YearMonth.now ());
-    aValues.put (Year.class, Year.now ());
-    aValues.put (Instant.class, Instant.now ());
+    aValues.put (YearMonth.class, PDTFactory.getCurrentYearMonth ());
+    aValues.put (Year.class, PDTFactory.getCurrentYearObj ());
+    aValues.put (Instant.class, PDTFactory.getCurrentInstant ());
 
     for (final Map.Entry <Class <?>, Object> aSrc : aValues.entrySet ())
     {
@@ -216,8 +213,7 @@ public final class PDTTypeConverterRegistrarTest
   @Test
   public void testMicroTypeConversion ()
   {
-    assertNotNull (MicroTypeConverter.convertToMicroElement (new GregorianCalendar (Locale.getDefault ()),
-                                                             ELEMENT_NAME));
+    assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.createGregorianCalendar (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (new Date (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentZonedDateTime (), ELEMENT_NAME));
     assertNotNull (MicroTypeConverter.convertToMicroElement (PDTFactory.getCurrentOffsetDateTime (), ELEMENT_NAME));

@@ -17,6 +17,7 @@
 package com.helger.datetime;
 
 import java.sql.Timestamp;
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,8 +29,11 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -465,12 +469,42 @@ public final class PDTFactory
     return createDate (createZonedDateTime (aLT));
   }
 
+  @Nonnull
+  public static Calendar createCalendar ()
+  {
+    return Calendar.getInstance (TimeZone.getDefault (), Locale.getDefault (Locale.Category.FORMAT));
+  }
+
+  @Nonnull
+  public static GregorianCalendar createGregorianCalendar ()
+  {
+    return new GregorianCalendar (TimeZone.getDefault (), Locale.getDefault (Locale.Category.FORMAT));
+  }
+
   // Misc
 
   @Nonnegative
   public static int getCurrentYear ()
   {
     return getCurrentLocalDate ().getYear ();
+  }
+
+  @Nonnegative
+  public static Year getCurrentYearObj ()
+  {
+    return Year.now (_getZoneId ());
+  }
+
+  @Nonnegative
+  public static YearMonth getCurrentYearMonth ()
+  {
+    return YearMonth.now (_getZoneId ());
+  }
+
+  @Nonnegative
+  public static Instant getCurrentInstant ()
+  {
+    return Instant.now (Clock.system (_getZoneId ()));
   }
 
   public static long getMillis (@Nonnull final LocalDate aLD)

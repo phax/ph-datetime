@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.timing.StopWatch;
+import com.helger.datetime.PDTFactory;
 import com.helger.holiday.mgr.AbstractHolidayManager;
 import com.helger.holiday.mgr.CalendarHierarchy;
 
@@ -45,10 +46,10 @@ public final class HolidayManagerFactoryTest
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HolidayManagerFactoryTest.class);
 
-  private static final Set <LocalDate> s_aTestDays = new HashSet <> ();
-  private static final Set <LocalDate> s_aTestDays_l1 = new HashSet <> ();
-  private static final Set <LocalDate> s_aTestDays_l2 = new HashSet <> ();
-  private static final Set <LocalDate> s_aTestDays_l11 = new HashSet <> ();
+  private static final Set <LocalDate> s_aTestDays = new HashSet<> ();
+  private static final Set <LocalDate> s_aTestDays_l1 = new HashSet<> ();
+  private static final Set <LocalDate> s_aTestDays_l2 = new HashSet<> ();
+  private static final Set <LocalDate> s_aTestDays_l11 = new HashSet<> ();
 
   static
   {
@@ -139,7 +140,7 @@ public final class HolidayManagerFactoryTest
   public void testCalendarChronology () throws Exception
   {
     final AbstractHolidayManager m = (AbstractHolidayManager) HolidayManagerFactory.getHolidayManager ("test");
-    final Calendar c = Calendar.getInstance ();
+    final Calendar c = PDTFactory.createCalendar ();
     c.set (Calendar.YEAR, 2010);
     c.set (Calendar.MONTH, Calendar.FEBRUARY);
     c.set (Calendar.DAY_OF_MONTH, 16);
