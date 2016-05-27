@@ -73,6 +73,19 @@ public enum EDayOfWeek implements IHasIntID
     return m_nCalID;
   }
 
+  /**
+   * Get the day of week in a number of days
+   *
+   * @param nDays
+   *        Days to add. No constraints
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  public EDayOfWeek plus (final int nDays)
+  {
+    return values ()[(ordinal () + nDays) % 7];
+  }
+
   @Nullable
   public String getWeekdayName (@Nonnull final Locale aLocale)
   {

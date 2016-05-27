@@ -90,6 +90,19 @@ public enum EMonth implements IHasIntID
     return ArrayHelper.getSafeElement (DateFormatSymbols.getInstance (aLocale).getShortMonths (), m_nCalID);
   }
 
+  /**
+   * Get the month in a number of month
+   *
+   * @param nMonth
+   *        Month to add. No constraints
+   * @return Never <code>null</code>.
+   */
+  @Nonnull
+  public EMonth plus (final int nMonth)
+  {
+    return values ()[(ordinal () + nMonth) % 12];
+  }
+
   @Nullable
   public static EMonth getFromIDOrNull (final int nID)
   {
