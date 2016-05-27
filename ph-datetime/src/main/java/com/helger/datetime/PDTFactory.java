@@ -26,6 +26,7 @@ import java.time.OffsetDateTime;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -51,10 +52,16 @@ public final class PDTFactory
 
   // To ZonedDateTime
 
-  @Nonnegative
+  @Nonnull
   public static ZonedDateTime getCurrentZonedDateTime ()
   {
     return ZonedDateTime.now (_getZoneId ());
+  }
+
+  @Nonnull
+  public static ZonedDateTime getCurrentZonedDateTimeUTC ()
+  {
+    return ZonedDateTime.now (ZoneOffset.UTC);
   }
 
   @Nullable
