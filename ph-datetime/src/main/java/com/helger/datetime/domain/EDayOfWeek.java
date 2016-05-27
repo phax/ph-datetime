@@ -58,7 +58,7 @@ public enum EDayOfWeek implements IHasIntID
   }
 
   /**
-   * @return The JDK8 time ID
+   * @return The JDK8 time ID (1-based!)
    */
   public int getDateTimeConstant ()
   {
@@ -66,7 +66,7 @@ public enum EDayOfWeek implements IHasIntID
   }
 
   /**
-   * @return The java.util.Calendar ID
+   * @return The java.util.Calendar ID (1-based!)
    */
   public int getCalendarConstant ()
   {
