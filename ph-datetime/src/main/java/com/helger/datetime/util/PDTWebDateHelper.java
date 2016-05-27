@@ -52,7 +52,7 @@ import com.helger.commons.annotation.PresentForCodeCoverage;
 import com.helger.commons.collection.ext.CommonsArrayList;
 import com.helger.commons.collection.ext.ICommonsList;
 import com.helger.commons.collection.pair.IPair;
-import com.helger.commons.collection.pair.ReadOnlyPair;
+import com.helger.commons.collection.pair.Pair;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.typeconvert.TypeConverter;
 import com.helger.datetime.PDTFactory;
@@ -367,11 +367,11 @@ public final class PDTWebDateHelper
     {
       final String sDTZ = aSupp.m_sZoneID;
       if (sDate.endsWith (" " + sDTZ))
-        return ReadOnlyPair.create (sDate.substring (0, nDateLen - (1 + sDTZ.length ())), aSupp.m_aZoneId);
+        return Pair.create (sDate.substring (0, nDateLen - (1 + sDTZ.length ())), aSupp.m_aZoneId);
       if (sDate.endsWith (sDTZ))
-        return ReadOnlyPair.create (sDate.substring (0, nDateLen - sDTZ.length ()), aSupp.m_aZoneId);
+        return Pair.create (sDate.substring (0, nDateLen - sDTZ.length ()), aSupp.m_aZoneId);
     }
-    return ReadOnlyPair.create (sDate, null);
+    return Pair.create (sDate, null);
   }
 
   /**
