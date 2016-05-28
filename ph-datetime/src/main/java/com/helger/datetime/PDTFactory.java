@@ -411,6 +411,12 @@ public final class PDTFactory
     return aYear == null ? null : aYear.atDay (1);
   }
 
+  @Nullable
+  public static LocalDate createLocalDate (@Nullable final LocalDateTime aLDT)
+  {
+    return aLDT == null ? null : aLDT.toLocalDate ();
+  }
+
   // To LocalTime
 
   @Nonnegative
@@ -435,6 +441,12 @@ public final class PDTFactory
   public static LocalTime createLocalTime (@Nullable final Date aDate)
   {
     return aDate == null ? null : createLocalTime (aDate.toInstant ());
+  }
+
+  @Nullable
+  public static LocalTime createLocalTime (@Nullable final LocalDateTime aLDT)
+  {
+    return aLDT == null ? null : aLDT.toLocalTime ();
   }
 
   // To Date
