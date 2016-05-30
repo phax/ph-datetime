@@ -449,6 +449,12 @@ public final class PDTFactory
     return aLDT == null ? null : aLDT.toLocalTime ();
   }
 
+  @Nullable
+  public static LocalTime createLocalTime (final int nHour, final int nMinute, final int nSecond)
+  {
+    return LocalTime.of (nHour, nMinute, nSecond);
+  }
+
   // To Date
 
   @Nullable
