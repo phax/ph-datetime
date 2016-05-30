@@ -25,6 +25,8 @@ import java.time.Month;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.WeekFields;
 import java.util.Comparator;
@@ -497,5 +499,10 @@ public final class PDTHelper
                                        @Nonnull final OffsetDateTime aDateTime2)
   {
     return aDateTime1.isBefore (aDateTime2) ? aDateTime1 : aDateTime2;
+  }
+
+  public static long getDaysBetween (@Nonnull final Temporal aStartIncl, @Nonnull final Temporal aEndExcl)
+  {
+    return ChronoUnit.DAYS.between (aStartIncl, aEndExcl);
   }
 }
