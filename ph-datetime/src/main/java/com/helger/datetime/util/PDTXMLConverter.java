@@ -41,9 +41,9 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.CGlobal;
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.commons.datetime.PDTConfig;
+import com.helger.commons.datetime.PDTFactory;
 import com.helger.commons.exception.InitializationException;
-import com.helger.datetime.PDTFactory;
-import com.helger.datetime.config.PDTConfig;
 
 /**
  * Utility class for XML date/time data type handling.

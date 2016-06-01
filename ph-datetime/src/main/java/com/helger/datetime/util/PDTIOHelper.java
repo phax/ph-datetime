@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.annotation.PresentForCodeCoverage;
-import com.helger.datetime.PDTFactory;
+import com.helger.commons.datetime.PDTFactory;
 import com.helger.datetime.format.PDTToString;
 
 /**

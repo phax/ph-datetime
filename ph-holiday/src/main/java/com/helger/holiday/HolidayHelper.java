@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.datetime.PDTFactory;
+import com.helger.commons.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
 /**

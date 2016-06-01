@@ -37,8 +37,8 @@ import javax.annotation.concurrent.Immutable;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.PresentForCodeCoverage;
+import com.helger.commons.datetime.PDTFactory;
 import com.helger.datetime.CPDT;
-import com.helger.datetime.PDTFactory;
 
 /**
  * Some date/time utility methods.

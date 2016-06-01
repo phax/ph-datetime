@@ -33,7 +33,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Test;
 
 import com.helger.commons.CGlobal;
-import com.helger.datetime.PDTFactory;
+import com.helger.commons.datetime.PDTFactory;
 
 /**
  * Test class for class {@link PDTXMLConverter}
