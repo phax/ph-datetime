@@ -22,12 +22,12 @@ import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
 import java.time.temporal.ChronoField;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.helger.commons.collection.ext.CommonsHashSet;
+import com.helger.commons.collection.ext.ICommonsSet;
 import com.helger.commons.datetime.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
 
@@ -58,9 +58,9 @@ public final class CalendarHelper
    *        Day to convert
    * @return List of gregorian dates for the islamic month/day.
    */
-  public static Set <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
-                                                                   final int nIslamicMonth,
-                                                                   final int nIslamicDay)
+  public static ICommonsSet <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
+                                                                           final int nIslamicMonth,
+                                                                           final int nIslamicDay)
   {
     return getDatesFromChronologyWithinGregorianYear (nIslamicMonth,
                                                       nIslamicDay,
@@ -83,16 +83,16 @@ public final class CalendarHelper
    * @return the list of gregorian dates.
    */
   @Nonnull
-  public static Set <LocalDate> getDatesFromChronologyWithinGregorianYear (final int nTargetMonth,
-                                                                           final int nTargetDay,
-                                                                           final int nGregorianYear,
-                                                                           final Chronology aTargetChrono)
+  public static ICommonsSet <LocalDate> getDatesFromChronologyWithinGregorianYear (final int nTargetMonth,
+                                                                                   final int nTargetDay,
+                                                                                   final int nGregorianYear,
+                                                                                   final Chronology aTargetChrono)
   {
     final Year aIsoYear = Year.of (nGregorianYear);
     final ChronoLocalDate aFirstTargetDate = aTargetChrono.date (aIsoYear.atDay (1));
     final ChronoLocalDate aLastTargetDate = aTargetChrono.date (aIsoYear.atDay (365 + (aIsoYear.isLeap () ? 1 : 0)));
 
-    final Set <LocalDate> aHolidays = new HashSet <> ();
+    final ICommonsSet <LocalDate> aHolidays = new CommonsHashSet<> ();
     final int nStartYear = aFirstTargetDate.get (ChronoField.YEAR);
     final int nEndYear = aLastTargetDate.get (ChronoField.YEAR);
     for (int nTargetYear = nStartYear; nTargetYear <= nEndYear; ++nTargetYear)

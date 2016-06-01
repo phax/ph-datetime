@@ -16,11 +16,7 @@
  */
 package com.helger.holiday;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.GuardedBy;
@@ -28,7 +24,10 @@ import javax.annotation.concurrent.GuardedBy;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.collection.ext.CommonsHashMap;
+import com.helger.commons.collection.ext.CommonsHashSet;
+import com.helger.commons.collection.ext.ICommonsMap;
+import com.helger.commons.collection.ext.ICommonsSet;
 import com.helger.commons.concurrent.SimpleReadWriteLock;
 import com.helger.commons.lang.ClassHelper;
 import com.helger.commons.lang.GenericReflection;
@@ -46,12 +45,12 @@ public final class HolidayManagerFactory
 {
   private static final SimpleReadWriteLock s_aRWLock = new SimpleReadWriteLock ();
   @GuardedBy ("s_aRWLock")
-  private static final Map <String, Class <? extends IHolidayManager>> s_aClassMap = new HashMap <> ();
+  private static final ICommonsMap <String, Class <? extends IHolidayManager>> s_aClassMap = new CommonsHashMap<> ();
   @GuardedBy ("s_aRWLock")
-  private static final Map <String, IHolidayManager> s_aInstMap = new HashMap <> ();
+  private static final ICommonsMap <String, IHolidayManager> s_aInstMap = new CommonsHashMap<> ();
 
   /** All supported default countries */
-  private static final Set <String> s_aSupportedCountries = new HashSet <> ();
+  private static final ICommonsSet <String> s_aSupportedCountries = new CommonsHashSet<> ();
 
   static
   {
@@ -105,20 +104,17 @@ public final class HolidayManagerFactory
     if (aMgr != null)
       return aMgr;
 
-    return s_aRWLock.writeLocked ( () -> {
-      // Check in writeLock again to be 100% sure
-      IHolidayManager aMgr2 = s_aInstMap.get (sCountryID);
+    return s_aRWLock.writeLocked ( () ->
+    // Check in writeLock again to be 100% sure
+    s_aInstMap.computeIfAbsent (sCountryID, k -> {
+      // Is a special holiday manager registered?
+      final Class <? extends IHolidayManager> aClass = s_aClassMap.get (sCountryID);
+      final IHolidayManager aMgr2 = aClass != null ? GenericReflection.newInstance (aClass)
+                                                   : new XMLHolidayManager (sCountryID);
       if (aMgr2 == null)
-      {
-        // Is a special holiday manager registered?
-        final Class <? extends IHolidayManager> aClass = s_aClassMap.get (sCountryID);
-        aMgr2 = aClass != null ? GenericReflection.newInstance (aClass) : new XMLHolidayManager (sCountryID);
-        if (aMgr2 == null)
-          throw new IllegalArgumentException ("Failed to create holiday manager for country '" + sCountryID + "'");
-        s_aInstMap.put (sCountryID, aMgr2);
-      }
+        throw new IllegalArgumentException ("Failed to create holiday manager for country '" + sCountryID + "'");
       return aMgr2;
-    });
+    }));
   }
 
   /**
@@ -128,8 +124,8 @@ public final class HolidayManagerFactory
    */
   @Nonnull
   @ReturnsMutableCopy
-  public static Set <String> getSupportedCountryCodes ()
+  public static ICommonsSet <String> getSupportedCountryCodes ()
   {
-    return CollectionHelper.newSet (s_aSupportedCountries);
+    return s_aSupportedCountries.getClone ();
   }
 }
