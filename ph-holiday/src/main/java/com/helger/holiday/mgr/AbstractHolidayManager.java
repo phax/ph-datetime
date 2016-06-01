@@ -18,7 +18,6 @@ package com.helger.holiday.mgr;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -29,6 +28,8 @@ import org.threeten.extra.Interval;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
+import com.helger.commons.collection.ext.CommonsHashMap;
+import com.helger.commons.collection.ext.ICommonsMap;
 import com.helger.commons.typeconvert.TypeConverter;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayManager;
@@ -45,7 +46,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   /**
    * Caches the holidays for a given year.
    */
-  private final Map <String, HolidayMap> m_aHolidaysPerYear = new HashMap <String, HolidayMap> ();
+  private final ICommonsMap <String, HolidayMap> m_aHolidaysPerYear = new CommonsHashMap<> ();
 
   protected AbstractHolidayManager ()
   {}

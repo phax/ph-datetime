@@ -17,8 +17,6 @@
 package com.helger.holiday.mgr;
 
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +35,9 @@ import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
 import com.helger.commons.collection.ext.CommonsArrayList;
+import com.helger.commons.collection.ext.CommonsHashSet;
 import com.helger.commons.collection.ext.ICommonsList;
+import com.helger.commons.collection.ext.ICommonsSet;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.commons.io.stream.StreamHelper;
 import com.helger.commons.lang.GenericReflection;
@@ -208,12 +208,12 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * multiple hierarchy entries within one configuration. It traverses down the
    * configuration tree.
    */
-  private static void _validateConfigurationHierarchy (final Configuration aConfig)
+  private static void _validateConfigurationHierarchy (@Nonnull final Configuration aConfig)
   {
-    final Set <String> aHierarchySet = new HashSet <String> ();
-    for (final Configuration subConfig : aConfig.getSubConfigurations ())
+    final ICommonsSet <String> aHierarchySet = new CommonsHashSet<> ();
+    for (final Configuration aSubConfig : aConfig.getSubConfigurations ())
     {
-      final String sHierarchy = subConfig.getHierarchy ();
+      final String sHierarchy = aSubConfig.getHierarchy ();
       if (!aHierarchySet.add (sHierarchy))
         throw new IllegalArgumentException ("Configuration for " +
                                             aConfig.getHierarchy () +

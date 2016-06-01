@@ -17,7 +17,6 @@
 package com.helger.holiday.parser;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +24,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.collection.ext.CommonsArrayList;
+import com.helger.commons.collection.ext.ICommonsList;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.ChristianHoliday;
 import com.helger.holiday.jaxb.ChristianHolidayType;
@@ -77,7 +78,7 @@ public final class ChristianHolidayParserTest
     final Holidays aConfig = _createConfig (1);
     final RelativeToEasterSundayParser aParser = new RelativeToEasterSundayParser ();
     aParser.parse (2011, aHolidays, aConfig);
-    final List <LocalDate> aExpected = new ArrayList <LocalDate> ();
+    final ICommonsList <LocalDate> aExpected = new CommonsArrayList<> ();
     aExpected.add (LocalDate.of (2011, 4, 24));
     Assert.assertEquals ("Wrong number of aHolidays.", aExpected.size (), aHolidays.size ());
     Assert.assertEquals ("Wrong holiday.",
@@ -97,7 +98,7 @@ public final class ChristianHolidayParserTest
                                             ChristianHolidayType.PENTECOST,
                                             ChristianHolidayType.SACRED_HEART);
     s_aParser.parse (2011, aHolidays, aConfig);
-    final List <LocalDate> expected = new ArrayList <LocalDate> ();
+    final ICommonsList <LocalDate> expected = new CommonsArrayList<> ();
     expected.add (LocalDate.of (2011, 3, 7));
     expected.add (LocalDate.of (2011, 4, 23));
     expected.add (LocalDate.of (2011, 4, 24));

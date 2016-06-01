@@ -19,11 +19,10 @@ package com.helger.holiday;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Test;
 
+import com.helger.commons.collection.ext.CommonsHashSet;
+import com.helger.commons.collection.ext.ICommonsSet;
 import com.helger.commons.locale.country.ECountry;
 
 /**
@@ -40,9 +39,9 @@ public final class ISOCodesFuncTest
    *
    * @return 2-digit ISO codes.
    */
-  public static final Set <String> getISOCodes ()
+  public static final ICommonsSet <String> getISOCodes ()
   {
-    final Set <String> codes = new HashSet <String> ();
+    final ICommonsSet <String> codes = new CommonsHashSet<> ();
     for (final ECountry eCountry : ECountry.values ())
       codes.add (eCountry.getISOCountryCode ());
     return codes;
@@ -54,7 +53,7 @@ public final class ISOCodesFuncTest
   @Test
   public void testISOCodes ()
   {
-    final Set <String> isoCodes = getISOCodes ();
+    final ICommonsSet <String> isoCodes = getISOCodes ();
     assertNotNull (isoCodes);
     assertEquals ("Wrong number of ISO codes.", NUMBER_OF_ISOCOUNTRIES, isoCodes.size ());
   }

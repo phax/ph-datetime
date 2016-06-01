@@ -16,7 +16,6 @@
  */
 package com.helger.holiday.mgr;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -26,6 +25,8 @@ import javax.annotation.Nullable;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.ReturnsImmutableObject;
 import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.collection.ext.CommonsHashMap;
+import com.helger.commons.collection.ext.ICommonsMap;
 import com.helger.commons.hashcode.HashCodeGenerator;
 import com.helger.commons.id.IHasID;
 import com.helger.commons.locale.country.ECountry;
@@ -41,7 +42,7 @@ public final class CalendarHierarchy implements IHasID <String>
 {
   private final String m_sID;
   private final ECountry m_eCountry;
-  private final Map <String, CalendarHierarchy> m_aChildren = new HashMap <String, CalendarHierarchy> ();
+  private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap<> ();
 
   /**
    * Constructor which takes a eventually existing parent hierarchy node and the
