@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.threeten.extra.chrono.CopticChronology;
 
+import com.helger.commons.collection.ext.ICommonsSet;
 import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
@@ -60,9 +61,9 @@ public final class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
    *        orthodox day
    * @return List of gregorian dates for the Ethiopian orthodox month/day.
    */
-  private static Set <LocalDate> _getEthiopianOrthodoxHolidaysInGregorianYear (final int nGregorianYear,
-                                                                               final int nEOMonth,
-                                                                               final int nEODay)
+  private static ICommonsSet <LocalDate> _getEthiopianOrthodoxHolidaysInGregorianYear (final int nGregorianYear,
+                                                                                       final int nEOMonth,
+                                                                                       final int nEODay)
   {
     return CalendarHelper.getDatesFromChronologyWithinGregorianYear (nEOMonth,
                                                                      nEODay,

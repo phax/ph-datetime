@@ -17,14 +17,12 @@
 package com.helger.holiday.mgr;
 
 import java.util.Locale;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.commons.annotation.ReturnsImmutableObject;
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ext.CommonsHashMap;
 import com.helger.commons.collection.ext.ICommonsMap;
 import com.helger.commons.hashcode.HashCodeGenerator;
@@ -42,7 +40,7 @@ public final class CalendarHierarchy implements IHasID <String>
 {
   private final String m_sID;
   private final ECountry m_eCountry;
-  private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap<> ();
+  private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap <> ();
 
   /**
    * Constructor which takes a eventually existing parent hierarchy node and the
@@ -90,10 +88,10 @@ public final class CalendarHierarchy implements IHasID <String>
   }
 
   @Nonnull
-  @ReturnsImmutableObject
-  public Map <String, CalendarHierarchy> getChildren ()
+  @ReturnsMutableCopy
+  public ICommonsMap <String, CalendarHierarchy> getChildren ()
   {
-    return CollectionHelper.makeUnmodifiable (m_aChildren);
+    return m_aChildren.getClone ();
   }
 
   @Override
