@@ -58,6 +58,7 @@ public final class CalendarHelper
    *        Day to convert
    * @return List of gregorian dates for the islamic month/day.
    */
+  @Nonnull
   public static ICommonsSet <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
                                                                            final int nIslamicMonth,
                                                                            final int nIslamicDay)
@@ -92,7 +93,7 @@ public final class CalendarHelper
     final ChronoLocalDate aFirstTargetDate = aTargetChrono.date (aIsoYear.atDay (1));
     final ChronoLocalDate aLastTargetDate = aTargetChrono.date (aIsoYear.atDay (365 + (aIsoYear.isLeap () ? 1 : 0)));
 
-    final ICommonsSet <LocalDate> aHolidays = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> aHolidays = new CommonsHashSet <> ();
     final int nStartYear = aFirstTargetDate.get (ChronoField.YEAR);
     final int nEndYear = aLastTargetDate.get (ChronoField.YEAR);
     for (int nTargetYear = nStartYear; nTargetYear <= nEndYear; ++nTargetYear)
@@ -119,7 +120,7 @@ public final class CalendarHelper
   public static LocalDate getCurrentOrNextWorkDay ()
   {
     LocalDate aDT = PDTFactory.getCurrentLocalDate ();
-    while (!PDTHelper.isWorkDay (aDT))
+    while (PDTHelper.isWeekend (aDT))
       aDT = aDT.plusDays (1);
     return aDT;
   }
