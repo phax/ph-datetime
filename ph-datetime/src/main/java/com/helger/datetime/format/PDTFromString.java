@@ -16,9 +16,11 @@
  */
 package com.helger.datetime.format;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -54,11 +56,18 @@ public final class PDTFromString
 
   private static void _onParseException (@Nonnull final String sDestType,
                                          @Nonnull final String sValue,
-                                         @Nonnull final DateTimeFormatter aDF,
+                                         @Nullable final DateTimeFormatter aDF,
                                          @Nonnull final DateTimeParseException ex)
   {
     if (s_aLogger.isDebugEnabled ())
-      s_aLogger.debug ("Failed to parse " + sDestType + " '" + sValue + "' with " + aDF + ": " + ex.getMessage ());
+      s_aLogger.debug ("Failed to parse " +
+                       sDestType +
+                       " '" +
+                       sValue +
+                       "'" +
+                       (aDF == null ? "" : " with " + aDF) +
+                       ": " +
+                       ex.getMessage ());
   }
 
   @Nullable
@@ -172,5 +181,33 @@ public final class PDTFromString
   public static LocalTime getLocalTimeFromString (@Nullable final String sValue, @Nonnull final String sPattern)
   {
     return getLocalTimeFromString (sValue, PDTFormatter.getForPattern (sPattern, null));
+  }
+
+  @Nullable
+  public static Duration getDurationFromString (@Nullable final String sValue)
+  {
+    try
+    {
+      return Duration.parse (sValue);
+    }
+    catch (final DateTimeParseException ex)
+    {
+      _onParseException ("Duration", sValue, null, ex);
+    }
+    return null;
+  }
+
+  @Nullable
+  public static Period getPeriodFromString (@Nullable final String sValue)
+  {
+    try
+    {
+      return Period.parse (sValue);
+    }
+    catch (final DateTimeParseException ex)
+    {
+      _onParseException ("Period", sValue, null, ex);
+    }
+    return null;
   }
 }
