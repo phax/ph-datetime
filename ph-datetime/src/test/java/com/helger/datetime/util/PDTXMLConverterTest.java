@@ -131,7 +131,7 @@ public final class PDTXMLConverterTest
     assertEquals (aLDT.getSecond (), c1.getSecond ());
     assertEquals (aLDT.get (ChronoField.MILLI_OF_SECOND), c1.getMillisecond ());
     assertEquals (aLDT.getOffset ().get (ChronoField.OFFSET_SECONDS) / CGlobal.SECONDS_PER_MINUTE, c1.getTimezone ());
-    final ZonedDateTime aLDT2 = PDTXMLConverter.getDateTime (c1);
+    final ZonedDateTime aLDT2 = PDTXMLConverter.getZonedDateTime (c1);
     assertNotNull (aLDT2);
     assertEquals (aLDT.toLocalDateTime (), aLDT2.toLocalDateTime ());
     assertEquals (aLDT.getOffset (), aLDT2.getOffset ());
