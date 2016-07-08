@@ -76,6 +76,19 @@ public final class PDTXMLConverter
   {}
 
   /**
+   * Convert milliseconds to minutes.
+   *
+   * @param nOffsetInMillis
+   *        The offset in milliseconds to use. May not be <code>null</code>.
+   * @return 0 for no offset to UTC, the minutes otherwise. Usually in 60minutes
+   *         steps :)
+   */
+  public static int getTimezoneOffsetInMinutes (final int nOffsetInMillis)
+  {
+    return nOffsetInMillis / (int) CGlobal.MILLISECONDS_PER_MINUTE;
+  }
+
+  /**
    * Get the time zone offset to UTC of the passed calendar in minutes to be
    * used in {@link XMLGregorianCalendar}.
    *
@@ -87,7 +100,7 @@ public final class PDTXMLConverter
   public static int getTimezoneOffsetInMinutes (@Nonnull final Calendar aCalendar)
   {
     final int nOffsetInMillis = aCalendar.getTimeZone ().getOffset (aCalendar.getTimeInMillis ());
-    return nOffsetInMillis / (int) CGlobal.MILLISECONDS_PER_MINUTE;
+    return getTimezoneOffsetInMinutes (nOffsetInMillis);
   }
 
   /**
@@ -467,7 +480,7 @@ public final class PDTXMLConverter
   @Nonnull
   public static XMLGregorianCalendar getXMLCalendarNow ()
   {
-    return getXMLCalendar (PDTFactory.getCurrentLocalDateTime ());
+    return getXMLCalendar (PDTFactory.getCurrentZonedDateTime ());
   }
 
   /**
