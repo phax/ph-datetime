@@ -81,6 +81,6 @@ public final class FixedNameHoliday implements ISingleHoliday
   {
     return new ToStringGenerator (this).append ("official", m_bIsOfficial)
                                        .append ("holidayName", m_sHolidayName)
-                                       .toString ();
+                                       .getToString ();
   }
 }

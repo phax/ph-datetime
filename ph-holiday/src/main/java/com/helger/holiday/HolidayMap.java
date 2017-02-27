@@ -39,7 +39,7 @@ import com.helger.commons.string.ToStringGenerator;
  */
 public final class HolidayMap
 {
-  private final ICommonsOrderedMap <LocalDate, ISingleHoliday> m_aMap = new CommonsLinkedHashMap <> ();
+  private final ICommonsOrderedMap <LocalDate, ISingleHoliday> m_aMap = new CommonsLinkedHashMap<> ();
 
   public HolidayMap ()
   {}
@@ -126,6 +126,6 @@ public final class HolidayMap
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("map", m_aMap).toString ();
+    return new ToStringGenerator (this).append ("map", m_aMap).getToString ();
   }
 }

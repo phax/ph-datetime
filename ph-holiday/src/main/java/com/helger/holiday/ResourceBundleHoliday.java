@@ -124,6 +124,6 @@ public final class ResourceBundleHoliday implements ISingleHoliday
   @Override
   public String toString ()
   {
-    return new ToStringGenerator (this).append ("official", m_bIsOfficial).append ("propsKey", m_aRBKey).toString ();
+    return new ToStringGenerator (this).append ("official", m_bIsOfficial).append ("propsKey", m_aRBKey).getToString ();
   }
 }
