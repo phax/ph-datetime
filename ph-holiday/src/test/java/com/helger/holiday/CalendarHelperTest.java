@@ -26,8 +26,8 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import com.helger.commons.collection.ext.CommonsHashSet;
-import com.helger.commons.collection.ext.ICommonsSet;
+import com.helger.commons.collection.impl.CommonsHashSet;
+import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.datetime.util.PDTHelper;
 
 /**

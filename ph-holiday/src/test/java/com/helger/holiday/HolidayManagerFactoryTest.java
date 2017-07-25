@@ -32,8 +32,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.commons.collection.ext.CommonsHashSet;
-import com.helger.commons.collection.ext.ICommonsSet;
+import com.helger.commons.collection.impl.CommonsHashSet;
+import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.commons.datetime.PDTFactory;
 import com.helger.commons.locale.country.ECountry;
 import com.helger.commons.timing.StopWatch;
@@ -47,10 +47,10 @@ public final class HolidayManagerFactoryTest
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (HolidayManagerFactoryTest.class);
 
-  private static final ICommonsSet <LocalDate> s_aTestDays = new CommonsHashSet<> ();
-  private static final ICommonsSet <LocalDate> s_aTestDays_l1 = new CommonsHashSet<> ();
-  private static final ICommonsSet <LocalDate> s_aTestDays_l2 = new CommonsHashSet<> ();
-  private static final ICommonsSet <LocalDate> s_aTestDays_l11 = new CommonsHashSet<> ();
+  private static final ICommonsSet <LocalDate> s_aTestDays = new CommonsHashSet <> ();
+  private static final ICommonsSet <LocalDate> s_aTestDays_l1 = new CommonsHashSet <> ();
+  private static final ICommonsSet <LocalDate> s_aTestDays_l2 = new CommonsHashSet <> ();
+  private static final ICommonsSet <LocalDate> s_aTestDays_l11 = new CommonsHashSet <> ();
 
   static
   {

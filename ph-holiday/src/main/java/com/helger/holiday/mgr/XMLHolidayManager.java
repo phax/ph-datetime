@@ -34,10 +34,10 @@ import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
 import com.helger.commons.collection.ArrayHelper;
-import com.helger.commons.collection.ext.CommonsArrayList;
-import com.helger.commons.collection.ext.CommonsHashSet;
-import com.helger.commons.collection.ext.ICommonsList;
-import com.helger.commons.collection.ext.ICommonsSet;
+import com.helger.commons.collection.impl.CommonsArrayList;
+import com.helger.commons.collection.impl.CommonsHashSet;
+import com.helger.commons.collection.impl.ICommonsList;
+import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.commons.io.resource.ClassPathResource;
 import com.helger.commons.io.stream.StreamHelper;
 import com.helger.commons.lang.GenericReflection;
@@ -138,7 +138,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
   @ReturnsMutableCopy
   private static ICommonsList <IHolidayParser> _getParsers (@Nonnull final Holidays aConfig)
   {
-    final ICommonsList <IHolidayParser> ret = new CommonsArrayList<> ();
+    final ICommonsList <IHolidayParser> ret = new CommonsArrayList <> ();
     if (!aConfig.getChristianHoliday ().isEmpty ())
       ret.add (ChristianHolidayParser.getInstance ());
     if (!aConfig.getEthiopianOrthodoxHoliday ().isEmpty ())
@@ -210,7 +210,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    */
   private static void _validateConfigurationHierarchy (@Nonnull final Configuration aConfig)
   {
-    final ICommonsSet <String> aHierarchySet = new CommonsHashSet<> ();
+    final ICommonsSet <String> aHierarchySet = new CommonsHashSet <> ();
     for (final Configuration aSubConfig : aConfig.getSubConfigurations ())
     {
       final String sHierarchy = aSubConfig.getHierarchy ();

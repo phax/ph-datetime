@@ -21,7 +21,7 @@ import java.util.Set;
 
 import org.threeten.extra.chrono.CopticChronology;
 
-import com.helger.commons.collection.ext.ICommonsSet;
+import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.holiday.CalendarHelper;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
