@@ -5,6 +5,10 @@ After 5.0.0 this library is now integrated int phax/ph-commons to always have jo
 # ph-holiday
 Java library containing holiday configuration.
 
+# News and noteworthy
+  * v6.0.0 - work in progress
+    * Updated to ph-commons 9.0.0
+
 ## Maven usage
 Add the following to your pom.xml to use this artifact:
 ```
