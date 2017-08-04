@@ -87,13 +87,13 @@ public abstract class AbstractHolidayManager implements IHolidayManager
     ValueEnforcer.notNull (aInterval, "Interval");
 
     final HolidayMap aHolidayMap = new HolidayMap ();
-    final int nStartYear = TypeConverter.convertIfNecessary (aInterval.getStart (), LocalDate.class).getYear ();
-    final int nEndYear = TypeConverter.convertIfNecessary (aInterval.getEnd (), LocalDate.class).getYear ();
+    final int nStartYear = TypeConverter.convert (aInterval.getStart (), LocalDate.class).getYear ();
+    final int nEndYear = TypeConverter.convert (aInterval.getEnd (), LocalDate.class).getYear ();
     for (int nYear = nStartYear; nYear <= nEndYear; nYear++)
     {
       final HolidayMap yearHolidays = getHolidays (nYear, aArgs);
       for (final Map.Entry <LocalDate, ISingleHoliday> aEntry : yearHolidays.getMap ().entrySet ())
-        if (aInterval.contains (TypeConverter.convertIfNecessary (aEntry.getKey (), Instant.class)))
+        if (aInterval.contains (TypeConverter.convert (aEntry.getKey (), Instant.class)))
           aHolidayMap.add (aEntry.getKey (), aEntry.getValue ());
     }
     return aHolidayMap;

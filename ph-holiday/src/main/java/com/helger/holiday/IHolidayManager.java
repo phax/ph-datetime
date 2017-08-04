@@ -45,7 +45,7 @@ public interface IHolidayManager
    */
   default boolean isHoliday (@Nonnull final Calendar aCalendar, final String... args)
   {
-    return isHoliday (TypeConverter.convertIfNecessary (aCalendar, LocalDate.class), args);
+    return isHoliday (TypeConverter.convert (aCalendar, LocalDate.class), args);
   }
 
   /**
