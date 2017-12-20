@@ -16,6 +16,7 @@
  */
 package com.helger.holiday;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.annotation.Nonnegative;
@@ -37,9 +38,9 @@ import com.helger.commons.string.ToStringGenerator;
  *
  * @author Philip Helger
  */
-public final class HolidayMap
+public class HolidayMap implements Serializable
 {
-  private final ICommonsOrderedMap <LocalDate, ISingleHoliday> m_aMap = new CommonsLinkedHashMap<> ();
+  private final ICommonsOrderedMap <LocalDate, ISingleHoliday> m_aMap = new CommonsLinkedHashMap <> ();
 
   public HolidayMap ()
   {}
@@ -71,7 +72,7 @@ public final class HolidayMap
   @Nonnull
   public EChange remove (@Nullable final LocalDate aDate)
   {
-    return EChange.valueOf (m_aMap.remove (aDate) != null);
+    return m_aMap.removeObject (aDate);
   }
 
   @Nonnull

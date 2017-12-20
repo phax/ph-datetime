@@ -31,7 +31,7 @@ import com.helger.commons.string.ToStringGenerator;
  * @author Philip Helger
  */
 @Immutable
-public final class FixedNameHoliday implements ISingleHoliday
+public class FixedNameHoliday implements ISingleHoliday
 {
   private final boolean m_bIsOfficial;
   private final String m_sHolidayName;

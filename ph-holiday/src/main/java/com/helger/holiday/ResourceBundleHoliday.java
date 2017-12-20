@@ -41,7 +41,7 @@ import com.helger.commons.text.resourcebundle.ResourceBundleKey;
  * @author Philip Helger
  */
 @Immutable
-public final class ResourceBundleHoliday implements ISingleHoliday
+public class ResourceBundleHoliday implements ISingleHoliday
 {
   private final boolean m_bIsOfficial;
 

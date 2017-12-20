@@ -16,6 +16,8 @@
  */
 package com.helger.holiday;
 
+import java.io.Serializable;
+
 /**
  * Type of holiday. Each holiday can be placed in a category and this is
  * represented by this type. The categories can mark a holiday as a official
@@ -24,7 +26,7 @@ package com.helger.holiday;
  * @author tboven
  * @author Philip Helger
  */
-public interface IHolidayType
+public interface IHolidayType extends Serializable
 {
   /**
    * Checks if is official holiday.
