@@ -45,7 +45,7 @@ import com.helger.holiday.mgr.CalendarHierarchy;
  */
 public final class HolidayManagerFactoryTest
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (HolidayManagerFactoryTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (HolidayManagerFactoryTest.class);
 
   private static final ICommonsSet <LocalDate> s_aTestDays = new CommonsHashSet <> ();
   private static final ICommonsSet <LocalDate> s_aTestDays_l1 = new CommonsHashSet <> ();
@@ -126,7 +126,7 @@ public final class HolidayManagerFactoryTest
       m.isHoliday (date);
       long duration = aSW.stopAndGetMillis ();
       if (duration > 0)
-        s_aLogger.info ("isHoliday took " + duration + " millis.");
+        LOGGER.info ("isHoliday took " + duration + " millis.");
       aSW.start ();
       date = date.plusDays (1);
       duration = aSW.stopAndGetMillis ();
@@ -134,7 +134,7 @@ public final class HolidayManagerFactoryTest
       sumDuration += duration;
     }
     if (sumDuration > 0)
-      s_aLogger.info ("isHoliday took " + sumDuration / count + " millis average.");
+      LOGGER.info ("isHoliday took " + sumDuration / count + " millis average.");
   }
 
   @Test

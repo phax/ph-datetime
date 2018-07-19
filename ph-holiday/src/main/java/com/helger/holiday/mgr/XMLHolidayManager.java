@@ -68,7 +68,7 @@ import com.helger.jaxb.JAXBContextCache;
  */
 public class XMLHolidayManager extends AbstractHolidayManager
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (XMLHolidayManager.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (XMLHolidayManager.class);
 
   /**
    * Unmarshals the configuration from the stream. Uses <code>JAXB</code> for
@@ -177,8 +177,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
                                    @Nonnull final Configuration aConfig,
                                    @Nullable final String... aArgs)
   {
-    if (s_aLogger.isDebugEnabled ())
-      s_aLogger.debug ("Adding holidays for " + aConfig.getDescription ());
+    if (LOGGER.isDebugEnabled ())
+      LOGGER.debug ("Adding holidays for " + aConfig.getDescription ());
 
     final HolidayMap aHolidayMap = new HolidayMap ();
     for (final IHolidayParser aParser : _getParsers (aConfig.getHolidays ()))
