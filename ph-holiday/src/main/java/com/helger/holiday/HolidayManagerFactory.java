@@ -45,12 +45,12 @@ public final class HolidayManagerFactory
 {
   private static final SimpleReadWriteLock s_aRWLock = new SimpleReadWriteLock ();
   @GuardedBy ("s_aRWLock")
-  private static final ICommonsMap <String, Class <? extends IHolidayManager>> s_aClassMap = new CommonsHashMap<> ();
+  private static final ICommonsMap <String, Class <? extends IHolidayManager>> s_aClassMap = new CommonsHashMap <> ();
   @GuardedBy ("s_aRWLock")
-  private static final ICommonsMap <String, IHolidayManager> s_aInstMap = new CommonsHashMap<> ();
+  private static final ICommonsMap <String, IHolidayManager> s_aInstMap = new CommonsHashMap <> ();
 
   /** All supported default countries */
-  private static final ICommonsSet <String> s_aSupportedCountries = new CommonsHashSet<> ();
+  private static final ICommonsSet <String> s_aSupportedCountries = new CommonsHashSet <> ();
 
   static
   {
@@ -100,11 +100,11 @@ public final class HolidayManagerFactory
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
 
     // is the instance already cached?
-    final IHolidayManager aMgr = s_aRWLock.readLocked ( () -> s_aInstMap.get (sCountryID));
+    final IHolidayManager aMgr = s_aRWLock.readLockedGet ( () -> s_aInstMap.get (sCountryID));
     if (aMgr != null)
       return aMgr;
 
-    return s_aRWLock.writeLocked ( () ->
+    return s_aRWLock.writeLockedGet ( () ->
     // Check in writeLock again to be 100% sure
     s_aInstMap.computeIfAbsent (sCountryID, k -> {
       // Is a special holiday manager registered?

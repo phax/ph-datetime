@@ -8,6 +8,8 @@ Java library containing holiday configuration.
 
 # News and noteworthy
 
+* v6.0.2 - work in progress
+    * Updated to ph-commons 9.4.0
 * v6.0.1 - 2018-11-22
     * Updated to ph-commons 9.2.0
 * v6.0.0 - 2017-12-20
