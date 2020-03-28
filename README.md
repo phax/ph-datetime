@@ -8,7 +8,7 @@ Java library containing holiday configuration.
 
 # News and noteworthy
 
-* v6.0.2 - work in progress
+* v6.0.2 - 2020-03-28
     * Updated to ph-commons 9.4.0
 * v6.0.1 - 2018-11-22
     * Updated to ph-commons 9.2.0
@@ -23,7 +23,7 @@ Add the following to your pom.xml to use this artifact:
 <dependency>
   <groupId>com.helger</groupId>
   <artifactId>ph-holiday</artifactId>
-  <version>6.0.1</version>
+  <version>6.0.2</version>
 </dependency>
 ```
 
