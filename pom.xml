@@ -25,7 +25,7 @@
     <version>1.11.1</version>
   </parent>
   <artifactId>ph-datetime-parent-pom</artifactId>
-  <version>6.0.2</version>
+  <version>6.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>ph-datetime-parent-pom</name>
   <description>Base POM to build the ph-datetime projects</description>
@@ -44,7 +44,7 @@
     <connection>scm:git:git@github.com:phax/ph-datetime.git</connection>
     <developerConnection>scm:git:git@github.com:phax/ph-datetime.git</developerConnection>
     <url>http://github.com/phax/ph-datetime</url>
-    <tag>ph-datetime-parent-pom-6.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <organization>
