@@ -46,7 +46,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   /**
    * Caches the holidays for a given year.
    */
-  private final ICommonsMap <String, HolidayMap> m_aHolidaysPerYear = new CommonsHashMap<> ();
+  private final ICommonsMap <String, HolidayMap> m_aHolidaysPerYear = new CommonsHashMap <> ();
 
   protected AbstractHolidayManager ()
   {}

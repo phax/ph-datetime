@@ -50,9 +50,9 @@ public final class HolidayDEFuncTest extends AbstractCountryTestBase
     {
       final IHolidayManager instance = HolidayManagerFactory.getHolidayManager (ECountry.DE);
       final Interval interval = Interval.of (TypeConverter.convert (LocalDate.of (2010, Month.OCTOBER, 1),
-                                                                               Instant.class),
+                                                                    Instant.class),
                                              TypeConverter.convert (LocalDate.of (2011, Month.JANUARY, 31),
-                                                                               Instant.class));
+                                                                    Instant.class));
       final HolidayMap holidays = instance.getHolidays (interval);
       final List <LocalDate> expected = Arrays.asList (LocalDate.of (2010, Month.DECEMBER, 25),
                                                        LocalDate.of (2010, Month.DECEMBER, 26),

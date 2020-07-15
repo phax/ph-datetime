@@ -51,7 +51,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicNewYear2008 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2008, Month.JANUARY, 10));
     expected.add (LocalDate.of (2008, Month.DECEMBER, 29));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 1, 1);
@@ -63,7 +63,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicNewYear2015 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2015, Month.OCTOBER, 14));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2015, 1, 1);
     assertNotNull (holidays);
@@ -74,7 +74,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicAschura2008 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2008, Month.JANUARY, 19));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 1, 10);
     assertNotNull (holidays);
@@ -85,7 +85,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicAschura2009 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2009, Month.JANUARY, 7));
     expected.add (LocalDate.of (2009, Month.DECEMBER, 27));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, 1, 10);
@@ -97,7 +97,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicAschura2010 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2010, Month.DECEMBER, 16));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2010, 1, 10);
     assertNotNull (holidays);
@@ -108,7 +108,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicIdAlFitr2008 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2008, Month.OCTOBER, 1));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2008, 10, 1);
     assertNotNull (holidays);
@@ -119,7 +119,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicIdAlFitr2009 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2009, Month.SEPTEMBER, 20));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2009, 10, 1);
     assertNotNull (holidays);
@@ -130,7 +130,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicIdAlFitr2013 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2013, Month.AUGUST, 8));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2013, 10, 1);
     assertNotNull (holidays);
@@ -141,7 +141,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicIdAlFitr2014 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2014, Month.JULY, 28));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2014, 10, 1);
     assertNotNull (holidays);
@@ -152,7 +152,7 @@ public final class CalendarHelperTest
   @Test
   public void testCalendarIslamicIdAlFitr2015 ()
   {
-    final ICommonsSet <LocalDate> expected = new CommonsHashSet<> ();
+    final ICommonsSet <LocalDate> expected = new CommonsHashSet <> ();
     expected.add (LocalDate.of (2015, Month.JULY, 17));
     final ICommonsSet <LocalDate> holidays = CalendarHelper.getIslamicHolidaysInGregorianYear (2015, 10, 1);
     assertNotNull (holidays);

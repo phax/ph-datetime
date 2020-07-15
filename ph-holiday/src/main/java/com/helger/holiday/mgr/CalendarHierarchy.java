@@ -40,7 +40,7 @@ public final class CalendarHierarchy implements IHasID <String>
 {
   private final String m_sID;
   private final ECountry m_eCountry;
-  private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap<> ();
+  private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap <> ();
 
   /**
    * Constructor which takes a eventually existing parent hierarchy node and the

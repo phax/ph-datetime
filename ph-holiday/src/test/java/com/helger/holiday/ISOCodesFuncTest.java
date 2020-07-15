@@ -41,7 +41,7 @@ public final class ISOCodesFuncTest
    */
   public static final ICommonsSet <String> getISOCodes ()
   {
-    final ICommonsSet <String> codes = new CommonsHashSet<> ();
+    final ICommonsSet <String> codes = new CommonsHashSet <> ();
     for (final ECountry eCountry : ECountry.values ())
       codes.add (eCountry.getISOCountryCode ());
     return codes;
