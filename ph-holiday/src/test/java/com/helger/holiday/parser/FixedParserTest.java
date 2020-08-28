@@ -53,12 +53,8 @@ public final class FixedParserTest
   @Test
   public void testFixedWithMoving ()
   {
-    final Holidays h = createHolidays (createFixed (8,
-                                                    Month.JANUARY,
-                                                    createMoving (Weekday.SATURDAY, With.PREVIOUS, Weekday.FRIDAY)),
-                                       createFixed (23,
-                                                    Month.JANUARY,
-                                                    createMoving (Weekday.SUNDAY, With.NEXT, Weekday.MONDAY)));
+    final Holidays h = createHolidays (createFixed (8, Month.JANUARY, createMoving (Weekday.SATURDAY, With.PREVIOUS, Weekday.FRIDAY)),
+                                       createFixed (23, Month.JANUARY, createMoving (Weekday.SUNDAY, With.NEXT, Weekday.MONDAY)));
     final HolidayMap set = new HolidayMap ();
     s_aParser.parse (2011, set, h);
     _containsAll (set, LocalDate.of (2011, 1, 7), LocalDate.of (2011, 1, 24));
