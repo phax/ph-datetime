@@ -17,6 +17,7 @@
 package com.helger.holiday.mgr;
 
 import java.io.InputStream;
+import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,6 @@ import javax.xml.bind.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.commons.CGlobal;
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.annotation.ReturnsMutableCopy;
@@ -109,7 +109,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
   {
     ValueEnforcer.notEmpty (sCountryCode, "CountryCode");
 
-    final String sFileName = "holidays/Holidays_" + sCountryCode.toLowerCase (CGlobal.DEFAULT_LOCALE) + ".xml";
+    final String sFileName = "holidays/Holidays_" + sCountryCode.toLowerCase (Locale.US) + ".xml";
     final InputStream aIS = ClassPathResource.getInputStream (sFileName);
     if (aIS == null)
       throw new IllegalArgumentException ("No holidays are defined for country code '" + sCountryCode + "'");
