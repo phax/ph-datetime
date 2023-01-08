@@ -21,7 +21,7 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
     * Updated to ph-commons 11
     * Using JAXB 4.0 as the baseline
 * v6.2.0 - 2021-05-02
-    * Updated to ph-commons 10
+    * Updated to ph-commons 10 `XMLOffset[Date|Time]` classes
 * v6.1.0 - 2021-03-22
     * Updated to ph-commons 10
 * v6.0.3 - 2020-09-17
