@@ -53,6 +53,7 @@ import com.helger.holiday.parser.IslamicHolidayParser;
 import com.helger.holiday.parser.RelativeToFixedParser;
 import com.helger.holiday.parser.RelativeToWeekdayInMonthParser;
 import com.helger.jaxb.JAXBContextCache;
+import com.helger.jaxb.JAXBContextCacheKey;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
@@ -86,7 +87,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
     try
     {
       final JAXBContext ctx = JAXBContextCache.getInstance ()
-                                              .getFromCache (com.helger.holiday.jaxb.ObjectFactory.class);
+                                              .getFromCache (JAXBContextCacheKey.createForClass (com.helger.holiday.jaxb.ObjectFactory.class));
       final Unmarshaller um = ctx.createUnmarshaller ();
       final JAXBElement <Configuration> aElement = GenericReflection.uncheckedCast (um.unmarshal (aIS));
       return aElement.getValue ();
