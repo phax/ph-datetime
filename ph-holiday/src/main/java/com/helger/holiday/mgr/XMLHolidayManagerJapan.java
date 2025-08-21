@@ -19,13 +19,13 @@ package com.helger.holiday.mgr;
 import java.time.LocalDate;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
-import com.helger.commons.locale.country.ECountry;
 import com.helger.holiday.EHolidayType;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.ISingleHoliday;
 import com.helger.holiday.ResourceBundleHoliday;
+import com.helger.text.locale.country.ECountry;
+
+import jakarta.annotation.Nullable;
 
 /**
  * @author svdi1de

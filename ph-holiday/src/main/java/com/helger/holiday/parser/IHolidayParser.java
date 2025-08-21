@@ -16,10 +16,10 @@
  */
 package com.helger.holiday.parser;
 
-import javax.annotation.Nonnull;
-
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Holidays;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * @author Sven Diedrichsen

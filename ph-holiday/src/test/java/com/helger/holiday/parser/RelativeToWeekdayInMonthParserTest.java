@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.collection.CollectionFind;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.FixedWeekdayInMonth;
 import com.helger.holiday.jaxb.Holidays;
@@ -84,8 +84,6 @@ public final class RelativeToWeekdayInMonthParserTest
     config.getRelativeToWeekdayInMonth ().add (rule);
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
-    assertEquals ("Wrong date.",
-                  LocalDate.of (2011, 7, 12),
-                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+    assertEquals ("Wrong date.", LocalDate.of (2011, 7, 12), CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 }

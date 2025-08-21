@@ -32,13 +32,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.commons.collection.impl.CommonsHashSet;
-import com.helger.commons.collection.impl.ICommonsSet;
-import com.helger.commons.datetime.PDTFactory;
-import com.helger.commons.locale.country.ECountry;
-import com.helger.commons.timing.StopWatch;
+import com.helger.base.timing.StopWatch;
+import com.helger.collection.commons.CommonsHashSet;
+import com.helger.collection.commons.ICommonsSet;
+import com.helger.datetime.helper.PDTFactory;
 import com.helger.holiday.mgr.AbstractHolidayManager;
 import com.helger.holiday.mgr.CalendarHierarchy;
+import com.helger.text.locale.country.ECountry;
 
 /**
  * @author svdi1de

@@ -23,9 +23,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
-import com.helger.commons.collection.impl.CommonsArrayList;
-import com.helger.commons.collection.impl.ICommonsList;
+import com.helger.collection.CollectionFind;
+import com.helger.collection.commons.CommonsArrayList;
+import com.helger.collection.commons.ICommonsList;
+import com.helger.collection.helper.CollectionSort;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.ChristianHoliday;
 import com.helger.holiday.jaxb.ChristianHolidayType;
@@ -56,7 +57,7 @@ public final class ChristianHolidayParserTest
     final Holidays aConfig = _createConfig (ChristianHolidayType.EASTER);
     s_aParser.parse (2011, aHolidays, aConfig);
     Assert.assertEquals ("Wrong number of aHolidays.", 1, aHolidays.size ());
-    final LocalDate aEasterDate = CollectionHelper.getFirstElement (aHolidays.getAllDates ());
+    final LocalDate aEasterDate = CollectionFind.getFirstElement (aHolidays.getAllDates ());
     final LocalDate aEndDate = LocalDate.of (2011, 4, 24);
     Assert.assertEquals ("Wrong easter date.", aEndDate, aEasterDate);
   }
@@ -83,7 +84,7 @@ public final class ChristianHolidayParserTest
     Assert.assertEquals ("Wrong number of aHolidays.", aExpected.size (), aHolidays.size ());
     Assert.assertEquals ("Wrong holiday.",
                          aExpected.get (0),
-                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -111,7 +112,7 @@ public final class ChristianHolidayParserTest
 
     Collections.sort (expected);
 
-    final List <LocalDate> found = CollectionHelper.getSorted (aHolidays.getAllDates ());
+    final List <LocalDate> found = CollectionSort.getSorted (aHolidays.getAllDates ());
 
     for (int i = 0; i < expected.size (); i++)
     {

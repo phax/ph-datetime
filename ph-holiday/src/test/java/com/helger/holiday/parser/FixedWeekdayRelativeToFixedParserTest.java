@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.collection.CollectionFind;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.FixedWeekdayRelativeToFixed;
@@ -84,9 +84,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     config.getFixedWeekdayRelativeToFixed ().add (rule);
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
-    assertEquals ("Wrong date.",
-                  LocalDate.of (2011, 1, 24),
-                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+    assertEquals ("Wrong date.", LocalDate.of (2011, 1, 24), CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -105,9 +103,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     config.getFixedWeekdayRelativeToFixed ().add (rule);
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
-    assertEquals ("Wrong date.",
-                  LocalDate.of (2011, 1, 17),
-                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+    assertEquals ("Wrong date.", LocalDate.of (2011, 1, 17), CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -126,9 +122,7 @@ public final class FixedWeekdayRelativeToFixedParserTest
     config.getFixedWeekdayRelativeToFixed ().add (rule);
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
-    assertEquals ("Wrong date.",
-                  LocalDate.of (2011, 2, 14),
-                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+    assertEquals ("Wrong date.", LocalDate.of (2011, 2, 14), CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -147,8 +141,6 @@ public final class FixedWeekdayRelativeToFixedParserTest
     config.getFixedWeekdayRelativeToFixed ().add (rule);
     s_aParser.parse (2011, aHolidays, config);
     assertEquals ("Wrong number of dates.", 1, aHolidays.size ());
-    assertEquals ("Wrong date.",
-                  LocalDate.of (2011, 4, 12),
-                  CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+    assertEquals ("Wrong date.", LocalDate.of (2011, 4, 12), CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 }

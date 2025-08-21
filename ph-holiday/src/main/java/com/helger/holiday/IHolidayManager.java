@@ -19,12 +19,12 @@ package com.helger.holiday;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.threeten.extra.Interval;
 
-import com.helger.commons.typeconvert.TypeConverter;
+import com.helger.typeconvert.impl.TypeConverter;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Base interface for a holiday manager for one country.

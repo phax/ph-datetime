@@ -18,23 +18,23 @@ package com.helger.holiday;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.GuardedBy;
-
-import com.helger.commons.ValueEnforcer;
-import com.helger.commons.annotation.Nonempty;
-import com.helger.commons.annotation.ReturnsMutableCopy;
-import com.helger.commons.collection.impl.CommonsHashMap;
-import com.helger.commons.collection.impl.CommonsHashSet;
-import com.helger.commons.collection.impl.ICommonsMap;
-import com.helger.commons.collection.impl.ICommonsSet;
-import com.helger.commons.concurrent.SimpleReadWriteLock;
-import com.helger.commons.lang.ClassHelper;
-import com.helger.commons.lang.GenericReflection;
-import com.helger.commons.locale.country.ECountry;
-import com.helger.commons.string.StringHelper;
+import com.helger.annotation.Nonempty;
+import com.helger.annotation.concurrent.GuardedBy;
+import com.helger.annotation.style.ReturnsMutableCopy;
+import com.helger.base.concurrent.SimpleReadWriteLock;
+import com.helger.base.enforce.ValueEnforcer;
+import com.helger.base.lang.clazz.ClassHelper;
+import com.helger.base.reflection.GenericReflection;
+import com.helger.base.string.StringHelper;
+import com.helger.collection.commons.CommonsHashMap;
+import com.helger.collection.commons.CommonsHashSet;
+import com.helger.collection.commons.ICommonsMap;
+import com.helger.collection.commons.ICommonsSet;
 import com.helger.holiday.mgr.XMLHolidayManager;
 import com.helger.holiday.mgr.XMLHolidayManagerJapan;
+import com.helger.text.locale.country.ECountry;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * The main class for creating holiday managers.

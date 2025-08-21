@@ -21,15 +21,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Map;
 
 import org.junit.Test;
 
-import com.helger.commons.collection.impl.CommonsHashMap;
-import com.helger.commons.collection.impl.CommonsHashSet;
-import com.helger.commons.collection.impl.ICommonsMap;
-import com.helger.commons.collection.impl.ICommonsSet;
-import com.helger.commons.lang.PropertiesHelper;
+import com.helger.base.rt.NonBlockingProperties;
+import com.helger.base.rt.PropertiesHelper;
+import com.helger.collection.commons.CommonsHashMap;
+import com.helger.collection.commons.CommonsHashSet;
+import com.helger.collection.commons.ICommonsMap;
+import com.helger.collection.commons.ICommonsSet;
+import com.helger.io.file.FileHelper;
 
 /**
  * @author sven
@@ -41,25 +42,25 @@ public final class HolidayDescriptionFuncTest
   {
     final File folder = new File ("src/main/resources/descriptions");
     assertTrue (folder.isDirectory ());
-    final File [] descriptions = folder.listFiles ((FilenameFilter) (dir,
-                                                                     name) -> name.startsWith ("holiday_descriptions") &&
-                                                                              name.endsWith (".properties"));
+    final File [] descriptions = folder.listFiles ((FilenameFilter) (dir, name) -> name.startsWith (
+                                                                                                    "holiday_descriptions") &&
+                                                                                   name.endsWith (".properties"));
     assertNotNull (descriptions);
     assertTrue (descriptions.length > 0);
 
     final ICommonsSet <String> propertiesNames = new CommonsHashSet <> ();
-    final ICommonsMap <String, ICommonsMap <String, String>> descriptionProperties = new CommonsHashMap <> ();
+    final ICommonsMap <String, NonBlockingProperties> descriptionProperties = new CommonsHashMap <> ();
 
     for (final File descriptionFile : descriptions)
     {
-      final ICommonsMap <String, String> aProps = PropertiesHelper.loadProperties (descriptionFile);
+      final NonBlockingProperties aProps = PropertiesHelper.loadProperties (FileHelper.getInputStream (descriptionFile));
       propertiesNames.addAll (aProps.keySet ());
       descriptionProperties.put (descriptionFile.getName (), aProps);
     }
 
     final ICommonsMap <String, ICommonsSet <String>> missingProperties = new CommonsHashMap <> ();
 
-    for (final Map.Entry <String, ICommonsMap <String, String>> entry : descriptionProperties.entrySet ())
+    for (final var entry : descriptionProperties.entrySet ())
       if (!entry.getValue ().keySet ().containsAll (propertiesNames))
       {
         final ICommonsSet <String> remainingProps = new CommonsHashSet <> (propertiesNames);

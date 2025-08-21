@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.collection.CollectionFind;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.FixedWeekdayBetweenFixed;
 import com.helger.holiday.jaxb.Holidays;
@@ -70,6 +70,6 @@ public final class FixedWeekdayBetweenFixedParserTest
     Assert.assertEquals ("Wrong number of results.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          LocalDate.of (2011, 1, 19),
-                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 }

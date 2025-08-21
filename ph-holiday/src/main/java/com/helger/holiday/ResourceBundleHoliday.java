@@ -20,22 +20,21 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
+import com.helger.annotation.concurrent.Immutable;
+import com.helger.base.classloader.ClassLoaderHelper;
+import com.helger.base.enforce.ValueEnforcer;
+import com.helger.base.equals.EqualsHelper;
+import com.helger.base.hashcode.HashCodeGenerator;
+import com.helger.base.hashcode.IHashCodeGenerator;
+import com.helger.base.string.StringHelper;
+import com.helger.base.tostring.ToStringGenerator;
+import com.helger.text.resourcebundle.ResourceBundleKey;
 
-import com.helger.commons.ValueEnforcer;
-import com.helger.commons.equals.EqualsHelper;
-import com.helger.commons.hashcode.HashCodeGenerator;
-import com.helger.commons.hashcode.IHashCodeGenerator;
-import com.helger.commons.lang.ClassLoaderHelper;
-import com.helger.commons.string.StringHelper;
-import com.helger.commons.string.ToStringGenerator;
-import com.helger.commons.text.resourcebundle.ResourceBundleKey;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
- * Represents the holiday and contains the actual date and an localized
- * description.
+ * Represents the holiday and contains the actual date and an localized description.
  *
  * @author Sven Diedrichsen
  * @author Philip Helger
@@ -52,8 +51,8 @@ public class ResourceBundleHoliday implements ISingleHoliday
   private transient int m_nHashCode = IHashCodeGenerator.ILLEGAL_HASHCODE;
 
   /**
-   * Constructs a holiday for a date using the provided properties key to
-   * retrieve the description with.
+   * Constructs a holiday for a date using the provided properties key to retrieve the description
+   * with.
    *
    * @param aType
    *        type
@@ -64,10 +63,10 @@ public class ResourceBundleHoliday implements ISingleHoliday
   {
     ValueEnforcer.notNull (aType, "Type");
     m_bIsOfficial = aType.isOfficialHoliday ();
-    m_aRBKey = StringHelper.hasNoText (sPropertiesKey) ? null
-                                                       : new ResourceBundleKey ("descriptions.holiday_descriptions",
-                                                                                "holiday.description." +
-                                                                                                                     sPropertiesKey);
+    m_aRBKey = StringHelper.isEmpty (sPropertiesKey) ? null : new ResourceBundleKey (
+                                                                                     "descriptions.holiday_descriptions",
+                                                                                     "holiday.description." +
+                                                                                                                          sPropertiesKey);
   }
 
   public boolean isOfficialHoliday ()

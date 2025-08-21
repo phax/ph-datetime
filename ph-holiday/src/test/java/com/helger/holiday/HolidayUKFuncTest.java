@@ -23,7 +23,7 @@ import java.time.Month;
 
 import org.junit.Test;
 
-import com.helger.commons.locale.country.ECountry;
+import com.helger.text.locale.country.ECountry;
 
 public final class HolidayUKFuncTest extends AbstractCountryTestBase
 {

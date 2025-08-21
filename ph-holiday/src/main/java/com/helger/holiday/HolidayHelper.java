@@ -18,13 +18,13 @@ package com.helger.holiday;
 
 import java.time.LocalDate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
-
-import com.helger.commons.ValueEnforcer;
-import com.helger.commons.datetime.PDTFactory;
+import com.helger.annotation.concurrent.Immutable;
+import com.helger.base.enforce.ValueEnforcer;
+import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Some holiday utility methods.

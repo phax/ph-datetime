@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Map;
 
-import com.helger.commons.collection.ArrayHelper;
+import com.helger.base.array.ArrayHelper;
 import com.helger.holiday.mgr.AbstractHolidayManager;
 import com.helger.holiday.mgr.CalendarHierarchy;
 

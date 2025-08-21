@@ -19,14 +19,14 @@ package com.helger.holiday.parser;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-
+import com.helger.annotation.concurrent.Immutable;
 import com.helger.holiday.jaxb.Holiday;
 import com.helger.holiday.jaxb.MoveableHoliday;
 import com.helger.holiday.jaxb.MovingCondition;
 import com.helger.holiday.jaxb.With;
 import com.helger.holiday.mgr.XMLHolidayHelper;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * The abstract base class for all {@link IHolidayParser} implementations.

@@ -23,7 +23,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.collection.helper.CollectionSort;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.Holidays;
@@ -53,8 +53,12 @@ public final class FixedParserTest
   @Test
   public void testFixedWithMoving ()
   {
-    final Holidays h = createHolidays (createFixed (8, Month.JANUARY, createMoving (Weekday.SATURDAY, With.PREVIOUS, Weekday.FRIDAY)),
-                                       createFixed (23, Month.JANUARY, createMoving (Weekday.SUNDAY, With.NEXT, Weekday.MONDAY)));
+    final Holidays h = createHolidays (createFixed (8,
+                                                    Month.JANUARY,
+                                                    createMoving (Weekday.SATURDAY, With.PREVIOUS, Weekday.FRIDAY)),
+                                       createFixed (23,
+                                                    Month.JANUARY,
+                                                    createMoving (Weekday.SUNDAY, With.NEXT, Weekday.MONDAY)));
     final HolidayMap set = new HolidayMap ();
     s_aParser.parse (2011, set, h);
     _containsAll (set, LocalDate.of (2011, 1, 7), LocalDate.of (2011, 1, 24));
@@ -87,8 +91,8 @@ public final class FixedParserTest
   private void _containsAll (final HolidayMap list, final LocalDate... dates)
   {
     Assert.assertEquals ("Number of holidays.", dates.length, list.size ());
-    final List <LocalDate> aSortedList = CollectionHelper.getSorted (list.getAllDates ());
-    final List <LocalDate> expected = CollectionHelper.getSorted (dates);
+    final List <LocalDate> aSortedList = CollectionSort.getSorted (list.getAllDates ());
+    final List <LocalDate> expected = CollectionSort.getSorted (dates);
     for (int i = 0; i < expected.size (); i++)
     {
       Assert.assertEquals ("Missing date.", expected.get (i), aSortedList.get (i));

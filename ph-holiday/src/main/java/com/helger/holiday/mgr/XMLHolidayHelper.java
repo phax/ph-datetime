@@ -19,15 +19,15 @@ package com.helger.holiday.mgr;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-
+import com.helger.annotation.Nonnegative;
 import com.helger.holiday.EHolidayType;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.HolidayType;
 import com.helger.holiday.jaxb.Month;
 import com.helger.holiday.jaxb.Weekday;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * @author svdi1de

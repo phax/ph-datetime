@@ -29,8 +29,8 @@ import java.util.List;
 import org.junit.Test;
 import org.threeten.extra.Interval;
 
-import com.helger.commons.locale.country.ECountry;
-import com.helger.commons.typeconvert.TypeConverter;
+import com.helger.text.locale.country.ECountry;
+import com.helger.typeconvert.impl.TypeConverter;
 
 public final class HolidayDEFuncTest extends AbstractCountryTestBase
 {

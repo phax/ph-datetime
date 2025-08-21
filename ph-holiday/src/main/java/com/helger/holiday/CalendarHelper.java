@@ -23,13 +23,13 @@ import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
 import java.time.temporal.ChronoField;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-
-import com.helger.commons.collection.impl.CommonsHashSet;
-import com.helger.commons.collection.impl.ICommonsSet;
-import com.helger.commons.datetime.PDTFactory;
+import com.helger.annotation.concurrent.Immutable;
+import com.helger.collection.commons.CommonsHashSet;
+import com.helger.collection.commons.ICommonsSet;
+import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Utility class for date operations.

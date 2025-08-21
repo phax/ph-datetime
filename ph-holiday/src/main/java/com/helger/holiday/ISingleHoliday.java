@@ -18,7 +18,7 @@ package com.helger.holiday;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Descriptor interface for a single holiday.

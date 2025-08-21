@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.helger.commons.collection.CollectionHelper;
+import com.helger.collection.CollectionFind;
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.Holidays;
@@ -75,7 +75,7 @@ public final class RelativeToFixedParserTest
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          LocalDate.of (2011, 8, 11),
-                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 
   @Test
@@ -95,6 +95,6 @@ public final class RelativeToFixedParserTest
     Assert.assertEquals ("Number of aHolidays wrong.", 1, aHolidays.size ());
     Assert.assertEquals ("Wrong date.",
                          LocalDate.of (2011, 8, 2),
-                         CollectionHelper.getFirstElement (aHolidays.getAllDates ()));
+                         CollectionFind.getFirstElement (aHolidays.getAllDates ()));
   }
 }
