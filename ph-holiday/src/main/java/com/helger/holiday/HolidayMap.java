@@ -19,6 +19,9 @@ package com.helger.holiday;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.Nonnegative;
 import com.helger.annotation.style.ReturnsMutableCopy;
 import com.helger.base.enforce.ValueEnforcer;
@@ -29,9 +32,6 @@ import com.helger.collection.commons.CommonsLinkedHashMap;
 import com.helger.collection.commons.ICommonsList;
 import com.helger.collection.commons.ICommonsOrderedMap;
 import com.helger.collection.commons.ICommonsOrderedSet;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Contains a map of holidays, were the key is the date.
@@ -56,40 +56,40 @@ public class HolidayMap implements Serializable
     return m_aMap.get (aDate);
   }
 
-  public void add (@Nonnull final LocalDate aDate, @Nonnull final ISingleHoliday aHoliday)
+  public void add (@NonNull final LocalDate aDate, @NonNull final ISingleHoliday aHoliday)
   {
     ValueEnforcer.notNull (aDate, "Date");
     ValueEnforcer.notNull (aHoliday, "Holiday");
     m_aMap.put (aDate, aHoliday);
   }
 
-  public void addAll (@Nonnull final HolidayMap aSubHolidays)
+  public void addAll (@NonNull final HolidayMap aSubHolidays)
   {
     ValueEnforcer.notNull (aSubHolidays, "SubHolidays");
     m_aMap.putAll (aSubHolidays.m_aMap);
   }
 
-  @Nonnull
+  @NonNull
   public EChange remove (@Nullable final LocalDate aDate)
   {
     return m_aMap.removeObject (aDate);
   }
 
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   public ICommonsOrderedSet <LocalDate> getAllDates ()
   {
     return m_aMap.copyOfKeySet ();
   }
 
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   public ICommonsList <ISingleHoliday> getAllHolidays ()
   {
     return m_aMap.copyOfValues ();
   }
 
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   public ICommonsOrderedMap <LocalDate, ISingleHoliday> getMap ()
   {

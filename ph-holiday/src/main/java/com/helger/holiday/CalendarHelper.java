@@ -23,13 +23,13 @@ import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
 import java.time.temporal.ChronoField;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.collection.commons.CommonsHashSet;
 import com.helger.collection.commons.ICommonsSet;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * Utility class for date operations.
@@ -58,7 +58,7 @@ public final class CalendarHelper
    *        Day to convert
    * @return List of gregorian dates for the islamic month/day.
    */
-  @Nonnull
+  @NonNull
   public static ICommonsSet <LocalDate> getIslamicHolidaysInGregorianYear (final int nGregorianYear,
                                                                            final int nIslamicMonth,
                                                                            final int nIslamicDay)
@@ -83,7 +83,7 @@ public final class CalendarHelper
    *        Target chronology
    * @return the list of gregorian dates.
    */
-  @Nonnull
+  @NonNull
   public static ICommonsSet <LocalDate> getDatesFromChronologyWithinGregorianYear (final int nTargetMonth,
                                                                                    final int nTargetDay,
                                                                                    final int nGregorianYear,
@@ -116,7 +116,7 @@ public final class CalendarHelper
    * @return The next matching date.
    * @see PDTHelper#isWorkDay(LocalDate)
    */
-  @Nonnull
+  @NonNull
   public static LocalDate getCurrentOrNextWorkDay ()
   {
     LocalDate aDT = PDTFactory.getCurrentLocalDate ();

@@ -16,10 +16,10 @@
  */
 package com.helger.holiday.parser;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.jaxb.Holidays;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * @author Sven Diedrichsen
@@ -27,5 +27,5 @@ import jakarta.annotation.Nonnull;
  */
 public interface IHolidayParser
 {
-  void parse (int nYear, @Nonnull HolidayMap aHolidayMap, @Nonnull Holidays aConfig);
+  void parse (int nYear, @NonNull HolidayMap aHolidayMap, @NonNull Holidays aConfig);
 }

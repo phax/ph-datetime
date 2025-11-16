@@ -20,14 +20,14 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayType;
 import com.helger.holiday.jaxb.ChristianHoliday;
 import com.helger.holiday.jaxb.ChronologyType;
 import com.helger.holiday.jaxb.Holidays;
 import com.helger.holiday.mgr.XMLHolidayHelper;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * This parser creates christian holidays for the given year relative to easter
@@ -43,7 +43,7 @@ public final class ChristianHolidayParser extends RelativeToEasterSundayParser
   private ChristianHolidayParser ()
   {}
 
-  @Nonnull
+  @NonNull
   public static ChristianHolidayParser getInstance ()
   {
     return s_aInstance;

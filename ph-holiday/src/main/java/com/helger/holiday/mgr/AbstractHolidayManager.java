@@ -20,6 +20,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Map;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.threeten.extra.Interval;
 
 import com.helger.annotation.style.ReturnsMutableCopy;
@@ -31,9 +33,6 @@ import com.helger.holiday.HolidayMap;
 import com.helger.holiday.IHolidayManager;
 import com.helger.holiday.ISingleHoliday;
 import com.helger.typeconvert.impl.TypeConverter;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Abstract base class for all holiday manager implementations.
@@ -51,8 +50,8 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   protected AbstractHolidayManager ()
   {}
 
-  @Nonnull
-  private static String _getKey (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
+  @NonNull
+  private static String _getKey (@NonNull final LocalDate aDate, @Nullable final String... aArgs)
   {
     String sKey = Integer.toString (aDate.getYear ());
     if (ArrayHelper.isNotEmpty (aArgs))
@@ -66,7 +65,7 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   }
 
   @Nullable
-  public ISingleHoliday getHoliday (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
+  public ISingleHoliday getHoliday (@NonNull final LocalDate aDate, @Nullable final String... aArgs)
   {
     ValueEnforcer.notNull (aDate, "Date");
 
@@ -80,9 +79,9 @@ public abstract class AbstractHolidayManager implements IHolidayManager
     return aHolidayMap.getHolidayForDate (aDate);
   }
 
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
-  public HolidayMap getHolidays (@Nonnull final Interval aInterval, @Nullable final String... aArgs)
+  public HolidayMap getHolidays (@NonNull final Interval aInterval, @Nullable final String... aArgs)
   {
     ValueEnforcer.notNull (aInterval, "Interval");
 
@@ -106,6 +105,6 @@ public abstract class AbstractHolidayManager implements IHolidayManager
    *
    * @return The hierarchy
    */
-  @Nonnull
+  @NonNull
   public abstract CalendarHierarchy getHierarchy ();
 }

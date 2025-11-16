@@ -18,6 +18,9 @@ package com.helger.holiday.mgr;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.style.ReturnsMutableCopy;
 import com.helger.base.enforce.ValueEnforcer;
 import com.helger.base.hashcode.HashCodeGenerator;
@@ -26,9 +29,6 @@ import com.helger.base.tostring.ToStringGenerator;
 import com.helger.collection.commons.CommonsHashMap;
 import com.helger.collection.commons.ICommonsMap;
 import com.helger.text.locale.country.ECountry;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Bean class for describing the configuration hierarchy.
@@ -54,7 +54,7 @@ public final class CalendarHierarchy implements IHasID <String>
    *        Country to use
    */
   public CalendarHierarchy (@Nullable final CalendarHierarchy aParent,
-                            @Nonnull final String sID,
+                            @NonNull final String sID,
                             @Nullable final ECountry eCountry)
   {
     ValueEnforcer.notNull (sID, "ID");
@@ -62,7 +62,7 @@ public final class CalendarHierarchy implements IHasID <String>
     m_eCountry = eCountry;
   }
 
-  @Nonnull
+  @NonNull
   public String getID ()
   {
     return m_sID;
@@ -75,19 +75,19 @@ public final class CalendarHierarchy implements IHasID <String>
    *        Locale to return the description text for.
    * @return Description text
    */
-  @Nonnull
+  @NonNull
   public String getDescription (final Locale aContentLocale)
   {
     final String ret = m_eCountry == null ? null : m_eCountry.getDisplayText (aContentLocale);
     return ret != null ? ret : "undefined";
   }
 
-  public void addChild (@Nonnull final CalendarHierarchy aChild)
+  public void addChild (@NonNull final CalendarHierarchy aChild)
   {
     m_aChildren.put (aChild.getID (), aChild);
   }
 
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   public ICommonsMap <String, CalendarHierarchy> getChildren ()
   {

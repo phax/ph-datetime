@@ -19,6 +19,8 @@ package com.helger.holiday.mgr;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.Nonnegative;
 import com.helger.holiday.EHolidayType;
 import com.helger.holiday.IHolidayType;
@@ -26,8 +28,6 @@ import com.helger.holiday.jaxb.Fixed;
 import com.helger.holiday.jaxb.HolidayType;
 import com.helger.holiday.jaxb.Month;
 import com.helger.holiday.jaxb.Weekday;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * @author svdi1de
@@ -46,7 +46,7 @@ public final class XMLHolidayHelper
    * @return {@link DayOfWeek} value.
    */
   @Nonnegative
-  public static DayOfWeek getWeekday (@Nonnull final Weekday eWeekday)
+  public static DayOfWeek getWeekday (@NonNull final Weekday eWeekday)
   {
     switch (eWeekday)
     {
@@ -77,7 +77,7 @@ public final class XMLHolidayHelper
    * @return {@link java.time.Month} value.
    */
   @Nonnegative
-  public static java.time.Month getMonth (@Nonnull final Month eMonth)
+  public static java.time.Month getMonth (@NonNull final Month eMonth)
   {
     switch (eMonth)
     {
@@ -117,8 +117,8 @@ public final class XMLHolidayHelper
    *        the type of holiday in the config
    * @return the type of holiday
    */
-  @Nonnull
-  public static IHolidayType getType (@Nonnull final HolidayType eType)
+  @NonNull
+  public static IHolidayType getType (@NonNull final HolidayType eType)
   {
     switch (eType)
     {
@@ -140,8 +140,8 @@ public final class XMLHolidayHelper
    *        The fixed information
    * @return A local date instance.
    */
-  @Nonnull
-  public static LocalDate create (@Nonnegative final int nYear, @Nonnull final Fixed aFixed)
+  @NonNull
+  public static LocalDate create (@Nonnegative final int nYear, @NonNull final Fixed aFixed)
   {
     return LocalDate.of (nYear, getMonth (aFixed.getMonth ()), aFixed.getDay ().intValue ());
   }

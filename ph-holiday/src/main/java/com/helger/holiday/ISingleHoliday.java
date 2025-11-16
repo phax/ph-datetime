@@ -18,7 +18,7 @@ package com.helger.holiday;
 
 import java.util.Locale;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Descriptor interface for a single holiday.
@@ -32,6 +32,6 @@ public interface ISingleHoliday extends IHolidayType
    *        The locale to use. May not be <code>null</code>.
    * @return The name of this holiday. Never <code>null</code>.
    */
-  @Nonnull
-  String getHolidayName (@Nonnull Locale aContentLocale);
+  @NonNull
+  String getHolidayName (@NonNull Locale aContentLocale);
 }

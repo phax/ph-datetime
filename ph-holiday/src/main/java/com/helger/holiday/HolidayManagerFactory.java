@@ -18,6 +18,8 @@ package com.helger.holiday;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.Nonempty;
 import com.helger.annotation.concurrent.GuardedBy;
 import com.helger.annotation.style.ReturnsMutableCopy;
@@ -33,8 +35,6 @@ import com.helger.collection.commons.ICommonsSet;
 import com.helger.holiday.mgr.XMLHolidayManager;
 import com.helger.holiday.mgr.XMLHolidayManagerJapan;
 import com.helger.text.locale.country.ECountry;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * The main class for creating holiday managers.
@@ -65,8 +65,8 @@ public final class HolidayManagerFactory
   private HolidayManagerFactory ()
   {}
 
-  public static void registerHolidayManagerClass (@Nonnull @Nonempty final String sCountryID,
-                                                  @Nonnull final Class <? extends IHolidayManager> aClass)
+  public static void registerHolidayManagerClass (@NonNull @Nonempty final String sCountryID,
+                                                  @NonNull final Class <? extends IHolidayManager> aClass)
   {
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
     ValueEnforcer.notNull (aClass, "Class");
@@ -80,22 +80,22 @@ public final class HolidayManagerFactory
     });
   }
 
-  @Nonnull
+  @NonNull
   public static IHolidayManager getDefaultHolidayManager ()
   {
     return getHolidayManager (Locale.getDefault ().getCountry ());
   }
 
-  @Nonnull
-  public static IHolidayManager getHolidayManager (@Nonnull final ECountry eCountry)
+  @NonNull
+  public static IHolidayManager getHolidayManager (@NonNull final ECountry eCountry)
   {
     ValueEnforcer.notNull (eCountry, "Country");
 
     return getHolidayManager (eCountry.getID ());
   }
 
-  @Nonnull
-  public static IHolidayManager getHolidayManager (@Nonnull @Nonempty final String sCountryID)
+  @NonNull
+  public static IHolidayManager getHolidayManager (@NonNull @Nonempty final String sCountryID)
   {
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
 
@@ -122,7 +122,7 @@ public final class HolidayManagerFactory
    *
    * @return Set of supported country codes.
    */
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   public static ICommonsSet <String> getSupportedCountryCodes ()
   {

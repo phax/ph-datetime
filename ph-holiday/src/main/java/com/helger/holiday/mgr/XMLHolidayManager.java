@@ -19,6 +19,8 @@ package com.helger.holiday.mgr;
 import java.io.InputStream;
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,8 +54,6 @@ import com.helger.jaxb.JAXBContextCache;
 import com.helger.jaxb.JAXBContextCacheKey;
 import com.helger.text.locale.country.ECountry;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
@@ -78,8 +78,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aIS
    * @return The unmarshalled configuration.
    */
-  @Nonnull
-  private static Configuration _unmarshallConfiguration (@WillClose @Nonnull final InputStream aIS)
+  @NonNull
+  private static Configuration _unmarshallConfiguration (@WillClose @NonNull final InputStream aIS)
   {
     ValueEnforcer.notNull (aIS, "InputStream");
 
@@ -106,7 +106,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    */
   private final Configuration m_aConfiguration;
 
-  public XMLHolidayManager (@Nonnull @Nonempty final String sCountryCode)
+  public XMLHolidayManager (@NonNull @Nonempty final String sCountryCode)
   {
     ValueEnforcer.notEmpty (sCountryCode, "CountryCode");
 
@@ -135,9 +135,9 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aConfig
    * @return A list of parsers to for this configuration.
    */
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
-  private static ICommonsList <IHolidayParser> _getParsers (@Nonnull final Holidays aConfig)
+  private static ICommonsList <IHolidayParser> _getParsers (@NonNull final Holidays aConfig)
   {
     final ICommonsList <IHolidayParser> ret = new CommonsArrayList <> ();
     if (!aConfig.getChristianHoliday ().isEmpty ())
@@ -172,10 +172,10 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aArgs
    * @return the holidays
    */
-  @Nonnull
+  @NonNull
   @ReturnsMutableCopy
   private HolidayMap _getHolidays (final int nYear,
-                                   @Nonnull final Configuration aConfig,
+                                   @NonNull final Configuration aConfig,
                                    @Nullable final String... aArgs)
   {
     if (LOGGER.isDebugEnabled ())
@@ -209,7 +209,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * multiple hierarchy entries within one configuration. It traverses down the
    * configuration tree.
    */
-  private static void _validateConfigurationHierarchy (@Nonnull final Configuration aConfig)
+  private static void _validateConfigurationHierarchy (@NonNull final Configuration aConfig)
   {
     final ICommonsSet <String> aHierarchySet = new CommonsHashSet <> ();
     for (final Configuration aSubConfig : aConfig.getSubConfigurations ())
@@ -234,7 +234,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * getHolidays()/isHoliday().
    */
   @Override
-  @Nonnull
+  @NonNull
   public CalendarHierarchy getHierarchy ()
   {
     return _createConfigurationHierarchy (m_aConfiguration, null);
@@ -246,8 +246,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
    * @param aConfig
    * @return configuration hierarchy
    */
-  @Nonnull
-  private static CalendarHierarchy _createConfigurationHierarchy (@Nonnull final Configuration aConfig,
+  @NonNull
+  private static CalendarHierarchy _createConfigurationHierarchy (@NonNull final Configuration aConfig,
                                                                   @Nullable final CalendarHierarchy aParent)
   {
     final ECountry eCountry = ECountry.getFromIDOrNull (aConfig.getHierarchy ());

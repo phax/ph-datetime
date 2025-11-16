@@ -18,12 +18,12 @@ package com.helger.holiday;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.base.enforce.ValueEnforcer;
 import com.helger.base.hashcode.HashCodeGenerator;
 import com.helger.base.tostring.ToStringGenerator;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * Default implementation of the {@link ISingleHoliday} interface.
@@ -36,12 +36,12 @@ public class FixedNameHoliday implements ISingleHoliday
   private final boolean m_bIsOfficial;
   private final String m_sHolidayName;
 
-  public FixedNameHoliday (@Nonnull final String sHolidayName)
+  public FixedNameHoliday (@NonNull final String sHolidayName)
   {
     this (EHolidayType.OFFICIAL_HOLIDAY, sHolidayName);
   }
 
-  public FixedNameHoliday (@Nonnull final IHolidayType aType, @Nonnull final String sHolidayName)
+  public FixedNameHoliday (@NonNull final IHolidayType aType, @NonNull final String sHolidayName)
   {
     ValueEnforcer.notNull (aType, "Type");
     ValueEnforcer.notEmpty (sHolidayName, "HolidayName");

@@ -20,6 +20,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.base.classloader.ClassLoaderHelper;
 import com.helger.base.enforce.ValueEnforcer;
@@ -29,9 +32,6 @@ import com.helger.base.hashcode.IHashCodeGenerator;
 import com.helger.base.string.StringHelper;
 import com.helger.base.tostring.ToStringGenerator;
 import com.helger.text.resourcebundle.ResourceBundleKey;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Represents the holiday and contains the actual date and an localized description.
@@ -59,7 +59,7 @@ public class ResourceBundleHoliday implements ISingleHoliday
    * @param sPropertiesKey
    *        key
    */
-  public ResourceBundleHoliday (@Nonnull final IHolidayType aType, @Nullable final String sPropertiesKey)
+  public ResourceBundleHoliday (@NonNull final IHolidayType aType, @Nullable final String sPropertiesKey)
   {
     ValueEnforcer.notNull (aType, "Type");
     m_bIsOfficial = aType.isOfficialHoliday ();

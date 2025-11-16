@@ -18,13 +18,13 @@ package com.helger.holiday;
 
 import java.time.LocalDate;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.base.enforce.ValueEnforcer;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.util.PDTHelper;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Some holiday utility methods.
@@ -37,7 +37,7 @@ public final class HolidayHelper
   private HolidayHelper ()
   {}
 
-  public static boolean isWorkDay (@Nonnull final LocalDate aDate, @Nonnull final IHolidayManager aHolidayMgr)
+  public static boolean isWorkDay (@NonNull final LocalDate aDate, @NonNull final IHolidayManager aHolidayMgr)
   {
     return PDTHelper.isWorkDay (aDate) && !aHolidayMgr.isHoliday (aDate);
   }
@@ -56,9 +56,9 @@ public final class HolidayHelper
    *         value will be negative! If start date equals end date the return
    *         will be 1 if it is a working day.
    */
-  public static int getWorkingDays (@Nonnull final LocalDate aStartDate,
-                                    @Nonnull final LocalDate aEndDate,
-                                    @Nonnull final IHolidayManager aHolidayMgr)
+  public static int getWorkingDays (@NonNull final LocalDate aStartDate,
+                                    @NonNull final LocalDate aEndDate,
+                                    @NonNull final IHolidayManager aHolidayMgr)
   {
     ValueEnforcer.notNull (aStartDate, "StartDate");
     ValueEnforcer.notNull (aEndDate, "EndDate");
@@ -90,7 +90,7 @@ public final class HolidayHelper
    * @see HolidayHelper#isWorkDay(LocalDate, IHolidayManager)
    * @see CalendarHelper#getCurrentOrNextWorkDay()
    */
-  @Nonnull
+  @NonNull
   public static LocalDate getCurrentOrNextWorkDay (@Nullable final IHolidayManager aHolidayMgr)
   {
     if (aHolidayMgr == null)

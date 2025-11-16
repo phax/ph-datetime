@@ -19,12 +19,11 @@ package com.helger.holiday;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.threeten.extra.Interval;
 
 import com.helger.typeconvert.impl.TypeConverter;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Base interface for a holiday manager for one country.
@@ -43,7 +42,7 @@ public interface IHolidayManager
    * @return <code>true</code> if it is a holiday
    * @see #isHoliday(LocalDate, String...)
    */
-  default boolean isHoliday (@Nonnull final Calendar aCalendar, final String... args)
+  default boolean isHoliday (@NonNull final Calendar aCalendar, final String... args)
   {
     return isHoliday (TypeConverter.convert (aCalendar, LocalDate.class), args);
   }
@@ -58,7 +57,7 @@ public interface IHolidayManager
    *        York holidays
    * @return is a holiday in the state/region
    */
-  default boolean isHoliday (@Nonnull final LocalDate aDate, @Nullable final String... aArgs)
+  default boolean isHoliday (@NonNull final LocalDate aDate, @Nullable final String... aArgs)
   {
     return getHoliday (aDate, aArgs) != null;
   }
@@ -74,7 +73,7 @@ public interface IHolidayManager
    * @return The respective holiday.
    */
   @Nullable
-  ISingleHoliday getHoliday (@Nonnull LocalDate aDate, @Nullable String... aArgs);
+  ISingleHoliday getHoliday (@NonNull LocalDate aDate, @Nullable String... aArgs);
 
   /**
    * Returns the holidays for the requested year and hierarchy structure.
@@ -86,7 +85,7 @@ public interface IHolidayManager
    *        holidays common to whole country
    * @return the list of holidays for the requested year
    */
-  @Nonnull
+  @NonNull
   HolidayMap getHolidays (int nYear, @Nullable String... aArgs);
 
   /**
@@ -98,6 +97,6 @@ public interface IHolidayManager
    *        a {@link java.lang.String} object.
    * @return list of holidays within the interval
    */
-  @Nonnull
-  HolidayMap getHolidays (@Nonnull Interval aInterval, @Nullable String... aArgs);
+  @NonNull
+  HolidayMap getHolidays (@NonNull Interval aInterval, @Nullable String... aArgs);
 }

@@ -19,14 +19,14 @@ package com.helger.holiday.parser;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.holiday.jaxb.Holiday;
 import com.helger.holiday.jaxb.MoveableHoliday;
 import com.helger.holiday.jaxb.MovingCondition;
 import com.helger.holiday.jaxb.With;
 import com.helger.holiday.mgr.XMLHolidayHelper;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * The abstract base class for all {@link IHolidayParser} implementations.
@@ -65,7 +65,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    *        the year to check against
    * @return is valid
    */
-  private static boolean _isValidForCycle (@Nonnull final Holiday aHoliday, final int nYear)
+  private static boolean _isValidForCycle (@NonNull final Holiday aHoliday, final int nYear)
   {
     final String sEvery = aHoliday.getEvery ();
     if (sEvery != null && !"EVERY_YEAR".equals (sEvery))
@@ -108,7 +108,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    * @param nYear
    * @return is valid.
    */
-  private static boolean _isValidInYear (@Nonnull final Holiday aHoliday, final int nYear)
+  private static boolean _isValidInYear (@NonNull final Holiday aHoliday, final int nYear)
   {
     return (aHoliday.getValidFrom () == null || aHoliday.getValidFrom ().intValue () <= nYear) &&
            (aHoliday.getValidTo () == null || aHoliday.getValidTo ().intValue () >= nYear);
@@ -123,7 +123,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    *        The move condition. May not be <code>null</code>.
    * @return <code>true</code> if it should be substituted
    */
-  protected static final boolean shallBeMoved (@Nonnull final LocalDate aFixed, @Nonnull final MovingCondition aMoveCond)
+  protected static final boolean shallBeMoved (@NonNull final LocalDate aFixed, @NonNull final MovingCondition aMoveCond)
   {
     return aFixed.getDayOfWeek () == XMLHolidayHelper.getWeekday (aMoveCond.getSubstitute ());
   }
