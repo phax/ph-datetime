@@ -1,5 +1,10 @@
 # ph-holiday
 
+<!-- ph-badge-start -->
+[![Sonatype Central](https://maven-badges.sml.io/sonatype-central/com.helger/ph-datetime-parent-pom/badge.svg)](https://maven-badges.sml.io/sonatype-central/com.helger/ph-datetime-parent-pom/)
+[![javadoc](https://javadoc.io/badge2/com.helger/ph-holiday/javadoc.svg)](https://javadoc.io/doc/com.helger/ph-holiday)
+<!-- ph-badge-end -->
+
 Java library containing holiday configurations for multiple countries.
 
 ## Maven usage
