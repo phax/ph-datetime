@@ -49,6 +49,7 @@
       <url>http://www.helger.com</url>
     </developer>
   </developers>
+  
   <dependencies>
     <dependency>
       <groupId>com.helger.commons</groupId>
@@ -68,6 +69,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
   <build>
     <plugins>
       <plugin>
