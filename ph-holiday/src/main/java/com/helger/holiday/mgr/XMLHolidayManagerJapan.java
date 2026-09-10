@@ -45,8 +45,8 @@ public final class XMLHolidayManagerJapan extends XMLHolidayManager
   }
 
   /**
-   * Implements the rule which requests if two holidays have one non holiday
-   * between each other than this day is also a holiday.
+   * Implements the rule which requests if two holidays have one non holiday between each other than
+   * this day is also a holiday.
    */
   @Override
   public HolidayMap getHolidays (final int nYear, @Nullable final String... aArgs)

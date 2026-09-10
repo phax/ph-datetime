@@ -49,10 +49,9 @@ public final class EthiopianOrthodoxHolidayParser extends AbstractHolidayParser
   }
 
   /**
-   * Returns a set of gregorian dates within a gregorian year which equal the
-   * Ethiopian orthodox month and day. Because the Ethiopian orthodox year
-   * different from the gregorian there may be more than one occurrence of an
-   * Ethiopian orthodox date in an gregorian year.
+   * Returns a set of gregorian dates within a gregorian year which equal the Ethiopian orthodox
+   * month and day. Because the Ethiopian orthodox year different from the gregorian there may be
+   * more than one occurrence of an Ethiopian orthodox date in an gregorian year.
    *
    * @param nGregorianYear
    * @param nEOMonth

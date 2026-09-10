@@ -53,8 +53,7 @@ public interface IHolidayManager
    * @param aDate
    *        The potential holiday.
    * @param aArgs
-   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New
-   *        York holidays
+   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New York holidays
    * @return is a holiday in the state/region
    */
   default boolean isHoliday (@NonNull final LocalDate aDate, @Nullable final String... aArgs)
@@ -68,8 +67,7 @@ public interface IHolidayManager
    * @param aDate
    *        The potential holiday.
    * @param aArgs
-   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New
-   *        York holidays
+   *        Hierarchy to request the holidays for. i.e. args = {'ny'} -&gt; New York holidays
    * @return The respective holiday.
    */
   @Nullable
@@ -81,8 +79,8 @@ public interface IHolidayManager
    * @param nYear
    *        i.e. 2010
    * @param aArgs
-   *        i.e. args = {'ny'}. returns US/New York holidays. No args -&gt;
-   *        holidays common to whole country
+   *        i.e. args = {'ny'}. returns US/New York holidays. No args -&gt; holidays common to whole
+   *        country
    * @return the list of holidays for the requested year
    */
   @NonNull

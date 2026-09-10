@@ -45,8 +45,7 @@ public final class FixedWeekdayBetweenFixedParser extends AbstractHolidayParser
   }
 
   /**
-   * Parses the provided configuration and creates holidays for the provided
-   * year.
+   * Parses the provided configuration and creates holidays for the provided year.
    */
   public void parse (final int nYear, final HolidayMap aHolidayMap, final Holidays aConfig)
   {

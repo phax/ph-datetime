@@ -43,8 +43,8 @@ public final class CalendarHierarchy implements IHasID <String>
   private final ICommonsMap <String, CalendarHierarchy> m_aChildren = new CommonsHashMap <> ();
 
   /**
-   * Constructor which takes a eventually existing parent hierarchy node and the
-   * ID of this hierarchy.
+   * Constructor which takes a eventually existing parent hierarchy node and the ID of this
+   * hierarchy.
    *
    * @param aParent
    *        parent entry

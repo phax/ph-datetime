@@ -44,11 +44,10 @@ public final class CalendarHelper
   {}
 
   /**
-   * Returns a set of gregorian dates within a gregorian year which equal the
-   * islamic month and day. Because the islamic year is about 11 days shorter
-   * than the gregorian there may be more than one occurrence of an islamic date
-   * in an gregorian year. i.e.: In the gregorian year 2008 there were two 1/1.
-   * They occurred on 1/10 and 12/29.
+   * Returns a set of gregorian dates within a gregorian year which equal the islamic month and day.
+   * Because the islamic year is about 11 days shorter than the gregorian there may be more than one
+   * occurrence of an islamic date in an gregorian year. i.e.: In the gregorian year 2008 there were
+   * two 1/1. They occurred on 1/10 and 12/29.
    *
    * @param nGregorianYear
    *        Year to convert
@@ -70,8 +69,7 @@ public final class CalendarHelper
   }
 
   /**
-   * Searches for the occurrences of a month/day in one chronology within one
-   * gregorian year.
+   * Searches for the occurrences of a month/day in one chronology within one gregorian year.
    *
    * @param nTargetMonth
    *        Target month
@@ -109,9 +107,9 @@ public final class CalendarHelper
   }
 
   /**
-   * Get the next working day based on the current day. If the current day is a
-   * working day, the current day is returned. A working day is determined by:
-   * it's not a weekend day (usually Saturday and Sunday).
+   * Get the next working day based on the current day. If the current day is a working day, the
+   * current day is returned. A working day is determined by: it's not a weekend day (usually
+   * Saturday and Sunday).
    *
    * @return The next matching date.
    * @see PDTHelper#isWorkDay(LocalDate)

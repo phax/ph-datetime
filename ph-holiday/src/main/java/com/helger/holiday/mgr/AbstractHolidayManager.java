@@ -99,9 +99,8 @@ public abstract class AbstractHolidayManager implements IHolidayManager
   }
 
   /**
-   * Returns the configured hierarchy structure for the specific manager. This
-   * hierarchy shows how the configured holidays are structured and can be
-   * retrieved.
+   * Returns the configured hierarchy structure for the specific manager. This hierarchy shows how
+   * the configured holidays are structured and can be retrieved.
    *
    * @return The hierarchy
    */

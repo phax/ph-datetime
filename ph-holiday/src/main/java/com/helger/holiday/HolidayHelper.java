@@ -43,8 +43,8 @@ public final class HolidayHelper
   }
 
   /**
-   * Get the number of working days between start date (incl.) and end date
-   * (incl.). An optional holiday calculator can be used as well.
+   * Get the number of working days between start date (incl.) and end date (incl.). An optional
+   * holiday calculator can be used as well.
    *
    * @param aStartDate
    *        The start date. May not be <code>null</code>.
@@ -52,9 +52,8 @@ public final class HolidayHelper
    *        The end date. May not be <code>null</code>.
    * @param aHolidayMgr
    *        The holiday calculator to use. May not be <code>null</code>.
-   * @return The number of working days. If start date is after end date, the
-   *         value will be negative! If start date equals end date the return
-   *         will be 1 if it is a working day.
+   * @return The number of working days. If start date is after end date, the value will be
+   *         negative! If start date equals end date the return will be 1 if it is a working day.
    */
   public static int getWorkingDays (@NonNull final LocalDate aStartDate,
                                     @NonNull final LocalDate aEndDate,
@@ -79,10 +78,9 @@ public final class HolidayHelper
   }
 
   /**
-   * Get the next working day based on the current day. If the current day is a
-   * working day, the current day is returned. A working day is determined by:
-   * it's not a weekend day (usually Saturday and Sunday) and it's not a holiday
-   * (based on the holiday manager).
+   * Get the next working day based on the current day. If the current day is a working day, the
+   * current day is returned. A working day is determined by: it's not a weekend day (usually
+   * Saturday and Sunday) and it's not a holiday (based on the holiday manager).
    *
    * @param aHolidayMgr
    *        An optional holiday calculator to be used. May be <code>null</code>.

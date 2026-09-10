@@ -17,9 +17,8 @@
 package com.helger.holiday;
 
 /**
- * Represents a localized version of a holiday type. This type identifies a
- * holiday and can be used to make a distinction for all returned holidays.
- * (e.g. is the holiday a public holiday or not)
+ * Represents a localized version of a holiday type. This type identifies a holiday and can be used
+ * to make a distinction for all returned holidays. (e.g. is the holiday a public holiday or not)
  *
  * @author tboven
  * @author Philip Helger

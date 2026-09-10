@@ -41,8 +41,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   {}
 
   /**
-   * Evaluates if the provided <code>Holiday</code> instance is valid for the
-   * provided year.
+   * Evaluates if the provided <code>Holiday</code> instance is valid for the provided year.
    *
    * @param aHoliday
    *        The holiday configuration entry to validate
@@ -56,8 +55,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   }
 
   /**
-   * Checks cyclic holidays and checks if the requested year is hit within the
-   * cycles.
+   * Checks cyclic holidays and checks if the requested year is hit within the cycles.
    *
    * @param aHoliday
    *        Holiday
@@ -123,7 +121,8 @@ public abstract class AbstractHolidayParser implements IHolidayParser
    *        The move condition. May not be <code>null</code>.
    * @return <code>true</code> if it should be substituted
    */
-  protected static final boolean shallBeMoved (@NonNull final LocalDate aFixed, @NonNull final MovingCondition aMoveCond)
+  protected static final boolean shallBeMoved (@NonNull final LocalDate aFixed,
+                                               @NonNull final MovingCondition aMoveCond)
   {
     return aFixed.getDayOfWeek () == XMLHolidayHelper.getWeekday (aMoveCond.getSubstitute ());
   }
@@ -149,8 +148,7 @@ public abstract class AbstractHolidayParser implements IHolidayParser
   }
 
   /**
-   * Moves a date if there are any moving conditions for this holiday and any of
-   * them fit.
+   * Moves a date if there are any moving conditions for this holiday and any of them fit.
    *
    * @param aMoveableHoliday
    *        Date

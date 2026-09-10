@@ -60,9 +60,9 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 /**
- * Manager implementation for reading data from XML files. The files with the
- * name pattern Holidays_[country].xml will be read from the system classpath.
- * It uses a list a parsers for parsing the different type of XML nodes.
+ * Manager implementation for reading data from XML files. The files with the name pattern
+ * Holidays_[country].xml will be read from the system classpath. It uses a list a parsers for
+ * parsing the different type of XML nodes.
  *
  * @author Sven Diedrichsen
  * @author Philip Helger
@@ -72,8 +72,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
   private static final Logger LOGGER = LoggerFactory.getLogger (XMLHolidayManager.class);
 
   /**
-   * Unmarshals the configuration from the stream. Uses <code>JAXB</code> for
-   * this.
+   * Unmarshals the configuration from the stream. Uses <code>JAXB</code> for this.
    *
    * @param aIS
    * @return The unmarshalled configuration.
@@ -119,8 +118,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
   }
 
   /**
-   * Calls
-   * <code>Set&lt;LocalDate&gt; getHolidays(int year, Configuration c, String... args)</code>
+   * Calls <code>Set&lt;LocalDate&gt; getHolidays(int year, Configuration c, String... args)</code>
    * with the configuration from initialization.
    */
   public HolidayMap getHolidays (final int nYear, @Nullable final String... aArgs)
@@ -129,8 +127,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
   }
 
   /**
-   * Creates a list of parsers by reading the configuration and trying to find
-   * an <code>HolidayParser</code> implementation for by XML class type.
+   * Creates a list of parsers by reading the configuration and trying to find an
+   * <code>HolidayParser</code> implementation for by XML class type.
    *
    * @param aConfig
    * @return A list of parsers to for this configuration.
@@ -164,8 +162,7 @@ public class XMLHolidayManager extends AbstractHolidayManager
   }
 
   /**
-   * Parses the provided configuration for the provided year and fills the list
-   * of holidays.
+   * Parses the provided configuration for the provided year and fills the list of holidays.
    *
    * @param nYear
    * @param aConfig
@@ -205,9 +202,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
   }
 
   /**
-   * Validates the content of the provided configuration by checking for
-   * multiple hierarchy entries within one configuration. It traverses down the
-   * configuration tree.
+   * Validates the content of the provided configuration by checking for multiple hierarchy entries
+   * within one configuration. It traverses down the configuration tree.
    */
   private static void _validateConfigurationHierarchy (@NonNull final Configuration aConfig)
   {
@@ -229,9 +225,8 @@ public class XMLHolidayManager extends AbstractHolidayManager
 
   /**
    * Returns the configurations hierarchy.<br>
-   * i.e. Hierarchy 'us' -&gt; Children 'al','ak','ar', ... ,'wv','wy'. Every
-   * child might itself have children. The ids be used to call
-   * getHolidays()/isHoliday().
+   * i.e. Hierarchy 'us' -&gt; Children 'al','ak','ar', ... ,'wv','wy'. Every child might itself
+   * have children. The ids be used to call getHolidays()/isHoliday().
    */
   @Override
   @NonNull

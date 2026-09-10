@@ -73,7 +73,7 @@ public final class HolidayManagerFactory
     ValueEnforcer.isTrue (ClassHelper.isInstancableClass (aClass),
                           "The passed class must be public, not abstract and needs a no-argument ctor!");
 
-    s_aRWLock.writeLocked ( () -> {
+    s_aRWLock.writeLocked (() -> {
       if (s_aClassMap.containsKey (sCountryID))
         throw new IllegalArgumentException ("A class for country " + sCountryID + " is already registered!");
       s_aClassMap.put (sCountryID, aClass);
@@ -100,11 +100,11 @@ public final class HolidayManagerFactory
     ValueEnforcer.notEmpty (sCountryID, "CountryID");
 
     // is the instance already cached?
-    final IHolidayManager aMgr = s_aRWLock.readLockedGet ( () -> s_aInstMap.get (sCountryID));
+    final IHolidayManager aMgr = s_aRWLock.readLockedGet (() -> s_aInstMap.get (sCountryID));
     if (aMgr != null)
       return aMgr;
 
-    return s_aRWLock.writeLockedGet ( () ->
+    return s_aRWLock.writeLockedGet (() ->
     // Check in writeLock again to be 100% sure
     s_aInstMap.computeIfAbsent (sCountryID, k -> {
       // Is a special holiday manager registered?

@@ -63,10 +63,9 @@ public class ResourceBundleHoliday implements ISingleHoliday
   {
     ValueEnforcer.notNull (aType, "Type");
     m_bIsOfficial = aType.isOfficialHoliday ();
-    m_aRBKey = StringHelper.isEmpty (sPropertiesKey) ? null : new ResourceBundleKey (
-                                                                                     "descriptions.holiday_descriptions",
-                                                                                     "holiday.description." +
-                                                                                                                          sPropertiesKey);
+    m_aRBKey = StringHelper.isEmpty (sPropertiesKey) ? null
+                                                     : new ResourceBundleKey ("descriptions.holiday_descriptions",
+                                                                              "holiday.description." + sPropertiesKey);
   }
 
   public boolean isOfficialHoliday ()
